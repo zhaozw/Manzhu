@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_tophead"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/idle_fuzhuangwh">
+
+        <ImageView
+            android:background="@drawable/imag_text_bg"
+            android:id="@+id/iv_fuzhuang"
+            android:elevation="2dp"
+            android:src="@mipmap/menu_icon_clsd"
+            android:layout_width="@dimen/idle_fuzhuangwh"
+            android:layout_height="@dimen/idle_fuzhuangwh"/>
+
+        <View
+            android:layout_marginLeft="@dimen/idle_fuzhuangwh"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:layout_marginLeft="1dp"
+            android:layout_alignTop="@+id/iv_fuzhuang"
+            android:src="@mipmap/menu_icon_tlsd"
+            android:id="@+id/iv_daoju"
+            android:layout_toRightOf="@+id/iv_fuzhuang"
+            android:layout_width="@dimen/idle_daojuwh"
+            android:layout_height="@dimen/idle_daojuwh"/>
+        <View
+            android:layout_alignLeft="@+id/iv_daoju"
+            android:background="@color/threebackground"
+            android:layout_below="@+id/iv_daoju"
+            android:layout_width="@dimen/idle_daojuwh"
+            android:layout_height="1dp"/>
+
+        <ImageView
+            android:layout_marginTop="1dp"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/iv_jiafa"
+            android:layout_alignLeft="@+id/iv_daoju"
+            android:layout_below="@+id/iv_daoju"
+            android:layout_width="@dimen/idle_jiafa"
+            android:layout_height="@dimen/idle_jiafa"/>
+
+
+        <View
+            android:layout_alignTop="@+id/iv_jiafa"
+            android:background="@color/threebackground"
+            android:layout_toRightOf="@+id/iv_jiafa"
+            android:layout_width="1dp"
+            android:layout_height="@dimen/idle_jiafa"/>
+
+        <ImageView
+            android:layout_marginLeft="1dp"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/iv_xiexue"
+            android:layout_alignTop="@+id/iv_jiafa"
+            android:layout_toRightOf="@+id/iv_jiafa"
+            android:layout_width="@dimen/idle_jiafa"
+            android:layout_height="@dimen/idle_jiafa"/>
+
+
+    </RelativeLayout>
+    <View
+        android:layout_below="@+id/rl_tophead"
+        android:background="@color/threebackground"
+        android:layout_width="match_parent"
+        android:layout_height="2.5dp"/>
+
+</RelativeLayout>

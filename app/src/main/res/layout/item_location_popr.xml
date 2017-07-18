@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="50dp">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/tv_sheng"
+            android:text="北京市"
+            android:layout_gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/iv_sheng_checked"
+            android:layout_gravity="center"
+            android:src="@mipmap/com_icon_check_g"
+            android:layout_width="17.5dp"
+            android:layout_height="17.5dp"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/stronglin"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+</LinearLayout>

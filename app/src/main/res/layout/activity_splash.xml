@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.zpfan.manzhu.SplashActivity">
+
+    <ImageView
+        android:layout_alignParentTop="true"
+        android:src="@mipmap/sc_1"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/splash_imgh"/>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="25dp"
+        android:layout_height="45dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+       android:id="@+id/logo"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/app_logo"
+         app:riv_corner_radius="5dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"/>
+
+
+    <ImageView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/iv_title"
+        android:layout_toRightOf="@+id/logo"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/cover_logo_sg"
+        android:layout_width="150dp"
+        android:layout_height="45dp"/>
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>

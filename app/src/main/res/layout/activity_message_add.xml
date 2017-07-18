@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.zpfan.manzhu.MessageAddActivity">
+
+
+    <com.zpfan.manzhu.myui.TopLin
+        android:id="@+id/add_top"
+        android:layout_alignParentTop="true"
+        android:elevation="2dp"
+        android:layout_width="match_parent"
+        app:toptext = "查找用户"
+        android:layout_height="@dimen/topmenuh"/>
+
+   <!-- <EditText
+        android:id="@+id/ed_seach"
+        android:layout_below="@+id/add_top"
+        android:layout_marginTop="@dimen/addseachmagt"
+        android:layout_marginRight="@dimen/addmarglr"
+        android:layout_marginLeft="@dimen/addmarglr"
+        android:background="@drawable/search_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/addseachh"/>
+
+    <ImageView
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/add_top"
+        android:layout_marginTop="@dimen/addseachmagt"
+        android:layout_marginRight="@dimen/addmarglr"
+        android:layout_marginLeft="@dimen/addmarglr"
+        android:src="@mipmap/com_icon_sch_gra"
+        android:layout_width="@dimen/addseachimg"
+        android:layout_height="@dimen/addseachimg"/>-->
+    <LinearLayout
+        android:id="@+id/ll_seach"
+        android:layout_marginLeft="@dimen/addmarglr"
+        android:layout_marginRight="@dimen/addmarglr"
+        android:background="@drawable/search_bg"
+        android:layout_marginTop="@dimen/addseachmagt"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/add_top"
+        android:layout_height="@dimen/addseachh">
+
+        <EditText
+            android:id="@+id/ed_seach"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/maintextcolor"
+            android:layout_width="0dp"
+            android:background="#00000000"
+            android:textSize="14sp"
+            android:textCursorDrawable="@null"
+            android:layout_weight="1"
+            android:hint="输入查找用户的cn/店铺名"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/iv_seach"
+            android:layout_marginRight="@dimen/addseachimgr"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/com_icon_sch_gra"
+            android:layout_width="@dimen/addseachimg"
+            android:layout_height="@dimen/addseachimg"/>
+
+
+
+
+
+
+
+    </LinearLayout>
+    <View
+        android:id="@+id/ll_line"
+        android:layout_marginTop="@dimen/addseachmart"
+        android:layout_below="@+id/ll_seach"
+        android:layout_marginLeft="80dp"
+        android:background="@color/secondbuttonbc"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_add"
+        android:layout_below="@+id/ll_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

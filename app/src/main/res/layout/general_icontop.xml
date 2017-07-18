@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/bootmbc"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="45dp">
+
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center"
+            android:id="@+id/iv_icontop_back"
+            android:layout_marginLeft="@dimen/toastmarglr"
+            android:src="@mipmap/com_icon_back"
+            android:scaleType="centerInside"
+            android:layout_width="@dimen/topmenuwh"
+            android:layout_height="@dimen/topmenuwh"/>
+
+
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:id="@+id/iv_menu"
+                android:src="@mipmap/menu_icon_01"
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
+
+            <TextView
+                android:id="@+id/tv_icontop_text"
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/maintextcolor"
+                android:text="页面标题"
+                android:layout_marginRight="@dimen/toastmarglr"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+            
+            
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:id="@+id/ll_topmenu"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@+id/ll_top1"
+            android:layout_width="97.5dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_top1"
+                android:src="@mipmap/com_icon_sell"
+                android:layout_width="@dimen/idle_topiconwh"
+                android:layout_height="@dimen/idle_topiconwh"/>
+
+            <TextView
+                android:id="@+id/tv_top1"
+                android:text="贩售"
+                android:layout_marginLeft="7.5dp"
+                android:textColor="@color/maintextcolor"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/stronglin"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@+id/ll_top2"
+            android:layout_width="97.5dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_top2"
+                android:src="@mipmap/com_icon_rent_ept"
+                android:layout_width="@dimen/idle_topiconwh"
+                android:layout_height="@dimen/idle_topiconwh"/>
+
+            <TextView
+                android:id="@+id/tv_top2"
+                android:text="出租"
+                android:layout_marginLeft="7.5dp"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/stronglin"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@+id/ll_top3"
+            android:layout_width="97.5dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_top3"
+                android:src="@mipmap/com_icon_excha_ept"
+                android:layout_width="@dimen/idle_topiconwh"
+                android:layout_height="@dimen/idle_topiconwh"/>
+
+            <TextView
+                android:id="@+id/tv_top3"
+                android:text="交换"
+                android:layout_marginLeft="7.5dp"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/stronglin"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@+id/ll_top4"
+            android:layout_width="70dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_shaixuan"
+                android:src="@mipmap/com_icon_order_ept"
+                android:layout_width="@dimen/idle_topiconwh"
+                android:layout_height="@dimen/idle_topiconwh"/>
+
+            <TextView
+                android:id="@+id/tv_shaixuan"
+                android:text="筛选排序"
+                android:layout_marginLeft="7.5dp"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="8sp"
+                android:layout_width="16dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

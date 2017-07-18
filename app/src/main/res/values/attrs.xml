@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Topmenu">
+
+        <attr name="toptext" format="string"/>
+
+    </declare-styleable>
+
+
+    <declare-styleable name="Topiconmenu">
+
+        <attr name="topicontext" format="string"/>
+        <attr name="topicon" format="reference"/>
+        <attr name="top1iv" format="reference"/>
+        <attr name="top2iv" format="reference"/>
+        <attr name="top3iv" format="reference"/>
+        <attr name="top1tv" format="string"/>
+        <attr name="top2tv" format="string"/>
+        <attr name="top3tv" format="string"/>
+
+    </declare-styleable>
+
+
+    <declare-styleable name="SearchTopLin">
+        <attr name="searchcontext" format="string"/>
+        <attr name="searchtop1iv" format="reference"/>
+        <attr name="searchtop2iv" format="reference"/>
+        <attr name="searchtop1tv" format="string"/>
+        <attr name="searchtop2tv" format="string"/>
+
+
+    </declare-styleable>
+
+
+
+
+</resources>

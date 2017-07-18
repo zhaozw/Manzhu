@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+
+    tools:context="com.zpfan.manzhu.MainActivity">
+
+
+    <FrameLayout
+
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+      android:layout_above="@+id/ll_main"
+        ></FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_main"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:clipChildren="false"
+        android:background="@color/background"
+        android:layout_height="@dimen/bootm_heigh">
+
+
+     <LinearLayout
+         android:id="@+id/ll_home"
+         android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_marginTop="@dimen/bootm_img_margintop"
+            android:id="@+id/iv_home"
+            android:src="@mipmap/com_icon_home"
+            android:layout_width="@dimen/bootm_img_heighandweigh"
+            android:layout_height="@dimen/bootm_img_heighandweigh"/>
+
+        <TextView
+            android:id="@+id/tv_home"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+
+            android:layout_marginTop="@dimen/bootm_margint"
+            android:text="首页"
+            android:textSize="8sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+        <LinearLayout
+
+            android:id="@+id/ll_huodong"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_marginTop="@dimen/bootm_img_margintop"
+                android:id="@+id/iv_huodong"
+                android:src="@mipmap/com_icon_act_ept"
+                android:layout_width="@dimen/bootm_img_heighandweigh"
+                android:layout_height="@dimen/bootm_img_heighandweigh"/>
+
+            <TextView
+                android:id="@+id/tv_houdong"
+                android:layout_gravity="bottom"
+                android:gravity="bottom|center"
+                android:layout_marginTop="@dimen/bootm_margint"
+                android:text="活动"
+                android:textSize="8sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_plus"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_message"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+
+
+
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/bootm_img_margintop"
+                android:id="@+id/iv_message"
+                android:src="@mipmap/com_icon_msg_ept"
+                android:layout_width="@dimen/bootm_img_heighandweigh"
+                android:layout_height="@dimen/bootm_img_heighandweigh"/>
+
+            <TextView
+
+                android:id="@+id/tv_message"
+               android:layout_gravity="bottom"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="@dimen/bootm_margint"
+                android:text="消息"
+                android:textSize="8sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_my"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_marginTop="@dimen/bootm_img_margintop"
+                android:id="@+id/iv_my"
+                android:src="@mipmap/com_icon_uc_ept"
+                android:layout_width="@dimen/bootm_img_heighandweigh"
+                android:layout_height="@dimen/bootm_img_heighandweigh"/>
+
+            <TextView
+                android:id="@+id/tv_my"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="@dimen/bootm_margint"
+                android:text="我的"
+                android:textSize="8sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_bootm"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@android:color/transparent"
+        android:gravity="center|top"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/iv_plus"
+            android:elevation="10dp"
+            android:src="@mipmap/pub_but"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

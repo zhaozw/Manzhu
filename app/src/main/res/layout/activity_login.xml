@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context="com.example.administrator.myapplication.LoginActivity">
+
+    
+    
+
+
+
+        <ImageView
+            android:id="@+id/iv_userimg"
+            android:layout_above="@+id/ll_username"
+            android:layout_centerHorizontal="true"
+           android:background="@mipmap/default_avator"
+            android:scaleType="fitXY"
+           android:src="@mipmap/avator_frame"
+            android:layout_marginBottom="@dimen/userimgb"
+            android:layout_width="@dimen/userimgwh"
+            android:layout_height="@dimen/userimgwh"/>
+
+
+    <LinearLayout
+        android:id="@+id/ll_username"
+        android:layout_marginLeft="@dimen/quickloginmarl"
+        android:layout_marginRight="@dimen/quickloginmarl"
+        android:layout_above="@+id/lin2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/passwordh">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/com_icon_phone"
+            android:layout_width="@dimen/passwordimghw"
+            android:layout_height="@dimen/passwordimghw"/>
+
+        <EditText
+            android:id="@+id/ed_username"
+            android:textColor="@color/maintextcolor"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:maxLength="11"
+            android:layout_width="0dp"
+            android:hint="注册手机号/邮箱"
+            android:textCursorDrawable="@null"
+            android:background="@null"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/lin2"
+        android:layout_above="@+id/ll_password"
+        android:background="@color/maintextcolor"
+        android:layout_marginLeft="@dimen/quickloginmarl"
+        android:layout_marginRight="@dimen/quickloginmarl"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/usernameb"
+        android:layout_height="1dp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_password"
+        android:layout_marginLeft="@dimen/quickloginmarl"
+        android:layout_marginRight="@dimen/quickloginmarl"
+        android:layout_above="@+id/lin1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/passwordh">
+        
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/com_icon_pw"
+            android:layout_width="@dimen/passwordimghw"
+            android:layout_height="@dimen/passwordimghw"/>
+
+        <EditText
+            android:id="@+id/ed_password"
+            android:password="true"
+            android:textColor="@color/maintextcolor"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:hint="登陆密码"
+            android:textCursorDrawable="@null"
+            android:background="@null"
+            android:layout_height="match_parent"/>
+        
+    </LinearLayout>
+    <View
+        android:id="@+id/lin1"
+        android:layout_above="@+id/bt_login"
+        android:background="@color/maintextcolor"
+        android:layout_marginLeft="@dimen/quickloginmarl"
+        android:layout_marginRight="@dimen/quickloginmarl"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/passwordmarb"
+        android:layout_height="1dp"/>
+
+
+    <Button
+        android:layout_above="@+id/ll_zhuce"
+        android:id="@+id/bt_login"
+        android:textSize="14sp"
+        android:layout_marginBottom="@dimen/loginbuttonb"
+        android:text="登  录"
+        android:textColor="@color/buttontext"
+        android:layout_marginLeft="@dimen/quickloginmarl"
+        android:layout_marginRight="@dimen/quickloginmarl"
+        android:background="@drawable/login_bg_buttom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/loginbuttonh"/>
+    
+    <LinearLayout
+        android:id="@+id/ll_zhuce"
+        android:layout_above="@+id/ll_quick"
+        android:layout_marginLeft="@dimen/quickloginmarl"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/zhuce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_forgetpw"
+            android:textSize="14sp"
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:textColor="@color/secondtextcolor"
+            android:text="忘记密码?"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <TextView
+            android:id="@+id/tv_regist"
+            android:textSize="14sp"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:textColor="@color/secondtextcolor"
+            android:layout_marginRight="@dimen/quickloginmarl"
+            android:text="新用户注册"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_quick"
+        android:layout_above="@+id/ll_fuwu"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/quickloginmarl"
+        android:layout_marginBottom="@dimen/quickbootem"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/maintextcolor"
+            android:text="快捷登陆"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        
+        <ImageView
+            android:id="@+id/iv_qq"
+            android:layout_marginLeft="@dimen/quickimgmarl"
+            android:src="@mipmap/qk_log_qq"
+            android:layout_width="@dimen/quickloginwh"
+            android:layout_height="@dimen/quickloginwh"/>
+        <ImageView
+            android:id="@+id/iv_wb"
+            android:layout_marginLeft="@dimen/quickimgmarl"
+            android:src="@mipmap/qk_log_wb"
+            android:layout_width="@dimen/quickloginwh"
+            android:layout_height="@dimen/quickloginwh"/>
+        <ImageView
+            android:id="@+id/iv_wx"
+            android:layout_marginLeft="@dimen/quickimgmarl"
+            android:src="@mipmap/qk_log_wx"
+            android:layout_width="@dimen/quickloginwh"
+            android:layout_height="@dimen/quickloginwh"/>
+
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_fuwu"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/loginmargb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:textSize="14sp"
+            android:text="登陆即代表阅读并同意"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_fuwu"
+            android:textSize="14sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_marginLeft="5dp"
+            android:text="服务条款"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

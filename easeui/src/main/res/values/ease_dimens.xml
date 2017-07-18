@@ -1,0 +1,254 @@
+<resources>
+
+     <dimen name="height_top_bar">46dp</dimen>
+    <dimen name="padding_search_bar">5dp</dimen>
+    <dimen name="height_row_weixin">59dp</dimen>
+    <dimen name="size_avatar">37.5dp</dimen>
+    <dimen name="margin_chat_activity">5dp</dimen>
+    <dimen name="field_textsize">14sp</dimen>
+    <dimen name="field_margin_right">5dp</dimen>
+    <dimen name="call_button_padding_vertical">10dp</dimen>
+    <dimen name="call_button_padding_left">25dp</dimen>
+    <dimen name="call_button_padding_right">25dp</dimen>
+    <dimen name="sidebar_text_size">10dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+     <dimen name="image_thumbnail_size">100dp</dimen>
+    <dimen name="image_thumbnail_spacing">1dp</dimen>
+	<dimen name="chat_nick_margin_left">12dp</dimen>
+	<dimen name="chat_nick_text_size">13sp</dimen>
+
+    <!--                    页面顶部的通用布局      -->
+
+    <!--  顶部菜单的高度   -->
+    <dimen name="topmenuh"> 45dp </dimen>
+
+    <!--  图标的宽和高  -->
+    <dimen name="topmenuwh"> 20dp </dimen>
+
+
+    <!--                      找回密码界面          -->
+
+    <!--   提示文字距离 顶部菜单的距离  -->
+    <dimen name="texttotop">  20dp  </dimen>
+
+    <!--     输入手机号的框框 距离提示文字的距离  -->
+    <dimen name="forgetusernamt"> 20dp  </dimen>
+
+    <!--    输入cn的输入框 距离输入手机号的框的距离  -->
+    <dimen name="forgetcnmargt">  18dp </dimen>
+
+    <!--     查找界面 距离输入cn 框的距离 -->
+    <dimen name="forgetbuttont">  40dp </dimen>
+
+    <!--   查找结果分割线  距离 查找按钮的距离 -->
+    <dimen name="result">  30dp </dimen>
+
+    <!--   查找结果 距离分割线的距离    25dp 55px-->
+    <dimen name="resultextt">  25dp </dimen>
+
+    <!--   查找结果   和 红字提示的距离  20dp  -->
+    <dimen name="redtext">  20dp </dimen>
+
+    <!--  发送验证码    的宽度   -->
+    <dimen name="webcodebutton"> 110dp  </dimen>
+
+    <!--    重设密码 和 发送验证码的距离-->
+    <dimen name="resetpw">   30dp </dimen>
+
+    <!--    输入手机号和cn的高度  -->
+    <dimen name="forginputh"> 30dp </dimen>
+
+    <!--  输入手机号和cn图标的高度和宽度 -->
+    <dimen name="forgimgwh"> 20dp </dimen>
+
+    <!--    发送验证码那一栏的高度 -->
+    <dimen name="getwebcode">  35dp  </dimen>
+    <!--     发送验证码和 提示之间的距离  -->
+    <dimen name="webcodet">   5dp </dimen>
+
+
+    <!--- *********** 注册界面  ***************** -->
+
+    <!--   联系客服和 已有帐号 立即登陆的距离 120px 60dp-->
+    <dimen name="kefum"> 60dp  </dimen>
+
+    <!--  注册按钮 和 已有帐号之间的距离 -->
+    <dimen name="registbuttonb"> 15dp  </dimen>
+
+    <!--  注册和发送验证码之间的距离  75px -->
+    <dimen name="registbuttont">  38dp </dimen>
+
+    <!--  几个输入框的高度  75px-->
+    <dimen name="inputh">  38dp </dimen>
+    <!--  几个输入框之间的间距   20px  -->
+    <dimen name="inputtb">  5dp </dimen>
+
+    <!--   注册界面 发送验证码 到左边的间距-->
+    <dimen name="registwebcodel">  45dp </dimen>
+
+    <!--   注册界面 绿色对号的 宽和高  30px -->
+    <dimen name="registright"> 15dp </dimen>
+
+    <!--   绿色对号距离右边的边距 15px-->
+    <dimen name="registrightr"> 8dp </dimen>
+
+    <!--    用户名 距离 图标的距离 130px  -->
+    <dimen name="registringiconb">  75dp </dimen>
+
+    <!--     注册图标 的宽和高 160px   -->
+    <dimen name="registriconwh">   80dp </dimen>
+
+    <!--      注册图标距离顶部的距离  140px  -->
+    <dimen name="registricont">   70dp </dimen>
+
+
+
+    <!--   *********  聊天界面的布局  ***********  -->
+
+    <!--    顶部的框的高度 130px -->
+    <dimen name="messagetoph">  65dp   </dimen>
+
+    <!--   界面同意距离左边的距离  20px-->
+    <dimen name="messagemarl">  10dp </dimen>
+    <dimen name="messagemarr">  15dp </dimen>
+
+    <!--   头像距离底部的距离 20px-->
+    <dimen name="messageimgmb">   10dp </dimen>
+
+    <!--   头像距离 顶部的距离 10px-->
+    <dimen name="messageimgmt">  5dp </dimen>
+    <!--     文字距离头像的距离   -->
+    <dimen name="messageimgmartext">   3dp </dimen>
+
+    <!--    用户名字 距离性别符号的距离  10px  -->
+
+    <dimen name="messageimgsex">  5dp </dimen>
+
+
+    <!--     聊天界面 距离顶部的距离 25px  -->
+    <dimen name="messagemargt"> 13dp </dimen>
+
+    <!--  聊天界面图标的  宽和高  90px-->
+    <dimen name="messageimgwh">    55dp  </dimen>
+
+    <!--   用户名字  距离顶部的距离  -->
+    <dimen name="messageusemart">   5dp  </dimen>
+
+    <!--    所在地  距离 名字的 距离  10px-->
+    <dimen name="messagelocalmart">   5dp </dimen>
+
+    <!--   性别图标的宽高-->
+    <dimen name="messagesexicon">  15dp </dimen>
+
+
+
+    <!--    加号的宽高   35px-->
+    <dimen name="messageaddwh"> 18dp  </dimen>
+
+
+    <!--    **********   聊天界面item   ***********      -->
+
+    <!--   用户头像的宽高 100px  -->
+    <dimen name="itemiconwh"> 50dp </dimen>
+
+    <!--  用户头像距离左边的距离   20px-->
+    <dimen name="itemiconmarl">  10dp </dimen>
+
+    <!--   用户头像距离右边的距离   20px-->
+    <dimen name="itemiconmarr">   10dp </dimen>
+
+    <!--   条目的高度  120px -->
+    <dimen name="itemh">   65dp  </dimen>
+
+    <!--   未读消息的宽高   35px-->
+    <dimen name="itemunredicon">  18dp </dimen>
+
+    <!--  店铺或者用户的 标识 宽高  30px -->
+    <dimen name="itemshopicon">  15dp </dimen>
+
+    <!--   标识距离顶部线的距离  距离底部线的距离 25px   -->
+    <dimen name="itemlinmartb">  13dp  </dimen>
+
+    <!--   店铺名距离表示的距离   15px-->
+    <dimen name="itemshopiconr">   8dp </dimen>
+
+
+    <!--    *****  查找好友的界面　　*****     -->
+
+    <!--   搜索框的高度  70px -->
+    <dimen name="addseachh">  35dp </dimen>
+
+
+    <!--   搜索框距离左边  和右边的距离  20px -->
+    <dimen name="addmarglr">  10dp  </dimen>
+
+    <!--     搜索图标的宽高   40px -->
+    <dimen name="addseachimg">  20dp </dimen>
+
+    <!--    距离顶部的高度  50px -->
+    <dimen name="addseachmagt">  20dp  </dimen>
+
+    <!--  搜索图标距离 右边的距离 25px-->
+    <dimen name="addseachimgr">  13dp </dimen>
+    <!--    搜素出来的用户列表距离搜索框的距离40px   -->
+
+    <dimen name="addseachmart">   20dp  </dimen>
+
+    <!--    性别标识的宽高  30px -->
+    <dimen name="addsexicon">  15dp </dimen>
+
+    <!--   发送消息按钮的宽度  190px -->
+    <dimen name="addsendmessage">  95dp  </dimen>
+
+    <!--       发送消息按钮的高度   60px -->
+    <dimen name="addsendmessageh">   30dp  </dimen>
+
+
+    <!--   发送消息按钮上的 图标的宽高  25px  -->
+    <dimen name="addsendmessageicon">   15dp  </dimen>
+
+
+    <!--      ******    聊天界面 ******* -->
+    <!--   两个图标的大小 40px  -->
+    <dimen name="messageicon">  20dp  </dimen>
+
+    <!--  两个图标之间的距离 30px-->
+    <dimen name="iconmarl"> 15dp </dimen>
+
+    <!--  下面输入框的高度 205px-->
+    <dimen name="messageinputh"> 100dp  </dimen>
+
+    <!--  输入框距离顶部的距离    表情距离顶部的距离 30px -->
+    <dimen name="messageinputt"> 15dp </dimen>
+
+
+    <!--  输入框距离 左右的距离 20px-->
+
+    <dimen name="messageinputlr">  10dp </dimen>
+
+
+    <!--  表情距离底部的距离  25px-->
+    <dimen name="messageiniputb">  13dp  </dimen>
+
+
+    <!--   表情  语音 图片 等图标的间距 60px-->
+    <dimen name="inputiconmarl">  30dp </dimen>
+
+
+
+    <!--   消息编辑框的高度  65px-->
+    <dimen name="inputedith">  33dp </dimen>
+
+    <!--    表情栏的高度  60px-->
+    <dimen name="emjoyh">   30dp </dimen>
+
+    <!--   表情图标的大小   45px   -->
+    <dimen name="emjoywh">  22dp  </dimen>
+
+    <!--    发送按钮的宽度  140px-->
+    <dimen name="sendw">  70dp </dimen>
+
+
+
+</resources>

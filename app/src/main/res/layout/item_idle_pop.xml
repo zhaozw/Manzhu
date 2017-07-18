@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/tv_tiaojian"
+            android:text="条件1"
+            android:layout_gravity="center_vertical"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="@color/maintextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <!--<TextView
+            android:id="@+id/tv_typefilter"
+            android:textColor="@color/secondtextcolor"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:text="全部"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <ImageView
+            android:src="@mipmap/com_icon_arr_down_gra"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="10dp"
+            android:layout_height="10dp"/>-->
+
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/flowlayout"
+            app:max_select="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            />
+    </LinearLayout>
+
+    <View
+        android:background="@color/stronglin"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+</LinearLayout>

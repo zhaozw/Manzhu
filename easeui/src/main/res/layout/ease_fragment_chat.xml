@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:hyphenate="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="#f2f0eb" >
+
+    <!--<com.hyphenate.easeui.widget.EaseTitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        hyphenate:titleBarLeftImage="@drawable/ease_mm_title_back" />-->
+
+    <RelativeLayout
+        android:id="@+id/title_bar"
+        android:orientation="horizontal"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="45dp">
+
+
+        <ImageView
+            android:id="@+id/iv_top_back"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/com_icon_back"
+            android:scaleType="centerInside"
+            android:layout_width="@dimen/topmenuwh"
+            android:layout_height="match_parent"/>
+
+
+        <TextView
+            android:id="@+id/tv_top_text"
+            android:textSize="18sp"
+            android:layout_centerInParent="true"
+            android:textColor="@color/maintextcolor"
+            android:text="聊天对象cn"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/iv_baohu"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/iv_dianpu"
+            android:layout_marginRight="@dimen/iconmarl"
+            android:src="@drawable/com_icon_ush"
+            android:layout_gravity="center_vertical"
+            android:layout_width="@dimen/messageicon"
+            android:layout_height="@dimen/messageicon"/>
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_dianpu"
+            android:src="@drawable/com_icon_us"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="@dimen/messageicon"
+            android:layout_height="@dimen/messageicon"/>
+
+
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/threebackground"
+        android:layout_above="@+id/input_menu"
+        android:layout_below="@id/title_bar" >
+
+
+
+        <com.hyphenate.easeui.widget.EaseChatMessageList
+            android:id="@+id/message_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.hyphenate.easeui.widget.EaseVoiceRecorderView
+            android:id="@+id/voice_recorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <com.hyphenate.easeui.widget.EaseChatInputMenu
+        android:id="@+id/input_menu"
+        android:elevation="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

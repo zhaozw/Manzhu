@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@color/threebackground"
+    tools:context="com.zpfan.manzhu.LocationActivity">
+
+    <com.zpfan.manzhu.myui.TopLin
+        app:toptext="我的位置"
+        android:elevation="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:background="@color/bootmbc"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/location_itemh">
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/location_itemml"
+            android:textSize="14sp"
+            android:textColor="@color/maintextcolor"
+            android:text="当前位置"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_mylocation"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/location_txtml"
+            android:textSize="14sp"
+            android:textColor="@color/maintextcolor"
+            android:text="定位的位置"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+        
+        <LinearLayout
+            android:id="@+id/ll_getlocation"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/location_itemml"
+            android:background="@drawable/location_button_bg2"
+            android:layout_width="@dimen/location_buttonw"
+            android:layout_height="@dimen/location_buttonh">
+
+
+            <ImageView
+                android:src="@mipmap/com_icon_aim_w"
+                android:layout_marginLeft="@dimen/location_buttoniconml"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/location_buttoniconwh"
+                android:layout_height="@dimen/location_buttoniconwh"/>
+            
+            <TextView
+                android:textColor="@color/buttontext"
+                android:textSize="10sp"
+                android:text="自动定位"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/location_buttonicaonmr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+    
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/stronglin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_chose"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/location_itemh"
+        android:background="@color/bootmbc"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/location_itemml"
+            android:text="手动选择"
+            android:textColor="@color/maintextcolor"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv_province"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/location_txtml"
+            android:text="选择省"
+            android:textColor="@color/secondtextcolor"
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:layout_width="@dimen/location_arrowwh"
+            android:layout_height="@dimen/location_arrowwh"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/com_icon_arr_down_gra"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/maintextcolor"/>
+
+
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/location_txtml"
+            android:text="选择市"
+            android:textColor="@color/secondtextcolor"
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:layout_width="@dimen/location_arrowwh"
+            android:layout_height="@dimen/location_arrowwh"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/com_icon_arr_down_gra"/>
+    </LinearLayout>
+
+    <View
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+    <Button
+        android:id="@+id/bt_import"
+        android:textColor="@color/buttontext"
+        android:text="提  交"
+        android:background="@drawable/location_imput_bg"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"/>
+
+
+
+</LinearLayout>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/itemh"
+    android:orientation="vertical"
+
+    android:clipChildren="false"
+    >
+
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        >
+    <ImageView
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/itemiconmarl"
+        android:id="@+id/iv_avator"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="@dimen/itemiconwh"
+        android:layout_height="@dimen/itemiconwh"/>
+
+    <TextView
+        android:id="@+id/tv_useralllv"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:layout_alignLeft="@+id/iv_avator"
+        android:background="@drawable/message_leve_bg"
+        android:textColor="@color/buttontext"
+        android:text="Lv.9"
+        android:layout_marginTop="3dp"
+        android:textSize="10sp"
+        android:layout_width="35dp"
+        android:layout_height="15dp"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginLeft="8dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:id="@+id/ll_info"
+        android:gravity="center_vertical"
+        android:layout_toRightOf="@id/iv_avator"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_shop"
+        android:src="@mipmap/type_icon_shop"
+        android:layout_width="@dimen/itemshopicon"
+        android:layout_height="@dimen/itemshopicon"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_marginLeft="@dimen/itemshopiconr"
+        android:gravity="center_vertical"
+        android:textSize="14sp"
+        android:textColor="@color/maintextcolor"
+        android:text="店铺名"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"/>
+
+
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/tv_lastmessage"
+        android:gravity="center_vertical"
+        android:textColor="@color/secondtextcolor"
+        android:layout_marginTop="3dp"
+        android:layout_below="@+id/ll_info"
+        android:textSize="10sp"
+        android:layout_alignLeft="@+id/ll_info"
+        android:text="最后一条聊天记录"
+        android:maxWidth="200dp"
+        android:singleLine="true"
+        android:layout_marginBottom="3dp"
+        android:ellipsize="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_marginRight="@dimen/itemiconmarl"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_lasttime"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="11：05"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:maxWidth="60dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_unred"
+                android:gravity="center"
+                android:text="99"
+                android:layout_marginTop="7dp"
+                android:textSize="10sp"
+                android:textColor="@color/buttontext"
+                android:background="@drawable/unredmessag_bg"
+                android:layout_gravity="center"
+                android:layout_width="17dp"
+                android:layout_height="17dp"/>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginLeft="80dp"
+        android:background="@color/secondbuttonbc"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+
+
+
+
+
+
+</LinearLayout>

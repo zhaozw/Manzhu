@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--  底部背景 -->
+
+    <color name="bootmbc">#ffffff</color>
+
+
+    <!--  按钮字体的颜色 -->
+
+    <color name="buttontext">#ffffff</color>
+
+
+
+    <!-- 主要文字的颜色   重要按钮底色 -->
+    <color name="maintextcolor">#683100 </color>
+
+    <!--  次要文字颜色 -->
+    <color name="secondtextcolor"> #bfbfbf </color>
+    
+    <!-- 价格文字颜色 -->
+    <color name="pricetextcolor"> #ff6600 </color>
+    
+    <!--  数字图标 颜色-->
+    <color name="numbertextcolor"> #ff3300 </color>
+
+    <!-- 背景底色  -->
+    <color name="background"> #f8f8f8 </color>
+
+    <!-- 二级背景    按钮文字颜色 -->
+    <color name="twobackground"> #ffffff </color>
+
+    <!-- 三级背景 -->
+    <color name="threebackground"> #f7f4f2 </color>
+
+    <!--  强分隔线 -->
+    <color name="stronglin"> #e1d6cc </color>
+
+    <!-- 弱分隔线 -->
+    <color name="weaklin"> #e4e4e4 </color>
+
+    <!--  次要按钮底色 -->
+    <color name="secondbuttonbc"> #f3e1da </color>
+
+    <!-- 无效按钮底色  用户离线 -->
+    <color name="unuseablebuttonbc"> #e4e4e4 </color>
+    
+    <!-- 促销图标-->
+    <color name="cuxiaocolor"> #ff6666 </color>
+
+    <!-- 用户在线 -->
+    <color name="outlin"> #33cc00 </color>
+
+
+    <!--    普通黑色字的颜色  -->
+    <color name="normaltextcolor"> #333333 </color>
+
+
+    <!--  透明的颜色-->
+    <color name="transparent"> #0000 </color>
+
+    <!--    多价格的颜色  -->
+    <color name="duojiage"> #6699ff </color>
+
+</resources>

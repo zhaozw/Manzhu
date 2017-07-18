@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 可用状态 -->
+    <item android:drawable="@drawable/message_send_bg" android:state_pressed="true" />
+    <!-- 不可用状态 -->
+    <item android:drawable="@drawable/message_unsend_bg" android:state_pressed="false" />
+
+</selector>

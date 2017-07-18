@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 720 * 1280 尺寸的dimens配置文件 -->
+<resources>
+    <!-- 底部导航栏的高度 -->
+    <dimen name="bootm_heigh"> 55dp </dimen>
+    <dimen name="bootm_img_heighandweigh"> 25dp </dimen>
+    <dimen name="bootm_img_margintop"> 5dp </dimen>
+    <!-- 底部导航栏 距离底部的距离-->
+    <dimen name="bootm_marginbootm"> 5dp </dimen>
+    <!--  左边距和右边距 -->
+    <dimen name="marginrf"> 10dp </dimen>
+    <!-- 底部文字距离图标的高度-->
+    <dimen name="bootm_margint"> 3dp </dimen>
+    <!--  加号的高度--> 
+    <dimen name="plus"> 80dp </dimen>
+    <!--  加号距离底部的距离 -->
+    <dimen name="plus_margin_bootm"> 10dp </dimen>
+
+    <!--   图标距离左边的距离 20px -->
+    <dimen name="iconl">  10dp </dimen>
+
+
+    <!--                  登陆界面                    -->
+
+
+    <!-- 快捷登陆栏  图标的宽高-->
+    <dimen name="quickloginwh"> 40dp </dimen>
+    <!-- 登陆界面统一距离左边的距离 -->
+    <dimen name="quickloginmarl">  30dp </dimen>
+    <!--   快捷登陆 图标之间的间距 -->
+    <dimen name="quickimgmarl"> 20dp </dimen>
+    <!-- 快捷登陆 距离服务条款的距离 -->
+    <dimen name="quickbootem"> 75dp </dimen>
+
+    <!--  忘记密码距离快捷登陆的距离 -->
+    <dimen name="zhuce"> 40dp </dimen>
+
+    <!-- 登陆按钮的高度-->
+    <dimen name="loginbuttonh"> 38dp </dimen>
+
+    <!-- 登陆按钮 距离 忘记密码的高度-->
+    <dimen name="loginbuttonb"> 15dp </dimen>
+    <!--  输入密码框的高度-->
+    <dimen name="passwordh"> 45dp </dimen>
+
+    <!-- 输入密码图标的高度和宽度-->
+    <dimen name="passwordimghw"> 25dp </dimen>
+
+    <!--  输入密码框 和登陆按钮的距离-->
+    <dimen name="passwordmarb"> 35dp </dimen>
+
+    <!--  输入用户名的输入框 和 输入密码的输入框的距离 -->
+    <dimen name="usernameb"> 25dp </dimen>
+
+    <!--   用户名上的头像框框距离用户名输入框的距离-->
+    <dimen name="userimgb"> 30dp </dimen>
+
+    <!--  头像框的宽度 和高度 -->
+    <dimen name="userimgw"> 80dp </dimen>
+
+    <!-- 头像的高度和宽度 -->
+    <dimen name="userimgwh"> 85dp </dimen>
+
+    <!-- 服务条款距离底部的距离 -->
+    <dimen name="loginmargb">  25dp </dimen>
+
+
+
+    <!--                    Toast 的高度                      -->
+
+    <!--    toast 上面图标的高度和宽度-->
+    <dimen name="toastimgwh"> 25dp </dimen>
+
+    <!-- toast  左右边距   -->
+    <dimen name="toastmarglr"> 10dp </dimen>
+
+    <!-- 图标和文字之间的距离  -->
+    <dimen name="toastimgtotext"> 15dp </dimen>
+
+    <!-- toast 上下边距-->
+    <dimen name="toastmargtb"> 15dp </dimen>
+
+
+
+
+    <!--                    页面顶部的通用布局      -->
+
+    <!--  顶部菜单的高度   -->
+    <dimen name="topmenuh"> 45dp </dimen>
+
+    <!--  图标的宽和高  -->
+    <dimen name="topmenuwh"> 17.5dp </dimen>
+
+
+    <!--                      找回密码界面          -->
+
+    <!--   提示文字距离 顶部菜单的距离  -->
+    <dimen name="texttotop">  20dp  </dimen>
+
+    <!--     输入手机号的框框 距离提示文字的距离  -->
+    <dimen name="forgetusernamt"> 20dp  </dimen>
+
+    <!--    输入cn的输入框 距离输入手机号的框的距离  -->
+    <dimen name="forgetcnmargt">  18dp </dimen>
+
+    <!--     查找界面 距离输入cn 框的距离 -->
+    <dimen name="forgetbuttont">  40dp </dimen>
+
+    <!--   查找结果分割线  距离 查找按钮的距离 -->
+    <dimen name="result">  30dp </dimen>
+
+    <!--   查找结果 距离分割线的距离    25dp 55px-->
+    <dimen name="resultextt">  25dp </dimen>
+
+    <!--   查找结果   和 红字提示的距离  20dp  -->
+    <dimen name="redtext">  20dp </dimen>
+
+    <!--  发送验证码    的宽度   -->
+    <dimen name="webcodebutton"> 110dp  </dimen>
+
+    <!--    重设密码 和 发送验证码的距离-->
+    <dimen name="resetpw">   30dp </dimen>
+
+    <!--    输入手机号和cn的高度  -->
+    <dimen name="forginputh"> 30dp </dimen>
+
+    <!--  输入手机号和cn图标的高度和宽度 -->
+    <dimen name="forgimgwh"> 20dp </dimen>
+
+    <!--    发送验证码那一栏的高度 -->
+    <dimen name="getwebcode">  35dp  </dimen>
+    <!--     发送验证码和 提示之间的距离  -->
+    <dimen name="webcodet">   5dp </dimen>
+
+
+    <!--- *********** 注册界面  ***************** -->
+
+    <!--   联系客服和 已有帐号 立即登陆的距离 120px 60dp-->
+    <dimen name="kefum"> 60dp  </dimen>
+
+    <!--  注册按钮 和 已有帐号之间的距离 -->
+    <dimen name="registbuttonb"> 15dp  </dimen>
+
+    <!--  注册和发送验证码之间的距离  75px -->
+    <dimen name="registbuttont">  38dp </dimen>
+
+    <!--  几个输入框的高度  75px-->
+    <dimen name="inputh">  38dp </dimen>
+    <!--  几个输入框之间的间距   20px  -->
+    <dimen name="inputtb">  5dp </dimen>
+
+    <!--   注册界面 发送验证码 到左边的间距-->
+    <dimen name="registwebcodel">  45dp </dimen>
+
+    <!--   注册界面 绿色对号的 宽和高  30px -->
+    <dimen name="registright"> 15dp </dimen>
+
+    <!--   绿色对号距离右边的边距 15px-->
+    <dimen name="registrightr"> 8dp </dimen>
+
+    <!--    用户名 距离 图标的距离 130px  -->
+    <dimen name="registringiconb">  75dp </dimen>
+
+    <!--     注册图标 的宽和高 160px   -->
+    <dimen name="registriconwh">   80dp </dimen>
+
+    <!--      注册图标距离顶部的距离  140px  -->
+    <dimen name="registricont">   70dp </dimen>
+
+
+
+    <!--   *********  聊天界面的布局  ***********  -->
+
+    <!--    顶部的框的高度 125px -->
+    <dimen name="messagetoph">  62.5dp   </dimen>
+
+    <!--   界面同意距离左边的距离  20px-->
+    <dimen name="messagemarl">  10dp </dimen>
+    <dimen name="messagemarr">  15dp </dimen>
+
+    <!--   头像距离底部的距离 20px-->
+    <dimen name="messageimgmb">   10dp </dimen>
+
+    <!--   头像距离 顶部的距离 10px-->
+    <dimen name="messageimgmt">  5dp </dimen>
+    <!--     文字距离头像的距离   -->
+    <dimen name="messageimgmartext">   8dp </dimen>
+
+    <!--    用户名字 距离性别符号的距离  10px  -->
+
+    <dimen name="messageimgsex">  5dp </dimen>
+
+
+    <!--     聊天界面 距离顶部的距离 25px  -->
+    <dimen name="messagemargt"> 13dp </dimen>
+
+    <!--  聊天界面图标的  宽和高  90px-->
+    <dimen name="messageimgwh">    45dp  </dimen>
+
+    <!--   用户名字  距离顶部的距离  -->
+    <dimen name="messageusemart">   5dp  </dimen>
+    
+    <!--    所在地  距离 名字的 距离  10px-->
+    <dimen name="messagelocalmart">   5dp </dimen>
+
+    <!--   性别图标的宽高-->
+    <dimen name="messagesexicon">  15dp </dimen>
+
+
+
+    <!--    加号的宽高   35px-->
+    <dimen name="messageaddwh"> 18dp  </dimen>
+
+
+    <!--    **********   聊天界面item   ***********      -->
+
+    <!--   用户头像的宽高 100px  -->
+    <dimen name="itemiconwh"> 50dp </dimen>
+
+    <!--  用户头像距离左边的距离   20px-->
+    <dimen name="itemiconmarl">  10dp </dimen>
+
+    <!--   用户头像距离右边的距离   20px-->
+    <dimen name="itemiconmarr">   10dp </dimen>
+
+    <!--   条目的高度  120px -->
+    <dimen name="itemh">   65dp  </dimen>
+
+    <!--   未读消息的宽高   35px-->
+    <dimen name="itemunredicon">  18dp </dimen>
+
+    <!--  店铺或者用户的 标识 宽高  25px -->
+    <dimen name="itemshopicon">  12.5dp </dimen>
+
+    <!--   标识距离顶部线的距离  距离底部线的距离 25px   -->
+    <dimen name="itemlinmartb">  13dp  </dimen>
+
+    <!--   店铺名距离表示的距离   15px-->
+    <dimen name="itemshopiconr">   8dp </dimen>
+
+
+    <!--    *****  查找好友的界面　　*****     -->
+
+    <!--   搜索框的高度  70px -->
+    <dimen name="addseachh">  35dp </dimen>
+
+
+    <!--   搜索框距离左边  和右边的距离  20px -->
+    <dimen name="addmarglr">  10dp  </dimen>
+
+    <!--     搜索图标的宽高   40px -->
+    <dimen name="addseachimg">  20dp </dimen>
+
+    <!--    距离顶部的高度  50px -->
+    <dimen name="addseachmagt">  20dp  </dimen>
+
+    <!--  搜索图标距离 右边的距离 25px-->
+    <dimen name="addseachimgr">  13dp </dimen>
+    <!--    搜素出来的用户列表距离搜索框的距离40px   -->
+    
+    <dimen name="addseachmart">   20dp  </dimen>
+
+    <!--    性别标识的宽高  30px -->
+    <dimen name="addsexicon">  15dp </dimen>
+
+    <!--   发送消息按钮的宽度  190px -->
+    <dimen name="addsendmessage">  95dp  </dimen>
+
+    <!--       发送消息按钮的高度   60px -->
+    <dimen name="addsendmessageh">   30dp  </dimen>
+
+
+    <!--   发送消息按钮上的 图标的宽高  25px  -->
+    <dimen name="addsendmessageicon">   13dp  </dimen>
+
+
+    <!--      ******    聊天界面 ******* -->
+    <!--   两个图标的大小 40px  -->
+    <dimen name="messageicon">  20dp  </dimen>
+
+    <!--  两个图标之间的距离 30px-->
+    <dimen name="iconmarl"> 15dp </dimen>
+
+    <!--  下面输入框的高度 205px-->
+    <dimen name="messageinputh"> 100dp  </dimen>
+
+    <!--  输入框距离顶部的距离    表情距离顶部的距离 30px -->
+    <dimen name="messageinputt"> 15dp </dimen>
+    
+
+    <!--  输入框距离 左右的距离 20px-->
+
+    <dimen name="messageinputlr">  10dp </dimen>
+
+
+    <!--  表情距离底部的距离  25px-->
+    <dimen name="messageiniputb">  13dp  </dimen>
+
+
+    <!--   表情  语音 图片 等图标的间距 60px-->
+    <dimen name="inputiconmarl">  30dp </dimen>
+
+
+
+    <!--   消息编辑框的高度  65px-->
+    <dimen name="inputedith">  33dp </dimen>
+
+    <!--    表情栏的高度  60px-->
+    <dimen name="emjoyh">   30dp </dimen>
+
+    <!--   表情图标的大小   45px   -->
+    <dimen name="emjoywh">  22dp  </dimen>
+
+    <!--    发送按钮的宽度  140px-->
+    <dimen name="sendw">  70dp </dimen>
+
+    <!--             ******   首页布局  ********      -->
+    <!--   首页图片高度  350px -->
+    <dimen name="homeImgH">  175dp </dimen>
+
+    <!--  首页搜索框的宽度   130px-->
+    <dimen name="homeSeachw">  65dp  </dimen>
+
+    <!--  定位图标的宽和高 40px-->
+    <dimen name="home_locationwh"> 20dp </dimen>
+    <!--  定位图标 距离左边的距离  30px-->
+    <dimen name="home_locationml"> 15dp </dimen>
+
+
+    <!--   定位图标和购物车距离顶部的距离 20px  -->
+    <dimen name="home_locationmt"> 10dp </dimen>
+
+    <!--  购物车图标的宽高 40px-->
+    <dimen name="home_spcartwh">  20dp </dimen>
+
+    <!--   搜索框距离上面一个控件的高度  95px-->
+    <dimen name="home_seachmt">  48dp </dimen>
+    
+    <!--   搜索框上面的标签的高度   50px-->
+    <dimen name="home_seachTagh">  25dp  </dimen>
+
+    <!--   搜索框上面的标签的宽度  130px-->
+    <dimen name="home_seachTagw">  65dp </dimen>
+
+    <!--      搜索框上面的标签距离左边的距离 55px-->
+    <dimen name="home_seachTagml"> 23dp </dimen>
+
+    <!--   搜索框上面的标签距离左边的距离 15px-->
+    <dimen name="home_seachTagmr"> 7.5dp </dimen>
+    
+    
+
+    <!--   搜索框的高度  80px-->
+    <dimen name="home_seachh">  40dp </dimen>
+
+    <!--    放大镜图标的宽高   35px  -->
+    <dimen name="home_seachiconwh"> 17.5dp </dimen>
+
+    <!--   搜索图标距离右边的距离 30px -->
+    <dimen name="home_seachiconmr"> 15dp </dimen>
+
+
+
+    <!--   八个常用布局 显示高度 120px -->
+    <dimen name="home_hotllh"> 60dp </dimen>
+    
+    <!--    八个模块距离 顶部的高度  45px-->
+    <dimen name="home_hotmt"> 23dp </dimen>
+
+    <!--   八个模块 图标的宽高  80px -->
+    <dimen name="home_hoticonwh"> 40dp </dimen>
+
+    <!--  文字距离 图标的 高度  10px-->
+    <dimen name="home_hottxtmt"> 5dp </dimen>
+
+
+    <!--   整个模块的宽高   100px-->
+    <dimen name="home_hotmoudwh"> 50dp </dimen>
+
+    <!--  轮播图距离 八大模块的距离  15px-->
+    <dimen name="home_binnermt">  7.5dp </dimen>
+
+    <!--   轮播图的高度  265px-->
+    <dimen name="home_binnerh"> 132.5dp </dimen>
+
+
+    <!--    优选商家的界面高度 500px -->
+    <dimen name="home_bussness"> 250dp </dimen>
+
+    <!--   优选商家 距离左边和右边的距离 20px-->
+    <dimen name="home_bussnessmlr">  10dp </dimen>
+
+    <!--  优选商家 标题的高度40px -->
+    <dimen name="home_bussnesstitleh">  20dp </dimen>
+
+    <!--   优选商家图标  35px-->
+    <dimen name="home_bussnessicon">  18dp </dimen>
+
+    <!--     优选商家标题下面的线 距离标题的距离  20px-->
+    <dimen name="home_bussnessiconline"> 10dp </dimen>
+
+
+    <!--        优选商家模块的高度  135px-->
+    <dimen name="home_bussnessmoudh">  70dp  </dimen>
+
+    <!--      优选商家模块图片的宽高 100px-->
+    <dimen name="home_bussnessmoudimgwh"> 50dp  </dimen>
+
+    <!--   漫猪推荐条目的高度  80px -->
+    <dimen name="home_manzhurecommendh">  40dp </dimen>
+
+    <!--   漫猪推荐图标的宽高   35px-->
+    <dimen name="home_recommendicon"> 18dp  </dimen>
+
+    <!--    优选商家独占模块的宽度  250px -->
+    <dimen name="home_bussnessonlyw">  125dp </dimen>
+    
+    <!--    下拉后显示的搜索框高度  100px    -->
+    <dimen name="home_topseachh">  50dp </dimen>
+
+    <!--      下拉后显示的搜索框的内框的高度  60px-->
+    <dimen name="home_topseachpadh"> 30dp </dimen>
+    <!--   内框的左右边距  30px-->
+    <dimen name="home_topseachmarlr">  15dp </dimen>
+
+    <!--   关键字 距离内框的?左边距    25px-->
+    <dimen name="home_topseachtxtml"> 12.5dp </dimen>
+    
+    <!--  搜索框 向下箭头的宽高  16px-->
+    <dimen name="home_toparrwh"> 8dp </dimen>
+    
+    <!--   搜索框  放大镜的宽高 32px-->
+    <dimen name="home_topseachiconwh"> 16dp </dimen>  
+    
+    
+    <!--  购物车悬浮模块   直径90-->
+    <dimen name="home_bottom_shopcartwh"> 45dp </dimen>
+
+    <!--    购物车 图标60* 60-->
+    <dimen name="home_bottom_shopcaticon"> 30dp  </dimen>
+
+    <!--  滑动到最上面距离底部的距离   220px-->
+    <dimen name="home_scrolltopmb">  110dp </dimen>
+
+    <!--    购物车 距离右边的距离   20px-->
+    <dimen name="home_scrolltopmr">   10dp </dimen>
+
+
+    <!--   购物车 距离 滑动到最上面的距离 30px-->
+    <dimen name="home_bottom_shopcartmb">  15dp </dimen>
+
+    <!--   弹窗的宽度  170px-->
+    <dimen name="home_top_popw"> 85dp </dimen>
+
+    <!--   弹窗的高度 280px -->
+    <dimen name="home_top_poph">  140dp </dimen>
+
+    <!--  弹窗中每一栏的高度 70px -->
+    <dimen name="home_top_popitemh">  35dp </dimen>
+
+    <!--  弹窗中每一栏的图标的宽度和高度  30px -->
+    <dimen name="home_pop_popitemiconwh">  15dp </dimen>
+
+
+
+    <!--************************    splash界面  ***********************-->
+    
+    <!--   上面图片的宽-->
+    <dimen name="splash_imgw">  360dp </dimen>
+    <!--  上面图片的高  -->
+    <dimen name="splash_imgh">  507.5dp  </dimen>
+
+
+    <!--************************** 定位界面  *************************-->
+    <!--   距离顶部的距离 15px-->
+    <dimen name="location_mart"> 7.5dp </dimen>
+
+    <!--    每个条目的高度  100px -->
+    <dimen name="location_itemh"> 50dp </dimen>
+
+    <!--  距离左边的距离  20px -->
+    <dimen name="location_itemml"> 10dp</dimen>
+
+    <!--  位置距离当前位置的距离 30px-->
+    <dimen name="location_txtml"> 15dp </dimen>
+
+    <!--  自动定位的按钮 的宽度 170px-->
+    <dimen name="location_buttonw"> 85dp </dimen>
+    <!--  自动定位的按钮 的高度  50px-->
+    <dimen name="location_buttonh"> 25dp</dimen>
+
+    <!--   自动定位的按钮 定位图片的宽度和高度 30px-->
+    <dimen name="location_buttoniconwh"> 15dp </dimen>
+
+    <!-- 自动定位的图标距离左边的距离 20px-->
+    <dimen name="location_buttoniconml"> 10dp </dimen>
+
+    <!--  自动定位的图标文字 距离图标的距离 15px-->
+    <dimen name="location_buttonicaonmr"> 7.5dp </dimen>
+
+    <!--   省市旁边向下的箭头距离左边的距离 20px-->
+    <dimen name="location_buttonarrowml"> 10dp </dimen>
+
+    <!--   向下的箭头图标的宽高  20px-->
+    <dimen name="location_arrowwh"> 10dp </dimen>
+
+    <!--*****************************   闲置商品等界面 *******************************  -->
+    <!---->
+    <dimen name="idle_topiconwh"> 17.5dp</dimen>
+
+
+    <!--    闲置二手界面的数据 服装-->
+    <dimen name="idle_fuzhuangwh"> 216dp </dimen>
+
+    <!--    闲置二手界面的数据 道具-->
+    <dimen name="idle_daojuwh"> 144dp </dimen>
+
+    <!--  闲置二手界面的数据  假发 鞋靴 -->
+    <dimen name="idle_jiafa">72dp </dimen>
+
+    <!--  闲置二手商品信息 分割条的高度 5px-->
+    <dimen name="idle_itemmargt">  2.5dp </dimen>
+
+    <!--  闲置二手商品的栏高 240px-->
+    <dimen name="idle_itemh"> 122.5dp </dimen>
+
+    <!--    闲置商品 左侧图片的宽高  240px-->
+    <dimen name="idle_itemleftimg">  120dp </dimen>
+
+    <!--  闲置商品 左上角 图片标签 距离左边的距离 20px-->
+    <dimen name="idle_itemlefttagml"> 10dp </dimen>
+
+    <!--  左上角图片的高度 40px-->
+    <dimen name="idle_itemlefttagh">  20dp </dimen>
+
+    <!--左上角图片的宽度 80px -->
+    <dimen name="idle_itemleftw">  40dp </dimen>
+    <!-- 文字描述 距离图片的 距离  20px-->
+    <dimen name="idle_itemtxtml">  10dp </dimen>
+
+    <!-- 贩 租  换 三个字的宽高  35px-->
+    <dimen name="idle_item_txtwh"> 17.5dp </dimen>
+
+    <!--   要换的模块  的宽度 80px-->
+    <dimen name="idle_item_huanw"> 40dp </dimen>
+
+    <!--  要换的模块的高度 35px-->
+    <dimen name="idle_item_huanh">  17.5dp </dimen>
+
+    <!--   角标的宽度和高度 45px-->
+    <dimen name="idle_item_iconwh"> 22.5dp </dimen>
+
+    <!--  点击右下角图标后出来的布局  100px -->
+    <dimen name="idle_item_avatorwh">  50dp </dimen>
+
+    <!--      头像右下角的宽度 40px-->
+    <dimen name="idle_item_rightwh">  20dp </dimen>
+
+    <!--   头像右下角的高度  30px-->
+    <dimen name="idle_item_righth">  15dp </dimen>
+
+    <!--  店铺名旁边的图标的宽高 30px-->
+    <dimen name="idle_item_shopwh">  15dp </dimen>
+
+
+    <!--  拍摄日景的高度 252px-->
+    <dimen name="photo_dayphotoh">  126dp </dimen>
+    <!--   拍摄下面一排的高度和宽度 180px-->
+    <dimen name="photo_ohotoh"> 90dp </dimen>
+
+    <!--  摄影item的高度  605px-->
+    <dimen name="photo_itemh"> 302.5dp </dimen>
+    <!--  item中图片的高度 480px-->
+    <dimen name="photo_itemiconh"> 240dp </dimen>
+
+    <!--  item 右下角的收藏按钮的宽度 90px -->
+    <dimen name="photo_itemcollectw"> 45dp</dimen>
+
+    <!-- item右下角收藏按钮的高度 40px-->
+    <dimen name="photo_itemcollecth">  20dp </dimen>
+
+    <!--  收藏按钮图标的宽高 20px-->
+    <dimen name="photo_itemcolliconwh"> 10dp </dimen>
+
+    <!--   item  闲字按钮的宽高 34px-->
+    <dimen name="photo_itemtxtwh"> 17dp </dimen>
+
+    <!--   item 中的评级的图标的宽高 30px-->
+    <dimen name="photo_itemlevewh"> 15dp </dimen>
+
+    <!--    item中的购物车和收藏距离顶部的距离 80px-->
+    <dimen name="photo_shopcartmt">  40dp </dimen>
+
+
+
+    <!--   cos新品 服装和道具的高度 288px-->
+    <dimen name="new_head_imgh">  144dp </dimen>
+
+    <!--   新品服装的宽度 432px  216dp-->
+    <dimen name="new_head_imgw"> 216dp </dimen>
+
+    <!--   新品中假发 鞋靴 其它的高度144 -->
+    <dimen name="new_head_otherh"> 72dp </dimen>
+
+
+
+
+</resources>

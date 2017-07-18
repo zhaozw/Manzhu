@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context="com.zpfan.manzhu.ForgetActivity">
+
+
+    <com.zpfan.manzhu.myui.TopLin
+        android:id="@+id/tl_forget"
+        android:layout_width="match_parent"
+        app:toptext="找回密码"
+        android:layout_height="@dimen/topmenuh"/>
+
+
+    <TextView
+        android:id="@+id/tv_tishi"
+        android:textSize="14sp"
+        android:textColor="@color/normaltextcolor"
+        android:layout_marginTop="@dimen/texttotop"
+        android:layout_below="@+id/tl_forget"
+        android:text="请输入您的登陆手机号和用户名 :"
+        android:layout_marginLeft="@dimen/quickloginmarl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/ll_forgusername"
+        android:layout_marginLeft="@dimen/quickloginmarl"
+        android:layout_marginRight="@dimen/quickloginmarl"
+        android:layout_below="@+id/tv_tishi"
+        android:layout_marginTop="@dimen/forgetusernamt"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/forginputh">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/com_icon_phone"
+            android:layout_marginLeft="2dp"
+            android:layout_width="@dimen/forgimgwh"
+            android:layout_height="@dimen/passwordimghw"/>
+
+        <EditText
+            android:id="@+id/ed_phone"
+            android:textColor="@color/maintextcolor"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:maxLength="11"
+            android:hint="登陆手机号"
+            android:textCursorDrawable="@null"
+            android:background="@null"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/forg_lin1"
+        android:layout_below="@+id/ll_forgusername"
+        android:background="@color/maintextcolor"
+        android:layout_marginLeft="@dimen/quickloginmarl"
+        android:layout_marginRight="@dimen/quickloginmarl"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/passwordmarb"
+        android:layout_height="1dp"/>
+    <LinearLayout
+        android:id="@+id/ll_forgcn"
+        android:layout_marginLeft="@dimen/quickloginmarl"
+        android:layout_marginRight="@dimen/quickloginmarl"
+        android:layout_below="@+id/ll_forgusername"
+        android:layout_marginTop="@dimen/forgetcnmargt"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/forginputh">
+
+        <ImageView
+            android:layout_marginLeft="2dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/com_icon_uname"
+            android:layout_width="@dimen/forgimgwh"
+            android:layout_height="@dimen/passwordimghw"/>
+
+        <EditText
+            android:id="@+id/ed_forgcn"
+            android:textColor="@color/maintextcolor"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:hint="用户名/CN"
+            android:textCursorDrawable="@null"
+            android:background="@null"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/forg_lin2"
+        android:layout_below="@+id/ll_forgcn"
+        android:background="@color/maintextcolor"
+        android:layout_marginLeft="@dimen/quickloginmarl"
+        android:layout_marginRight="@dimen/quickloginmarl"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/passwordmarb"
+        android:layout_height="1dp"/>
+
+
+
+
+    <Button
+        android:layout_below="@+id/forg_lin2"
+        android:id="@+id/bt_find"
+        android:textSize="14sp"
+        android:text="查  找"
+        android:textColor="@color/buttontext"
+        android:layout_marginLeft="@dimen/quickloginmarl"
+        android:layout_marginRight="@dimen/quickloginmarl"
+        android:background="@drawable/login_bg_buttom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/loginbuttonh"/>
+
+
+    <LinearLayout
+        android:id="@+id/ll_result"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_find"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <View
+            android:id="@+id/forg_lin3"
+            android:background="@color/stronglin"
+            android:layout_marginLeft="@dimen/quickloginmarl"
+            android:layout_marginRight="@dimen/quickloginmarl"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/resultextt"
+            android:layout_marginLeft="@dimen/quickloginmarl"
+            android:layout_marginRight="@dimen/quickloginmarl"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="14sp"
+                android:textColor="@color/normaltextcolor"
+                android:text="查找结果 :"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_result"
+                android:textSize="14sp"
+                android:textColor="@color/normaltextcolor"
+                android:text="查找到的内容"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:textSize="12sp"
+            android:layout_marginTop="@dimen/redtext"
+            android:layout_marginLeft="@dimen/quickloginmarl"
+            android:layout_marginRight="@dimen/quickloginmarl"
+            android:text="*确认上述信息为您的帐号后，点击 “发送验证码” ,将收到的验证码填入，点击 “重设密码” 后即可设置新密码。"
+            android:textColor="@color/numbertextcolor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_marginLeft="@dimen/quickloginmarl"
+            android:layout_marginRight="@dimen/quickloginmarl"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/webcodet"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/getwebcode">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/ed_webcode"
+
+                    android:textColor="@color/maintextcolor"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="match_parent"
+                    android:hint="输入验证码"
+                    android:textCursorDrawable="@null"
+                    android:background="@null"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+
+                <View
+                    android:background="@color/maintextcolor"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_height="1dp"/>
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/bt_webcode"
+                android:textSize="14sp"
+                android:textColor="@color/bootmbc"
+                android:text="发送验证码"
+                android:background="@drawable/webcode_button_bg"
+                android:layout_width="@dimen/webcodebutton"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:layout_below="@+id/forg_lin2"
+            android:id="@+id/bt_resetpw"
+            android:textSize="14sp"
+            android:text="重设密码"
+            android:layout_marginTop="@dimen/resetpw"
+            android:textColor="@color/buttontext"
+            android:layout_marginLeft="@dimen/quickloginmarl"
+            android:layout_marginRight="@dimen/quickloginmarl"
+            android:background="@drawable/login_bg_buttom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/loginbuttonh"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_reset"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_find"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+
+        <View
+            android:id="@+id/forg_lin4"
+            android:background="@color/stronglin"
+            android:layout_marginLeft="@dimen/quickloginmarl"
+            android:layout_marginRight="@dimen/quickloginmarl"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+        <LinearLayout
+            android:id="@+id/ll_password"
+            android:layout_marginLeft="@dimen/quickloginmarl"
+            android:layout_marginRight="@dimen/quickloginmarl"
+            android:layout_marginTop="@dimen/resultextt"
+            android:layout_below="@+id/forg_lin4"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/passwordh">
+
+            <ImageView
+                android:layout_marginLeft="@dimen/iconl"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/com_icon_pw"
+                android:layout_width="@dimen/passwordimghw"
+                android:layout_height="@dimen/passwordimghw"/>
+
+            <EditText
+                android:id="@+id/ed_password"
+                android:password="true"
+                android:textColor="@color/maintextcolor"
+                android:layout_marginLeft="20dp"
+                android:maxLength="12"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:textSize="16sp"
+                android:hint="登陆密码，6-12位字母或数字"
+                android:textCursorDrawable="@null"
+                android:background="@null"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:visibility="invisible"
+                android:id="@+id/iv_password"
+                android:layout_gravity="center"
+                android:src="@mipmap/com_icon_check_g"
+                android:layout_marginRight="@dimen/registrightr"
+                android:layout_width="@dimen/registright"
+                android:layout_height="@dimen/registright"/>
+
+
+        </LinearLayout>
+        <View
+            android:id="@+id/forg_lin5"
+            android:layout_below="@+id/ll_password"
+            android:background="@color/maintextcolor"
+            android:layout_marginLeft="@dimen/quickloginmarl"
+            android:layout_marginRight="@dimen/quickloginmarl"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/inputtb"
+            android:layout_height="1dp"/>
+
+
+        <LinearLayout
+            android:id="@+id/ll_surepw"
+            android:layout_marginLeft="@dimen/quickloginmarl"
+            android:layout_marginRight="@dimen/quickloginmarl"
+            android:layout_below="@+id/forg_lin5"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/passwordh">
+
+            <ImageView
+                android:layout_marginLeft="@dimen/iconl"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/com_icon_pw"
+                android:layout_width="@dimen/passwordimghw"
+                android:layout_height="@dimen/passwordimghw"/>
+
+            <EditText
+                android:id="@+id/ed_surepw"
+                android:password="true"
+                android:textColor="@color/maintextcolor"
+                android:layout_marginLeft="20dp"
+                android:maxLength="12"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:textSize="16sp"
+                android:hint="再次确认登陆密码"
+                android:textCursorDrawable="@null"
+                android:background="@null"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:visibility="invisible"
+                android:id="@+id/iv_surepw"
+                android:layout_gravity="center"
+                android:src="@mipmap/com_icon_check_g"
+                android:layout_marginRight="@dimen/registrightr"
+                android:layout_width="@dimen/registright"
+                android:layout_height="@dimen/registright"/>
+
+
+        </LinearLayout>
+        <View
+            android:id="@+id/forg_lin6"
+            android:layout_below="@+id/ll_password"
+            android:background="@color/maintextcolor"
+            android:layout_marginLeft="@dimen/quickloginmarl"
+            android:layout_marginRight="@dimen/quickloginmarl"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/inputtb"
+            android:layout_height="1dp"/>
+
+
+
+        <Button
+            android:layout_below="@+id/forg_lin6"
+            android:id="@+id/bt_import"
+            android:textSize="14sp"
+            android:text="提交"
+            android:layout_marginTop="@dimen/resetpw"
+            android:textColor="@color/buttontext"
+            android:layout_marginLeft="@dimen/quickloginmarl"
+            android:layout_marginRight="@dimen/quickloginmarl"
+            android:background="@drawable/login_bg_buttom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/loginbuttonh"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/quickimgmarl"
+        android:layout_marginRight="@dimen/quickimgmarl"
+        android:layout_marginBottom="@dimen/loginmargb"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="@color/secondtextcolor"
+            android:textSize="14sp"
+            android:id="@+id/tv_haikey"
+            android:text="您还可以 "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_registnew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_haikey"
+            android:layout_toRightOf="@+id/tv_haikey"
+            android:text="注册新帐号"
+            android:textColor="@color/maintextcolor"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

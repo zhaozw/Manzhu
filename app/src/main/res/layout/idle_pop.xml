@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+
+              android:background="#f777"
+
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <!--  上面的选项标签 -->
+    <LinearLayout
+        android:background="@color/bootmbc"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <LinearLayout
+            android:id="@+id/ll_order"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_order"
+            android:src="@mipmap/com_icon_order"
+            android:layout_width="17.5dp"
+            android:layout_height="17.5dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_order"
+            android:textColor="@color/maintextcolor"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:text="结果排序"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/stronglin"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:id="@+id/ll_filter"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_filter"
+                android:src="@mipmap/com_icon_screen_ept"
+                android:layout_width="17.5dp"
+                android:layout_height="17.5dp"/>
+
+
+            <TextView
+                android:id="@+id/tv_filter"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="12sp"
+                android:layout_marginLeft="10dp"
+                android:text="结果筛选"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/stronglin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:background="@color/bootmbc"
+        android:id="@+id/tv_paixu"
+        android:gravity="left|center_vertical"
+        android:textSize="14sp"
+        android:textColor="@color/maintextcolor"
+        android:text="当前排序: 全部"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+    <View
+        android:background="@color/stronglin"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:visibility="visible"
+        android:id="@+id/rv_idlepop"
+        android:background="@color/bootmbc"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+    <android.support.v7.widget.RecyclerView
+        android:visibility="gone"
+        android:background="@color/bootmbc"
+        android:id="@+id/rv_idlefilter"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+
+    <LinearLayout
+        android:background="@color/bootmbc"
+        android:visibility="gone"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:id="@+id/ll_button"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <Button
+            android:id="@+id/bt_cancel"
+            android:background="@drawable/pop_button_cancle_selector"
+            android:text="取 消"
+            android:textColor="@color/secondbuttonbc"
+            android:layout_width="115dp"
+            android:layout_height="37dp"/>
+        <Button
+            android:id="@+id/bt_import"
+            android:textColor="@color/maintextcolor"
+            android:background="@drawable/pop_button_import_selector"
+            android:text="提交"
+            android:layout_marginLeft="20dp"
+            android:layout_width="115dp"
+            android:layout_height="37dp"/>
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

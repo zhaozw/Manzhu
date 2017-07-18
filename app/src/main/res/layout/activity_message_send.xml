@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zpfan.manzhu.MessageSendActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:background="@color/bootmbc"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topmenuh">
+
+
+
+
+        <ImageView
+            android:id="@+id/iv_top_back"
+            android:layout_marginLeft="@dimen/toastmarglr"
+            android:src="@mipmap/com_icon_back"
+            android:scaleType="centerInside"
+            android:layout_width="@dimen/topmenuwh"
+            android:layout_height="match_parent"/>
+
+
+        <TextView
+            android:id="@+id/tv_top_text"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/maintextcolor"
+            android:text="聊天对象cn"
+            android:layout_marginRight="@dimen/toastmarglr"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+
+
+        <ImageView
+            android:id="@+id/iv_baohu"
+            android:layout_marginRight="@dimen/iconmarl"
+            android:src="@mipmap/com_icon_ush"
+            android:layout_gravity="center_vertical"
+            android:layout_width="@dimen/messageicon"
+            android:layout_height="@dimen/messageicon"/>
+
+        <ImageView
+            android:id="@+id/iv_dianpu"
+            android:src="@mipmap/com_icon_us"
+            android:layout_marginRight="@dimen/toastmarglr"
+            android:layout_gravity="center_vertical"
+            android:layout_width="@dimen/messageicon"
+            android:layout_height="@dimen/messageicon"/>
+
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_message"
+        android:layout_below="@+id/ll_top"
+        android:layout_above="@+id/ll_bootmlin"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/ll_bootmlin"
+        android:elevation="10dp"
+        android:background="@color/threebackground"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="@dimen/messageinputh">
+
+        <EditText
+            android:id="@+id/ed_message"
+            android:layout_marginTop="@dimen/messageinputt"
+            android:background="@drawable/input_message_bg"
+            android:layout_marginLeft="@dimen/messageinputlr"
+            android:layout_marginRight="@dimen/messageinputlr"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/inputedith"/>
+
+    
+    
+    <LinearLayout
+        android:layout_marginLeft="@dimen/messageinputlr"
+        android:layout_marginRight="@dimen/messageinputlr"
+        android:layout_marginTop="@dimen/messageinputt"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/emjoyh">
+
+        <ImageView
+            android:id="@+id/iv_biaoqing"
+        android:src="@mipmap/chat_icon_face_ept"
+        android:layout_width="@dimen/emjoywh"
+        android:layout_height="@dimen/emjoywh"/>
+
+
+        <ImageView
+            android:id="@+id/iv_yuyin"
+            android:layout_marginLeft="@dimen/inputiconmarl"
+            android:src="@mipmap/chat_icon_voice_ept"
+            android:layout_width="@dimen/emjoywh"
+            android:layout_height="@dimen/emjoywh"/>
+        <ImageView
+            android:id="@+id/iv_tupian"
+            android:layout_marginLeft="@dimen/inputiconmarl"
+            android:src="@mipmap/chat_icon_pic_ept"
+            android:layout_width="@dimen/emjoywh"
+            android:layout_height="@dimen/emjoywh"/>
+        <ImageView
+            android:id="@+id/iv_zhaoxiang"
+            android:layout_marginLeft="@dimen/inputiconmarl"
+            android:src="@mipmap/chat_icon_cam_ept"
+            android:layout_width="@dimen/emjoywh"
+            android:layout_height="@dimen/emjoywh"/>
+
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"/>
+        
+        <Button
+            android:id="@+id/bt_send"
+            android:textColor="@color/buttontext"
+            android:text="发 送"
+            android:background="@drawable/message_leve_bg"
+            android:layout_width="@dimen/sendw"
+            android:layout_height="match_parent"/>
+
+
+
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

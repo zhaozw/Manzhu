@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+
+    <size
+        android:height="@dimen/home_bottom_shopcartwh"
+        android:width="@dimen/home_bottom_shopcartwh"/>
+
+    <solid android:color="@color/secondbuttonbc"/>
+
+</shape>

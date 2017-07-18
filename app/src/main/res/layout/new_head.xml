@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+              android:orientation="vertical"
+                android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/new_head_imgh">
+
+        <ImageView
+        android:background="#000"
+        android:layout_width="@dimen/new_head_imgw"
+        android:layout_height="@dimen/new_head_imgh"/>
+
+
+        <View
+            android:background="@color/weaklin"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:paddingLeft="1dp"
+            android:background="#ff00"
+            android:layout_width="@dimen/new_head_imgh"
+            android:layout_height="@dimen/new_head_imgh"/>
+
+    </LinearLayout>
+    <View
+        android:background="@color/weaklin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <LinearLayout
+        android:paddingTop="1dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/new_head_otherh">
+        
+        <ImageView
+            android:background="#ff00ff"
+            android:layout_width="@dimen/new_head_imgw"
+            android:layout_height="@dimen/new_head_otherh"/>
+
+        <View
+            android:background="@color/weaklin"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+        
+       <ImageView
+           android:background="#00f"
+           android:layout_width="@dimen/new_head_otherh"
+           android:layout_height="@dimen/new_head_otherh"/>
+        <View
+            android:background="@color/weaklin"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:background="#0ff"
+            android:layout_width="@dimen/new_head_otherh"
+            android:layout_height="@dimen/new_head_otherh"/>
+
+        
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
