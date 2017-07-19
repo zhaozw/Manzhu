@@ -54,11 +54,20 @@ public class SearchTopLin extends LinearLayout {
 
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.SearchTopLin);
-
-        title.setText(array.getString(0));
-        mIvtop1.setImageResource(array.getResourceId(R.styleable.SearchTopLin_searchtop1iv, 1));
-        mIvtop2.setImageResource(array.getResourceId(R.styleable.SearchTopLin_searchtop2iv, 2));
-
+        type.setText(array.getString(R.styleable.SearchTopLin_searchtype));
+        title.setText(array.getString(R.styleable.SearchTopLin_searchcontext));
+        int id = array.getResourceId(R.styleable.SearchTopLin_searchtop1iv, 1);
+        int id1 = array.getResourceId(R.styleable.SearchTopLin_searchtop2iv, 2);
+        if (id != 1 && id1 != 2) {
+            mIvtop1.setImageResource(id);
+            mIvtop2.setImageResource(id1);
+        }
+        boolean aBoolean = array.getBoolean(R.styleable.SearchTopLin_isshowmore, true);
+        if (aBoolean) {
+            mTopmenu.setVisibility(VISIBLE);
+        } else {
+            mTopmenu.setVisibility(GONE);
+        }
 
         mTvtop1.setText(array.getString(R.styleable.SearchTopLin_searchtop1tv));
         mTvtop2.setText(array.getString(R.styleable.SearchTopLin_searchtop2tv));

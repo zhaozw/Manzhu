@@ -61,6 +61,8 @@ public class UserBean {
     private  int unredCount = 0;
     private long lasttime;
     private  String lastStringtime;
+    private  String member_identity;
+
 
     public String getLastStringtime() {
         return lastStringtime;

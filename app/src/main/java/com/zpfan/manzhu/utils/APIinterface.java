@@ -114,7 +114,7 @@ public interface APIinterface {
      * @return
      */
     @GET("getchatmemberlist_by_cnshopname")
-    Call<String> seachuser(@Query("keyword") String keyword);
+    Call<String> seachuser(@Query("Page") String page ,@Query("keyword") String keyword);
 
 
     /**

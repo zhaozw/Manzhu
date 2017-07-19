@@ -1,19 +1,17 @@
 package com.zpfan.manzhu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.zpfan.manzhu.adapter.MessageaddAdapter;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.UserBean;
-import com.zpfan.manzhu.myui.TopLin;
 import com.zpfan.manzhu.utils.Utils;
 
 import java.lang.reflect.Type;
@@ -21,49 +19,37 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MessageAddActivity extends AppCompatActivity {
+public class SearchCnResultActivity extends AppCompatActivity {
 
-    @BindView(R.id.add_top)
-    TopLin mAddTop;
-    @BindView(R.id.ed_seach)
-    EditText mEdSeach;
-    @BindView(R.id.iv_seach)
-    ImageView mIvSeach;
-    @BindView(R.id.ll_seach)
-    LinearLayout mLlSeach;
-    @BindView(R.id.rv_add)
-    RecyclerView mRvAdd;
+    @BindView(R.id.rv_cn)
+    RecyclerView mRvCn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message_add);
+        setContentView(R.layout.activity_search_cn_result);
         ButterKnife.bind(this);
         initView();
+
     }
 
     private void initView() {
-
-        // Utils.setTranslucentStatus(MessageAddActivity.this);
-        mRvAdd.setLayoutManager(new LinearLayoutManager(MessageAddActivity.this));
-        
-
-
+        Intent intent = getIntent();
+        String key = intent.getStringExtra("key");
+        mRvCn.setLayoutManager(new LinearLayoutManager(SearchCnResultActivity.this));
+        Log.i("zc", "onCreate:   获取到的key" + key);
+        searchCn(key);
     }
 
-    @OnClick(R.id.iv_seach)
-    public void onViewClicked() {
-        //搜索按钮的业务
+    private void searchCn(String key) {
 
-        String seach = mEdSeach.getText().toString();
 
-        Call<String> seachuser = Aplication.mIinterface.seachuser("1",seach);
+        Call<String> seachuser = Aplication.mIinterface.seachuser("1",key);
 
         seachuser.enqueue(new Callback<String>() {
             @Override
@@ -86,10 +72,10 @@ public class MessageAddActivity extends AppCompatActivity {
                     ArrayList<UserBean> userBeen = Utils.gson.fromJson(json, type1);
 
                     MessageaddAdapter messageaddAdapter = new MessageaddAdapter(R.layout.message_add_item, userBeen);
-                    mRvAdd.setAdapter(messageaddAdapter);
+                    mRvCn.setAdapter(messageaddAdapter);
                 } else {
 
-                    Toast.makeText(MessageAddActivity.this, retmsg, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SearchCnResultActivity.this, retmsg, Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -100,8 +86,6 @@ public class MessageAddActivity extends AppCompatActivity {
 
             }
         });
-
-
 
     }
 }

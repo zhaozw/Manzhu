@@ -67,7 +67,7 @@ public class EaseUserUtils {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Call<String> seachuser = Aplication.mIinterface.seachuser(username);
+                Call<String> seachuser = Aplication.mIinterface.seachuser("1",username);
                 seachuser.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {

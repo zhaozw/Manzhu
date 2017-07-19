@@ -24,10 +24,12 @@
 
     <declare-styleable name="SearchTopLin">
         <attr name="searchcontext" format="string"/>
+        <attr name="searchtype" format="string"/>
         <attr name="searchtop1iv" format="reference"/>
         <attr name="searchtop2iv" format="reference"/>
         <attr name="searchtop1tv" format="string"/>
         <attr name="searchtop2tv" format="string"/>
+        <attr name="isshowmore" format="boolean"/>
 
 
     </declare-styleable>

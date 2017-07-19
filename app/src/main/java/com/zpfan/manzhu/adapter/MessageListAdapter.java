@@ -183,7 +183,7 @@ public class MessageListAdapter extends BaseQuickAdapter<UserBean, BaseViewHolde
         //发送网络请求
         String from = emMessage.getFrom();
         //根据手机号去获取到用户信息 并刷新
-        Call<String> seachuser = Aplication.mIinterface.seachuser(from);
+        Call<String> seachuser = Aplication.mIinterface.seachuser("1",from);
         seachuser.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

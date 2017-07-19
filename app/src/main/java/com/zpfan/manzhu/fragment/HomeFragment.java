@@ -42,6 +42,7 @@ import com.zpfan.manzhu.MakeUpActivity;
 import com.zpfan.manzhu.NewActivity;
 import com.zpfan.manzhu.PhotoActivity;
 import com.zpfan.manzhu.R;
+import com.zpfan.manzhu.SearchCnResultActivity;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.SearchBean;
 import com.zpfan.manzhu.bean.TypeBean;
@@ -252,8 +253,8 @@ public class HomeFragment extends Fragment implements BDLocationListener {
             @Override
             public void onClick(View v) {
                 if (typeid == 2) {
-
                     reservation();
+                    mEdSeach.setText("");
                     mEdSeach.setEnabled(false);
                 }
             }
@@ -341,7 +342,6 @@ public class HomeFragment extends Fragment implements BDLocationListener {
 
                 }
 
-
             }
 
             @Override
@@ -419,6 +419,30 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                                 };
 
                                 mTagFlowLayout.setAdapter(mTagAdapter);
+                            mTagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+                                @Override
+                                public boolean onTagClick(View view, int position, FlowLayout parent) {
+                                    if (typenumber.equals("7")) {
+                                        //说明是点击了搜索cn的按钮
+
+                                        searchCn(taglist.get(position));
+
+
+
+                                    } else if (typenumber.equals("2")) {
+                                        //说明是点击了宝贝和角色的按钮
+                                        Log.i("zc", "onTagClick:   跳转到宝贝或者角色");
+
+
+                                    }
+
+
+                                    return false;
+                                }
+                            });
+
+
+
                             mSearchwindow.showAsDropDown(mLlHomeseach);
                         } else if (retmsg.contains("[") && retmsg.length() == 2) {
 
@@ -439,6 +463,17 @@ public class HomeFragment extends Fragment implements BDLocationListener {
 
             }
         });
+
+    }
+
+    private void searchCn(String s) {
+        //点击cn标签 跳转到cn 搜索界面的方法
+        Log.i("zc", "onTagClick:   跳转到cn 关键字" + s);
+        Intent cnintent = new Intent(getContext(), SearchCnResultActivity.class);
+        cnintent.putExtra("key", s);
+        startActivity(cnintent);
+
+
 
     }
 
