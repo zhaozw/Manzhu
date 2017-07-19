@@ -43,6 +43,7 @@ import com.zpfan.manzhu.NewActivity;
 import com.zpfan.manzhu.PhotoActivity;
 import com.zpfan.manzhu.R;
 import com.zpfan.manzhu.SearchCnResultActivity;
+import com.zpfan.manzhu.SearchResultsActivity;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.SearchBean;
 import com.zpfan.manzhu.bean.TypeBean;
@@ -75,6 +76,9 @@ import static com.zpfan.manzhu.utils.Utils.dp2px;
 
 public class HomeFragment extends Fragment implements BDLocationListener {
     private static final int REQUSET_LOCATION = 1;
+    private static final int REQUEST_PRODUCT = 0;
+    private static final int REQUEST_CN = 1;
+    private static final int REQUEST_SERVICE = 2;
     @BindView(R.id.iv_location)
     ImageView mIvLocation;
     @BindView(R.id.tv_location)
@@ -167,7 +171,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
     private ArrayList<String> typeidlist;
 
     private String typenumber = "2";
-    private int typeid = 0;
+    private int typeid = REQUEST_PRODUCT;
 
 
 
@@ -225,7 +229,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (typeid != 2) {
+                if (typeid != REQUEST_SERVICE) {
                     mEdSeach.setFocusableInTouchMode(true);
                     mEdSeach.setFocusable(true);
                     mEdSeach.setEnabled(true);
@@ -252,7 +256,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
         mEdSeach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (typeid == 2) {
+                if (typeid == REQUEST_SERVICE) {
                     reservation();
                     mEdSeach.setText("");
                     mEdSeach.setEnabled(false);
@@ -422,16 +426,20 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                             mTagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
                                 @Override
                                 public boolean onTagClick(View view, int position, FlowLayout parent) {
+                                    String keyword = taglist.get(position);
                                     if (typenumber.equals("7")) {
                                         //说明是点击了搜索cn的按钮
-
-                                        searchCn(taglist.get(position));
-
-
-
-                                    } else if (typenumber.equals("2")) {
+                                        searchCn(keyword);
+                                    }else if (typenumber.equals("2")) {
                                         //说明是点击了宝贝和角色的按钮
-                                        Log.i("zc", "onTagClick:   跳转到宝贝或者角色");
+                                        String[] split = null;
+                                        if (keyword.contains("-")) {
+                                            split = keyword.split("-");
+                                        }
+
+                                        if (split != null) {
+                                            searchProduct(split[0]);
+                                        }
 
 
                                     }
@@ -466,9 +474,20 @@ public class HomeFragment extends Fragment implements BDLocationListener {
 
     }
 
+    /**
+     *  搜索商品的方法 宝贝 和 角色
+     * @param s
+     */
+    private void searchProduct(String s) {
+        Intent prodcutIntent = new Intent(getContext(), SearchResultsActivity.class);
+        prodcutIntent.putExtra("key", s);
+        startActivity(prodcutIntent);
+
+    }
+
     private void searchCn(String s) {
         //点击cn标签 跳转到cn 搜索界面的方法
-        Log.i("zc", "onTagClick:   跳转到cn 关键字" + s);
+
         Intent cnintent = new Intent(getContext(), SearchCnResultActivity.class);
         cnintent.putExtra("key", s);
         startActivity(cnintent);
@@ -558,7 +577,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                 mTvArrange.setBackground(getResources().getDrawable(R.drawable.home_tag1_bg));
 
                 typenumber = "2";
-                typeid = 0;
+                typeid = REQUEST_PRODUCT;
 
 
                 break;
@@ -571,7 +590,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                 mTvArrange.setBackground(getResources().getDrawable(R.drawable.home_tag1_bg));
 
                 typenumber = "2";
-                typeid = 0;
+                typeid = REQUEST_PRODUCT;
                 break;
             case R.id.tv_cn:
                 //搜cn的按钮
@@ -582,7 +601,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                 mTvArrange.setBackground(getResources().getDrawable(R.drawable.home_tag1_bg));
 
                 typenumber = "7";
-                typeid = 1;
+                typeid = REQUEST_CN;
                 break;
             case R.id.tv_arrange:
                 // 搜约单的按钮
@@ -591,13 +610,26 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                 mTvRole.setBackground(getResources().getDrawable(R.drawable.home_tag1_bg));
                 mTvCn.setBackground(getResources().getDrawable(R.drawable.home_tag1_bg));
                 mTvArrange.setBackground(getResources().getDrawable(R.drawable.home_tg_bg));
-                typeid = 2;
+                typeid = REQUEST_SERVICE;
 
 
                 break;
             case R.id.iv_seach:
-                // 搜索按钮
+                // 搜索按钮   根据不同的type 去打开不同的界面
+                if (typeid == REQUEST_PRODUCT) {
+                    //搜宝贝和角色的界面
+                    String s = mEdSeach.getText().toString();
+                    searchProduct(s);
+                } else if (typeid == REQUEST_CN) {
+                    //搜cn的界面
 
+
+                } else if (typeid == REQUEST_SERVICE) {
+                    //搜约单的界面
+
+
+
+                }
 
 
 

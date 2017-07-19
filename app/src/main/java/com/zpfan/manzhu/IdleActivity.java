@@ -91,7 +91,7 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
 
         mRvIdel.setLayoutManager(new LinearLayoutManager(IdleActivity.this));
         mTopmenu = (LinearLayout) mIcontoplin.findViewById(R.id.ll_topmenu);
-        mEmptyview = View.inflate(IdleActivity.this, R.layout.rv_emptyview, null);
+       // mEmptyview = View.inflate(IdleActivity.this, R.layout.rv_emptyview, null);
 
         mMap = new HashMap<>();
         mMap.put("page", "1");
@@ -174,11 +174,11 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
 
                                 mBussnessBeen = Utils.gson.fromJson(substring, type1);
                                 mAdapter = new IdelAdapter(R.layout.item_idel, mBussnessBeen);
-                                         mHeadView = View.inflate(IdleActivity.this, R.layout.idle_head, null);
-                                        mAdapter.addHeaderView(mHeadView);
-                                        mRvIdel.setAdapter(mAdapter);
-                                        mAdapter.bindToRecyclerView(mRvIdel);
-                                        mAdapter.setEmptyView(R.layout.rv_emptyview);
+                                mHeadView = View.inflate(IdleActivity.this, R.layout.idle_head, null);
+                                mAdapter.addHeaderView(mHeadView);
+                                mRvIdel.setAdapter(mAdapter);
+                                mAdapter.bindToRecyclerView(mRvIdel);
+                                mAdapter.setEmptyView(R.layout.rv_emptyview);
                                 Log.i("zc", "onResponse:    看看走没走 这个方法");
 
                             }

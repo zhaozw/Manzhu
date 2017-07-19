@@ -5,10 +5,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.zpfan.manzhu.SearchResultsActivity">
 
+    <com.zpfan.manzhu.myui.SearchTopLin
+        android:id="@+id/st_product"
+        app:searchtype="宝贝"
+        app:searchcontext="|key"
+        app:searchtop1iv="@mipmap/com_icon_sh"
+        app:searchtop1tv="闲置/二手"
+        app:searchtop2tv="新品"
+        app:searchtop2iv="@mipmap/com_icon_new_prd_ept"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
+    <android.support.v7.widget.RecyclerView
+        android:visibility="gone"
+        android:id="@+id/rv_product"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
+    <TextView
+        android:id="@+id/tv_notfind"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="未查询到相关商品或服务"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
 

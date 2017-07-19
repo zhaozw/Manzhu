@@ -81,20 +81,10 @@ public class MainActivity extends AppCompatActivity implements EaseConversationL
         getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ButterKnife.bind(this);
-
         initView();
 
     }
-
-
-
-
-
-
-
-
 
     @Override
     public void onBackPressed() {

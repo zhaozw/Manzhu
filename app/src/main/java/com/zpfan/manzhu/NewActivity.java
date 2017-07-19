@@ -174,11 +174,11 @@ public class NewActivity extends AppCompatActivity implements View.OnClickListen
 
                                 mBussnessBeen = Utils.gson.fromJson(substring, type1);
                                 mAdapter = new NewAdapter(R.layout.item_new, mBussnessBeen);
-                                         mHeadView = View.inflate(NewActivity.this, R.layout.new_head, null);
-                                        mAdapter.addHeaderView(mHeadView);
-                                        mRvIdel.setAdapter(mAdapter);
-                                        mAdapter.bindToRecyclerView(mRvIdel);
-                                        mAdapter.setEmptyView(R.layout.rv_emptyview);
+                                mHeadView = View.inflate(NewActivity.this, R.layout.new_head, null);
+                                mAdapter.addHeaderView(mHeadView);
+                                mRvIdel.setAdapter(mAdapter);
+                                mAdapter.bindToRecyclerView(mRvIdel);
+                                mAdapter.setEmptyView(R.layout.rv_emptyview);
 
 
                             }

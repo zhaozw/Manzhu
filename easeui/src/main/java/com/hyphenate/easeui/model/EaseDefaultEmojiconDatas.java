@@ -83,8 +83,8 @@ public class EaseDefaultEmojiconDatas {
         R.drawable.ee_34,  
         R.drawable.ee_35,  
     };
-    
-    
+
+    // TODO: 2017/7/19 0019   emoji表情的转换
     private static final EaseEmojicon[] DATA = createData();
     
     private static EaseEmojicon[] createData(){
