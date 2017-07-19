@@ -267,9 +267,10 @@
                 android:layout_height="@dimen/idle_item_txtwh"/>
 
             <TextView
+
                 android:layout_marginLeft="5dp"
                 android:paddingRight="5dp"
-               android:paddingLeft="7.5dp"
+                android:paddingLeft="5dp"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:id="@+id/tv_change1"
@@ -280,14 +281,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="17.5dp"/>
             <TextView
-                android:id="@+id/tv_change2"
-                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
                 android:gravity="center"
+                android:layout_gravity="center"
+                android:id="@+id/tv_change2"
                 android:textSize="8sp"
                 android:textColor="@color/stronglin"
                 android:text="服|路飞"
                 android:background="@drawable/genghuan"
-                android:layout_marginLeft="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="17.5dp"/>
             <!--<TextView

@@ -604,5 +604,16 @@
 
 
 
+    <!--***********    商品详情界面的高度  85px 42.5dp-->
+    <dimen name="detail_topline_h">  42.5dp </dimen>
+
+    <!--  商品详情界面顶部右边图标的宽高  35px-->
+    <dimen name="detail_top_iconrwh"> 17.5dp </dimen>
+
+    <!--  商品详情界面大图片的高度  680px-->
+    <dimen name="detail_top_imgh"> 340dp</dimen>
+
+
+
 
 </resources>

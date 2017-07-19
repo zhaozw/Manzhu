@@ -77,6 +77,78 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
         }
         helper.setText(R.id.tv_title, item.getG_Title());
 
+        //是不是要换的商品
+        if (item.isG_IsChange()) {
+            ViewGroup.LayoutParams params = mHuan.getLayoutParams();
+            params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+            mHuan.setLayoutParams(params);
+            //设置要换的东西
+            String fk = item.getDemand_FK();
+            String[] split = fk.split(",");
+            if (split.length == 1) {
+                //就显示一个
+                helper.setText(R.id.tv_change1, split[0].substring(1)).setText(R.id.tv_more,"");
+                change2.setVisibility(View.GONE);
+            } else if (split.length == 2){
+                //就显示两个
+                helper.setText(R.id.tv_change1, split[0]).setText(R.id.tv_change2,split[1].substring(1)).setText(R.id.tv_more,"");
+
+            } else if (split.length > 2) {
+                //还是显示两个  和等
+                helper.setText(R.id.tv_change1, split[0]).setText(R.id.tv_change2,split[1].substring(1)).setText(R.id.tv_more,"等");
+
+
+            }
+
+
+
+        } else {
+            ViewGroup.LayoutParams params = mHuan.getLayoutParams();
+            params.height = 0;
+            mHuan.setLayoutParams(params);
+        }
+
+
+
+        //是不是 要租的商品
+        if (item.isG_IsRent()) {
+            ViewGroup.LayoutParams params = mZu.getLayoutParams();
+            params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+            mZu.setLayoutParams(params);
+            //设置租的价格和时间
+            String amount = item.getG_CorrespAmount();
+            String zuprice = null;
+            String zuxiaoshu = null;
+            if (amount.contains(".")) {
+                int i = amount.indexOf(".");
+                zuprice = amount.substring(0, i);
+                zuxiaoshu = amount.substring(i);
+            }
+
+            String price = item.getG_RenewalPrice();
+            String zudayprice = null;
+            String zudayxiaoshu = null;
+            if (price.contains(".")) {
+                int i = price.indexOf(".");
+                 zudayprice = price.substring(0, i);
+                  zudayxiaoshu = price.substring(i);
+            }
+            String[] zudayprices = price.split(".");
+
+                helper.setText(R.id.tv_zuprice, zuprice).setText(R.id.tv_zuxiaoshu, zuxiaoshu)
+                        .setText(R.id.tv_zuday, "(" + item.getG_BasicLease() + "天)+").setText(R.id.tv_zudayprice, zudayprice)
+                        .setText(R.id.tv_zudayxiaoshu, zudayxiaoshu);
+
+
+
+        } else {
+            ViewGroup.LayoutParams params = mZu.getLayoutParams();
+            params.height = 0;
+            mZu.setLayoutParams(params);
+        }
+
+
+
 
 
         //是不是 要贩卖的商品

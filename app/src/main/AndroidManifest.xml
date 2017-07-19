@@ -148,6 +148,8 @@
         </activity>
         <activity android:name=".SearchCnResultActivity">
         </activity>
+        <activity android:name=".IdleDetailActivity">
+        </activity>
     </application>
 
 </manifest>

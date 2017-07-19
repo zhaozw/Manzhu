@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zpfan.manzhu.IdleDetailActivity">
+    <!--  顶部的图片-->
+    <ImageView
+        android:id="@+id/iv_detail"
+        android:src="@mipmap/u5027"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_top_imgh"/>
+
+    <!--  顶部一栏-->
+    <RelativeLayout
+        android:layout_alignParentTop="true"
+        android:background="#30000000"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_topline_h">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/iv_top_back"
+            android:layout_marginLeft="@dimen/toastmarglr"
+            android:src="@mipmap/com_icon_back_w"
+            android:scaleType="centerInside"
+            android:layout_width="@dimen/topmenuwh"
+            android:layout_height="@dimen/topmenuwh"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:textSize="15sp"
+            android:textColor="@color/buttontext"
+            android:text="闲置/二手"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:src="@mipmap/com_icon_bmenu_w"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="@dimen/detail_top_iconrwh"
+            android:layout_height="@dimen/detail_top_iconrwh"/>
+
+
+
+    </RelativeLayout>
+
+    <!-- 包邮的一栏-->
+    <LinearLayout
+        android:layout_below="@+id/iv_detail"
+        android:id="@+id/ll_baoyou"
+        android:layout_marginLeft="@dimen/idle_itemtxtml"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/iv_bussness_photo"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:visibility="visible"
+            android:id="@+id/tv_baoyou"
+            android:layout_toRightOf="@+id/iv_bussness_photo"
+            android:background="@drawable/baoyou_shape"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:textColor="@color/buttontext"
+            android:text="包邮"
+            android:layout_marginRight="5dp"
+            android:layout_width="30dp"
+            android:layout_height="15dp"/>
+        <TextView
+            android:id="@+id/tv_title"
+            android:visibility="visible"
+            android:textColor="@color/maintextcolor"
+            android:text="商品的标题"
+            android:textSize="14sp"
+            android:maxLines="2"
+            android:layout_alignTop="@+id/tv_baoyou"
+            android:layout_toRightOf="@+id/iv_bussness_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>
