@@ -614,6 +614,79 @@
     <dimen name="detail_top_imgh"> 340dp</dimen>
 
 
+    <!--   商品详情界面 包邮和标题 还有分享图标的高度75px-->
+    <dimen name="detail_llbaoyou_h"> 37.5dp </dimen>
+    
+    <!--  分享按钮的宽度 70px-->
+    <dimen name="detail_sharew">  35dp </dimen>
+
+    <!--  分享按钮的高度  75px-->
+    <dimen name="detail_shareh">  37.5dp </dimen>
+
+    <!--  分享图标的宽高 30px-->
+    <dimen name="detail_shareiconwh"> 15dp </dimen>
+
+
+    <!--  租 贩  换的图标的宽高 40px-->
+    <dimen name="detail_textwh"> 20dp </dimen>
+
+
+    <!--  发布时间 和浏览数的 图标的宽高  30px-->
+    <dimen name="detail_release_iconwh"> 15dp </dimen>
+
+
+    <!--  宝贝参数一栏的 高度75 px-->
+    <dimen name="detail_babayparameh"> 37.5dp  </dimen>
+
+    <!--  宝贝参数一栏 点击以后展开的布局高度220px-->
+    <dimen name="detail_babayouth"> 110dp </dimen>
+
+    <!--   优惠劵和分隔栏一共的高度 100px-->
+    <dimen name="detail_couponh"> 50dp </dimen>
+
+    <!--  分隔栏的高度  15px-->
+    <dimen name="detail_separatedh"> 7.5dp </dimen>
+
+    <!--  优惠劵图标的宽高  50px -->
+    <dimen name="detail_couponhwh"> 25dp </dimen>
+
+
+    <!--  宝贝详情分隔栏的高度 80px-->
+    <dimen name="detail_detailh">  40dp  </dimen>
+
+    <!--  宝贝详情分隔栏 中 线的长度 90px-->
+    <dimen name="detail_linew"> 45dp </dimen>
+
+    <!--  宝贝详情里面的高度 250px-->
+    <dimen name="detail_imgh"> 125dp </dimen>
+
+    <!-- 买家评论栏的切换栏  高度 90px-->
+    <dimen name="detail_commenth">  45dp </dimen>
+
+    <!--  买家评论栏的图标的宽高 35px -->
+    <dimen name="detail_commenticonwh"> 17.5dp </dimen>
+
+    <!--   查看更多的按钮的宽度 580px-->
+    <dimen name="detail_comment_buttonw"> 290dp </dimen>
+    
+    <!--  查看按钮的高度 60px-->
+    <dimen name="detail_comment_buttonh"> 30dp </dimen>
+
+    <!--  商品 详情的栏的高度 90px-->
+    <dimen name="detail_bootommenuh"> 45dp </dimen>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </resources>

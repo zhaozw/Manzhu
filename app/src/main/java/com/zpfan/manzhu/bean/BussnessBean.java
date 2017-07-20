@@ -1,79 +1,75 @@
 package com.zpfan.manzhu.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/7/13 0013.
  */
 
-public class BussnessBean {
-
-
+public class BussnessBean implements Parcelable {
 
 
     /**
      * BrandID :
-     * Demand_FK :
+     * Demand_FK : 道具|蒙奇·D·路飞,
      * G_Agent_Member_UID :
      * G_Area : 未填写
-     * G_AuditStatus :
+     * G_AuditStatus : 审核通过
      * G_BasicLease : 2
      * G_City : 成都
      * G_CommissionMoney : 0.00
-     * G_ContactPhone : 15928873182
+     * G_ContactPhone : 18508103615
      * G_ContactQQ :
-     * G_CorrespAmount : 30.00
-     * G_CosworkIDs :
-     * G_CourierCompanyID : 0
-     * G_CourierMoney : 0.00
-     * G_Cover : http:\/\/www.anipiggy.com\/UploadFolder\/image\/201609\/2016989585481633374.png
+     * G_CorrespAmount : 4.30
+     * G_CosworkIDs : 1,8,14
+     * G_CourierCompanyID : 2
+     * G_CourierMoney : 12.80
+     * G_Cover : http:\/\/www.anipiggy.com\/UploadFolder\/image\/201609\/2016981123582870038.jpg
      * G_DepositPrice : 0.00
-     * G_DetailRemarks : <p>
-     <br \/>
-     <\/p>
-     <p>
-     888888888888888888888888
-     <\/p>
-     * G_FixedPrice : 100.00
+     * G_DetailRemarks : 测试商品<span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span>
+     * G_FixedPrice : 120.60
      * G_GoodsFreightNum :
-     * G_Hits : 9
-     * G_Images : http:\/\/www.anipiggy.com\/UploadFolder\/image\/201609\/2016989585481633374.png,
+     * G_Hits : 293
+     * G_Images : http:\/\/www.anipiggy.com\/UploadFolder\/image\/201609\/20169811235925157051.jpg,http:\/\/www.anipiggy.com\/UploadFolder\/image\/201609\/20169811235858355307.jpg,http:\/\/www.anipiggy.com\/UploadFolder\/image\/201609\/2016981123582870038.jpg,
      * G_IsChange : true
      * G_IsDepositDeal : false
      * G_IsFreeService : false
-     * G_IsFreeShip : true
+     * G_IsFreeShip : false
      * G_IsMorePrice : true
      * G_IsOfflineDeal : true
-     * G_IsOffline_rentdeal : false
-     * G_IsOnline_rentdeal : false
+     * G_IsOffline_rentdeal : true
+     * G_IsOnline_rentdeal : true
      * G_IsRecommend : false
      * G_IsRent : true
      * G_IsSale : true
      * G_IsServiceBook : false
-     * G_IsShelves : false
+     * G_IsShelves : true
      * G_IsShowIndex : false
      * G_IsTJByShop : false
      * G_Isdraught : false
      * G_Isurgentsale : false
-     * G_MarketingPrice : 150.00
-     * G_Member_OBJ : {"M_Account_Status":"正常","M_Area":"市辖区","M_Avatar":"\\/App_Themes\\/UI\\/image\\/default_avator.jpg","M_BusinessType":"一般商家","M_City":"成都市","M_Email":"","M_FCode":"eUfmM","M_IDCard":"","M_IsBusiness":true,"M_IsLock":false,"M_IsRealNameAuth":false,"M_IsSkill":false,"M_MemberLevel":3,"M_Name":"","M_Phone":"15928873182","M_Province":"四川省","M_Pwd":"E10ADC3949BA59ABBE56E057F20F883E","M_RegIP":"182.139.188.246","M_RegTime":"2016-09-07 20:53:47","M_Sex":"男","M_StoreLevel":15,"M_UID":"20169720534713893413","M_UserName":"罗少2","N_AllLevel":18}
+     * G_MarketingPrice : 200.00
+     * G_Member_OBJ : {"M_Account_Status":"正常","M_Area":"市辖区","M_Avatar":"\\/UploadFolder\\/image\\/201705\\/20175181253057401172.jpg","M_BusinessType":"品牌商家","M_City":"成都市","M_Email":"","M_FCode":"ArRwi","M_IDCard":"510105201512140000","M_IsBusiness":true,"M_IsLock":false,"M_IsRealNameAuth":true,"M_IsSkill":false,"M_MemberLevel":4,"M_Name":"猪排子","M_Phone":"18508103615","M_Province":"四川省","M_Pwd":"E10ADC3949BA59ABBE56E057F20F883E","M_RegIP":"171.217.145.83","M_RegTime":"2016-09-07 20:33:54","M_Sex":"女","M_StoreLevel":24,"M_UID":"20169720335385547137","M_UserName":"猪排子","N_AllLevel":28,"member_identity":"COSER|后期|摄影师|舞师|妆娘|"}
      * G_NewOldDegree : 8.5成新
      * G_NoPassReason :
      * G_NoPassReasonDetail :
      * G_OrderNum : 0
      * G_Province : 四川
-     * G_ReadCount : 0
-     * G_RefreshTime : 2016-09-08 10:00:27
-     * G_RenewalPrice : 20.00
-     * G_SaleNum : 0
+     * G_ReadCount : 152
+     * G_RefreshTime : 2017-06-12 12:49:08
+     * G_RenewalPrice : 2.20
+     * G_SaleNum : 31
      * G_ShareNumber : 0
      * G_ShopOrderNum : 0
-     * G_StockNum : 100
-     * G_SubTitle :
-     * G_Title : 蒙奇·D·路飞 - 商品一号
+     * G_StockNum : 135
+     * G_SubTitle : SH_SHOPPING_ONLINE_T1
+     * G_Title : 罗罗诺亚·索隆\/蒙奇·D·路飞 - SH_SHOPPING_ONLINE_T1
      * G_Type : 二手商品
-     * G_UID : 2016981002789024616
-     * G_UpTime : 2016-09-08 10:00:27
+     * G_UID : 20169811263489221726
+     * G_UpTime : 2016-09-08 11:26:34
      * G_Weight : 0
      * G_appointment_mintime_value : 0
      * G_appointment_price_1 : 0.00
@@ -87,21 +83,24 @@ public class BussnessBean {
      * G_appointment_time_value_6 : 0
      * GoodsTypeID : 4
      * GoodsTypeID2 : 0
-     * Member_UID : 20169720534713893413
-     * TelevisionWorks_FK : 1,
-     * VirtualRole_FK : 1,
+     * Member_UID : 20169720335385547137
+     * TelevisionWorks_FK : 1,1,
+     * VirtualRole_FK : 2,1,
      * attitude_number_value : 0.0
-     * bbkpd_member_value : 0.0
+     * bbkpd_member_value : 4.5
      * collection_number : 1
      * complatespeed_value : 0.0
-     * czrkpd_member_value : 0.0
-     * goods_cosworks : []
+     * czrkpd_member_value : 4.2
+     * goods_cosworks : 1,8,14
      * goods_parameter : 组套情况：未知,肩宽(CM)：未知,胸围(CM)：未知,袖长(CM)：未知,衣长(CM)：未知,腰围(CM)：未知,裤长(CM)：未知,身高(CM)：未知,体重(KG)：未知,臀围(CM)：未知,面料柔软：未知,面料厚度：未知,版型指数：未知,衣长指数：未知,
-     * goods_specifications : [{"PS_ArticleCode":"","PS_AttributeNames":"衣长,颜色","PS_AttributeValues":"80,黑色","PS_BasicLease":2,"PS_CorrespAmount":"30.00","PS_DepositPrice":"0.00","PS_FixedPrice":"100.00","PS_Inventory":48,"PS_IsDefaultSelected":true,"PS_IsShelves":false,"PS_MarketingPrice":"150.00","PS_RenewalPrice":"20.00","PS_UniqueID":"201611415222616593502","PS_Weight":0,"Product_UniqueID":"2016981002789024616","id":230},{"PS_ArticleCode":"","PS_AttributeNames":"衣长,颜色","PS_AttributeValues":"80,白色","PS_BasicLease":2,"PS_CorrespAmount":"30.00","PS_DepositPrice":"0.00","PS_FixedPrice":"110.00","PS_Inventory":98,"PS_IsDefaultSelected":false,"PS_IsShelves":false,"PS_MarketingPrice":"150.00","PS_RenewalPrice":"20.00","PS_UniqueID":"201611415222627583734","PS_Weight":0,"Product_UniqueID":"2016981002789024616","id":231},{"PS_ArticleCode":"","PS_AttributeNames":"衣长,颜色","PS_AttributeValues":"100,黑色","PS_BasicLease":2,"PS_CorrespAmount":"40.00","PS_DepositPrice":"0.00","PS_FixedPrice":"120.00","PS_Inventory":98,"PS_IsDefaultSelected":false,"PS_IsShelves":false,"PS_MarketingPrice":"150.00","PS_RenewalPrice":"30.00","PS_UniqueID":"201611415222637836670","PS_Weight":0,"Product_UniqueID":"2016981002789024616","id":232},{"PS_ArticleCode":"","PS_AttributeNames":"衣长,颜色","PS_AttributeValues":"100,白色","PS_BasicLease":2,"PS_CorrespAmount":"40.00","PS_DepositPrice":"0.00","PS_FixedPrice":"130.00","PS_Inventory":100,"PS_IsDefaultSelected":false,"PS_IsShelves":false,"PS_MarketingPrice":"150.00","PS_RenewalPrice":"30.00","PS_UniqueID":"201611415222650963045","PS_Weight":0,"Product_UniqueID":"2016981002789024616","id":233}]
-     * id : 1
-     * mjkpd_member_value : 0.0
+     * goods_specifications : [{"PS_ArticleCode":"","PS_AttributeNames":"尺寸,色彩","PS_AttributeValues":"175\\/65A,奶奶灰","PS_BasicLease":2,"PS_CorrespAmount":"4.30","PS_DepositPrice":"0.00","PS_FixedPrice":"120.60","PS_Inventory":37,"PS_IsDefaultSelected":true,"PS_IsShelves":false,"PS_MarketingPrice":"200.00","PS_RenewalPrice":"2.20","PS_UniqueID":"201763141020143180","PS_Weight":0,"Product_UniqueID":"20169811263489221726","id":408},{"PS_ArticleCode":"","PS_AttributeNames":"尺寸,色彩","PS_AttributeValues":"175\\/65A,草坪绿","PS_BasicLease":2,"PS_CorrespAmount":"8.50","PS_DepositPrice":"0.00","PS_FixedPrice":"200.40","PS_Inventory":83,"PS_IsDefaultSelected":false,"PS_IsShelves":false,"PS_MarketingPrice":"400.00","PS_RenewalPrice":"2.20","PS_UniqueID":"20176314102010943202","PS_Weight":0,"Product_UniqueID":"20169811263489221726","id":409},{"PS_ArticleCode":"","PS_AttributeNames":"尺寸,色彩","PS_AttributeValues":"180\\/70A,奶奶灰","PS_BasicLease":2,"PS_CorrespAmount":"10.43","PS_DepositPrice":"0.00","PS_FixedPrice":"250.50","PS_Inventory":56,"PS_IsDefaultSelected":false,"PS_IsShelves":false,"PS_MarketingPrice":"500.00","PS_RenewalPrice":"2.60","PS_UniqueID":"20176314102021159017","PS_Weight":0,"Product_UniqueID":"20169811263489221726","id":410},{"PS_ArticleCode":"","PS_AttributeNames":"尺寸,色彩","PS_AttributeValues":"180\\/70A,草坪绿","PS_BasicLease":2,"PS_CorrespAmount":"4.20","PS_DepositPrice":"0.00","PS_FixedPrice":"7.20","PS_Inventory":92,"PS_IsDefaultSelected":false,"PS_IsShelves":false,"PS_MarketingPrice":"600.00","PS_RenewalPrice":"2.10","PS_UniqueID":"20176314102031448149","PS_Weight":0,"Product_UniqueID":"20169811263489221726","id":411}]
+     * id : 4
+     * mjkpd_member_value : 5.0
+     * order_review_list : [{"Comments_object":"买家","GoodsCate":"二手商品","Goods_UID":"20169811263489221726","Member_UID":"20169720303555307924","OP_Buyerdegrees":0,"OP_Buyersimpression":"","OP_Sellerdeliveryspeed":0,"OP_Sellerserviceattitude":0,"OP_ServerType":4,"OP_Server_attitude":0,"OP_Server_completespeed":0,"OP_Server_professionaldegree":0,"OR_BabyPerformance":5,"OR_BabydescriptionMatch":0,"OR_Evaluation":"中评","OR_GoodsComment":"afdsaf","OR_Sellerdegrees":5,"OR_Sellerimpression":"adfasfas","OR_Time":"2017-06-09 17:55","OrderCate":"租赁订单","Order_UID":"2017691011962410638","Store_UID":"20169720335385547137","id":88},{"Comments_object":"买家","GoodsCate":"二手商品","Goods_UID":"20169811263489221726","Member_UID":"20169720303555307924","OP_Buyerdegrees":0,"OP_Buyersimpression":"","OP_Sellerdeliveryspeed":0,"OP_Sellerserviceattitude":0,"OP_ServerType":4,"OP_Server_attitude":0,"OP_Server_completespeed":0,"OP_Server_professionaldegree":0,"OR_BabyPerformance":4,"OR_BabydescriptionMatch":0,"OR_Evaluation":"好评","OR_GoodsComment":"沙发大发发生","OR_Sellerdegrees":4,"OR_Sellerimpression":"暗示法撒地方撒发生","OR_Time":"2017-06-09 06:39","OrderCate":"租赁订单","Order_UID":"2017695492184477357","Store_UID":"20169720335385547137","id":87},{"Comments_object":"买家","GoodsCate":"二手商品","Goods_UID":"20169811263489221726","Member_UID":"20169720303555307924","OP_Buyerdegrees":0,"OP_Buyersimpression":"","OP_Sellerdeliveryspeed":0,"OP_Sellerserviceattitude":0,"OP_ServerType":4,"OP_Server_attitude":0,"OP_Server_completespeed":0,"OP_Server_professionaldegree":0,"OR_BabyPerformance":5,"OR_BabydescriptionMatch":0,"OR_Evaluation":"好评","OR_GoodsComment":"","OR_Sellerdegrees":5,"OR_Sellerimpression":"法师法师发大水","OR_Time":"2017-06-07 17:59","OrderCate":"租赁订单","Order_UID":"20176716431440212793","Store_UID":"20169720335385547137","id":84},{"Comments_object":"买家","GoodsCate":"二手商品","Goods_UID":"20169811263489221726","Member_UID":"20169720303555307924","OP_Buyerdegrees":0,"OP_Buyersimpression":"","OP_Sellerdeliveryspeed":0,"OP_Sellerserviceattitude":0,"OP_ServerType":4,"OP_Server_attitude":0,"OP_Server_completespeed":0,"OP_Server_professionaldegree":0,"OR_BabyPerformance":5,"OR_BabydescriptionMatch":0,"OR_Evaluation":"好评","OR_GoodsComment":"很好的东西，不错不错","OR_Sellerdegrees":5,"OR_Sellerimpression":"王小帅很好的东西，不错不错","OR_Time":"2017-02-17 18:01","OrderCate":"购物订单","Order_UID":"2017131336812111905","Store_UID":"20169720335385547137","id":6},{"Comments_object":"买家","GoodsCate":"二手商品","Goods_UID":"20169811263489221726","Member_UID":"20169720303555307924","OP_Buyerdegrees":0,"OP_Buyersimpression":"","OP_Sellerdeliveryspeed":0,"OP_Sellerserviceattitude":0,"OP_ServerType":4,"OP_Server_attitude":0,"OP_Server_completespeed":0,"OP_Server_professionaldegree":0,"OR_BabyPerformance":5,"OR_BabydescriptionMatch":0,"OR_Evaluation":"中评","OR_GoodsComment":"afdssafasfsaf","OR_Sellerdegrees":4,"OR_Sellerimpression":"afdasfsafsafsafsa","OR_Time":"2017-01-26 01:39","OrderCate":"租赁订单","Order_UID":"20171187375334227142","Store_UID":"20169720335385547137","id":3},{"Comments_object":"买家","GoodsCate":"二手商品","Goods_UID":"20169811263489221726","Member_UID":"20169720303555307924","OP_Buyerdegrees":0,"OP_Buyersimpression":"","OP_Sellerdeliveryspeed":0,"OP_Sellerserviceattitude":0,"OP_ServerType":4,"OP_Server_attitude":0,"OP_Server_completespeed":0,"OP_Server_professionaldegree":0,"OR_BabyPerformance":3,"OR_BabydescriptionMatch":0,"OR_Evaluation":"中评","OR_GoodsComment":"长春 v 不合格","OR_Sellerdegrees":3,"OR_Sellerimpression":"复古风句vg","OR_Time":"2017-01-18 04:11","OrderCate":"租赁订单","Order_UID":"2017118353458906882","Store_UID":"20169720335385547137","id":2}]
+     * order_sellerfigure : [{"Comments_object":"买家","GoodsCate":"二手商品","Goods_UID":"20169811263489221726","Member_UID":"20169720303555307924","OP_Buyerdegrees":0,"OP_Buyersimpression":"","OP_Sellerdeliveryspeed":0,"OP_Sellerserviceattitude":0,"OP_ServerType":4,"OP_Server_attitude":0,"OP_Server_completespeed":0,"OP_Server_professionaldegree":0,"OR_BabyPerformance":5,"OR_BabydescriptionMatch":0,"OR_Evaluation":"中评","OR_GoodsComment":"afdsaf","OR_Sellerdegrees":5,"OR_Sellerimpression":"adfasfas","OR_Time":"2017-06-09 17:55","OrderCate":"租赁订单","Order_UID":"2017691011962410638","Store_UID":"20169720335385547137","id":88},{"Comments_object":"买家","GoodsCate":"二手商品","Goods_UID":"20169811263489221726","Member_UID":"20169720303555307924","OP_Buyerdegrees":0,"OP_Buyersimpression":"","OP_Sellerdeliveryspeed":0,"OP_Sellerserviceattitude":0,"OP_ServerType":4,"OP_Server_attitude":0,"OP_Server_completespeed":0,"OP_Server_professionaldegree":0,"OR_BabyPerformance":4,"OR_BabydescriptionMatch":0,"OR_Evaluation":"好评","OR_GoodsComment":"沙发大发发生","OR_Sellerdegrees":4,"OR_Sellerimpression":"暗示法撒地方撒发生","OR_Time":"2017-06-09 06:39","OrderCate":"租赁订单","Order_UID":"2017695492184477357","Store_UID":"20169720335385547137","id":87},{"Comments_object":"买家","GoodsCate":"二手商品","Goods_UID":"20169811263489221726","Member_UID":"20169720303555307924","OP_Buyerdegrees":0,"OP_Buyersimpression":"","OP_Sellerdeliveryspeed":0,"OP_Sellerserviceattitude":0,"OP_ServerType":4,"OP_Server_attitude":0,"OP_Server_completespeed":0,"OP_Server_professionaldegree":0,"OR_BabyPerformance":5,"OR_BabydescriptionMatch":0,"OR_Evaluation":"好评","OR_GoodsComment":"","OR_Sellerdegrees":5,"OR_Sellerimpression":"法师法师发大水","OR_Time":"2017-06-07 17:59","OrderCate":"租赁订单","Order_UID":"20176716431440212793","Store_UID":"20169720335385547137","id":84},{"Comments_object":"买家","GoodsCate":"服务","Goods_UID":"20161194442457287949","Member_UID":"20169720303555307924","OP_Buyerdegrees":0,"OP_Buyersimpression":"","OP_Sellerdeliveryspeed":0,"OP_Sellerserviceattitude":0,"OP_ServerType":8,"OP_Server_attitude":5,"OP_Server_completespeed":4,"OP_Server_professionaldegree":5,"OR_BabyPerformance":0,"OR_BabydescriptionMatch":0,"OR_Evaluation":"","OR_GoodsComment":"","OR_Sellerdegrees":0,"OR_Sellerimpression":"n\u2006x\u2006n\u2006n\u2006x\u2006n\u2006x\u2006n","OR_Time":"2017-05-17 08:14","OrderCate":"购物订单","Order_UID":"20175176171897923354","Store_UID":"20169720335385547137","id":79},{"Comments_object":"买家","GoodsCate":"二手商品","Goods_UID":"20169811263489221726","Member_UID":"20169720303555307924","OP_Buyerdegrees":0,"OP_Buyersimpression":"","OP_Sellerdeliveryspeed":0,"OP_Sellerserviceattitude":0,"OP_ServerType":4,"OP_Server_attitude":0,"OP_Server_completespeed":0,"OP_Server_professionaldegree":0,"OR_BabyPerformance":5,"OR_BabydescriptionMatch":0,"OR_Evaluation":"好评","OR_GoodsComment":"很好的东西，不错不错","OR_Sellerdegrees":5,"OR_Sellerimpression":"王小帅很好的东西，不错不错","OR_Time":"2017-02-17 18:01","OrderCate":"购物订单","Order_UID":"2017131336812111905","Store_UID":"20169720335385547137","id":6},{"Comments_object":"买家","GoodsCate":"服务","Goods_UID":"20171193493153455371","Member_UID":"20169720303555307924","OP_Buyerdegrees":0,"OP_Buyersimpression":"","OP_Sellerdeliveryspeed":0,"OP_Sellerserviceattitude":0,"OP_ServerType":8,"OP_Server_attitude":5,"OP_Server_completespeed":5,"OP_Server_professionaldegree":5,"OR_BabyPerformance":0,"OR_BabydescriptionMatch":0,"OR_Evaluation":"好评","OR_GoodsComment":"fdsafafsaf","OR_Sellerdegrees":0,"OR_Sellerimpression":"adfasfasfasdfasfafsfda","OR_Time":"2017-02-07 18:01","OrderCate":"购物订单","Order_UID":"20172717585835909771","Store_UID":"20169720335385547137","id":4},{"Comments_object":"买家","GoodsCate":"二手商品","Goods_UID":"20169811263489221726","Member_UID":"20169720303555307924","OP_Buyerdegrees":0,"OP_Buyersimpression":"","OP_Sellerdeliveryspeed":0,"OP_Sellerserviceattitude":0,"OP_ServerType":4,"OP_Server_attitude":0,"OP_Server_completespeed":0,"OP_Server_professionaldegree":0,"OR_BabyPerformance":5,"OR_BabydescriptionMatch":0,"OR_Evaluation":"中评","OR_GoodsComment":"afdssafasfsaf","OR_Sellerdegrees":4,"OR_Sellerimpression":"afdasfsafsafsafsa","OR_Time":"2017-01-26 01:39","OrderCate":"租赁订单","Order_UID":"20171187375334227142","Store_UID":"20169720335385547137","id":3},{"Comments_object":"买家","GoodsCate":"二手商品","Goods_UID":"20169811263489221726","Member_UID":"20169720303555307924","OP_Buyerdegrees":0,"OP_Buyersimpression":"","OP_Sellerdeliveryspeed":0,"OP_Sellerserviceattitude":0,"OP_ServerType":4,"OP_Server_attitude":0,"OP_Server_completespeed":0,"OP_Server_professionaldegree":0,"OR_BabyPerformance":3,"OR_BabydescriptionMatch":0,"OR_Evaluation":"中评","OR_GoodsComment":"长春 v 不合格","OR_Sellerdegrees":3,"OR_Sellerimpression":"复古风句vg","OR_Time":"2017-01-18 04:11","OrderCate":"租赁订单","Order_UID":"2017118353458906882","Store_UID":"20169720335385547137","id":2}]
      * professionaldegree_value : 0.0
-     * showtype : 0
+     * shop_coupon_count : 3
+     * showtype : 1
      */
 
     private String BrandID;
@@ -182,13 +181,16 @@ public class BussnessBean {
     private int collection_number;
     private String complatespeed_value;
     private String czrkpd_member_value;
+    private String goods_cosworks;
     private String goods_parameter;
     private int id;
     private String mjkpd_member_value;
     private String professionaldegree_value;
+    private int shop_coupon_count;
     private int showtype;
-    private List<?> goods_cosworks;
     private List<GoodsSpecificationsBean> goods_specifications;
+    private List<OrderReviewListBean> order_review_list;
+    private List<OrderSellerfigureBean> order_sellerfigure;
 
     public String getBrandID() {
         return BrandID;
@@ -814,6 +816,14 @@ public class BussnessBean {
         this.czrkpd_member_value = czrkpd_member_value;
     }
 
+    public String getGoods_cosworks() {
+        return goods_cosworks;
+    }
+
+    public void setGoods_cosworks(String goods_cosworks) {
+        this.goods_cosworks = goods_cosworks;
+    }
+
     public String getGoods_parameter() {
         return goods_parameter;
     }
@@ -846,20 +856,20 @@ public class BussnessBean {
         this.professionaldegree_value = professionaldegree_value;
     }
 
+    public int getShop_coupon_count() {
+        return shop_coupon_count;
+    }
+
+    public void setShop_coupon_count(int shop_coupon_count) {
+        this.shop_coupon_count = shop_coupon_count;
+    }
+
     public int getShowtype() {
         return showtype;
     }
 
     public void setShowtype(int showtype) {
         this.showtype = showtype;
-    }
-
-    public List<?> getGoods_cosworks() {
-        return goods_cosworks;
-    }
-
-    public void setGoods_cosworks(List<?> goods_cosworks) {
-        this.goods_cosworks = goods_cosworks;
     }
 
     public List<GoodsSpecificationsBean> getGoods_specifications() {
@@ -870,32 +880,50 @@ public class BussnessBean {
         this.goods_specifications = goods_specifications;
     }
 
-    public static class GMemberOBJBean {
+    public List<OrderReviewListBean> getOrder_review_list() {
+        return order_review_list;
+    }
+
+    public void setOrder_review_list(List<OrderReviewListBean> order_review_list) {
+        this.order_review_list = order_review_list;
+    }
+
+    public List<OrderSellerfigureBean> getOrder_sellerfigure() {
+        return order_sellerfigure;
+    }
+
+    public void setOrder_sellerfigure(List<OrderSellerfigureBean> order_sellerfigure) {
+        this.order_sellerfigure = order_sellerfigure;
+    }
+
+    public static class GMemberOBJBean implements Parcelable {
+
         /**
          * M_Account_Status : 正常
          * M_Area : 市辖区
-         * M_Avatar : \/App_Themes\/UI\/image\/default_avator.jpg
-         * M_BusinessType : 一般商家
+         * M_Avatar : \/UploadFolder\/image\/201705\/20175181253057401172.jpg
+         * M_BusinessType : 品牌商家
          * M_City : 成都市
          * M_Email :
-         * M_FCode : eUfmM
-         * M_IDCard :
+         * M_FCode : ArRwi
+         * M_IDCard : 510105201512140000
          * M_IsBusiness : true
          * M_IsLock : false
-         * M_IsRealNameAuth : false
+         * M_IsRealNameAuth : true
          * M_IsSkill : false
-         * M_MemberLevel : 3
-         * M_Name :
-         * M_Phone : 15928873182
+         * M_MemberLevel : 4
+         * M_Name : 猪排子
+         * M_Phone : 18508103615
          * M_Province : 四川省
          * M_Pwd : E10ADC3949BA59ABBE56E057F20F883E
-         * M_RegIP : 182.139.188.246
-         * M_RegTime : 2016-09-07 20:53:47
-         * M_Sex : 男
-         * M_StoreLevel : 15
-         * M_UID : 20169720534713893413
-         * M_UserName : 罗少2
-         * N_AllLevel : 18
+         * M_RegIP : 171.217.145.83
+         * M_RegTime : 2016-09-07 20:33:54
+         * M_Sex : 女
+         * M_StoreLevel : 24
+         * M_UID : 20169720335385547137
+         * M_UserName : 猪排子
+         * N_AllLevel : 28
+         * member_identity : COSER|后期|摄影师|舞师|妆娘|
          */
 
         private String M_Account_Status;
@@ -922,6 +950,7 @@ public class BussnessBean {
         private String M_UID;
         private String M_UserName;
         private int N_AllLevel;
+        private String member_identity;
 
         public String getM_Account_Status() {
             return M_Account_Status;
@@ -1114,26 +1143,113 @@ public class BussnessBean {
         public void setN_AllLevel(int N_AllLevel) {
             this.N_AllLevel = N_AllLevel;
         }
+
+        public String getMember_identity() {
+            return member_identity;
+        }
+
+        public void setMember_identity(String member_identity) {
+            this.member_identity = member_identity;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.M_Account_Status);
+            dest.writeString(this.M_Area);
+            dest.writeString(this.M_Avatar);
+            dest.writeString(this.M_BusinessType);
+            dest.writeString(this.M_City);
+            dest.writeString(this.M_Email);
+            dest.writeString(this.M_FCode);
+            dest.writeString(this.M_IDCard);
+            dest.writeByte(this.M_IsBusiness ? (byte) 1 : (byte) 0);
+            dest.writeByte(this.M_IsLock ? (byte) 1 : (byte) 0);
+            dest.writeByte(this.M_IsRealNameAuth ? (byte) 1 : (byte) 0);
+            dest.writeByte(this.M_IsSkill ? (byte) 1 : (byte) 0);
+            dest.writeInt(this.M_MemberLevel);
+            dest.writeString(this.M_Name);
+            dest.writeString(this.M_Phone);
+            dest.writeString(this.M_Province);
+            dest.writeString(this.M_Pwd);
+            dest.writeString(this.M_RegIP);
+            dest.writeString(this.M_RegTime);
+            dest.writeString(this.M_Sex);
+            dest.writeInt(this.M_StoreLevel);
+            dest.writeString(this.M_UID);
+            dest.writeString(this.M_UserName);
+            dest.writeInt(this.N_AllLevel);
+            dest.writeString(this.member_identity);
+        }
+
+        public GMemberOBJBean() {
+        }
+
+        protected GMemberOBJBean(Parcel in) {
+            this.M_Account_Status = in.readString();
+            this.M_Area = in.readString();
+            this.M_Avatar = in.readString();
+            this.M_BusinessType = in.readString();
+            this.M_City = in.readString();
+            this.M_Email = in.readString();
+            this.M_FCode = in.readString();
+            this.M_IDCard = in.readString();
+            this.M_IsBusiness = in.readByte() != 0;
+            this.M_IsLock = in.readByte() != 0;
+            this.M_IsRealNameAuth = in.readByte() != 0;
+            this.M_IsSkill = in.readByte() != 0;
+            this.M_MemberLevel = in.readInt();
+            this.M_Name = in.readString();
+            this.M_Phone = in.readString();
+            this.M_Province = in.readString();
+            this.M_Pwd = in.readString();
+            this.M_RegIP = in.readString();
+            this.M_RegTime = in.readString();
+            this.M_Sex = in.readString();
+            this.M_StoreLevel = in.readInt();
+            this.M_UID = in.readString();
+            this.M_UserName = in.readString();
+            this.N_AllLevel = in.readInt();
+            this.member_identity = in.readString();
+        }
+
+        public static final Parcelable.Creator<GMemberOBJBean> CREATOR = new Parcelable.Creator<GMemberOBJBean>() {
+            @Override
+            public GMemberOBJBean createFromParcel(Parcel source) {
+                return new GMemberOBJBean(source);
+            }
+
+            @Override
+            public GMemberOBJBean[] newArray(int size) {
+                return new GMemberOBJBean[size];
+            }
+        };
     }
 
-    public static class GoodsSpecificationsBean {
+    public static class GoodsSpecificationsBean implements Parcelable {
+
+
         /**
          * PS_ArticleCode :
-         * PS_AttributeNames : 衣长,颜色
-         * PS_AttributeValues : 80,黑色
+         * PS_AttributeNames : 尺寸,色彩
+         * PS_AttributeValues : 175\/65A,奶奶灰
          * PS_BasicLease : 2
-         * PS_CorrespAmount : 30.00
+         * PS_CorrespAmount : 4.30
          * PS_DepositPrice : 0.00
-         * PS_FixedPrice : 100.00
-         * PS_Inventory : 48
+         * PS_FixedPrice : 120.60
+         * PS_Inventory : 37
          * PS_IsDefaultSelected : true
          * PS_IsShelves : false
-         * PS_MarketingPrice : 150.00
-         * PS_RenewalPrice : 20.00
-         * PS_UniqueID : 201611415222616593502
+         * PS_MarketingPrice : 200.00
+         * PS_RenewalPrice : 2.20
+         * PS_UniqueID : 201763141020143180
          * PS_Weight : 0
-         * Product_UniqueID : 2016981002789024616
-         * id : 230
+         * Product_UniqueID : 20169811263489221726
+         * id : 408
          */
 
         private String PS_ArticleCode;
@@ -1280,5 +1396,889 @@ public class BussnessBean {
         public void setId(int id) {
             this.id = id;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.PS_ArticleCode);
+            dest.writeString(this.PS_AttributeNames);
+            dest.writeString(this.PS_AttributeValues);
+            dest.writeInt(this.PS_BasicLease);
+            dest.writeString(this.PS_CorrespAmount);
+            dest.writeString(this.PS_DepositPrice);
+            dest.writeString(this.PS_FixedPrice);
+            dest.writeInt(this.PS_Inventory);
+            dest.writeByte(this.PS_IsDefaultSelected ? (byte) 1 : (byte) 0);
+            dest.writeByte(this.PS_IsShelves ? (byte) 1 : (byte) 0);
+            dest.writeString(this.PS_MarketingPrice);
+            dest.writeString(this.PS_RenewalPrice);
+            dest.writeString(this.PS_UniqueID);
+            dest.writeInt(this.PS_Weight);
+            dest.writeString(this.Product_UniqueID);
+            dest.writeInt(this.id);
+        }
+
+        public GoodsSpecificationsBean() {
+        }
+
+        protected GoodsSpecificationsBean(Parcel in) {
+            this.PS_ArticleCode = in.readString();
+            this.PS_AttributeNames = in.readString();
+            this.PS_AttributeValues = in.readString();
+            this.PS_BasicLease = in.readInt();
+            this.PS_CorrespAmount = in.readString();
+            this.PS_DepositPrice = in.readString();
+            this.PS_FixedPrice = in.readString();
+            this.PS_Inventory = in.readInt();
+            this.PS_IsDefaultSelected = in.readByte() != 0;
+            this.PS_IsShelves = in.readByte() != 0;
+            this.PS_MarketingPrice = in.readString();
+            this.PS_RenewalPrice = in.readString();
+            this.PS_UniqueID = in.readString();
+            this.PS_Weight = in.readInt();
+            this.Product_UniqueID = in.readString();
+            this.id = in.readInt();
+        }
+
+        public static final Parcelable.Creator<GoodsSpecificationsBean> CREATOR = new Parcelable.Creator<GoodsSpecificationsBean>() {
+            @Override
+            public GoodsSpecificationsBean createFromParcel(Parcel source) {
+                return new GoodsSpecificationsBean(source);
+            }
+
+            @Override
+            public GoodsSpecificationsBean[] newArray(int size) {
+                return new GoodsSpecificationsBean[size];
+            }
+        };
     }
+
+    public static class OrderReviewListBean implements Parcelable {
+
+
+        /**
+         * Comments_object : 买家
+         * GoodsCate : 二手商品
+         * Goods_UID : 20169811263489221726
+         * Member_UID : 20169720303555307924
+         * OP_Buyerdegrees : 0
+         * OP_Buyersimpression :
+         * OP_Sellerdeliveryspeed : 0
+         * OP_Sellerserviceattitude : 0
+         * OP_ServerType : 4
+         * OP_Server_attitude : 0
+         * OP_Server_completespeed : 0
+         * OP_Server_professionaldegree : 0
+         * OR_BabyPerformance : 5
+         * OR_BabydescriptionMatch : 0
+         * OR_Evaluation : 中评
+         * OR_GoodsComment : afdsaf
+         * OR_Sellerdegrees : 5
+         * OR_Sellerimpression : adfasfas
+         * OR_Time : 2017-06-09 17:55
+         * OrderCate : 租赁订单
+         * Order_UID : 2017691011962410638
+         * Store_UID : 20169720335385547137
+         * id : 88
+         */
+
+        private String Comments_object;
+        private String GoodsCate;
+        private String Goods_UID;
+        private String Member_UID;
+        private int OP_Buyerdegrees;
+        private String OP_Buyersimpression;
+        private int OP_Sellerdeliveryspeed;
+        private int OP_Sellerserviceattitude;
+        private int OP_ServerType;
+        private int OP_Server_attitude;
+        private int OP_Server_completespeed;
+        private int OP_Server_professionaldegree;
+        private int OR_BabyPerformance;
+        private int OR_BabydescriptionMatch;
+        private String OR_Evaluation;
+        private String OR_GoodsComment;
+        private int OR_Sellerdegrees;
+        private String OR_Sellerimpression;
+        private String OR_Time;
+        private String OrderCate;
+        private String Order_UID;
+        private String Store_UID;
+        private int id;
+
+        public String getComments_object() {
+            return Comments_object;
+        }
+
+        public void setComments_object(String Comments_object) {
+            this.Comments_object = Comments_object;
+        }
+
+        public String getGoodsCate() {
+            return GoodsCate;
+        }
+
+        public void setGoodsCate(String GoodsCate) {
+            this.GoodsCate = GoodsCate;
+        }
+
+        public String getGoods_UID() {
+            return Goods_UID;
+        }
+
+        public void setGoods_UID(String Goods_UID) {
+            this.Goods_UID = Goods_UID;
+        }
+
+        public String getMember_UID() {
+            return Member_UID;
+        }
+
+        public void setMember_UID(String Member_UID) {
+            this.Member_UID = Member_UID;
+        }
+
+        public int getOP_Buyerdegrees() {
+            return OP_Buyerdegrees;
+        }
+
+        public void setOP_Buyerdegrees(int OP_Buyerdegrees) {
+            this.OP_Buyerdegrees = OP_Buyerdegrees;
+        }
+
+        public String getOP_Buyersimpression() {
+            return OP_Buyersimpression;
+        }
+
+        public void setOP_Buyersimpression(String OP_Buyersimpression) {
+            this.OP_Buyersimpression = OP_Buyersimpression;
+        }
+
+        public int getOP_Sellerdeliveryspeed() {
+            return OP_Sellerdeliveryspeed;
+        }
+
+        public void setOP_Sellerdeliveryspeed(int OP_Sellerdeliveryspeed) {
+            this.OP_Sellerdeliveryspeed = OP_Sellerdeliveryspeed;
+        }
+
+        public int getOP_Sellerserviceattitude() {
+            return OP_Sellerserviceattitude;
+        }
+
+        public void setOP_Sellerserviceattitude(int OP_Sellerserviceattitude) {
+            this.OP_Sellerserviceattitude = OP_Sellerserviceattitude;
+        }
+
+        public int getOP_ServerType() {
+            return OP_ServerType;
+        }
+
+        public void setOP_ServerType(int OP_ServerType) {
+            this.OP_ServerType = OP_ServerType;
+        }
+
+        public int getOP_Server_attitude() {
+            return OP_Server_attitude;
+        }
+
+        public void setOP_Server_attitude(int OP_Server_attitude) {
+            this.OP_Server_attitude = OP_Server_attitude;
+        }
+
+        public int getOP_Server_completespeed() {
+            return OP_Server_completespeed;
+        }
+
+        public void setOP_Server_completespeed(int OP_Server_completespeed) {
+            this.OP_Server_completespeed = OP_Server_completespeed;
+        }
+
+        public int getOP_Server_professionaldegree() {
+            return OP_Server_professionaldegree;
+        }
+
+        public void setOP_Server_professionaldegree(int OP_Server_professionaldegree) {
+            this.OP_Server_professionaldegree = OP_Server_professionaldegree;
+        }
+
+        public int getOR_BabyPerformance() {
+            return OR_BabyPerformance;
+        }
+
+        public void setOR_BabyPerformance(int OR_BabyPerformance) {
+            this.OR_BabyPerformance = OR_BabyPerformance;
+        }
+
+        public int getOR_BabydescriptionMatch() {
+            return OR_BabydescriptionMatch;
+        }
+
+        public void setOR_BabydescriptionMatch(int OR_BabydescriptionMatch) {
+            this.OR_BabydescriptionMatch = OR_BabydescriptionMatch;
+        }
+
+        public String getOR_Evaluation() {
+            return OR_Evaluation;
+        }
+
+        public void setOR_Evaluation(String OR_Evaluation) {
+            this.OR_Evaluation = OR_Evaluation;
+        }
+
+        public String getOR_GoodsComment() {
+            return OR_GoodsComment;
+        }
+
+        public void setOR_GoodsComment(String OR_GoodsComment) {
+            this.OR_GoodsComment = OR_GoodsComment;
+        }
+
+        public int getOR_Sellerdegrees() {
+            return OR_Sellerdegrees;
+        }
+
+        public void setOR_Sellerdegrees(int OR_Sellerdegrees) {
+            this.OR_Sellerdegrees = OR_Sellerdegrees;
+        }
+
+        public String getOR_Sellerimpression() {
+            return OR_Sellerimpression;
+        }
+
+        public void setOR_Sellerimpression(String OR_Sellerimpression) {
+            this.OR_Sellerimpression = OR_Sellerimpression;
+        }
+
+        public String getOR_Time() {
+            return OR_Time;
+        }
+
+        public void setOR_Time(String OR_Time) {
+            this.OR_Time = OR_Time;
+        }
+
+        public String getOrderCate() {
+            return OrderCate;
+        }
+
+        public void setOrderCate(String OrderCate) {
+            this.OrderCate = OrderCate;
+        }
+
+        public String getOrder_UID() {
+            return Order_UID;
+        }
+
+        public void setOrder_UID(String Order_UID) {
+            this.Order_UID = Order_UID;
+        }
+
+        public String getStore_UID() {
+            return Store_UID;
+        }
+
+        public void setStore_UID(String Store_UID) {
+            this.Store_UID = Store_UID;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.Comments_object);
+            dest.writeString(this.GoodsCate);
+            dest.writeString(this.Goods_UID);
+            dest.writeString(this.Member_UID);
+            dest.writeInt(this.OP_Buyerdegrees);
+            dest.writeString(this.OP_Buyersimpression);
+            dest.writeInt(this.OP_Sellerdeliveryspeed);
+            dest.writeInt(this.OP_Sellerserviceattitude);
+            dest.writeInt(this.OP_ServerType);
+            dest.writeInt(this.OP_Server_attitude);
+            dest.writeInt(this.OP_Server_completespeed);
+            dest.writeInt(this.OP_Server_professionaldegree);
+            dest.writeInt(this.OR_BabyPerformance);
+            dest.writeInt(this.OR_BabydescriptionMatch);
+            dest.writeString(this.OR_Evaluation);
+            dest.writeString(this.OR_GoodsComment);
+            dest.writeInt(this.OR_Sellerdegrees);
+            dest.writeString(this.OR_Sellerimpression);
+            dest.writeString(this.OR_Time);
+            dest.writeString(this.OrderCate);
+            dest.writeString(this.Order_UID);
+            dest.writeString(this.Store_UID);
+            dest.writeInt(this.id);
+        }
+
+        public OrderReviewListBean() {
+        }
+
+        protected OrderReviewListBean(Parcel in) {
+            this.Comments_object = in.readString();
+            this.GoodsCate = in.readString();
+            this.Goods_UID = in.readString();
+            this.Member_UID = in.readString();
+            this.OP_Buyerdegrees = in.readInt();
+            this.OP_Buyersimpression = in.readString();
+            this.OP_Sellerdeliveryspeed = in.readInt();
+            this.OP_Sellerserviceattitude = in.readInt();
+            this.OP_ServerType = in.readInt();
+            this.OP_Server_attitude = in.readInt();
+            this.OP_Server_completespeed = in.readInt();
+            this.OP_Server_professionaldegree = in.readInt();
+            this.OR_BabyPerformance = in.readInt();
+            this.OR_BabydescriptionMatch = in.readInt();
+            this.OR_Evaluation = in.readString();
+            this.OR_GoodsComment = in.readString();
+            this.OR_Sellerdegrees = in.readInt();
+            this.OR_Sellerimpression = in.readString();
+            this.OR_Time = in.readString();
+            this.OrderCate = in.readString();
+            this.Order_UID = in.readString();
+            this.Store_UID = in.readString();
+            this.id = in.readInt();
+        }
+
+        public static final Parcelable.Creator<OrderReviewListBean> CREATOR = new Parcelable.Creator<OrderReviewListBean>() {
+            @Override
+            public OrderReviewListBean createFromParcel(Parcel source) {
+                return new OrderReviewListBean(source);
+            }
+
+            @Override
+            public OrderReviewListBean[] newArray(int size) {
+                return new OrderReviewListBean[size];
+            }
+        };
+    }
+
+    public static class OrderSellerfigureBean implements Parcelable {
+
+
+        /**
+         * Comments_object : 买家
+         * GoodsCate : 二手商品
+         * Goods_UID : 20169811263489221726
+         * Member_UID : 20169720303555307924
+         * OP_Buyerdegrees : 0
+         * OP_Buyersimpression :
+         * OP_Sellerdeliveryspeed : 0
+         * OP_Sellerserviceattitude : 0
+         * OP_ServerType : 4
+         * OP_Server_attitude : 0
+         * OP_Server_completespeed : 0
+         * OP_Server_professionaldegree : 0
+         * OR_BabyPerformance : 5
+         * OR_BabydescriptionMatch : 0
+         * OR_Evaluation : 中评
+         * OR_GoodsComment : afdsaf
+         * OR_Sellerdegrees : 5
+         * OR_Sellerimpression : adfasfas
+         * OR_Time : 2017-06-09 17:55
+         * OrderCate : 租赁订单
+         * Order_UID : 2017691011962410638
+         * Store_UID : 20169720335385547137
+         * id : 88
+         */
+
+        private String Comments_object;
+        private String GoodsCate;
+        private String Goods_UID;
+        private String Member_UID;
+        private int OP_Buyerdegrees;
+        private String OP_Buyersimpression;
+        private int OP_Sellerdeliveryspeed;
+        private int OP_Sellerserviceattitude;
+        private int OP_ServerType;
+        private int OP_Server_attitude;
+        private int OP_Server_completespeed;
+        private int OP_Server_professionaldegree;
+        private int OR_BabyPerformance;
+        private int OR_BabydescriptionMatch;
+        private String OR_Evaluation;
+        private String OR_GoodsComment;
+        private int OR_Sellerdegrees;
+        private String OR_Sellerimpression;
+        private String OR_Time;
+        private String OrderCate;
+        private String Order_UID;
+        private String Store_UID;
+        private int id;
+
+        public String getComments_object() {
+            return Comments_object;
+        }
+
+        public void setComments_object(String Comments_object) {
+            this.Comments_object = Comments_object;
+        }
+
+        public String getGoodsCate() {
+            return GoodsCate;
+        }
+
+        public void setGoodsCate(String GoodsCate) {
+            this.GoodsCate = GoodsCate;
+        }
+
+        public String getGoods_UID() {
+            return Goods_UID;
+        }
+
+        public void setGoods_UID(String Goods_UID) {
+            this.Goods_UID = Goods_UID;
+        }
+
+        public String getMember_UID() {
+            return Member_UID;
+        }
+
+        public void setMember_UID(String Member_UID) {
+            this.Member_UID = Member_UID;
+        }
+
+        public int getOP_Buyerdegrees() {
+            return OP_Buyerdegrees;
+        }
+
+        public void setOP_Buyerdegrees(int OP_Buyerdegrees) {
+            this.OP_Buyerdegrees = OP_Buyerdegrees;
+        }
+
+        public String getOP_Buyersimpression() {
+            return OP_Buyersimpression;
+        }
+
+        public void setOP_Buyersimpression(String OP_Buyersimpression) {
+            this.OP_Buyersimpression = OP_Buyersimpression;
+        }
+
+        public int getOP_Sellerdeliveryspeed() {
+            return OP_Sellerdeliveryspeed;
+        }
+
+        public void setOP_Sellerdeliveryspeed(int OP_Sellerdeliveryspeed) {
+            this.OP_Sellerdeliveryspeed = OP_Sellerdeliveryspeed;
+        }
+
+        public int getOP_Sellerserviceattitude() {
+            return OP_Sellerserviceattitude;
+        }
+
+        public void setOP_Sellerserviceattitude(int OP_Sellerserviceattitude) {
+            this.OP_Sellerserviceattitude = OP_Sellerserviceattitude;
+        }
+
+        public int getOP_ServerType() {
+            return OP_ServerType;
+        }
+
+        public void setOP_ServerType(int OP_ServerType) {
+            this.OP_ServerType = OP_ServerType;
+        }
+
+        public int getOP_Server_attitude() {
+            return OP_Server_attitude;
+        }
+
+        public void setOP_Server_attitude(int OP_Server_attitude) {
+            this.OP_Server_attitude = OP_Server_attitude;
+        }
+
+        public int getOP_Server_completespeed() {
+            return OP_Server_completespeed;
+        }
+
+        public void setOP_Server_completespeed(int OP_Server_completespeed) {
+            this.OP_Server_completespeed = OP_Server_completespeed;
+        }
+
+        public int getOP_Server_professionaldegree() {
+            return OP_Server_professionaldegree;
+        }
+
+        public void setOP_Server_professionaldegree(int OP_Server_professionaldegree) {
+            this.OP_Server_professionaldegree = OP_Server_professionaldegree;
+        }
+
+        public int getOR_BabyPerformance() {
+            return OR_BabyPerformance;
+        }
+
+        public void setOR_BabyPerformance(int OR_BabyPerformance) {
+            this.OR_BabyPerformance = OR_BabyPerformance;
+        }
+
+        public int getOR_BabydescriptionMatch() {
+            return OR_BabydescriptionMatch;
+        }
+
+        public void setOR_BabydescriptionMatch(int OR_BabydescriptionMatch) {
+            this.OR_BabydescriptionMatch = OR_BabydescriptionMatch;
+        }
+
+        public String getOR_Evaluation() {
+            return OR_Evaluation;
+        }
+
+        public void setOR_Evaluation(String OR_Evaluation) {
+            this.OR_Evaluation = OR_Evaluation;
+        }
+
+        public String getOR_GoodsComment() {
+            return OR_GoodsComment;
+        }
+
+        public void setOR_GoodsComment(String OR_GoodsComment) {
+            this.OR_GoodsComment = OR_GoodsComment;
+        }
+
+        public int getOR_Sellerdegrees() {
+            return OR_Sellerdegrees;
+        }
+
+        public void setOR_Sellerdegrees(int OR_Sellerdegrees) {
+            this.OR_Sellerdegrees = OR_Sellerdegrees;
+        }
+
+        public String getOR_Sellerimpression() {
+            return OR_Sellerimpression;
+        }
+
+        public void setOR_Sellerimpression(String OR_Sellerimpression) {
+            this.OR_Sellerimpression = OR_Sellerimpression;
+        }
+
+        public String getOR_Time() {
+            return OR_Time;
+        }
+
+        public void setOR_Time(String OR_Time) {
+            this.OR_Time = OR_Time;
+        }
+
+        public String getOrderCate() {
+            return OrderCate;
+        }
+
+        public void setOrderCate(String OrderCate) {
+            this.OrderCate = OrderCate;
+        }
+
+        public String getOrder_UID() {
+            return Order_UID;
+        }
+
+        public void setOrder_UID(String Order_UID) {
+            this.Order_UID = Order_UID;
+        }
+
+        public String getStore_UID() {
+            return Store_UID;
+        }
+
+        public void setStore_UID(String Store_UID) {
+            this.Store_UID = Store_UID;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.Comments_object);
+            dest.writeString(this.GoodsCate);
+            dest.writeString(this.Goods_UID);
+            dest.writeString(this.Member_UID);
+            dest.writeInt(this.OP_Buyerdegrees);
+            dest.writeString(this.OP_Buyersimpression);
+            dest.writeInt(this.OP_Sellerdeliveryspeed);
+            dest.writeInt(this.OP_Sellerserviceattitude);
+            dest.writeInt(this.OP_ServerType);
+            dest.writeInt(this.OP_Server_attitude);
+            dest.writeInt(this.OP_Server_completespeed);
+            dest.writeInt(this.OP_Server_professionaldegree);
+            dest.writeInt(this.OR_BabyPerformance);
+            dest.writeInt(this.OR_BabydescriptionMatch);
+            dest.writeString(this.OR_Evaluation);
+            dest.writeString(this.OR_GoodsComment);
+            dest.writeInt(this.OR_Sellerdegrees);
+            dest.writeString(this.OR_Sellerimpression);
+            dest.writeString(this.OR_Time);
+            dest.writeString(this.OrderCate);
+            dest.writeString(this.Order_UID);
+            dest.writeString(this.Store_UID);
+            dest.writeInt(this.id);
+        }
+
+        public OrderSellerfigureBean() {
+        }
+
+        protected OrderSellerfigureBean(Parcel in) {
+            this.Comments_object = in.readString();
+            this.GoodsCate = in.readString();
+            this.Goods_UID = in.readString();
+            this.Member_UID = in.readString();
+            this.OP_Buyerdegrees = in.readInt();
+            this.OP_Buyersimpression = in.readString();
+            this.OP_Sellerdeliveryspeed = in.readInt();
+            this.OP_Sellerserviceattitude = in.readInt();
+            this.OP_ServerType = in.readInt();
+            this.OP_Server_attitude = in.readInt();
+            this.OP_Server_completespeed = in.readInt();
+            this.OP_Server_professionaldegree = in.readInt();
+            this.OR_BabyPerformance = in.readInt();
+            this.OR_BabydescriptionMatch = in.readInt();
+            this.OR_Evaluation = in.readString();
+            this.OR_GoodsComment = in.readString();
+            this.OR_Sellerdegrees = in.readInt();
+            this.OR_Sellerimpression = in.readString();
+            this.OR_Time = in.readString();
+            this.OrderCate = in.readString();
+            this.Order_UID = in.readString();
+            this.Store_UID = in.readString();
+            this.id = in.readInt();
+        }
+
+        public static final Parcelable.Creator<OrderSellerfigureBean> CREATOR = new Parcelable.Creator<OrderSellerfigureBean>() {
+            @Override
+            public OrderSellerfigureBean createFromParcel(Parcel source) {
+                return new OrderSellerfigureBean(source);
+            }
+
+            @Override
+            public OrderSellerfigureBean[] newArray(int size) {
+                return new OrderSellerfigureBean[size];
+            }
+        };
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.BrandID);
+        dest.writeString(this.Demand_FK);
+        dest.writeString(this.G_Agent_Member_UID);
+        dest.writeString(this.G_Area);
+        dest.writeString(this.G_AuditStatus);
+        dest.writeInt(this.G_BasicLease);
+        dest.writeString(this.G_City);
+        dest.writeString(this.G_CommissionMoney);
+        dest.writeString(this.G_ContactPhone);
+        dest.writeString(this.G_ContactQQ);
+        dest.writeString(this.G_CorrespAmount);
+        dest.writeString(this.G_CosworkIDs);
+        dest.writeInt(this.G_CourierCompanyID);
+        dest.writeString(this.G_CourierMoney);
+        dest.writeString(this.G_Cover);
+        dest.writeString(this.G_DepositPrice);
+        dest.writeString(this.G_DetailRemarks);
+        dest.writeString(this.G_FixedPrice);
+        dest.writeString(this.G_GoodsFreightNum);
+        dest.writeInt(this.G_Hits);
+        dest.writeString(this.G_Images);
+        dest.writeByte(this.G_IsChange ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_IsDepositDeal ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_IsFreeService ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_IsFreeShip ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_IsMorePrice ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_IsOfflineDeal ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_IsOffline_rentdeal ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_IsOnline_rentdeal ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_IsRecommend ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_IsRent ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_IsSale ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_IsServiceBook ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_IsShelves ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_IsShowIndex ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_IsTJByShop ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_Isdraught ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.G_Isurgentsale ? (byte) 1 : (byte) 0);
+        dest.writeString(this.G_MarketingPrice);
+        dest.writeParcelable(this.G_Member_OBJ, flags);
+        dest.writeString(this.G_NewOldDegree);
+        dest.writeString(this.G_NoPassReason);
+        dest.writeString(this.G_NoPassReasonDetail);
+        dest.writeInt(this.G_OrderNum);
+        dest.writeString(this.G_Province);
+        dest.writeInt(this.G_ReadCount);
+        dest.writeString(this.G_RefreshTime);
+        dest.writeString(this.G_RenewalPrice);
+        dest.writeInt(this.G_SaleNum);
+        dest.writeInt(this.G_ShareNumber);
+        dest.writeInt(this.G_ShopOrderNum);
+        dest.writeInt(this.G_StockNum);
+        dest.writeString(this.G_SubTitle);
+        dest.writeString(this.G_Title);
+        dest.writeString(this.G_Type);
+        dest.writeString(this.G_UID);
+        dest.writeString(this.G_UpTime);
+        dest.writeString(this.G_Weight);
+        dest.writeInt(this.G_appointment_mintime_value);
+        dest.writeString(this.G_appointment_price_1);
+        dest.writeString(this.G_appointment_price_2);
+        dest.writeString(this.G_appointment_price_3);
+        dest.writeInt(this.G_appointment_time_value_1);
+        dest.writeInt(this.G_appointment_time_value_2);
+        dest.writeInt(this.G_appointment_time_value_3);
+        dest.writeInt(this.G_appointment_time_value_4);
+        dest.writeInt(this.G_appointment_time_value_5);
+        dest.writeInt(this.G_appointment_time_value_6);
+        dest.writeInt(this.GoodsTypeID);
+        dest.writeInt(this.GoodsTypeID2);
+        dest.writeString(this.Member_UID);
+        dest.writeString(this.TelevisionWorks_FK);
+        dest.writeString(this.VirtualRole_FK);
+        dest.writeString(this.attitude_number_value);
+        dest.writeString(this.bbkpd_member_value);
+        dest.writeInt(this.collection_number);
+        dest.writeString(this.complatespeed_value);
+        dest.writeString(this.czrkpd_member_value);
+        dest.writeString(this.goods_cosworks);
+        dest.writeString(this.goods_parameter);
+        dest.writeInt(this.id);
+        dest.writeString(this.mjkpd_member_value);
+        dest.writeString(this.professionaldegree_value);
+        dest.writeInt(this.shop_coupon_count);
+        dest.writeInt(this.showtype);
+        dest.writeTypedList(this.goods_specifications);
+        dest.writeTypedList(this.order_review_list);
+        dest.writeTypedList(this.order_sellerfigure);
+    }
+
+    public BussnessBean() {
+    }
+
+    protected BussnessBean(Parcel in) {
+        this.BrandID = in.readString();
+        this.Demand_FK = in.readString();
+        this.G_Agent_Member_UID = in.readString();
+        this.G_Area = in.readString();
+        this.G_AuditStatus = in.readString();
+        this.G_BasicLease = in.readInt();
+        this.G_City = in.readString();
+        this.G_CommissionMoney = in.readString();
+        this.G_ContactPhone = in.readString();
+        this.G_ContactQQ = in.readString();
+        this.G_CorrespAmount = in.readString();
+        this.G_CosworkIDs = in.readString();
+        this.G_CourierCompanyID = in.readInt();
+        this.G_CourierMoney = in.readString();
+        this.G_Cover = in.readString();
+        this.G_DepositPrice = in.readString();
+        this.G_DetailRemarks = in.readString();
+        this.G_FixedPrice = in.readString();
+        this.G_GoodsFreightNum = in.readString();
+        this.G_Hits = in.readInt();
+        this.G_Images = in.readString();
+        this.G_IsChange = in.readByte() != 0;
+        this.G_IsDepositDeal = in.readByte() != 0;
+        this.G_IsFreeService = in.readByte() != 0;
+        this.G_IsFreeShip = in.readByte() != 0;
+        this.G_IsMorePrice = in.readByte() != 0;
+        this.G_IsOfflineDeal = in.readByte() != 0;
+        this.G_IsOffline_rentdeal = in.readByte() != 0;
+        this.G_IsOnline_rentdeal = in.readByte() != 0;
+        this.G_IsRecommend = in.readByte() != 0;
+        this.G_IsRent = in.readByte() != 0;
+        this.G_IsSale = in.readByte() != 0;
+        this.G_IsServiceBook = in.readByte() != 0;
+        this.G_IsShelves = in.readByte() != 0;
+        this.G_IsShowIndex = in.readByte() != 0;
+        this.G_IsTJByShop = in.readByte() != 0;
+        this.G_Isdraught = in.readByte() != 0;
+        this.G_Isurgentsale = in.readByte() != 0;
+        this.G_MarketingPrice = in.readString();
+        this.G_Member_OBJ = in.readParcelable(GMemberOBJBean.class.getClassLoader());
+        this.G_NewOldDegree = in.readString();
+        this.G_NoPassReason = in.readString();
+        this.G_NoPassReasonDetail = in.readString();
+        this.G_OrderNum = in.readInt();
+        this.G_Province = in.readString();
+        this.G_ReadCount = in.readInt();
+        this.G_RefreshTime = in.readString();
+        this.G_RenewalPrice = in.readString();
+        this.G_SaleNum = in.readInt();
+        this.G_ShareNumber = in.readInt();
+        this.G_ShopOrderNum = in.readInt();
+        this.G_StockNum = in.readInt();
+        this.G_SubTitle = in.readString();
+        this.G_Title = in.readString();
+        this.G_Type = in.readString();
+        this.G_UID = in.readString();
+        this.G_UpTime = in.readString();
+        this.G_Weight = in.readString();
+        this.G_appointment_mintime_value = in.readInt();
+        this.G_appointment_price_1 = in.readString();
+        this.G_appointment_price_2 = in.readString();
+        this.G_appointment_price_3 = in.readString();
+        this.G_appointment_time_value_1 = in.readInt();
+        this.G_appointment_time_value_2 = in.readInt();
+        this.G_appointment_time_value_3 = in.readInt();
+        this.G_appointment_time_value_4 = in.readInt();
+        this.G_appointment_time_value_5 = in.readInt();
+        this.G_appointment_time_value_6 = in.readInt();
+        this.GoodsTypeID = in.readInt();
+        this.GoodsTypeID2 = in.readInt();
+        this.Member_UID = in.readString();
+        this.TelevisionWorks_FK = in.readString();
+        this.VirtualRole_FK = in.readString();
+        this.attitude_number_value = in.readString();
+        this.bbkpd_member_value = in.readString();
+        this.collection_number = in.readInt();
+        this.complatespeed_value = in.readString();
+        this.czrkpd_member_value = in.readString();
+        this.goods_cosworks = in.readString();
+        this.goods_parameter = in.readString();
+        this.id = in.readInt();
+        this.mjkpd_member_value = in.readString();
+        this.professionaldegree_value = in.readString();
+        this.shop_coupon_count = in.readInt();
+        this.showtype = in.readInt();
+        this.goods_specifications = in.createTypedArrayList(GoodsSpecificationsBean.CREATOR);
+        this.order_review_list = in.createTypedArrayList(OrderReviewListBean.CREATOR);
+        this.order_sellerfigure = in.createTypedArrayList(OrderSellerfigureBean.CREATOR);
+    }
+
+    public static final Parcelable.Creator<BussnessBean> CREATOR = new Parcelable.Creator<BussnessBean>() {
+        @Override
+        public BussnessBean createFromParcel(Parcel source) {
+            return new BussnessBean(source);
+        }
+
+        @Override
+        public BussnessBean[] newArray(int size) {
+            return new BussnessBean[size];
+        }
+    };
 }

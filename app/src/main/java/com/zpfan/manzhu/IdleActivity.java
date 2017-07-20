@@ -1,5 +1,6 @@
 package com.zpfan.manzhu;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -88,7 +89,6 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initRV() {
         final ArrayList<String> strings = new ArrayList<>();
-
         mRvIdel.setLayoutManager(new LinearLayoutManager(IdleActivity.this));
         mTopmenu = (LinearLayout) mIcontoplin.findViewById(R.id.ll_topmenu);
        // mEmptyview = View.inflate(IdleActivity.this, R.layout.rv_emptyview, null);
@@ -115,7 +115,6 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
         mMap.put("ROLE_WORK_ID", "");
         mMap.put("now_province", "");
         mMap.put("is_deposit", "");
-
 
         getData();
 
@@ -151,11 +150,13 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getData() {
+
         Call<String> getgoodslist = Aplication.mIinterface.getgoodslist(mMap);
         getgoodslist.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 String body = response.body();
+
                 if (body != null) {
 
                     Type type = new TypeToken<ArrayList<AvatorBean>>() {
@@ -174,18 +175,35 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
 
                                 mBussnessBeen = Utils.gson.fromJson(substring, type1);
                                 mAdapter = new IdelAdapter(R.layout.item_idel, mBussnessBeen);
+                                mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+                                        Intent intent = new Intent(IdleActivity.this, IdleDetailActivity.class);
+                                        intent.putExtra("id", mBussnessBeen.get(position));
+
+                                        startActivity(intent);
+
+
+                                    }
+                                });
                                 mHeadView = View.inflate(IdleActivity.this, R.layout.idle_head, null);
                                 mAdapter.addHeaderView(mHeadView);
                                 mRvIdel.setAdapter(mAdapter);
                                 mAdapter.bindToRecyclerView(mRvIdel);
                                 mAdapter.setEmptyView(R.layout.rv_emptyview);
-                                Log.i("zc", "onResponse:    看看走没走 这个方法");
+
 
                             }
+                        } else {
+
+
                         }
 
 
                     }
+
+                } else {
 
                 }
 
@@ -194,7 +212,7 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                Log.i("zc", "onResponse:  是不是发送的访问不正确" + t.toString() + call.request().toString());
             }
         });
     }
