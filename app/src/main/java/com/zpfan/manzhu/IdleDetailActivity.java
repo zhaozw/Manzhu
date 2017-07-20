@@ -1,5 +1,4 @@
 package com.zpfan.manzhu;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,11 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.zpfan.manzhu.bean.BussnessBean;
 import com.zpfan.manzhu.utils.Utils;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -107,7 +104,6 @@ public class IdleDetailActivity extends AppCompatActivity {
         initView();
     }
 
-
     private void initView() {
         Intent intent = getIntent();
         BussnessBean id = intent.getParcelableExtra("id");
@@ -180,7 +176,7 @@ public class IdleDetailActivity extends AppCompatActivity {
             TextView inflate = (TextView) IdleDetailActivity.this.getLayoutInflater().inflate(R.layout.change_tv, null);
             inflate.setText("asdasdsadasdasd");
             int i = Utils.dp2px(20);
-            // TODO: 2017/7/20 0020   动态修改宽高 
+            // TODO: 2017/7/20 0020   动态修改宽高
             inflate.setHeight(i);
             mLlChange.addView(inflate);
 
