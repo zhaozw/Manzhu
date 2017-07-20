@@ -22,7 +22,7 @@
         <item name="android:textColor"> @color/stronglin </item>
         <item name="android:background"> @drawable/genghuan </item>
         <item name="android:layout_width"> wrap_content </item>
-        <item name="android:layout_height"> match_parent </item>
+        <item name="android:layout_height"> 20dp </item>
 
     
     

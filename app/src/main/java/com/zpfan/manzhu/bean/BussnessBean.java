@@ -122,7 +122,7 @@ public class BussnessBean implements Parcelable {
     private String G_DetailRemarks;
     private String G_FixedPrice;
     private String G_GoodsFreightNum;
-    private int G_Hits;
+    private String G_Hits;
     private String G_Images;
     private boolean G_IsChange;
     private boolean G_IsDepositDeal;
@@ -344,11 +344,11 @@ public class BussnessBean implements Parcelable {
         this.G_GoodsFreightNum = G_GoodsFreightNum;
     }
 
-    public int getG_Hits() {
+    public String getG_Hits() {
         return G_Hits;
     }
 
-    public void setG_Hits(int G_Hits) {
+    public void setG_Hits(String G_Hits) {
         this.G_Hits = G_Hits;
     }
 
@@ -2105,7 +2105,7 @@ public class BussnessBean implements Parcelable {
         dest.writeString(this.G_DetailRemarks);
         dest.writeString(this.G_FixedPrice);
         dest.writeString(this.G_GoodsFreightNum);
-        dest.writeInt(this.G_Hits);
+        dest.writeString(this.G_Hits);
         dest.writeString(this.G_Images);
         dest.writeByte(this.G_IsChange ? (byte) 1 : (byte) 0);
         dest.writeByte(this.G_IsDepositDeal ? (byte) 1 : (byte) 0);
@@ -2199,7 +2199,7 @@ public class BussnessBean implements Parcelable {
         this.G_DetailRemarks = in.readString();
         this.G_FixedPrice = in.readString();
         this.G_GoodsFreightNum = in.readString();
-        this.G_Hits = in.readInt();
+        this.G_Hits = in.readString();
         this.G_Images = in.readString();
         this.G_IsChange = in.readByte() != 0;
         this.G_IsDepositDeal = in.readByte() != 0;

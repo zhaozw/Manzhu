@@ -321,6 +321,7 @@
             android:layout_marginTop="7.5dp"
             android:layout_alignLeft="@+id/ll_zu"
             android:layout_below="@+id/ll_zu"
+            android:gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -394,6 +395,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/tv_newold"
                 android:textStyle="bold"
                 android:text="8.5"
                 android:textColor="@color/numbertextcolor"
@@ -403,6 +405,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/tv_chengse"
                 android:textColor="@color/secondtextcolor"
                 android:textSize="12sp"
                 android:layout_marginLeft="5dp"
@@ -434,6 +437,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/tv_express"
             android:textColor="@color/secondtextcolor"
             android:textSize="10sp"
             android:text="10.00(成都 到 北京)"
@@ -451,6 +455,7 @@
             android:layout_height="@dimen/detail_release_iconwh"/>
 
         <TextView
+            android:id="@+id/tv_uptime"
             android:text="2017-07-20"
             android:textColor="@color/secondtextcolor"
             android:layout_marginLeft="5dp"
@@ -465,6 +470,7 @@
             android:layout_height="@dimen/detail_release_iconwh"/>
 
         <TextView
+            android:id="@+id/tv_viewnumber"
             android:layout_marginLeft="5dp"
             android:textColor="@color/secondtextcolor"
             android:textSize="10sp"
@@ -501,6 +507,7 @@
                 android:layout_height="0dp"/>
 
             <ImageView
+                android:id="@+id/iv_babayparame"
                 android:src="@mipmap/com_icon_arr_right_gra"
                 android:layout_width="@dimen/detail_release_iconwh"
                 android:layout_height="@dimen/detail_release_iconwh"/>
@@ -508,12 +515,14 @@
 
         </LinearLayout>
         <View
+            android:id="@+id/dashline"
             android:layout_below="@+id/ll_babayparame"
             android:background="@drawable/dash_line_shape"
             android:layout_width="match_parent"
             android:layout_height="2dp"/>
         <!--   宝贝参数点开后的界面-->
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_babayparame_out"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
