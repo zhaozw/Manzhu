@@ -205,7 +205,13 @@ public interface APIinterface {
     Call<String> getproducttype(@Query("catevalue") String cate, @Query("titlevalue") String titele);
 
 
-
+    /**\
+     * 获取商家详细信息的接口
+     * @param uid
+     * @return
+     */
+    @GET("getshopdetail")
+    Call<String> getshopdetail(@Query("member_uid") String uid);
 
 
 

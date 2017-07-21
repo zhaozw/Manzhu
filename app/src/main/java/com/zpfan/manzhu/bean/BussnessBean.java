@@ -12,6 +12,7 @@ import java.util.List;
 public class BussnessBean implements Parcelable {
 
 
+
     /**
      * BrandID :
      * Demand_FK : 道具|蒙奇·D·路飞,
@@ -32,7 +33,7 @@ public class BussnessBean implements Parcelable {
      * G_DetailRemarks : 测试商品<span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span><span>测试商品<\/span>
      * G_FixedPrice : 120.60
      * G_GoodsFreightNum :
-     * G_Hits : 293
+     * G_Hits : 298
      * G_Images : http:\/\/www.anipiggy.com\/UploadFolder\/image\/201609\/20169811235925157051.jpg,http:\/\/www.anipiggy.com\/UploadFolder\/image\/201609\/20169811235858355307.jpg,http:\/\/www.anipiggy.com\/UploadFolder\/image\/201609\/2016981123582870038.jpg,
      * G_IsChange : true
      * G_IsDepositDeal : false
@@ -52,7 +53,7 @@ public class BussnessBean implements Parcelable {
      * G_Isdraught : false
      * G_Isurgentsale : false
      * G_MarketingPrice : 200.00
-     * G_Member_OBJ : {"M_Account_Status":"正常","M_Area":"市辖区","M_Avatar":"\\/UploadFolder\\/image\\/201705\\/20175181253057401172.jpg","M_BusinessType":"品牌商家","M_City":"成都市","M_Email":"","M_FCode":"ArRwi","M_IDCard":"510105201512140000","M_IsBusiness":true,"M_IsLock":false,"M_IsRealNameAuth":true,"M_IsSkill":false,"M_MemberLevel":4,"M_Name":"猪排子","M_Phone":"18508103615","M_Province":"四川省","M_Pwd":"E10ADC3949BA59ABBE56E057F20F883E","M_RegIP":"171.217.145.83","M_RegTime":"2016-09-07 20:33:54","M_Sex":"女","M_StoreLevel":24,"M_UID":"20169720335385547137","M_UserName":"猪排子","N_AllLevel":28,"member_identity":"COSER|后期|摄影师|舞师|妆娘|"}
+     * G_Member_OBJ : {"M_Account_Status":"正常","M_Area":"市辖区","M_Avatar":"\\/UploadFolder\\/image\\/201705\\/20175181253057401172.jpg","M_BusinessType":"品牌商家","M_City":"成都市","M_Email":"","M_FCode":"ArRwi","M_IDCard":"510105201512140000","M_IsBusiness":true,"M_IsLock":false,"M_IsRealNameAuth":true,"M_IsSkill":false,"M_MemberLevel":4,"M_Name":"猪排子","M_Phone":"18508103615","M_Province":"四川省","M_Pwd":"E10ADC3949BA59ABBE56E057F20F883E","M_RegIP":"171.217.145.83","M_RegTime":"2016-09-07 20:33:54","M_Sex":"女","M_StoreLevel":24,"M_UID":"20169720335385547137","M_UserName":"猪排子","N_AllLevel":28,"S_DisputeProportion":3.6,"member_identity":"COSER|后期|摄影师|舞师|妆娘|","order_deal_count":66}
      * G_NewOldDegree : 8.5成新
      * G_NoPassReason :
      * G_NoPassReasonDetail :
@@ -122,7 +123,7 @@ public class BussnessBean implements Parcelable {
     private String G_DetailRemarks;
     private String G_FixedPrice;
     private String G_GoodsFreightNum;
-    private String G_Hits;
+    private int G_Hits;
     private String G_Images;
     private boolean G_IsChange;
     private boolean G_IsDepositDeal;
@@ -191,6 +192,33 @@ public class BussnessBean implements Parcelable {
     private List<GoodsSpecificationsBean> goods_specifications;
     private List<OrderReviewListBean> order_review_list;
     private List<OrderSellerfigureBean> order_sellerfigure;
+    private String bbmsxfd_member_value;
+    private String mjfutd_member_value;
+    private String mjfhsd_member_value;
+
+    public String getBbmsxfd_member_value() {
+        return bbmsxfd_member_value;
+    }
+
+    public void setBbmsxfd_member_value(String bbmsxfd_member_value) {
+        this.bbmsxfd_member_value = bbmsxfd_member_value;
+    }
+
+    public String getMjfutd_member_value() {
+        return mjfutd_member_value;
+    }
+
+    public void setMjfutd_member_value(String mjfutd_member_value) {
+        this.mjfutd_member_value = mjfutd_member_value;
+    }
+
+    public String getMjfhsd_member_value() {
+        return mjfhsd_member_value;
+    }
+
+    public void setMjfhsd_member_value(String mjfhsd_member_value) {
+        this.mjfhsd_member_value = mjfhsd_member_value;
+    }
 
     public String getBrandID() {
         return BrandID;
@@ -344,11 +372,11 @@ public class BussnessBean implements Parcelable {
         this.G_GoodsFreightNum = G_GoodsFreightNum;
     }
 
-    public String getG_Hits() {
+    public int getG_Hits() {
         return G_Hits;
     }
 
-    public void setG_Hits(String G_Hits) {
+    public void setG_Hits(int G_Hits) {
         this.G_Hits = G_Hits;
     }
 
@@ -898,6 +926,7 @@ public class BussnessBean implements Parcelable {
 
     public static class GMemberOBJBean implements Parcelable {
 
+
         /**
          * M_Account_Status : 正常
          * M_Area : 市辖区
@@ -923,7 +952,9 @@ public class BussnessBean implements Parcelable {
          * M_UID : 20169720335385547137
          * M_UserName : 猪排子
          * N_AllLevel : 28
+         * S_DisputeProportion : 3.6
          * member_identity : COSER|后期|摄影师|舞师|妆娘|
+         * order_deal_count : 66
          */
 
         private String M_Account_Status;
@@ -950,7 +981,15 @@ public class BussnessBean implements Parcelable {
         private String M_UID;
         private String M_UserName;
         private int N_AllLevel;
+        private String S_DisputeProportion;
         private String member_identity;
+        private int order_deal_count;
+
+
+
+
+
+
 
         public String getM_Account_Status() {
             return M_Account_Status;
@@ -1144,12 +1183,31 @@ public class BussnessBean implements Parcelable {
             this.N_AllLevel = N_AllLevel;
         }
 
+        public String getS_DisputeProportion() {
+            return S_DisputeProportion;
+        }
+
+        public void setS_DisputeProportion(String S_DisputeProportion) {
+            this.S_DisputeProportion = S_DisputeProportion;
+        }
+
         public String getMember_identity() {
             return member_identity;
         }
 
         public void setMember_identity(String member_identity) {
             this.member_identity = member_identity;
+        }
+
+        public int getOrder_deal_count() {
+            return order_deal_count;
+        }
+
+        public void setOrder_deal_count(int order_deal_count) {
+            this.order_deal_count = order_deal_count;
+        }
+
+        public GMemberOBJBean() {
         }
 
         @Override
@@ -1183,10 +1241,10 @@ public class BussnessBean implements Parcelable {
             dest.writeString(this.M_UID);
             dest.writeString(this.M_UserName);
             dest.writeInt(this.N_AllLevel);
+            dest.writeString(this.S_DisputeProportion);
             dest.writeString(this.member_identity);
-        }
+            dest.writeInt(this.order_deal_count);
 
-        public GMemberOBJBean() {
         }
 
         protected GMemberOBJBean(Parcel in) {
@@ -1214,10 +1272,13 @@ public class BussnessBean implements Parcelable {
             this.M_UID = in.readString();
             this.M_UserName = in.readString();
             this.N_AllLevel = in.readInt();
+            this.S_DisputeProportion = in.readString();
             this.member_identity = in.readString();
+            this.order_deal_count = in.readInt();
+
         }
 
-        public static final Parcelable.Creator<GMemberOBJBean> CREATOR = new Parcelable.Creator<GMemberOBJBean>() {
+        public static final Creator<GMemberOBJBean> CREATOR = new Creator<GMemberOBJBean>() {
             @Override
             public GMemberOBJBean createFromParcel(Parcel source) {
                 return new GMemberOBJBean(source);
@@ -2079,6 +2140,9 @@ public class BussnessBean implements Parcelable {
         };
     }
 
+    public BussnessBean() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -2105,7 +2169,7 @@ public class BussnessBean implements Parcelable {
         dest.writeString(this.G_DetailRemarks);
         dest.writeString(this.G_FixedPrice);
         dest.writeString(this.G_GoodsFreightNum);
-        dest.writeString(this.G_Hits);
+        dest.writeInt(this.G_Hits);
         dest.writeString(this.G_Images);
         dest.writeByte(this.G_IsChange ? (byte) 1 : (byte) 0);
         dest.writeByte(this.G_IsDepositDeal ? (byte) 1 : (byte) 0);
@@ -2174,9 +2238,9 @@ public class BussnessBean implements Parcelable {
         dest.writeTypedList(this.goods_specifications);
         dest.writeTypedList(this.order_review_list);
         dest.writeTypedList(this.order_sellerfigure);
-    }
-
-    public BussnessBean() {
+        dest.writeString(this.bbmsxfd_member_value);
+        dest.writeString(this.mjfutd_member_value);
+        dest.writeString(this.mjfhsd_member_value);
     }
 
     protected BussnessBean(Parcel in) {
@@ -2199,7 +2263,7 @@ public class BussnessBean implements Parcelable {
         this.G_DetailRemarks = in.readString();
         this.G_FixedPrice = in.readString();
         this.G_GoodsFreightNum = in.readString();
-        this.G_Hits = in.readString();
+        this.G_Hits = in.readInt();
         this.G_Images = in.readString();
         this.G_IsChange = in.readByte() != 0;
         this.G_IsDepositDeal = in.readByte() != 0;
@@ -2268,9 +2332,12 @@ public class BussnessBean implements Parcelable {
         this.goods_specifications = in.createTypedArrayList(GoodsSpecificationsBean.CREATOR);
         this.order_review_list = in.createTypedArrayList(OrderReviewListBean.CREATOR);
         this.order_sellerfigure = in.createTypedArrayList(OrderSellerfigureBean.CREATOR);
+        this.bbmsxfd_member_value = in.readString();
+        this.mjfutd_member_value = in.readString();
+        this.mjfhsd_member_value = in.readString();
     }
 
-    public static final Parcelable.Creator<BussnessBean> CREATOR = new Parcelable.Creator<BussnessBean>() {
+    public static final Creator<BussnessBean> CREATOR = new Creator<BussnessBean>() {
         @Override
         public BussnessBean createFromParcel(Parcel source) {
             return new BussnessBean(source);

@@ -62,7 +62,32 @@ public class UserBean {
     private long lasttime;
     private  String lastStringtime;
     private  String member_identity;
+    private String S_DisputeProportion;
+    private String order_deal_count;
 
+    public String getMember_identity() {
+        return member_identity;
+    }
+
+    public void setMember_identity(String member_identity) {
+        this.member_identity = member_identity;
+    }
+
+    public String getS_DisputeProportion() {
+        return S_DisputeProportion;
+    }
+
+    public void setS_DisputeProportion(String s_DisputeProportion) {
+        S_DisputeProportion = s_DisputeProportion;
+    }
+
+    public String getOrder_deal_count() {
+        return order_deal_count;
+    }
+
+    public void setOrder_deal_count(String order_deal_count) {
+        this.order_deal_count = order_deal_count;
+    }
 
     public String getLastStringtime() {
         return lastStringtime;

@@ -30,6 +30,7 @@
             android:layout_height="@dimen/detail_top_imgh"/>
             <!--  顶部一栏-->
             <RelativeLayout
+                android:id="@+id/rv_topline"
                 android:layout_alignParentTop="true"
                 android:background="#30000000"
                 android:layout_width="match_parent"
@@ -46,7 +47,6 @@
                     android:layout_height="@dimen/topmenuwh"/>
 
                 <TextView
-
                     android:textStyle="bold"
                     android:layout_centerInParent="true"
                     android:textSize="15sp"
@@ -527,80 +527,166 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:layout_below="@+id/ll_babayparame"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/detail_babayouth">
 
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginTop="12.5dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 
                <TextView
+                   android:textColor="@color/secondtextcolor"
+                   android:textSize="10sp"
+                   android:id="@+id/tv_zutao"
                    android:text="组套情况:未知"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"/>
-
                 <TextView
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="7.5dp"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="10sp"
+                    android:id="@+id/tv_xc"
+                    android:text="组套情况:未知"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginTop="7.5dp"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="10sp"
+                    android:id="@+id/tv_kc"
                     android:text="组套情况:未知"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
+
                 <TextView
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="7.5dp"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="10sp"
+                    android:id="@+id/tv_tw"
                     android:text="组套情况:未知"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+
+
+                <TextView
+                    android:layout_marginTop="7.5dp"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="10sp"
+                    android:id="@+id/tv_bx"
+                    android:text="组套情况:未知"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
                 
                 
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_marginTop="7.5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:orientation="vertical"
+                android:layout_marginTop="12.5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
 
                 <TextView
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="10sp"
+                    android:id="@+id/tv_jk"
+                    android:layout_marginLeft="15dp"
                     android:text="组套情况:未知"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
+
                 <TextView
+                    android:layout_marginTop="7.5dp"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="10sp"
+                    android:id="@+id/tv_yc"
+                    android:layout_marginLeft="15dp"
+                    android:text="组套情况:未知"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginTop="7.5dp"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="10sp"
+                    android:id="@+id/tv_sg"
+                    android:layout_marginLeft="15dp"
+                    android:text="组套情况:未知"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginTop="7.5dp"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="10sp"
+                    android:id="@+id/tv_rr"
                     android:layout_marginLeft="15dp"
                     android:text="组套情况:未知"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:layout_marginTop="7.5dp"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="10sp"
+                    android:id="@+id/tv_yczs"
                     android:layout_marginLeft="15dp"
                     android:text="组套情况:未知"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+
+
+
+
+
 
 
             </LinearLayout>
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_marginTop="7.5dp"
+                android:orientation="vertical"
+                android:layout_marginTop="12.5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
                 <TextView
-                    android:text="组套情况:未知"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="10sp"
+                    android:id="@+id/tv_xw"
                     android:layout_marginLeft="15dp"
                     android:text="组套情况:未知"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
+
+
                 <TextView
+                    android:layout_marginTop="7.5dp"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="10sp"
+                    android:id="@+id/tv_yw"
+                    android:layout_marginLeft="15dp"
+                    android:text="组套情况:未知"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginTop="7.5dp"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="10sp"
+                    android:id="@+id/tv_tz"
+                    android:layout_marginLeft="15dp"
+                    android:text="组套情况:未知"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginTop="7.5dp"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="10sp"
+                    android:id="@+id/tv_hd"
                     android:layout_marginLeft="15dp"
                     android:text="组套情况:未知"
                     android:layout_width="wrap_content"
@@ -608,57 +694,7 @@
 
 
             </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_marginTop="7.5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <TextView
-                    android:text="组套情况:未知"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:text="组套情况:未知"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:text="组套情况:未知"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_marginTop="7.5dp"
-                android:layout_marginBottom="12.5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:text="组套情况:未知"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:text="组套情况:未知"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:text="组套情况:未知"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-
-            </LinearLayout>
 
         </LinearLayout>
 
@@ -693,6 +729,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/tv_coupon"
             android:textStyle="bold"
             android:textColor="@color/numbertextcolor"
             android:textSize="14sp"
@@ -753,6 +790,7 @@
 
 
             <TextView
+                android:id="@+id/tv_guige"
                 android:textColor="@color/maintextcolor"
                 android:textSize="14sp"
                 android:layout_marginLeft="10dp"

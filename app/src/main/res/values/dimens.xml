@@ -677,9 +677,15 @@
 
 
 
+    <!--   详情弹出框 首页 搜索栏高60px-->
+    <dimen name="detail_toplinh">  30dp </dimen>
 
 
+    <!--    顶部一栏  图标的宽高  50px-->
+    <dimen name="detail_topliniconwh"> 25dp</dimen>
 
+    <!--  头像一栏的高度 140px -->
+    <dimen name="detail_topiconh">  70dp </dimen>
 
 
 
