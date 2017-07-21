@@ -863,6 +863,7 @@
             android:layout_height="@dimen/detail_imgh"/>
         
             <TextView
+                android:id="@+id/tv_prddetail"
                 android:textColor="@color/maintextcolor"
                 android:textSize="14sp"
                 android:text="啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"

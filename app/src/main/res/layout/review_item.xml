@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:orientation="vertical"
+    android:clipChildren="false"
+    >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+    <LinearLayout
+
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        >
+    <ImageView
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/itemiconmarl"
+        android:id="@+id/iv_avator"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="35dp"
+        android:layout_height="35dp"/>
+
+    <TextView
+        android:id="@+id/tv_userlv"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@+id/iv_avator"
+        android:background="@drawable/message_leve_bg"
+        android:textColor="@color/buttontext"
+        android:text="Lv.9"
+        android:textSize="8sp"
+        android:layout_width="30dp"
+        android:layout_height="12dp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="7.5dp"
+        android:layout_marginLeft="12.5dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+        <TextView
+            android:maxLines="2"
+            android:text="购物|商品标题啊啊啊啊啊啊啊啊aaaaaaaaaaa啊啊啊"
+            android:textColor="@color/maintextcolor"
+            android:textSize="10sp"
+            android:ellipsize="end"
+            android:maxEms="7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="规格1，规格2"
+            android:layout_marginTop="5dp"
+            android:textSize="9sp"
+            android:textColor="@color/secondtextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_marginLeft="15dp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        >
+
+      <TextView
+          android:text="内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容容内容内容内容内容内容内容内容内容内容内容"
+          android:textColor="@color/maintextcolor"
+          android:textSize="10sp"
+          android:layout_marginTop="7.5dp"
+          android:maxLines="3"
+          android:ellipsize="end"
+          android:maxEms="7"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:background="@color/weaklin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+
+
+</LinearLayout>

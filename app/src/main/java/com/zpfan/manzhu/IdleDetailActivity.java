@@ -175,6 +175,8 @@ public class IdleDetailActivity extends AppCompatActivity {
     RelativeLayout mRvTopline;
     @BindView(R.id.tv_guige)
     TextView mTvGuige;
+    @BindView(R.id.tv_prddetail)
+    TextView mTvPrddetail;
 
 
     private boolean isshowbabyparame = false;
@@ -422,6 +424,23 @@ public class IdleDetailActivity extends AppCompatActivity {
 
         }
 
+        //设置商品详情的情况
+        String remarks = mbussness.getG_DetailRemarks();
+        if (remarks.contains("<span>")) {
+            String replace = remarks.replace("<span>", "");
+            String replace1 = replace.replace("</span>", "");
+            mTvPrddetail.setText(replace1);
+        } else {
+            mTvPrddetail.setText(remarks);
+        }
+        //设置商品评价
+
+
+
+
+
+
+
     }
 
     @OnClick({R.id.iv_top_back, R.id.ll_share, R.id.ll_babayparame, R.id.ll_coupon, R.id.iv_topmenu})
@@ -618,9 +637,7 @@ public class IdleDetailActivity extends AppCompatActivity {
         //设置分数mObj.getOrder_deal_count()
 
         tvnumber.setText(mObj.getOrder_deal_count() + "");
-        tvjiufen.setText("(纠纷比例:" + mObj.getS_DisputeProportion() +"%)");
-
-
+        tvjiufen.setText("(纠纷比例:" + mObj.getS_DisputeProportion() + "%)");
 
 
         final List<BussnessBean.GoodsSpecificationsBean> specifications = mbussness.getGoods_specifications();
@@ -729,7 +746,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                             mTvGuige.setText(formatvale1.get(integer));
                             //点击以后 去更改价格
                             for (BussnessBean.GoodsSpecificationsBean specification : specifications) {
-                                String s = formatvale1.get(selectid1) + ","+ formatvale2.get(selectid2);
+                                String s = formatvale1.get(selectid1) + "," + formatvale2.get(selectid2);
                                 if (s.equals(specification.getPS_AttributeValues())) {
                                     //去更改价格
                                     String price = specification.getPS_FixedPrice();
@@ -755,7 +772,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                             mTvGuige.setText(formatvale1.get(integer) + ", " + formatvale2.get(integer));
                             //点击以后 去更改价格
                             for (BussnessBean.GoodsSpecificationsBean specification : specifications) {
-                                String s = formatvale1.get(selectid1) + ","+ formatvale2.get(selectid2);
+                                String s = formatvale1.get(selectid1) + "," + formatvale2.get(selectid2);
                                 if (s.equals(specification.getPS_AttributeValues())) {
                                     //去更改价格
                                     String price = specification.getPS_FixedPrice();
@@ -765,7 +782,6 @@ public class IdleDetailActivity extends AppCompatActivity {
                                     setRentPrice(tvzuprice, tvzuxiaoshu, tvzudayprice, tvzudayxiaoshu, tvzuday, amount, renewal);
                                 }
                             }
-
 
 
                         }
@@ -793,7 +809,7 @@ public class IdleDetailActivity extends AppCompatActivity {
            /* ViewGroup.LayoutParams params = llzu.getLayoutParams();
             params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
             llzu.setLayoutParams(params);*/
-           llzu.setVisibility(View.VISIBLE);
+            llzu.setVisibility(View.VISIBLE);
             String amount = mbussness.getG_CorrespAmount();
             String renewal = mbussness.getG_RenewalPrice();
             setRentPrice(tvzuprice, tvzuxiaoshu, tvzudayprice, tvzudayxiaoshu, tvzuday, amount, renewal);
@@ -804,25 +820,8 @@ public class IdleDetailActivity extends AppCompatActivity {
             params.height = 0;
             llzu.setLayoutParams(params);*/
 
-        llzu.setVisibility(View.GONE);
+            llzu.setVisibility(View.GONE);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
@@ -859,4 +858,6 @@ public class IdleDetailActivity extends AppCompatActivity {
 
         super.onDestroy();
     }
+
+
 }
