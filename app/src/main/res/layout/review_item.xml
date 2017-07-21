@@ -29,7 +29,7 @@
         >
     <ImageView
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/itemiconmarl"
+
         android:id="@+id/iv_avator"
         android:src="@mipmap/ic_launcher"
         android:layout_width="35dp"
@@ -76,8 +76,6 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-
-
     </LinearLayout>
 
 
@@ -109,8 +107,4 @@
         android:background="@color/weaklin"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
-
-
-
-
 </LinearLayout>
