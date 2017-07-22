@@ -3,10 +3,12 @@ package com.zpfan.manzhu;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
@@ -28,9 +30,14 @@ import com.google.gson.reflect.TypeToken;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
+import com.zpfan.manzhu.adapter.CosAdapter;
+import com.zpfan.manzhu.adapter.DetailCommentAdapter;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.BussnessBean;
+import com.zpfan.manzhu.bean.CosBean;
 import com.zpfan.manzhu.bean.ShopBean;
+import com.zpfan.manzhu.utils.MyScrollView;
+import com.zpfan.manzhu.utils.ScrollViewListener;
 import com.zpfan.manzhu.utils.Utils;
 
 import java.lang.reflect.Type;
@@ -177,6 +184,82 @@ public class IdleDetailActivity extends AppCompatActivity {
     TextView mTvGuige;
     @BindView(R.id.tv_prddetail)
     TextView mTvPrddetail;
+    @BindView(R.id.tv_nocomment)
+    TextView mTvNocomment;
+    @BindView(R.id.bt_morecomment)
+    Button mBtMorecomment;
+    @BindView(R.id.tv_commentnumber)
+    TextView mTvCommentnumber;
+    @BindView(R.id.ll_babaycomment)
+    LinearLayout mLlBabaycomment;
+    @BindView(R.id.tv_impressionnumber)
+    TextView mTvImpressionnumber;
+    @BindView(R.id.ll_impression)
+    LinearLayout mLlImpression;
+    @BindView(R.id.iv_comment)
+    ImageView mIvComment;
+    @BindView(R.id.tv_commentt)
+    TextView mTvCommentt;
+    @BindView(R.id.iv_impression)
+    ImageView mIvImpression;
+    @BindView(R.id.tv_impressiont)
+    TextView mTvImpressiont;
+    @BindView(R.id.bt_morecos)
+    Button mBtMorecos;
+    @BindView(R.id.ll_callbussness)
+    LinearLayout mLlCallbussness;
+    @BindView(R.id.iv_shop)
+    ImageView mIvShop;
+    @BindView(R.id.tv_shoporuser)
+    TextView mTvShoporuser;
+    @BindView(R.id.ll_shop)
+    LinearLayout mLlShop;
+    @BindView(R.id.iv_collect)
+    ImageView mIvCollect;
+    @BindView(R.id.tv_collect)
+    TextView mTvCollect;
+    @BindView(R.id.ll_collect)
+    LinearLayout mLlCollect;
+    @BindView(R.id.ll_shopcart)
+    LinearLayout mLlShopcart;
+    @BindView(R.id.tv_makeorder)
+    TextView mTvMakeorder;
+    @BindView(R.id.myscrollview)
+    MyScrollView mMyscrollview;
+    @BindView(R.id.iv_icontop_back)
+    ImageView mIvIcontopBack;
+    @BindView(R.id.tv_icontop_text)
+    TextView mTvIcontopText;
+    @BindView(R.id.iv_top1)
+    ImageView mIvTop1;
+    @BindView(R.id.tv_top1)
+    TextView mTvTop1;
+    @BindView(R.id.ll_top1)
+    LinearLayout mLlTop1;
+    @BindView(R.id.iv_top2)
+    ImageView mIvTop2;
+    @BindView(R.id.tv_top2)
+    TextView mTvTop2;
+    @BindView(R.id.ll_top2)
+    LinearLayout mLlTop2;
+    @BindView(R.id.iv_top3)
+    ImageView mIvTop3;
+    @BindView(R.id.tv_top3)
+    TextView mTvTop3;
+    @BindView(R.id.ll_top3)
+    LinearLayout mLlTop3;
+    @BindView(R.id.iv_shaixuan)
+    ImageView mIvShaixuan;
+    @BindView(R.id.tv_shaixuan)
+    TextView mTvShaixuan;
+    @BindView(R.id.ll_top4)
+    LinearLayout mLlTop4;
+    @BindView(R.id.ll_topmenu)
+    LinearLayout mLlTopmenu;
+    @BindView(R.id.ll_topmen)
+    LinearLayout mLlTopmen;
+    @BindView(R.id.iv_menu)
+    ImageView mIvMenu;
 
 
     private boolean isshowbabyparame = false;
@@ -189,6 +272,14 @@ public class IdleDetailActivity extends AppCompatActivity {
     public ArrayList<String> formatvale2 = new ArrayList<>();
     private int selectid1 = 0;
     private int selectid2 = 0;
+    private DetailCommentAdapter mAdapter;
+    private int commenttype = 0;
+    private ArrayList<CosBean> coslist = new ArrayList<>();
+    private PopupWindow mWindow;
+    private int mLineDetailTop;
+    private int mIvDetailTop;
+    private int mMLineCommentTop;
+    private int mCostop;
 
 
     @Override
@@ -201,10 +292,29 @@ public class IdleDetailActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        ScrollViewListener listener = new ScrollViewListener() {
+            @Override
+            public void onScrollChanged(MyScrollView scrollView, int x, int y, int oldx, int oldy) {
+                Rect rect = new Rect();
+                boolean rect1 = mIvDetail.getGlobalVisibleRect(rect);
+                if (rect1) {
+                    //showTopBottom();
+                    mLlTopmen.setVisibility(View.GONE);
+                } else {
+                    //hideTopBottom();
+                    mLlTopmen.setVisibility(View.VISIBLE);
+                }
+
+
+            }
+        };
+        mMyscrollview.setListener(listener);
+
+
         Intent intent = getIntent();
         mDashline.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         mbussness = intent.getParcelableExtra("id");
-
+        mRvCos.setLayoutManager(new LinearLayoutManager(IdleDetailActivity.this));
 
         if (mbussness != null) {
             //设置封面
@@ -433,24 +543,167 @@ public class IdleDetailActivity extends AppCompatActivity {
         } else {
             mTvPrddetail.setText(remarks);
         }
+        //设置商品详情中显示的图片
+        String images = mbussness.getG_Images();
+        if (images != null) {
+            String[] split = images.split(",");
+            if (split.length > 0) {
+                for (String s : split) {
+                    ImageView img = new ImageView(IdleDetailActivity.this);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    params.setMargins(0, 0, 0, 20);
+                    img.setLayoutParams(params);
+                    img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    Glide.with(IdleDetailActivity.this).load(s).into(img);
+                    mLlDetail.addView(img);
+
+                }
+
+
+            }
+
+
+        }
+
+
         //设置商品评价
+        mRvComment.setLayoutManager(new LinearLayoutManager(IdleDetailActivity.this));
+        List<BussnessBean.OrderReviewListBean> list = mbussness.getOrder_review_list();
+        if (list.size() > 0 && list.size() < 4) {
+            mAdapter = new DetailCommentAdapter(R.layout.review_item, list, mbussness, 0);
+            mRvComment.setVisibility(View.VISIBLE);
+            mTvNocomment.setVisibility(View.GONE);
+            mBtMorecomment.setVisibility(View.VISIBLE);
+            mRvComment.setAdapter(mAdapter);
+        } else if (list.size() >= 4) {
+            ArrayList<BussnessBean.OrderReviewListBean> been = new ArrayList<>();
+            for (int i = 0; i < 3; i++) {
+                been.add(list.get(i));
+            }
+            mAdapter = new DetailCommentAdapter(R.layout.review_item, been, mbussness, 0);
+            mRvComment.setVisibility(View.VISIBLE);
+            mTvNocomment.setVisibility(View.GONE);
+            mBtMorecomment.setVisibility(View.VISIBLE);
+            mRvComment.setAdapter(mAdapter);
 
-
-
-
-
+        } else {
+            mRvComment.setVisibility(View.GONE);
+            mTvNocomment.setVisibility(View.VISIBLE);
+            mBtMorecomment.setVisibility(View.GONE);
+        }
+        mTvCommentnumber.setText("(" + mbussness.getOrder_review_list().size() + ")");
+        mTvImpressionnumber.setText("(" + mbussness.getOrder_sellerfigure().size() + ")");
+        //展示相关cos作品  要发送网络请求 需要字段
+        String cosworks = mbussness.getGoods_cosworks();
+        setCosWork(cosworks);
 
 
     }
 
-    @OnClick({R.id.iv_top_back, R.id.ll_share, R.id.ll_babayparame, R.id.ll_coupon, R.id.iv_topmenu})
+    /**
+     * 获取相关cos 并显示的方法
+     *
+     * @param cosworks
+     */
+    private void setCosWork(String cosworks) {
+        Call<String> getcosworkbygoodsmodle = Aplication.mIinterface.getcosworkbygoodsmodle("商品", "", cosworks);
+        getcosworkbygoodsmodle.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String body = response.body();
+                if (body != null) {
+                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                    }.getType();
+
+                    ArrayList<AvatorBean> been = Utils.gson.fromJson(body, type);
+                    if (been != null) {
+                        AvatorBean bean = been.get(0);
+                        String retmsg = bean.getRetmsg();
+                        if (retmsg.contains("[")) {
+                            String substring = retmsg.substring(1, retmsg.lastIndexOf("]"));
+                            Type type1 = new TypeToken<ArrayList<CosBean>>() {
+                            }.getType();
+
+                            ArrayList<CosBean> cosBeen = Utils.gson.fromJson(substring, type1);
+                            if (cosBeen.size() > 0) {
+                                CosAdapter adapter = new CosAdapter(R.layout.item_cosshow, cosBeen);
+                                mRvCos.setAdapter(adapter);
+
+
+                            }
+
+
+                        }
+
+
+                    }
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        mLineDetailTop = mLineDetail.getTop(); //详情
+        mIvDetailTop = mIvDetail.getTop(); //简介
+        mMLineCommentTop = mLineComment.getTop();  //评论
+        mCostop = mLineCos.getTop(); //相关cos
+
+    }
+
+    @OnClick({R.id.iv_top_back, R.id.ll_share, R.id.ll_babayparame, R.id.ll_coupon, R.id.iv_topmenu, R.id.bt_morecomment
+            , R.id.ll_impression, R.id.ll_babaycomment, R.id.ll_callbussness, R.id.ll_shop, R.id.ll_collect, R.id.ll_shopcart
+            , R.id.tv_makeorder, R.id.ll_format, R.id.iv_icontop_back,R.id.iv_menu,R.id.ll_top2,R.id.ll_top1
+            ,R.id.ll_top3,R.id.ll_top4
+
+    })
     public void onViewClicked(View view) {
+
         switch (view.getId()) {
+
+            case R.id.ll_top4:
+
+                mMyscrollview.smoothScrollTo(0,mCostop);
+                break;
+            case R.id.ll_top3:
+
+                mMyscrollview.smoothScrollTo(0,mMLineCommentTop);
+                break;
+
+            case R.id.ll_top1:
+
+                mMyscrollview.smoothScrollTo(0,mIvDetailTop);
+                break;
+
+            case R.id.ll_top2:
+                mMyscrollview.smoothScrollTo(0,mLineDetailTop);
+
+                break;
+
             case R.id.iv_top_back:
                 //返回按钮
                 finish();
 
                 break;
+
+            case R.id.iv_icontop_back:
+
+                finish();
+                break;
+
             case R.id.ll_share:
                 //分享按钮
 
@@ -477,10 +730,153 @@ public class IdleDetailActivity extends AppCompatActivity {
 
                 break;
 
+            case R.id.iv_menu:
+
+            case R.id.ll_format:
+
+
             case R.id.iv_topmenu:
                 //顶部点击事件 和 规格点击事件相同
 
                 showTopWindow();
+
+                break;
+            case R.id.bt_morecomment:
+                //查看更多评论
+                if (commenttype == 0) {
+                    List<BussnessBean.OrderReviewListBean> list1 = mbussness.getOrder_review_list();
+                    if (list1.size() > 0) {
+                        mAdapter = new DetailCommentAdapter(R.layout.review_item, list1, mbussness, 0);
+                        mRvComment.setVisibility(View.VISIBLE);
+                        mTvNocomment.setVisibility(View.GONE);
+                        mBtMorecomment.setVisibility(View.VISIBLE);
+                        mRvComment.setAdapter(mAdapter);
+                    } else {
+                        mRvComment.setVisibility(View.GONE);
+                        mTvNocomment.setVisibility(View.VISIBLE);
+                        mBtMorecomment.setVisibility(View.GONE);
+                    }
+                } else if (commenttype == 1) {
+
+                    List<BussnessBean.OrderReviewListBean> list = mbussness.getOrder_sellerfigure();
+                    if (list.size() > 0) {
+                        mAdapter = new DetailCommentAdapter(R.layout.review_item, list, mbussness, 1);
+                        mRvComment.setVisibility(View.VISIBLE);
+                        mTvNocomment.setVisibility(View.GONE);
+                        mBtMorecomment.setVisibility(View.VISIBLE);
+                        mRvComment.setAdapter(mAdapter);
+                    } else {
+                        mRvComment.setVisibility(View.GONE);
+                        mTvNocomment.setVisibility(View.VISIBLE);
+                        mBtMorecomment.setVisibility(View.GONE);
+                    }
+
+
+                }
+
+
+                break;
+
+            case R.id.ll_impression:
+                //显示卖家印象的条目
+
+
+                mIvComment.setImageResource(R.mipmap.com_icon_prd_comm_a_ept);
+                mTvCommentnumber.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                mTvCommentt.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                mIvImpression.setImageResource(R.mipmap.com_icon_prd_comm_b);
+                mTvImpressiont.setTextColor(getResources().getColor(R.color.maintextcolor));
+                mTvImpressionnumber.setTextColor(getResources().getColor(R.color.maintextcolor));
+
+                List<BussnessBean.OrderReviewListBean> list = mbussness.getOrder_sellerfigure();
+                if (list.size() > 0 && list.size() < 4) {
+                    mAdapter = new DetailCommentAdapter(R.layout.review_item, list, mbussness, 1);
+                    mRvComment.setVisibility(View.VISIBLE);
+                    mTvNocomment.setVisibility(View.GONE);
+                    mBtMorecomment.setVisibility(View.VISIBLE);
+                    mRvComment.setAdapter(mAdapter);
+                } else if (list.size() >= 4) {
+                    ArrayList<BussnessBean.OrderReviewListBean> been = new ArrayList<>();
+                    for (int i = 0; i < 3; i++) {
+                        been.add(list.get(i));
+                    }
+                    mAdapter = new DetailCommentAdapter(R.layout.review_item, been, mbussness, 1);
+                    mRvComment.setVisibility(View.VISIBLE);
+                    mTvNocomment.setVisibility(View.GONE);
+                    mBtMorecomment.setVisibility(View.VISIBLE);
+                    mRvComment.setAdapter(mAdapter);
+
+                } else {
+                    mRvComment.setVisibility(View.GONE);
+                    mTvNocomment.setVisibility(View.VISIBLE);
+                    mBtMorecomment.setVisibility(View.GONE);
+                }
+                commenttype = 1;
+
+
+                break;
+
+            case R.id.ll_babaycomment:
+                //显示宝贝平价店条目
+                mIvComment.setImageResource(R.mipmap.com_icon_prd_comm_a);
+                mTvCommentnumber.setTextColor(getResources().getColor(R.color.maintextcolor));
+                mTvCommentt.setTextColor(getResources().getColor(R.color.maintextcolor));
+                mIvImpression.setImageResource(R.mipmap.com_icon_prd_comm_b_ept);
+                mTvImpressiont.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                mTvImpressionnumber.setTextColor(getResources().getColor(R.color.secondtextcolor));
+
+                List<BussnessBean.OrderReviewListBean> list1 = mbussness.getOrder_review_list();
+                if (list1.size() > 0 && list1.size() < 4) {
+                    mAdapter = new DetailCommentAdapter(R.layout.review_item, list1, mbussness, 0);
+                    mRvComment.setVisibility(View.VISIBLE);
+                    mTvNocomment.setVisibility(View.GONE);
+                    mBtMorecomment.setVisibility(View.VISIBLE);
+                    mRvComment.setAdapter(mAdapter);
+                } else if (list1.size() >= 4) {
+                    ArrayList<BussnessBean.OrderReviewListBean> been = new ArrayList<>();
+                    for (int i = 0; i < 3; i++) {
+                        been.add(list1.get(i));
+                    }
+                    mAdapter = new DetailCommentAdapter(R.layout.review_item, been, mbussness, 0);
+                    mRvComment.setVisibility(View.VISIBLE);
+                    mTvNocomment.setVisibility(View.GONE);
+                    mBtMorecomment.setVisibility(View.VISIBLE);
+                    mRvComment.setAdapter(mAdapter);
+
+                } else {
+                    mRvComment.setVisibility(View.GONE);
+                    mTvNocomment.setVisibility(View.VISIBLE);
+                    mBtMorecomment.setVisibility(View.GONE);
+                }
+
+                commenttype = 0;
+
+                break;
+
+            case R.id.ll_callbussness:
+
+                //  点击了 联系卖家
+
+                break;
+
+            case R.id.ll_shop:
+
+                // 点击了店铺
+                break;
+
+            case R.id.ll_collect:
+
+                //点击了收藏
+                break;
+
+            case R.id.ll_shopcart:
+
+                //点击了购物车
+                break;
+
+            case R.id.tv_makeorder:
+                //点击了 立即下单
+
 
                 break;
 
@@ -490,25 +886,26 @@ public class IdleDetailActivity extends AppCompatActivity {
 
     private void showTopWindow() {
 
-        PopupWindow window = new PopupWindow(IdleDetailActivity.this);
+        mWindow = new PopupWindow(IdleDetailActivity.this);
         View inflate = View.inflate(IdleDetailActivity.this, R.layout.detail_popwindow, null);
-        initPopData(inflate, window);
+        initPopData(inflate, mWindow);
+
         WindowManager.LayoutParams lp = IdleDetailActivity.this.getWindow()
                 .getAttributes();
         lp.alpha = 0.4f;
         IdleDetailActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         IdleDetailActivity.this.getWindow().setAttributes(lp);
 
-        window.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_toppop_bg));
-        window.setTouchable(true);
-        window.setContentView(inflate);
-        window.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        window.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        window.setOutsideTouchable(true);
-        window.update();
-        window.showAtLocation(mRvTopline, Gravity.NO_GRAVITY, 0, 0);
+        mWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.detail_toppop_bg));
+        mWindow.setTouchable(true);
+        mWindow.setContentView(inflate);
+        mWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        mWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        mWindow.setOutsideTouchable(true);
+        mWindow.update();
+        mWindow.showAtLocation(mRvTopline, Gravity.NO_GRAVITY, 0, 0);
 
-        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+        mWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 WindowManager.LayoutParams lp = IdleDetailActivity.this.getWindow()
@@ -523,7 +920,7 @@ public class IdleDetailActivity extends AppCompatActivity {
 
     }
 
-    private void initPopData(View inflate, PopupWindow window) {
+    private void initPopData(View inflate, final PopupWindow window) {
         ImageView ivbotoom = (ImageView) inflate.findViewById(R.id.iv_botoom);
         ImageView ivhome = (ImageView) inflate.findViewById(R.id.iv_home);
         ImageView ivshopcart = (ImageView) inflate.findViewById(R.id.iv_shopcart);
@@ -532,7 +929,19 @@ public class IdleDetailActivity extends AppCompatActivity {
         final ImageView ivavator = (ImageView) inflate.findViewById(R.id.iv_avator);
         ImageView ivshop = (ImageView) inflate.findViewById(R.id.iv_shop);
         ImageView ivmanor = (ImageView) inflate.findViewById(R.id.iv_manor);
-
+        View close = inflate.findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                window.dismiss();
+            }
+        });
+        ivbotoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                window.dismiss();
+            }
+        });
 
         TextView tvname = (TextView) inflate.findViewById(R.id.tv_name);
         TextView tvdizhi = (TextView) inflate.findViewById(R.id.tv_dizhi);
@@ -584,6 +993,7 @@ public class IdleDetailActivity extends AppCompatActivity {
             String shi = city.substring(0, city.lastIndexOf("市"));
             String text = sheng + "- " + shi;
             tvdizhi.setText(text);
+            tvleav.setText("Lv." + mbussness.getG_Member_OBJ().getN_AllLevel());
 
             tvfirstscore.setText("宝贝描述相符度");
             tvpro.setText(mbussness.getBbmsxfd_member_value());
@@ -669,9 +1079,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                     }
                 };
                 tag1.setAdapter(adapter);
-
                 adapter.setSelectedList(selectid1);
-
                 tag1.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
                     @Override
                     public void onSelected(Set<Integer> selectPosSet) {
@@ -694,6 +1102,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                         }
                     }
                 });
+                mTvGuige.setText(formatvale1.get(selectid1));
                 tvformat2.setVisibility(View.GONE);
                 tag2.setVisibility(View.GONE);
 
@@ -738,6 +1147,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                 tag2.setAdapter(adapter1);
                 adapter.setSelectedList(selectid1);
                 adapter1.setSelectedList(selectid2);
+                mTvGuige.setText(formatvale1.get(selectid1) + "," + formatvale2.get(selectid2));
                 tag1.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
                     @Override
                     public void onSelected(Set<Integer> selectPosSet) {

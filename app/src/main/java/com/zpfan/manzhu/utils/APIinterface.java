@@ -214,6 +214,19 @@ public interface APIinterface {
     Call<String> getshopdetail(@Query("member_uid") String uid);
 
 
+    /**
+     * 获取相关cos作品的信息
+     * @param obj_cate
+     * @param location_name
+     * @param cosworkID_arry
+     * @return
+     */
+    @GET("get_coswork_by_goodsmodle")
+    Call<String> getcosworkbygoodsmodle(@Query("obj_cate") String obj_cate, @Query("location_name") String location_name, @Query("cosworkID_arry") String cosworkID_arry);
+
+
+
+
 
 
 

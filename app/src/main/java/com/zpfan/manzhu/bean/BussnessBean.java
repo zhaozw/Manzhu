@@ -191,7 +191,7 @@ public class BussnessBean implements Parcelable {
     private int showtype;
     private List<GoodsSpecificationsBean> goods_specifications;
     private List<OrderReviewListBean> order_review_list;
-    private List<OrderSellerfigureBean> order_sellerfigure;
+    private List<OrderReviewListBean> order_sellerfigure;
     private String bbmsxfd_member_value;
     private String mjfutd_member_value;
     private String mjfhsd_member_value;
@@ -916,11 +916,11 @@ public class BussnessBean implements Parcelable {
         this.order_review_list = order_review_list;
     }
 
-    public List<OrderSellerfigureBean> getOrder_sellerfigure() {
+    public List<OrderReviewListBean> getOrder_sellerfigure() {
         return order_sellerfigure;
     }
 
-    public void setOrder_sellerfigure(List<OrderSellerfigureBean> order_sellerfigure) {
+    public void setOrder_sellerfigure(List<OrderReviewListBean> order_sellerfigure) {
         this.order_sellerfigure = order_sellerfigure;
     }
 
@@ -1570,6 +1570,36 @@ public class BussnessBean implements Parcelable {
         private String Order_UID;
         private String Store_UID;
         private int id;
+        private String goods_spcification_name;
+        private String reviewmember_avator;
+        private String reivewmember_level;
+
+
+
+
+        public String getReviewmember_avator() {
+            return reviewmember_avator;
+        }
+
+        public void setReviewmember_avator(String reviewmember_avator) {
+            this.reviewmember_avator = reviewmember_avator;
+        }
+
+        public String getReivewmember_level() {
+            return reivewmember_level;
+        }
+
+        public void setReivewmember_level(String reivewmember_level) {
+            this.reivewmember_level = reivewmember_level;
+        }
+
+        public String getGoods_spcification_name() {
+            return goods_spcification_name;
+        }
+
+        public void setGoods_spcification_name(String goods_spcification_name) {
+            this.goods_spcification_name = goods_spcification_name;
+        }
 
         public String getComments_object() {
             return Comments_object;
@@ -1755,6 +1785,9 @@ public class BussnessBean implements Parcelable {
             this.id = id;
         }
 
+        public OrderReviewListBean() {
+        }
+
         @Override
         public int describeContents() {
             return 0;
@@ -1785,9 +1818,9 @@ public class BussnessBean implements Parcelable {
             dest.writeString(this.Order_UID);
             dest.writeString(this.Store_UID);
             dest.writeInt(this.id);
-        }
-
-        public OrderReviewListBean() {
+            dest.writeString(this.goods_spcification_name);
+            dest.writeString(this.reviewmember_avator);
+            dest.writeString(this.reivewmember_level);
         }
 
         protected OrderReviewListBean(Parcel in) {
@@ -1814,9 +1847,12 @@ public class BussnessBean implements Parcelable {
             this.Order_UID = in.readString();
             this.Store_UID = in.readString();
             this.id = in.readInt();
+            this.goods_spcification_name = in.readString();
+            this.reviewmember_avator = in.readString();
+            this.reivewmember_level = in.readString();
         }
 
-        public static final Parcelable.Creator<OrderReviewListBean> CREATOR = new Parcelable.Creator<OrderReviewListBean>() {
+        public static final Creator<OrderReviewListBean> CREATOR = new Creator<OrderReviewListBean>() {
             @Override
             public OrderReviewListBean createFromParcel(Parcel source) {
                 return new OrderReviewListBean(source);
@@ -2331,7 +2367,7 @@ public class BussnessBean implements Parcelable {
         this.showtype = in.readInt();
         this.goods_specifications = in.createTypedArrayList(GoodsSpecificationsBean.CREATOR);
         this.order_review_list = in.createTypedArrayList(OrderReviewListBean.CREATOR);
-        this.order_sellerfigure = in.createTypedArrayList(OrderSellerfigureBean.CREATOR);
+        this.order_sellerfigure = in.createTypedArrayList(OrderReviewListBean.CREATOR);
         this.bbmsxfd_member_value = in.readString();
         this.mjfutd_member_value = in.readString();
         this.mjfhsd_member_value = in.readString();

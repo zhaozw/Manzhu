@@ -58,6 +58,7 @@
         android:layout_weight="1"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/tv_title"
             android:maxLines="2"
             android:text="购物|商品标题啊啊啊啊啊啊啊啊aaaaaaaaaaa啊啊啊"
             android:textColor="@color/maintextcolor"
@@ -68,6 +69,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/tv_format"
             android:text="规格1，规格2"
             android:layout_marginTop="5dp"
             android:textSize="9sp"
@@ -89,6 +91,7 @@
         >
 
       <TextView
+          android:id="@+id/tv_comment"
           android:text="内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容容内容内容内容内容内容内容内容内容内容内容"
           android:textColor="@color/maintextcolor"
           android:textSize="10sp"
