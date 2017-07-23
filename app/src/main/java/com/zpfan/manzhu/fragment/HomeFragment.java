@@ -285,7 +285,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
         mSearchwindow.setContentView(mContentView);
         mSearchwindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_toppop_bg));
         mSearchwindow.setTouchable(true);
-        mSearchwindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        mSearchwindow.setWidth(mLlHomeseach.getWidth());
         mSearchwindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         mSearchwindow.setOutsideTouchable(true);
         mSearchwindow.update();
@@ -333,7 +333,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                                         intent.putExtra("type", "search");
                                         intent.putExtra("typeid", been1.get(position).getId());
                                         intent.putExtra("location", mProvince);
-                                        Log.i("zc", "onTagClick:  看看省份" + mProvince);
+
                                         startActivity(intent);
                                         return false;
                                     }
@@ -378,7 +378,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
         mSearchwindow.setContentView(mContentView);
         mSearchwindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_toppop_bg));
         mSearchwindow.setTouchable(true);
-        mSearchwindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        mSearchwindow.setWidth(mLlHomeseach.getWidth());
         mSearchwindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         mSearchwindow.setOutsideTouchable(true);
         mSearchwindow.update();
@@ -771,7 +771,6 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                 popupWindow.setTouchable(true);
                 popupWindow.setOutsideTouchable(true);
 
-
                 popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_toppop_bg));
                 popupWindow.showAsDropDown(mTvKeyword);
 
@@ -860,12 +859,11 @@ public class HomeFragment extends Fragment implements BDLocationListener {
     }
 
 
-    @Subscribe(threadMode = ThreadMode.POSTING)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void getLocation(String city) {
 
         Log.i("location", "getLocation:    看看获取到的城市" + city);
         mTvLocation.setText(city);
-
 
     }
 

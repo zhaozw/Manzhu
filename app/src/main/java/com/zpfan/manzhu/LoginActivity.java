@@ -90,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
     private MyToast mToast1;
     private String mUserAvator;
     private String mCn;
+    private String mUid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -308,6 +309,7 @@ public class LoginActivity extends AppCompatActivity {
                                     mUserAvator = user.getM_Avatar();
                                     mUserPhone = user.getM_Phone();
                                     mCn = user.getM_UserName();
+                                    mUid = user.getM_UID();
 
                                 }
                                 SPUtils.getInstance().put("user", message);
@@ -328,6 +330,7 @@ public class LoginActivity extends AppCompatActivity {
                                             SPUtils.getInstance().put("usericon", mUserAvator);
                                             SPUtils.getInstance().put("userinfo", message);
                                             SPUtils.getInstance().put("userlogin", true);
+                                            SPUtils.getInstance().put("userid", mUid);
                                             //判断用户是否是第一次登陆
 
                                             EaseUI instance = EaseUI.getInstance();

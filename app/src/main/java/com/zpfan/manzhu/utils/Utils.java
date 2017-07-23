@@ -69,6 +69,20 @@ public class Utils {
     }
 
     /**
+     * 获取到登陆用户的uid
+     * @return
+     */
+    public  static String getloginuid() {
+        String userid = SPUtils.getInstance().getString("userid", null);
+
+        return userid;
+
+
+    }
+
+
+
+    /**
      * 是不是第一次 去加载聊天界面
      * @param phone
      * @return

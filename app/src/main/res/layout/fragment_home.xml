@@ -761,6 +761,7 @@
                                 android:textSize="16sp"/>
 
                             <TextView
+                                android:layout_marginTop="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="可以拍的辣么好看，不去看看真的好吗"

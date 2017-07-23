@@ -18,7 +18,7 @@
         <item name="android:paddingLeft"> 5dp </item>
         <item name="android:gravity"> center </item>
         <item name="android:layout_gravity"> center </item>
-        <item name="android:textSize"> 8sp </item>
+        <item name="android:textSize"> 10sp </item>
         <item name="android:textColor"> @color/stronglin </item>
         <item name="android:background"> @drawable/genghuan </item>
         <item name="android:layout_width"> wrap_content </item>

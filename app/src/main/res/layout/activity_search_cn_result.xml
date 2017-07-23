@@ -10,6 +10,7 @@
 
 
     <com.zpfan.manzhu.myui.SearchTopLin
+        android:id="@+id/st_cn"
         app:isshowmore="false"
         app:searchtype="CN"
         android:layout_width="match_parent"

@@ -55,7 +55,7 @@ public class MessageaddAdapter extends BaseQuickAdapter<UserBean,BaseViewHolder>
     @Override
     protected void convert(BaseViewHolder helper, final UserBean item) {
         helper.setText(R.id.tv_name, item.getM_UserName());
-        helper.setText(R.id.tv_dizhi, item.getM_Province() + "-" + item.getM_City());
+        helper.setText(R.id.tv_dizhi, item.getM_Province() + " -  " + item.getM_City());
         helper.setText(R.id.tv_userlv, "Lv." +item.getN_AllLevel());
 
 

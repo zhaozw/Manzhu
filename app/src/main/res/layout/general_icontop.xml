@@ -12,13 +12,11 @@
 
 
         <ImageView
-            android:layout_centerVertical="true"
+           android:layout_marginTop="16dp"
             android:layout_alignParentLeft="true"
-            android:layout_gravity="center"
             android:id="@+id/iv_icontop_back"
             android:layout_marginLeft="@dimen/toastmarglr"
             android:src="@mipmap/com_icon_back"
-            android:scaleType="centerInside"
             android:layout_width="@dimen/topmenuwh"
             android:layout_height="@dimen/topmenuwh"/>
 

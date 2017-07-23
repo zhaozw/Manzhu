@@ -225,8 +225,31 @@ public interface APIinterface {
     Call<String> getcosworkbygoodsmodle(@Query("obj_cate") String obj_cate, @Query("location_name") String location_name, @Query("cosworkID_arry") String cosworkID_arry);
 
 
+    /**
+     * 将商品添加到收藏的方法
+     * @param obj_cate
+     * @param obj_id
+     * @param obj_member_uid
+     * @return
+     */
+    @GET("opera_collection_function")
+    Call<String> operacollectionfunction(@Query("obj_cate") String obj_cate, @Query("obj_id") String obj_id, @Query("obj_member_uid") String obj_member_uid);
 
 
+    /**
+     *  更新购物车数据的方法
+     * @param car_uid
+     * @param member_uid
+     * @param goods_uid
+     * @param goods_ps_uid
+     * @param bussiness_uid
+     * @param car_count
+     * @return
+     */
+    @GET("opera_add_update_shoppingcar_function")
+    Call<String> operaaddupdateshopcart(@Query("car_uid") String car_uid, @Query("member_uid") String member_uid, @Query("goods_uid") String goods_uid, @Query("goods_ps_uid") String goods_ps_uid
+            , @Query("bussiness_uid") String bussiness_uid, @Query("car_count") String car_count
+    );
 
 
 

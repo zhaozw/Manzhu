@@ -136,7 +136,7 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
             String[] zudayprices = price.split(".");
 
                 helper.setText(R.id.tv_zuprice, zuprice).setText(R.id.tv_zuxiaoshu, zuxiaoshu)
-                        .setText(R.id.tv_zuday, "(" + item.getG_BasicLease() + "天)+").setText(R.id.tv_zudayprice, zudayprice)
+                        .setText(R.id.tv_zuday, "（" + item.getG_BasicLease() + "天）+ ").setText(R.id.tv_zudayprice, zudayprice)
                         .setText(R.id.tv_zudayxiaoshu, zudayxiaoshu);
 
 

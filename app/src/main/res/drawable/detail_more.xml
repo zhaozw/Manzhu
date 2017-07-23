@@ -5,8 +5,8 @@
     <solid android:color="@color/bootmbc"/>
     <corners
         android:radius="5dp"
-        android:bottomLeftRadius="190dp"
-        android:bottomRightRadius="190dp"
+        android:bottomLeftRadius="2000dp"
+        android:bottomRightRadius="2000dp"
         android:topLeftRadius="0dp"
         android:topRightRadius="0dp"/>
 

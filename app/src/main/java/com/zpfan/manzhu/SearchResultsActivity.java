@@ -74,6 +74,11 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
     private Button mBtcancel;
     private Button mBtimport;
     private String mShaixuan;
+    private ImageView mIvsearchtop1;
+    private ImageView mIvsearchtop2;
+    private TextView mTvsearchtop1;
+    private TextView mTvsearchtop2;
+    private TextView mTvsearchkey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,12 +98,12 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         LinearLayout llsearchtop1 = (LinearLayout) mStProduct.findViewById(R.id.ll_searchtop1);
         LinearLayout llsearchtop2 = (LinearLayout) mStProduct.findViewById(R.id.ll_searchtop2);
         LinearLayout llsearchtop3 = (LinearLayout) mStProduct.findViewById(R.id.ll_searchtop3);
-        ImageView ivsearchtop1 = (ImageView) mStProduct.findViewById(R.id.iv_searchtop1);
-        ImageView ivsearchtop2 = (ImageView) mStProduct.findViewById(R.id.iv_searchtop2);
-        TextView tvsearchtop1 = (TextView) mStProduct.findViewById(R.id.tv_searchtop1);
-        TextView tvsearchtop2 = (TextView) mStProduct.findViewById(R.id.tv_searchtop2);
-        TextView tvsearchkey = (TextView) mStProduct.findViewById(R.id.tv_searchkeyword);
-        tvsearchkey.setText(mKey);
+        mIvsearchtop1 = (ImageView) mStProduct.findViewById(R.id.iv_searchtop1);
+        mIvsearchtop2 = (ImageView) mStProduct.findViewById(R.id.iv_searchtop2);
+        mTvsearchtop1 = (TextView) mStProduct.findViewById(R.id.tv_searchtop1);
+        mTvsearchtop2 = (TextView) mStProduct.findViewById(R.id.tv_searchtop2);
+        mTvsearchkey = (TextView) mStProduct.findViewById(R.id.tv_searchkeyword);
+        mTvsearchkey.setText(mKey);
 
         mRvProduct.setLayoutManager(new LinearLayoutManager(SearchResultsActivity.this));
         llsearchtop1.setOnClickListener(this);
@@ -213,7 +218,10 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
             case R.id.ll_searchtop1:
                 // 闲置二手的商品数据的加载
                 mMap.put("G_TYPE", "二手商品");
-
+                mIvsearchtop1.setImageResource(R.mipmap.com_icon_sh);
+                mTvsearchtop1.setTextColor(getResources().getColor(R.color.maintextcolor));
+                mIvsearchtop2.setImageResource(R.mipmap.com_icon_new_prd_ept);
+                mTvsearchtop2.setTextColor(getResources().getColor(R.color.secondtextcolor));
                 getProductData();
                 break;
 
@@ -221,6 +229,11 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
                 //新商品的数据的加载
 
                 mMap.put("G_TYPE", "新商品");
+                mIvsearchtop1.setImageResource(R.mipmap.com_icon_sh_ept);
+                mTvsearchtop1.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                mIvsearchtop2.setImageResource(R.mipmap.com_icon_new_prd);
+                mTvsearchtop2.setTextColor(getResources().getColor(R.color.maintextcolor));
+
 
                 getProductData();
                 break;

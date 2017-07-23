@@ -12,6 +12,7 @@
 
 
         <ImageView
+            android:scaleType="centerInside"
             android:id="@+id/iv_cos"
             android:layout_below="@+id/line"
             android:maxHeight="360dp"
@@ -23,9 +24,9 @@
         android:id="@+id/tv_bussnesstag"
         android:visibility="visible"
         android:gravity="center"
-        android:paddingRight="5dp"
-        android:paddingLeft="5dp"
-        android:textSize="12sp"
+        android:paddingRight="7.5dp"
+        android:paddingLeft="7.5dp"
+        android:textSize="10sp"
         android:text="COS秀"
         android:textColor="@color/maintextcolor"
         android:background="@drawable/idel_item_bg"
@@ -68,17 +69,19 @@
     </LinearLayout>
     <!--  动画的名称-->
     <TextView
+        android:gravity="center"
         android:id="@+id/tv_cosrole"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:layout_alignRight="@+id/iv_cos"
         android:layout_alignBottom="@+id/iv_cos"
-        android:padding="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:ellipsize="end"
         android:maxEms="16"
         android:singleLine="true"
         android:textSize="10sp"
-        android:textColor="@color/maintextcolor"
+        android:textColor="#60683100"
         android:background="@drawable/cos_item_name_bg"
         android:text="动画名称动画名称动画名称动画名称动画名称"
         android:layout_width="wrap_content"
@@ -109,7 +112,7 @@
             android:src="@mipmap/com_icon_male"
             android:scaleType="centerCrop"
             android:padding="3dp"
-            android:background="@color/secondbuttonbc"
+            android:background="@drawable/sex_bg"
             android:layout_width="@dimen/addsexicon"
             android:layout_height="@dimen/addsexicon"/>
 
@@ -160,6 +163,7 @@
         android:layout_height="50dp"/>
 
    <android.support.v7.widget.RecyclerView
+       android:visibility="gone"
        android:id="@+id/rv_cosshow"
        android:layout_marginTop="10dp"
        android:layout_below="@+id/ll_info"
@@ -175,7 +179,7 @@
         android:layout_below="@id/rv_cosshow"
         android:background="@color/weaklin"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="0.5dp"/>
 
     <LinearLayout
         android:id="@+id/ll_tag"

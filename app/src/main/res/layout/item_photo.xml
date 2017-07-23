@@ -67,7 +67,7 @@
         android:id="@+id/tv_idle"
         android:gravity="center"
         android:text="闲"
-        android:textSize="12sp"
+        android:textSize="10sp"
         android:textColor="@color/buttontext"
         android:background="@drawable/item_photo_txt"
         android:layout_marginTop="10dp"
@@ -133,7 +133,7 @@
             android:textSize="14sp"
             android:layout_gravity="bottom"
             android:layout_marginLeft="1dp"
-            android:text="/套"
+            android:text=" / 套"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -262,17 +262,19 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:gravity="bottom"
+            android:layout_gravity="center_vertical"
             android:textColor="@color/maintextcolor"
             android:textSize="12sp"
             android:text="评级"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"/>
 
         <ImageView
             android:id="@+id/iv_start1"
             android:src="@mipmap/com_icon_star_on"
             android:layout_marginLeft="10dp"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:layout_width="@dimen/photo_itemlevewh"
             android:layout_height="@dimen/photo_itemlevewh"/>
         <ImageView
@@ -341,34 +343,42 @@
         android:layout_alignLeft="@+id/ll_leve"
         android:layout_below="@+id/ll_leve"
         android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="@dimen/photo_shopcartmt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
         <LinearLayout
-            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:gravity="center"
             android:visibility="visible"
             android:id="@+id/rl_collect"
             android:layout_width="@dimen/idle_item_avatorwh"
             android:background="@drawable/idle_bottom_shop"
             android:layout_height="@dimen/idle_item_avatorwh"
-            android:layout_marginRight="55dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
+           >
 
             <ImageView
                 android:id="@+id/iv_photocollect"
-                android:src="@mipmap/com_icon_share_ept_w"
+                android:src="@mipmap/com_icon_shct_w"
                 android:layout_centerInParent="true"
                 android:layout_width="@dimen/home_bottom_shopcaticon"
                 android:layout_height="@dimen/home_bottom_shopcaticon"/>
 
         </LinearLayout>
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
         <LinearLayout
+            android:layout_marginRight="15dp"
             android:gravity="center"
             android:visibility="visible"
-            android:layout_marginRight="20dp"
             android:id="@+id/rl_shopcar"
             android:layout_width="@dimen/idle_item_avatorwh"
             android:background="@drawable/idle_bottom_shop"
@@ -377,19 +387,15 @@
             <ImageView
                 android:layout_gravity="center"
                 android:id="@+id/iv_shopcar"
-                android:src="@mipmap/com_icon_shct_w"
+                android:src="@mipmap/com_icon_share_ept_w"
                 android:layout_width="@dimen/home_bottom_shopcaticon"
                 android:layout_height="@dimen/home_bottom_shopcaticon"/>
 
         </LinearLayout>
-
-
-
-
-
-
-
-
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
 
 
     </LinearLayout>
@@ -421,6 +427,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:layout_marginTop="5dp"
                 android:textStyle="bold"
                 android:id="@+id/tv_pro"
                 android:layout_gravity="center"
@@ -454,6 +461,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:layout_marginTop="5dp"
                 android:textStyle="bold"
                 android:id="@+id/tv_server"
                 android:layout_gravity="center"
@@ -488,6 +496,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:layout_marginTop="5dp"
                 android:textStyle="bold"
                 android:id="@+id/tv_finishspeed"
                 android:layout_gravity="center"

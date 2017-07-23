@@ -9,11 +9,12 @@
         android:id="@+id/ll_searchtop"
         android:layout_alignParentTop="true"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
+
         android:layout_width="match_parent"
         android:layout_height="40dp">
 
         <ImageView
+            android:layout_marginTop="16dp"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:id="@+id/iv_top_back"
@@ -24,6 +25,7 @@
             android:layout_height="@dimen/topmenuwh"/>
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/ll_search"
             android:orientation="horizontal"
             android:background="@drawable/topsearch_bg"
@@ -53,7 +55,7 @@
                 android:id="@+id/tv_searchkeyword"
                 android:textColor="@color/secondtextcolor"
                 android:textSize="14sp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
                 android:text="|搜索的关键字"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

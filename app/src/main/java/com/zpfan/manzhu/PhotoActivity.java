@@ -293,9 +293,12 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
         mLlsearchetop1 = (LinearLayout) mSearchtoplin.findViewById(R.id.ll_searchtop1);
         mLlsearchetop2 = (LinearLayout) mSearchtoplin.findViewById(R.id.ll_searchtop2);
         mLlsearchetop3 = (LinearLayout) mSearchtoplin.findViewById(R.id.ll_searchtop3);
+        TextView searchtype = (TextView) mSearchtoplin.findViewById(R.id.tv_searchtype);
 
-
-
+        Intent intent = getIntent();
+        String typetitle = intent.getStringExtra("typetitle");
+        searchtype.setText(typetitle);
+        //intent.getStringExtra("")
 
 
         /*mIvtop4 = (ImageView) mIcontoplin.findViewById(R.id.iv_shaixuan);

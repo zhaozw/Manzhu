@@ -6,12 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.zpfan.manzhu.adapter.MessageaddAdapter;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.UserBean;
+import com.zpfan.manzhu.myui.SearchTopLin;
 import com.zpfan.manzhu.utils.Utils;
 
 import java.lang.reflect.Type;
@@ -27,6 +29,8 @@ public class SearchCnResultActivity extends AppCompatActivity {
 
     @BindView(R.id.rv_cn)
     RecyclerView mRvCn;
+    @BindView(R.id.st_cn)
+    SearchTopLin mStCn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +47,15 @@ public class SearchCnResultActivity extends AppCompatActivity {
         String key = intent.getStringExtra("key");
         mRvCn.setLayoutManager(new LinearLayoutManager(SearchCnResultActivity.this));
         Log.i("zc", "onCreate:   获取到的key" + key);
+        TextView id = (TextView) mStCn.findViewById(R.id.tv_searchkeyword);
+        id.setText(" | " + key);
         searchCn(key);
     }
 
     private void searchCn(String key) {
 
 
-        Call<String> seachuser = Aplication.mIinterface.seachuser("1",key);
+        Call<String> seachuser = Aplication.mIinterface.seachuser("1", key);
 
         seachuser.enqueue(new Callback<String>() {
             @Override

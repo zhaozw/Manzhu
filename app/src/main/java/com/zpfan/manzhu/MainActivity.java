@@ -308,6 +308,7 @@ public class MainActivity extends AppCompatActivity implements EaseConversationL
                 public void onSuccess() {
                     if (mUserlogin) {
                         SPUtils.getInstance().put("userlogin",false);
+                        SPUtils.getInstance().remove("userid");
                         Log.i("zc", "onSuccess:   退出登陆成功");
                         MyToast.show("退出登陆成功",R.mipmap.com_icon_check_w);
                     }

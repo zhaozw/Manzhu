@@ -47,6 +47,7 @@
             android:layout_toRightOf="@+id/iv_bussness_photo"
             android:background="@drawable/baoyou_shape"
             android:gravity="center"
+            android:layout_gravity="center"
             android:textSize="10sp"
             android:textColor="@color/buttontext"
             android:text="包邮"
@@ -68,6 +69,7 @@
 
         <!--贩卖的条目-->
         <LinearLayout
+
         android:id="@+id/ll_fanmai"
         android:visibility="visible"
         android:layout_below="@+id/ll_baoyou"
@@ -75,10 +77,12 @@
         android:layout_alignLeft="@+id/ll_baoyou"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <TextView
+            android:layout_gravity="center"
             android:id="@+id/tv_fan"
             android:gravity="center"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:text="贩"
             android:textColor="@color/buttontext"
             android:background="@drawable/fanmai_shape"
@@ -140,7 +144,7 @@
             <TextView
                 android:id="@+id/tv_zu"
                 android:gravity="center"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:text="租"
                 android:textColor="@color/buttontext"
                 android:background="@drawable/fanmai_shape"
@@ -185,7 +189,7 @@
             <TextView
                 android:layout_gravity="bottom"
                 android:id="@+id/tv_zuday"
-                android:text="(2天)+"
+                android:text="(2天) + "
                 android:textColor="@color/secondtextcolor"
                 android:textSize="14sp"
                 android:layout_marginLeft="5dp"
@@ -230,7 +234,7 @@
 
             <TextView
                 android:layout_gravity="bottom"
-                android:text="/天"
+                android:text=" / 天"
                 android:textColor="@color/secondtextcolor"
                 android:textSize="14sp"
                 android:layout_marginLeft="1dp"
@@ -258,7 +262,7 @@
             <TextView
                 android:id="@+id/tv_huan"
                 android:gravity="center"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:text="换"
                 android:textColor="@color/buttontext"
                 android:background="@drawable/fanmai_shape"
@@ -292,15 +296,7 @@
                 android:background="@drawable/genghuan"
                 android:layout_width="wrap_content"
                 android:layout_height="17.5dp"/>
-            <!--<TextView
-                android:gravity="center"
-                android:textSize="8sp"
-                android:textColor="@color/stronglin"
-                android:text="服|路飞"
-                android:background="@drawable/genghuan"
-                android:layout_marginLeft="5dp"
-                android:layout_width="@dimen/idle_item_huanw"
-                android:layout_height="@dimen/idle_item_huanh"/>-->
+
 
             <TextView
                 android:id="@+id/tv_more"
@@ -467,6 +463,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:layout_marginTop="5dp"
             android:textStyle="bold"
             android:id="@+id/tv_baobeikaopu"
             android:layout_gravity="center"
@@ -498,6 +495,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:layout_marginTop="5dp"
             android:textStyle="bold"
             android:id="@+id/tv_maikaopu"
             android:layout_gravity="center"
@@ -530,6 +528,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:layout_marginTop="5dp"
             android:textStyle="bold"
             android:id="@+id/tv_zukaopu"
             android:layout_gravity="center"

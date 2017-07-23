@@ -84,7 +84,7 @@
         android:src="@mipmap/com_icon_male"
         android:scaleType="centerCrop"
         android:padding="3dp"
-        android:background="@color/secondbuttonbc"
+        android:background="@drawable/sex_bg"
         android:layout_width="@dimen/addsexicon"
         android:layout_height="@dimen/addsexicon"/>
 

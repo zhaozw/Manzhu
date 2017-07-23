@@ -37,7 +37,9 @@ public class CosAdapter extends BaseQuickAdapter<CosBean,BaseViewHolder> {
          ImageView ivmanor = helper.getView(R.id.iv_manor);
 
         Glide.with(mContext).load(item.getCW_Cover()).into(ivcos);
-
+        ViewGroup.LayoutParams params2 = ivcos.getLayoutParams();
+        params2.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        ivcos.setLayoutParams(params2);
 
         RequestOptions options = new RequestOptions().centerCrop();
 
@@ -75,6 +77,7 @@ public class CosAdapter extends BaseQuickAdapter<CosBean,BaseViewHolder> {
                 inflate.setHeight(i);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 params.setMargins(Utils.dp2px(0),0,Utils.dp2px(10),Utils.dp2px(10));
+
                 inflate.setLayoutParams(params);
                 lltag.addView(inflate);
                 ViewGroup.LayoutParams params1 = lltag.getLayoutParams();

@@ -43,7 +43,7 @@
                     android:textSize="15sp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/maintextcolor"
-                    android:text="闲置二手"
+                    android:text="闲置/二手"
                     android:layout_marginRight="@dimen/toastmarglr"
                     android:gravity="center"
                     android:layout_width="wrap_content"
@@ -182,7 +182,7 @@
                     android:text="COS相关"
                     android:layout_marginLeft="7.5dp"
                     android:textColor="@color/secondtextcolor"
-                    android:textSize="8sp"
+                    android:textSize="12sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -712,7 +712,7 @@
             android:layout_below="@+id/ll_babayparame"
             android:background="@drawable/dash_line_shape"
             android:layout_width="match_parent"
-            android:layout_height="2dp"/>
+            android:layout_height="1dp"/>
         <!--   宝贝参数点开后的界面-->
         <LinearLayout
             android:visibility="gone"
@@ -926,9 +926,7 @@
             android:textStyle="bold"
             android:textColor="@color/numbertextcolor"
             android:textSize="14sp"
-            android:text="2"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
+            android:text=" 2 "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -1026,7 +1024,7 @@
                 android:layout_height="@dimen/detail_release_iconwh"/>
 
             <TextView
-                android:layout_marginLeft="7.5dp"
+                android:layout_marginLeft="5dp"
                 android:textColor="@color/stronglin"
                 android:text="宝贝详情"
                 android:textSize="12sp"
@@ -1053,6 +1051,7 @@
 
         </LinearLayout>
         <TextView
+            android:lineSpacingMultiplier = "1.2"
             android:layout_below="@+id/ll_detail"
             android:id="@+id/tv_prddetail"
             android:textColor="@color/maintextcolor"
@@ -1088,7 +1087,7 @@
                 android:layout_height="@dimen/detail_release_iconwh"/>
 
             <TextView
-                android:layout_marginLeft="7.5dp"
+                android:layout_marginLeft="5dp"
                 android:textColor="@color/stronglin"
                 android:text="买家评论"
                 android:textSize="12sp"
@@ -1178,7 +1177,7 @@
 
                     <TextView
                         android:id="@+id/tv_impressiont"
-                        android:text="卖家印象"
+                        android:text="卖家形象"
                         android:layout_marginLeft="10dp"
                         android:textColor="@color/secondtextcolor"
                         android:textSize="12sp"
@@ -1255,7 +1254,7 @@
                 android:layout_height="@dimen/detail_release_iconwh"/>
 
             <TextView
-                android:layout_marginLeft="7.5dp"
+                android:layout_marginLeft="5dp"
                 android:textColor="@color/stronglin"
                 android:text="相关COS作品"
                 android:textSize="12sp"
@@ -1308,7 +1307,6 @@
     <!--  底部的菜单栏-->
     
     <LinearLayout
-        android:background="@color/bootmbc"
         android:id="@+id/ll_bottommenu"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
@@ -1420,8 +1418,8 @@
         
             <ImageView
                 android:src="@mipmap/com_icon_shct_w"
-                android:layout_width="17.5dp"
-                android:layout_height="17.5dp"/>
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
 
             <TextView
                 android:layout_marginLeft="10dp"
@@ -1435,17 +1433,17 @@
 
 
         </LinearLayout>
+
         <TextView
             android:id="@+id/tv_makeorder"
-            android:textSize="14sp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.29"
+            android:background="@color/maintextcolor"
             android:gravity="center"
             android:text="立即下单"
             android:textColor="@color/buttontext"
-            android:layout_weight="0.29"
-            android:background="@color/maintextcolor"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"/>
-
+            android:textSize="14sp"/>
 
     </LinearLayout>
 

@@ -29,7 +29,7 @@
         app:searchtop1tv="全部服务"
         app:searchtop2iv="@mipmap/com_icon_loca_gra"
         app:searchtop2tv="本地服务"
-        app:searchcontext =" 无敌搜索"
+        app:searchcontext =" |"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

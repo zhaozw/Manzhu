@@ -22,11 +22,13 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.google.gson.reflect.TypeToken;
+import com.hyphenate.chat.EMMessage;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -36,6 +38,8 @@ import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.BussnessBean;
 import com.zpfan.manzhu.bean.CosBean;
 import com.zpfan.manzhu.bean.ShopBean;
+import com.zpfan.manzhu.myui.EaseActivity;
+import com.zpfan.manzhu.myui.MyToast;
 import com.zpfan.manzhu.utils.MyScrollView;
 import com.zpfan.manzhu.utils.ScrollViewListener;
 import com.zpfan.manzhu.utils.Utils;
@@ -280,6 +284,9 @@ public class IdleDetailActivity extends AppCompatActivity {
     private int mIvDetailTop;
     private int mMLineCommentTop;
     private int mCostop;
+    private String mSpecificationId = "" ;
+    private ShopBean mShopBean;
+    private int prdnumber = 1;
 
 
     @Override
@@ -473,7 +480,7 @@ public class IdleDetailActivity extends AppCompatActivity {
             if (specifications.size() == 0) {
                 mLlFormat.setVisibility(View.GONE);
             } else {
-                mTvGuige.setText(specifications.get(0).getPS_AttributeNames());
+                mTvGuige.setText(specifications.get(0).getPS_AttributeNames()); //需要处理
             }
 
 
@@ -505,6 +512,9 @@ public class IdleDetailActivity extends AppCompatActivity {
                                     }.getType();
 
                                     mShopBeen = Utils.gson.fromJson(retmsg, type1);
+                                    if (mShopBeen != null && mShopBeen.size() > 0) {
+                                        mShopBean = mShopBeen.get(0);
+                                    }
 
                                 }
 
@@ -657,17 +667,20 @@ public class IdleDetailActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
-        mLineDetailTop = mLineDetail.getTop(); //详情
         mIvDetailTop = mIvDetail.getTop(); //简介
-        mMLineCommentTop = mLineComment.getTop();  //评论
-        mCostop = mLineCos.getTop(); //相关cos
+        mLineDetailTop = mLineDetail.getTop(); //详情
 
+        mMLineCommentTop = mLineComment.getTop();
+        Log.i("zc", "onWindowFocusChanged:    评论的top" + mLineComment.getTop());
+
+        mCostop = mRvCos.getBottom();
     }
+
 
     @OnClick({R.id.iv_top_back, R.id.ll_share, R.id.ll_babayparame, R.id.ll_coupon, R.id.iv_topmenu, R.id.bt_morecomment
             , R.id.ll_impression, R.id.ll_babaycomment, R.id.ll_callbussness, R.id.ll_shop, R.id.ll_collect, R.id.ll_shopcart
-            , R.id.tv_makeorder, R.id.ll_format, R.id.iv_icontop_back,R.id.iv_menu,R.id.ll_top2,R.id.ll_top1
-            ,R.id.ll_top3,R.id.ll_top4
+            , R.id.tv_makeorder, R.id.ll_format, R.id.iv_icontop_back, R.id.iv_menu, R.id.ll_top2, R.id.ll_top1
+            , R.id.ll_top3, R.id.ll_top4
 
     })
     public void onViewClicked(View view) {
@@ -676,20 +689,20 @@ public class IdleDetailActivity extends AppCompatActivity {
 
             case R.id.ll_top4:
 
-                mMyscrollview.smoothScrollTo(0,mCostop);
+                mMyscrollview.smoothScrollTo(0, mCostop);
                 break;
             case R.id.ll_top3:
 
-                mMyscrollview.smoothScrollTo(0,mMLineCommentTop);
+                mMyscrollview.smoothScrollTo(0, mMLineCommentTop);
                 break;
 
             case R.id.ll_top1:
 
-                mMyscrollview.smoothScrollTo(0,mIvDetailTop);
+                mMyscrollview.smoothScrollTo(0, mIvDetailTop);
                 break;
 
             case R.id.ll_top2:
-                mMyscrollview.smoothScrollTo(0,mLineDetailTop);
+                mMyscrollview.smoothScrollTo(0, mLineDetailTop);
 
                 break;
 
@@ -854,24 +867,126 @@ public class IdleDetailActivity extends AppCompatActivity {
                 break;
 
             case R.id.ll_callbussness:
+                //  点击了 联系卖家  先判断用户是否登陆 如果登陆的话 就跳转到聊天的界面
+                if (Utils.isUserLogin()) {
 
-                //  点击了 联系卖家
+                    Intent intent = new Intent(mContext, EaseActivity.class);
+             /*   intent.putExtra("userphone", item.getM_Phone());
+
+                intent.putExtra("chatType", EMMessage.ChatType.Chat);*/
+                    intent.putExtra("userId", mbussness.getG_ContactPhone());
+                    intent.putExtra("usercn", mShopBeen.get(0).getS_Name());
+                    intent.putExtra("chatType", EMMessage.ChatType.Chat);
+                    startActivity(intent);
+
+                } else {
+                    startActivity(new Intent(IdleDetailActivity.this, LoginActivity.class));
+                }
 
                 break;
 
             case R.id.ll_shop:
-
                 // 点击了店铺
+                Toast.makeText(this, "跳转到店铺的详情", Toast.LENGTH_SHORT).show();
+
                 break;
 
             case R.id.ll_collect:
-
                 //点击了收藏
+                if (Utils.isUserLogin()) {
+                    //去执行收藏的方法
+                    Log.i("zc", "onViewClicked:   看看商品的id " + mbussness.getId() + "登陆人的id" + Utils.getloginuid());
+                    Call<String> operacollectionfunction = Aplication.mIinterface.operacollectionfunction("商品", mbussness.getId() + "", Utils.getloginuid());
+                    operacollectionfunction.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            String body = response.body();
+                            if (body != null) {
+                                Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                                }.getType();
+
+                                ArrayList<AvatorBean> been = Utils.gson.fromJson(body, type);
+                                if (been != null) {
+                                    String retmsg = been.get(0).getRetmsg();
+                                    Log.i("zc", "onResponse:   看看返回的是什么" + retmsg);
+                                    if (retmsg.equals("true")) {
+                                        MyToast.show("收藏成功", R.mipmap.com_icon_check_w);
+                                        mLlCollect.setClickable(false);
+                                        mIvCollect.setImageResource(R.mipmap.com_icon_fav);
+
+                                    } else {
+                                        MyToast.show("收藏失败，您可能已经收藏过该商品", R.mipmap.com_icon_cross_w);
+                                    }
+
+
+                                }
+
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+
+
+                } else {
+                    startActivity(new Intent(IdleDetailActivity.this, LoginActivity.class));
+                }
+
+
                 break;
 
             case R.id.ll_shopcart:
-
                 //点击了购物车
+
+                if (Utils.isUserLogin()) {
+                    Call<String> operaaddupdateshopcart = Aplication.mIinterface.operaaddupdateshopcart("ShoppingCar" + Utils.getloginuid(), Utils.getloginuid(), mbussness.getG_UID(), mSpecificationId, mShopBean.getM_UID(), prdnumber+"");
+
+                    operaaddupdateshopcart.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Log.i("zc", "onResponse:   看看数据" + call.request().toString());
+                            String body = response.body();
+                            if (body != null) {
+                                Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                                }.getType();
+
+                                ArrayList<AvatorBean> been = Utils.gson.fromJson(body, type);
+                                if (been != null) {
+                                    AvatorBean bean = been.get(0);
+                                    if (bean.getRetmsg().equals("true")) {
+
+                                        MyToast.show("添加到购物车成功", R.mipmap.com_icon_check_w);
+
+                                    } else {
+                                        MyToast.show("添加到购物车失败", R.mipmap.com_icon_cross_w);
+                                    }
+
+
+                                }
+                            } else {
+                                Log.i("zc", "onFailure:   看看错误的地方" + call.request().toString() + "-----"+ response.code());
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Log.i("zc", "onFailure:   看看错误的地方" + call.request().toString());
+                        }
+                    });
+
+
+
+
+                } else {
+                    startActivity(new Intent(IdleDetailActivity.this, LoginActivity.class));
+                }
                 break;
 
             case R.id.tv_makeorder:
@@ -929,6 +1044,8 @@ public class IdleDetailActivity extends AppCompatActivity {
         final ImageView ivavator = (ImageView) inflate.findViewById(R.id.iv_avator);
         ImageView ivshop = (ImageView) inflate.findViewById(R.id.iv_shop);
         ImageView ivmanor = (ImageView) inflate.findViewById(R.id.iv_manor);
+        View line = inflate.findViewById(R.id.dashline);
+        line.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         View close = inflate.findViewById(R.id.close);
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -940,6 +1057,26 @@ public class IdleDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 window.dismiss();
+            }
+        });
+
+        ivmessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Utils.isUserLogin()) {
+
+                    Intent intent = new Intent(mContext, EaseActivity.class);
+                    intent.putExtra("userId", mbussness.getG_ContactPhone());
+                    intent.putExtra("usercn", mShopBeen.get(0).getS_Name());
+                    intent.putExtra("chatType", EMMessage.ChatType.Chat);
+                    startActivity(intent);
+                    window.dismiss();
+                } else {
+                    startActivity(new Intent(IdleDetailActivity.this, LoginActivity.class));
+                    window.dismiss();
+                }
+
+
             }
         });
 
@@ -963,7 +1100,7 @@ public class IdleDetailActivity extends AppCompatActivity {
         final TextView tvzudayprice = (TextView) inflate.findViewById(R.id.tv_zudayprice);
         final TextView tvzudayxiaoshu = (TextView) inflate.findViewById(R.id.tv_zudayxiaoshu);
         final TextView tvzuday = (TextView) inflate.findViewById(R.id.tv_zuday);
-        TextView tvprdnumber = (TextView) inflate.findViewById(R.id.tv_prdnumber);
+        final TextView tvprdnumber = (TextView) inflate.findViewById(R.id.tv_prdnumber);
         TextView tvleav = (TextView) inflate.findViewById(R.id.tv_leav);
 
 
@@ -976,6 +1113,26 @@ public class IdleDetailActivity extends AppCompatActivity {
 
         final TagFlowLayout tag1 = (TagFlowLayout) inflate.findViewById(R.id.tag_1);
         final TagFlowLayout tag2 = (TagFlowLayout) inflate.findViewById(R.id.tag_2);
+
+        btup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvprdnumber.setText((++prdnumber ) + "");
+
+            }
+        });
+        btdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (prdnumber == 1) {
+
+                } else {
+                    tvprdnumber.setText((--prdnumber) + "");
+                }
+
+            }
+        });
+
 
         //设置参数进去
         if (mObj.isM_IsBusiness()) {
@@ -995,14 +1152,14 @@ public class IdleDetailActivity extends AppCompatActivity {
             tvdizhi.setText(text);
             tvleav.setText("Lv." + mbussness.getG_Member_OBJ().getN_AllLevel());
 
-            tvfirstscore.setText("宝贝描述相符度");
-            tvpro.setText(mbussness.getBbmsxfd_member_value());
+            tvfirstscore.setText("宝贝描述相符度  ");
+            tvpro.setText(mbussness.getBbmsxfd_member_value()+ "  ");
 
-            tvsecandscore.setText("卖家服务态度");
-            tvserver.setText(mbussness.getMjfutd_member_value());
+            tvsecandscore.setText("  卖家服务态度  ");
+            tvserver.setText(mbussness.getMjfutd_member_value() + "  ");
 
-            tvthreescore.setText("卖家发货速度");
-            tvfinishspeed.setText(mbussness.getMjfhsd_member_value());
+            tvthreescore.setText("  卖家发货速度  ");
+            tvfinishspeed.setText(mbussness.getMjfhsd_member_value() + "  ");
 
 
         } else {
@@ -1096,6 +1253,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                                     String amount = specification.getPS_CorrespAmount();
                                     String renewal = specification.getPS_RenewalPrice();
                                     setRentPrice(tvzuprice, tvzuxiaoshu, tvzudayprice, tvzudayxiaoshu, tvzuday, amount, renewal);
+                                    mSpecificationId = specification.getPS_UniqueID();
                                 }
 
                             }
@@ -1164,6 +1322,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                                     String amount = specification.getPS_CorrespAmount();
                                     String renewal = specification.getPS_RenewalPrice();
                                     setRentPrice(tvzuprice, tvzuxiaoshu, tvzudayprice, tvzudayxiaoshu, tvzuday, amount, renewal);
+                                    mSpecificationId = specification.getPS_UniqueID();
                                 }
                             }
 
@@ -1190,6 +1349,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                                     String amount = specification.getPS_CorrespAmount();
                                     String renewal = specification.getPS_RenewalPrice();
                                     setRentPrice(tvzuprice, tvzuxiaoshu, tvzudayprice, tvzudayxiaoshu, tvzuday, amount, renewal);
+                                    mSpecificationId = specification.getPS_UniqueID();
                                 }
                             }
 
