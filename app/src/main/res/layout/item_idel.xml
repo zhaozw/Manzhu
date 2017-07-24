@@ -95,7 +95,7 @@
             android:gravity="center"
             android:textSize="10sp"
             android:textColor="@color/pricetextcolor"
-            android:text="¥"
+            android:text="¥ "
             android:layout_width="6dp"
             android:layout_height="14dp"/>
 
@@ -160,7 +160,7 @@
                 android:layout_marginLeft="7.5dp"
                 android:layout_toRightOf="@+id/tv_fan"
                 android:gravity="center"
-                android:text="¥"
+                android:text="¥ "
                 android:textColor="@color/pricetextcolor"
                 android:textSize="10sp"/>
 
@@ -189,7 +189,7 @@
             <TextView
                 android:layout_gravity="bottom"
                 android:id="@+id/tv_zuday"
-                android:text="(2天) + "
+                android:text="（2天） + "
                 android:textColor="@color/secondtextcolor"
                 android:textSize="14sp"
                 android:layout_marginLeft="5dp"
@@ -204,7 +204,7 @@
                 android:gravity="center"
                 android:textSize="10sp"
                 android:textColor="@color/pricetextcolor"
-                android:text="¥"
+                android:text="¥ "
                 android:layout_width="6dp"
                 android:layout_height="14dp"/>
 

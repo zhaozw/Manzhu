@@ -370,7 +370,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                 String zudayxiaoshu = renewal.substring(renewa);
 
 
-                mTvZuday.setText("(" + mbussness.getG_BasicLease() + "天)+");
+                mTvZuday.setText("（" + mbussness.getG_BasicLease() + "天）+");
                 mTvZudayprice.setText(zudayprice);
                 mTvZudayxiaoshu.setText(zudayxiaoshu);
 
@@ -429,7 +429,7 @@ public class IdleDetailActivity extends AppCompatActivity {
             }
 
             //设置快递的价格
-            mTvExpress.setText(mbussness.getG_CourierMoney() + "(成都 到 北京）");
+            mTvExpress.setText(mbussness.getG_CourierMoney() + "（成都 到 北京）");
 
             //设置发布时间
             mTvUptime.setText(mbussness.getG_UpTime().substring(0, 11));
@@ -601,8 +601,8 @@ public class IdleDetailActivity extends AppCompatActivity {
             mTvNocomment.setVisibility(View.VISIBLE);
             mBtMorecomment.setVisibility(View.GONE);
         }
-        mTvCommentnumber.setText("(" + mbussness.getOrder_review_list().size() + ")");
-        mTvImpressionnumber.setText("(" + mbussness.getOrder_sellerfigure().size() + ")");
+        mTvCommentnumber.setText("（" + mbussness.getOrder_review_list().size() + "）");
+        mTvImpressionnumber.setText("（" + mbussness.getOrder_sellerfigure().size() + "）");
         //展示相关cos作品  要发送网络请求 需要字段
         String cosworks = mbussness.getGoods_cosworks();
         setCosWork(cosworks);
@@ -1060,6 +1060,18 @@ public class IdleDetailActivity extends AppCompatActivity {
             }
         });
 
+
+        ivshopcart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Utils.isUserLogin()) {
+                    startActivity(new Intent(IdleDetailActivity.this, ShopCarActivity.class));
+                } else {
+                    startActivity(new Intent(IdleDetailActivity.this,LoginActivity.class));
+                }
+            }
+        });
+
         ivmessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1204,7 +1216,7 @@ public class IdleDetailActivity extends AppCompatActivity {
         //设置分数mObj.getOrder_deal_count()
 
         tvnumber.setText(mObj.getOrder_deal_count() + "");
-        tvjiufen.setText("(纠纷比例:" + mObj.getS_DisputeProportion() + "%)");
+        tvjiufen.setText("（纠纷比例:" + mObj.getS_DisputeProportion() + "%）");
 
 
         final List<BussnessBean.GoodsSpecificationsBean> specifications = mbussness.getGoods_specifications();
@@ -1409,7 +1421,7 @@ public class IdleDetailActivity extends AppCompatActivity {
         String zudayxiaoshu = renewal.substring(renewa);
 
 
-        tvzuday.setText("(" + mbussness.getG_BasicLease() + "天)+");
+        tvzuday.setText("（" + mbussness.getG_BasicLease() + "天）+");
         tvzudayprice.setText(zudayprice);
         tvzudayxiaoshu.setText(zudayxiaoshu);
     }

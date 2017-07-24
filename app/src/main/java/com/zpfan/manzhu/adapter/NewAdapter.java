@@ -166,7 +166,7 @@ public class NewAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
         //设置定金  先检查是否支持定金
         if (item.isG_IsDepositDeal()) {
             //如果支持定金我就显示定金 如果不支持 就把定金那个内容设置位“”
-            helper.setText(R.id.tv_deposit, "(包含定金:¥" + item.getG_DepositPrice() + ")");
+            helper.setText(R.id.tv_deposit, "（包含定金:¥ " + item.getG_DepositPrice() + "）");
 
         } else {
             helper.setText(R.id.tv_deposit, "");

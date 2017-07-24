@@ -150,6 +150,7 @@
 
             <TextView
                 android:id="@+id/tv_my"
+
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="@dimen/bootm_margint"

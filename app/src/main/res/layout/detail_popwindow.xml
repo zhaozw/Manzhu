@@ -169,7 +169,7 @@
                     android:textSize="12sp"
                     android:layout_gravity="center_vertical"
                     android:textColor="@color/secondtextcolor"
-                    android:text="(四川-成都)"
+                    android:text="（四川-成都）"
                     android:ellipsize="end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -199,7 +199,7 @@
 
                 <TextView
                     android:id="@+id/tv_jiufen"
-                    android:text="(纠纷比例:8.2%)"
+                    android:text="（纠纷比例:8.2%）"
                     android:textSize="9sp"
                     android:textColor="@color/secondtextcolor"
                     android:layout_marginLeft="10dp"
@@ -415,7 +415,7 @@
             android:layout_marginLeft="10dp"
             android:textSize="14sp"
             android:textColor="@color/pricetextcolor"
-            android:text="¥"
+            android:text="¥ "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -471,7 +471,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/tv_fan"
             android:gravity="center"
-            android:text="¥"
+            android:text="¥ "
             android:textColor="@color/pricetextcolor"
             android:textSize="14sp"/>
 
@@ -500,7 +500,7 @@
         <TextView
             android:layout_gravity="bottom"
             android:id="@+id/tv_zuday"
-            android:text="(2天)+"
+            android:text="（2天）+"
             android:textColor="@color/secondtextcolor"
             android:textSize="14sp"
             android:layout_marginLeft="5dp"
@@ -515,7 +515,7 @@
             android:gravity="center"
             android:textSize="14sp"
             android:textColor="@color/pricetextcolor"
-            android:text="¥"
+            android:text="¥ "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

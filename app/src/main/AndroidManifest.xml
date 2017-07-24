@@ -148,7 +148,9 @@
         </activity>
         <activity android:name=".SearchCnResultActivity">
         </activity>
-        <activity android:name=".IdleDetailActivity" >
+        <activity android:name=".IdleDetailActivity">
+        </activity>
+        <activity android:name=".ShopCarActivity">
         </activity>
     </application>
 

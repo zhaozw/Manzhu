@@ -103,7 +103,7 @@
             android:gravity="center"
             android:textSize="10sp"
             android:textColor="@color/pricetextcolor"
-            android:text="¥"
+            android:text="¥ "
             android:layout_width="6dp"
             android:layout_height="14dp"/>
 

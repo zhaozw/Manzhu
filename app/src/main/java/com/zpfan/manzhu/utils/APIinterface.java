@@ -20,15 +20,17 @@ public interface APIinterface {
 
     /**
      * 登陆的接口
+     *
      * @param phonenumber
      * @param password
      * @return
      */
     @GET("Login")
-    Call<String> login (@Query("v_phonenumber") String phonenumber,@Query("v_password") String password);
+    Call<String> login(@Query("v_phonenumber") String phonenumber, @Query("v_password") String password);
 
     /**
      * 通过手机号码 获取用户头像的接口
+     *
      * @param phonenumber
      * @return
      */
@@ -38,6 +40,7 @@ public interface APIinterface {
 
     /**
      * 通过手机号 查看这个手机号是否被注册过
+     *
      * @param phonenumber
      * @return
      */
@@ -47,6 +50,7 @@ public interface APIinterface {
 
     /**
      * 根据cn来判断用户是否注册过
+     *
      * @param cn
      * @return
      */
@@ -56,6 +60,7 @@ public interface APIinterface {
 
     /**
      * 根据手机号获取验证码
+     *
      * @param phone
      * @return
      */
@@ -65,6 +70,7 @@ public interface APIinterface {
 
     /**
      * 注册的接口
+     *
      * @param phonenumber
      * @param cnname
      * @param fcode
@@ -80,6 +86,7 @@ public interface APIinterface {
 
     /**
      * 通过手机号查找到用户的信息
+     *
      * @param phonenumber
      * @param cn
      * @return
@@ -90,6 +97,7 @@ public interface APIinterface {
 
     /**
      * 根据手机号和验证码  来判断填写的验证码是否正确
+     *
      * @param phonenumber
      * @param webcode
      * @return
@@ -100,6 +108,7 @@ public interface APIinterface {
 
     /**
      * 把新密码 提交到服务器
+     *
      * @param uid
      * @param pw
      * @return
@@ -110,15 +119,17 @@ public interface APIinterface {
 
     /**
      * 通过手机号和cn 来查询用户
+     *
      * @param keyword
      * @return
      */
     @GET("getchatmemberlist_by_cnshopname")
-    Call<String> seachuser(@Query("Page") String page ,@Query("keyword") String keyword);
+    Call<String> seachuser(@Query("Page") String page, @Query("keyword") String keyword);
 
 
     /**
      * 上传图片
+     *
      * @param file
      * @return
      */
@@ -129,6 +140,7 @@ public interface APIinterface {
 
     /**
      * 获取会员聊天对象的列表
+     *
      * @param phone
      * @return
      */
@@ -138,21 +150,23 @@ public interface APIinterface {
 
     /**
      * 获取最后一条消息
+     *
      * @param from
      * @param to
      * @return
      */
     @GET("get_memberchat_list_lastlog")
-    Call<String> getlastMessage(@Query("frommember_phone")String  from, @Query("tomember_phone") String to   );
+    Call<String> getlastMessage(@Query("frommember_phone") String from, @Query("tomember_phone") String to);
 
     /**
      * 保存会员聊天对象记录
+     *
      * @param myphone
      * @param tophone
      * @return
      */
     @GET("save_member_chat_obj")
-    Call<String> saveChatbj(@Query("fromphone")  String myphone,@Query("tophone")  String tophone );
+    Call<String> saveChatbj(@Query("fromphone") String myphone, @Query("tophone") String tophone);
 
 
     /**
@@ -164,28 +178,30 @@ public interface APIinterface {
     Call<String> saveChatLog(@Query("obj_A") String fromphone, @Query("obj_B") String tophone, @Query("message") String message, @Query("message_type") String messagetype);
 
 
-
     /**
      * 获取会员聊天记录
+     *
      * @param fromphone
      * @param toPhone
      * @return
      */
     @GET("get_member_chatlog_list")
-    Call<String> getChatlogList(@Query("Page") int i,@Query("frommember_phone") String fromphone, @Query("tomember_phone")String toPhone);
+    Call<String> getChatlogList(@Query("Page") int i, @Query("frommember_phone") String fromphone, @Query("tomember_phone") String toPhone);
 
     /**
      * 获取商品列表的接口
+     *
      * @param
      * @param
      * @return
      */
     @GET("getgoodslist")
-    Call<String> getgoodslist(@QueryMap Map<String,String> map);
+    Call<String> getgoodslist(@QueryMap Map<String, String> map);
 
 
     /**
      * 首页获取
+     *
      * @param cate
      * @param key
      * @param psid
@@ -197,6 +213,7 @@ public interface APIinterface {
 
     /**
      * 获取商品类型的接口
+     *
      * @param cate
      * @param titele
      * @return
@@ -205,8 +222,10 @@ public interface APIinterface {
     Call<String> getproducttype(@Query("catevalue") String cate, @Query("titlevalue") String titele);
 
 
-    /**\
+    /**
+     * \
      * 获取商家详细信息的接口
+     *
      * @param uid
      * @return
      */
@@ -216,6 +235,7 @@ public interface APIinterface {
 
     /**
      * 获取相关cos作品的信息
+     *
      * @param obj_cate
      * @param location_name
      * @param cosworkID_arry
@@ -227,6 +247,7 @@ public interface APIinterface {
 
     /**
      * 将商品添加到收藏的方法
+     *
      * @param obj_cate
      * @param obj_id
      * @param obj_member_uid
@@ -237,7 +258,8 @@ public interface APIinterface {
 
 
     /**
-     *  更新购物车数据的方法
+     * 更新购物车数据的方法
+     *
      * @param car_uid
      * @param member_uid
      * @param goods_uid
@@ -251,9 +273,14 @@ public interface APIinterface {
             , @Query("bussiness_uid") String bussiness_uid, @Query("car_count") String car_count
     );
 
-
-
-
-
+    /**
+     * 获取购物车列表的方法
+     *
+     * @param member_uid
+     * @param cate_obj
+     * @return
+     */
+    @GET("get_shoppingcar_list")
+    Call<String> getshopcarlist(@Query("member_uid") String member_uid, @Query("cate_obj") String cate_obj);
 
 }

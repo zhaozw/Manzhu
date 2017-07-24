@@ -240,7 +240,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="12.5dp"
             android:layout_marginTop="5dp"
-            android:text="( 60秒 )"
+            android:text="(60秒)"
             android:textColor="#bfbfbf"
             android:textSize="9sp"
             android:visibility="visible"/>
