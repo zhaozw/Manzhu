@@ -1,5 +1,6 @@
 package com.zpfan.manzhu.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class ShopCartbean {
     private int idle_number;
     private int new_number;
     private int server_number;
-    private List<CarshoplistBean> carshoplist;
+    private ArrayList<CarshoplistBean> carshoplist;
 
     public int getIdle_number() {
         return idle_number;
@@ -45,11 +46,11 @@ public class ShopCartbean {
         this.server_number = server_number;
     }
 
-    public List<CarshoplistBean> getCarshoplist() {
+    public ArrayList<CarshoplistBean> getCarshoplist() {
         return carshoplist;
     }
 
-    public void setCarshoplist(List<CarshoplistBean> carshoplist) {
+    public void setCarshoplist(ArrayList<CarshoplistBean> carshoplist) {
         this.carshoplist = carshoplist;
     }
 
@@ -109,6 +110,19 @@ public class ShopCartbean {
         }
 
         public static class CargoodslistBean {
+            @Override
+            public String toString() {
+                return "CargoodslistBean{" +
+                        "Bussiness_UID='" + Bussiness_UID + '\'' +
+                        ", CarCount=" + CarCount +
+                        ", Goods_Spcification_UID='" + Goods_Spcification_UID + '\'' +
+                        ", Goods_UID='" + Goods_UID + '\'' +
+                        ", Member_UID='" + Member_UID + '\'' +
+                        ", SC_UID='" + SC_UID + '\'' +
+                        ", goods_model=" + goods_model +
+                        '}';
+            }
+
             /**
              * Bussiness_UID : 20169720335385547137
              * CarCount : 1
@@ -126,6 +140,15 @@ public class ShopCartbean {
             private String Member_UID;
             private String SC_UID;
             private GoodsModelBean goods_model;
+            private boolean isChecked =false;
+
+            public boolean isChecked() {
+                return isChecked;
+            }
+
+            public void setChecked(boolean checked) {
+                isChecked = checked;
+            }
 
             public String getBussiness_UID() {
                 return Bussiness_UID;
@@ -184,6 +207,104 @@ public class ShopCartbean {
             }
 
             public static class GoodsModelBean {
+
+                @Override
+                public String toString() {
+                    return "GoodsModelBean{" +
+                            "BrandID='" + BrandID + '\'' +
+                            ", Demand_FK='" + Demand_FK + '\'' +
+                            ", G_Agent_Member_UID='" + G_Agent_Member_UID + '\'' +
+                            ", G_Area='" + G_Area + '\'' +
+                            ", G_AuditStatus='" + G_AuditStatus + '\'' +
+                            ", G_BasicLease=" + G_BasicLease +
+                            ", G_City='" + G_City + '\'' +
+                            ", G_CommissionMoney='" + G_CommissionMoney + '\'' +
+                            ", G_ContactPhone='" + G_ContactPhone + '\'' +
+                            ", G_ContactQQ='" + G_ContactQQ + '\'' +
+                            ", G_CorrespAmount='" + G_CorrespAmount + '\'' +
+                            ", G_CosworkIDs='" + G_CosworkIDs + '\'' +
+                            ", G_CourierCompanyID=" + G_CourierCompanyID +
+                            ", G_CourierMoney='" + G_CourierMoney + '\'' +
+                            ", G_Cover='" + G_Cover + '\'' +
+                            ", G_DepositPrice='" + G_DepositPrice + '\'' +
+                            ", G_DetailRemarks='" + G_DetailRemarks + '\'' +
+                            ", G_FixedPrice='" + G_FixedPrice + '\'' +
+                            ", G_GoodsFreightNum='" + G_GoodsFreightNum + '\'' +
+                            ", G_Hits=" + G_Hits +
+                            ", G_Images='" + G_Images + '\'' +
+                            ", G_IsChange=" + G_IsChange +
+                            ", G_IsDepositDeal=" + G_IsDepositDeal +
+                            ", G_IsFreeService=" + G_IsFreeService +
+                            ", G_IsFreeShip=" + G_IsFreeShip +
+                            ", G_IsMorePrice=" + G_IsMorePrice +
+                            ", G_IsOfflineDeal=" + G_IsOfflineDeal +
+                            ", G_IsOffline_rentdeal=" + G_IsOffline_rentdeal +
+                            ", G_IsOnline_rentdeal=" + G_IsOnline_rentdeal +
+                            ", G_IsRecommend=" + G_IsRecommend +
+                            ", G_IsRent=" + G_IsRent +
+                            ", G_IsSale=" + G_IsSale +
+                            ", G_IsServiceBook=" + G_IsServiceBook +
+                            ", G_IsShelves=" + G_IsShelves +
+                            ", G_IsShowIndex=" + G_IsShowIndex +
+                            ", G_IsTJByShop=" + G_IsTJByShop +
+                            ", G_Isdraught=" + G_Isdraught +
+                            ", G_Isurgentsale=" + G_Isurgentsale +
+                            ", G_MarketingPrice='" + G_MarketingPrice + '\'' +
+                            ", G_Member_OBJ=" + G_Member_OBJ +
+                            ", G_NewOldDegree='" + G_NewOldDegree + '\'' +
+                            ", G_NoPassReason='" + G_NoPassReason + '\'' +
+                            ", G_NoPassReasonDetail='" + G_NoPassReasonDetail + '\'' +
+                            ", G_OrderNum=" + G_OrderNum +
+                            ", G_Province='" + G_Province + '\'' +
+                            ", G_ReadCount=" + G_ReadCount +
+                            ", G_RefreshTime='" + G_RefreshTime + '\'' +
+                            ", G_RenewalPrice='" + G_RenewalPrice + '\'' +
+                            ", G_SaleNum=" + G_SaleNum +
+                            ", G_ShareNumber=" + G_ShareNumber +
+                            ", G_ShopOrderNum=" + G_ShopOrderNum +
+                            ", G_StockNum=" + G_StockNum +
+                            ", G_SubTitle='" + G_SubTitle + '\'' +
+                            ", G_Title='" + G_Title + '\'' +
+                            ", G_Type='" + G_Type + '\'' +
+                            ", G_UID='" + G_UID + '\'' +
+                            ", G_UpTime='" + G_UpTime + '\'' +
+                            ", G_Weight=" + G_Weight +
+                            ", G_appointment_mintime_value=" + G_appointment_mintime_value +
+                            ", G_appointment_price_1='" + G_appointment_price_1 + '\'' +
+                            ", G_appointment_price_2='" + G_appointment_price_2 + '\'' +
+                            ", G_appointment_price_3='" + G_appointment_price_3 + '\'' +
+                            ", G_appointment_time_value_1=" + G_appointment_time_value_1 +
+                            ", G_appointment_time_value_2=" + G_appointment_time_value_2 +
+                            ", G_appointment_time_value_3=" + G_appointment_time_value_3 +
+                            ", G_appointment_time_value_4=" + G_appointment_time_value_4 +
+                            ", G_appointment_time_value_5=" + G_appointment_time_value_5 +
+                            ", G_appointment_time_value_6=" + G_appointment_time_value_6 +
+                            ", GoodsTypeID=" + GoodsTypeID +
+                            ", GoodsTypeID2=" + GoodsTypeID2 +
+                            ", Member_UID='" + Member_UID + '\'' +
+                            ", TelevisionWorks_FK='" + TelevisionWorks_FK + '\'' +
+                            ", VirtualRole_FK='" + VirtualRole_FK + '\'' +
+                            ", attitude_number_value='" + attitude_number_value + '\'' +
+                            ", bbkpd_member_value='" + bbkpd_member_value + '\'' +
+                            ", bbmsxfd_member_value='" + bbmsxfd_member_value + '\'' +
+                            ", collection_number=" + collection_number +
+                            ", complatespeed_value='" + complatespeed_value + '\'' +
+                            ", czrkpd_member_value='" + czrkpd_member_value + '\'' +
+                            ", goods_cosworks='" + goods_cosworks + '\'' +
+                            ", goods_parameter='" + goods_parameter + '\'' +
+                            ", id=" + id +
+                            ", mjfhsd_member_value='" + mjfhsd_member_value + '\'' +
+                            ", mjfutd_member_value='" + mjfutd_member_value + '\'' +
+                            ", mjkpd_member_value='" + mjkpd_member_value + '\'' +
+                            ", professionaldegree_value='" + professionaldegree_value + '\'' +
+                            ", shop_coupon_count=" + shop_coupon_count +
+                            ", showtype=" + showtype +
+                            ", goods_specifications=" + goods_specifications +
+                            ", order_review_list=" + order_review_list +
+                            ", order_sellerfigure=" + order_sellerfigure +
+                            '}';
+                }
+
                 /**
                  * BrandID :
                  * Demand_FK :
@@ -366,7 +487,7 @@ public class ShopCartbean {
                 private String professionaldegree_value;
                 private int shop_coupon_count;
                 private int showtype;
-                private List<?> goods_specifications;
+                private List<FormatBean> goods_specifications;
                 private List<?> order_review_list;
                 private List<OrderSellerfigureBean> order_sellerfigure;
 
@@ -1074,11 +1195,11 @@ public class ShopCartbean {
                     this.showtype = showtype;
                 }
 
-                public List<?> getGoods_specifications() {
+                public List<FormatBean> getGoods_specifications() {
                     return goods_specifications;
                 }
 
-                public void setGoods_specifications(List<?> goods_specifications) {
+                public void setGoods_specifications(List<FormatBean> goods_specifications) {
                     this.goods_specifications = goods_specifications;
                 }
 

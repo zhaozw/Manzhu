@@ -579,14 +579,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <Button
-            android:id="@+id/bt_up"
-            android:background="@drawable/button_checkmore"
-            android:textColor="@color/buttontext"
-            android:text="+"
+        <RelativeLayout
             android:layout_marginLeft="10dp"
+            android:id="@+id/bt_up"
+            android:background="@drawable/add_button_bg"
             android:layout_width="25dp"
-            android:layout_height="25dp"/>
+            android:layout_height="25dp">
+
+            <ImageView
+                android:src="@mipmap/com_icon_plus_2_w"
+                android:layout_centerInParent="true"
+                android:layout_width="12.5dp"
+                android:layout_height="12.5dp"/>
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_prdnumber"
@@ -601,13 +607,20 @@
 
 
 
-        <Button
+        <RelativeLayout
+            android:layout_marginLeft="10dp"
             android:id="@+id/bt_down"
-            android:background="@drawable/button_checkmore"
-            android:textColor="@color/buttontext"
-            android:text="-"
+            android:background="@drawable/add_button_bg"
             android:layout_width="25dp"
-            android:layout_height="25dp"/>
+            android:layout_height="25dp">
+
+            <ImageView
+                android:src="@mipmap/com_icon_minus_2_w"
+                android:layout_centerInParent="true"
+                android:layout_width="12.5dp"
+                android:layout_height="12.5dp"/>
+
+        </RelativeLayout>
 
     </LinearLayout>
 

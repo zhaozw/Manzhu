@@ -283,4 +283,20 @@ public interface APIinterface {
     @GET("get_shoppingcar_list")
     Call<String> getshopcarlist(@Query("member_uid") String member_uid, @Query("cate_obj") String cate_obj);
 
+    /**
+     * 获取商品规格的详情
+     * @param gs_uid
+     * @return
+     */
+    @GET("getgoodspecification_model")
+    Call<String> getsprcification(@Query("gs_uid") String gs_uid);
+
+
+
+
+
+
+
+
+
 }

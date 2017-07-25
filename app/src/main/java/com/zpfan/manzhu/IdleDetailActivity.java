@@ -439,36 +439,38 @@ public class IdleDetailActivity extends AppCompatActivity {
 
             //设置宝贝参数
             String parameter = mbussness.getGoods_parameter();
-            String[] split = parameter.split(",");
-            for (String s : split) {
-                if (s.contains("组套情况")) {
-                    mTvZutao.setText(s);
-                } else if (s.contains("肩宽")) {
-                    mTvJk.setText(s);
-                } else if (s.contains("胸围")) {
-                    mTvXw.setText(s);
-                } else if (s.contains("袖长")) {
-                    mTvXc.setText(s);
-                } else if (s.contains("衣长(")) {
-                    mTvYc.setText(s);
-                } else if (s.contains("腰围")) {
-                    mTvYw.setText(s);
-                } else if (s.contains("裤长")) {
-                    mTvKc.setText(s);
-                } else if (s.contains("身高")) {
-                    mTvSg.setText(s);
-                } else if (s.contains("体重")) {
-                    mTvTz.setText(s);
-                } else if (s.contains("臀围")) {
-                    mTvTw.setText(s);
-                } else if (s.contains("面料柔软")) {
-                    mTvRr.setText(s);
-                } else if (s.contains("面料厚度")) {
-                    mTvHd.setText(s);
-                } else if (s.contains("版型指数")) {
-                    mTvBx.setText(s);
-                } else if (s.contains("衣长指数")) {
-                    mTvYczs.setText(s);
+            if (parameter != null) {
+                String[] split = parameter.split(",");
+                for (String s : split) {
+                    if (s.contains("组套情况")) {
+                        mTvZutao.setText(s);
+                    } else if (s.contains("肩宽")) {
+                        mTvJk.setText(s);
+                    } else if (s.contains("胸围")) {
+                        mTvXw.setText(s);
+                    } else if (s.contains("袖长")) {
+                        mTvXc.setText(s);
+                    } else if (s.contains("衣长(")) {
+                        mTvYc.setText(s);
+                    } else if (s.contains("腰围")) {
+                        mTvYw.setText(s);
+                    } else if (s.contains("裤长")) {
+                        mTvKc.setText(s);
+                    } else if (s.contains("身高")) {
+                        mTvSg.setText(s);
+                    } else if (s.contains("体重")) {
+                        mTvTz.setText(s);
+                    } else if (s.contains("臀围")) {
+                        mTvTw.setText(s);
+                    } else if (s.contains("面料柔软")) {
+                        mTvRr.setText(s);
+                    } else if (s.contains("面料厚度")) {
+                        mTvHd.setText(s);
+                    } else if (s.contains("版型指数")) {
+                        mTvBx.setText(s);
+                    } else if (s.contains("衣长指数")) {
+                        mTvYczs.setText(s);
+                    }
                 }
             }
 
@@ -477,7 +479,7 @@ public class IdleDetailActivity extends AppCompatActivity {
 
             //查看是否有规格
             List<BussnessBean.GoodsSpecificationsBean> specifications = mbussness.getGoods_specifications();
-            if (specifications.size() == 0) {
+            if (specifications == null ||specifications.size() == 0) {
                 mLlFormat.setVisibility(View.GONE);
             } else {
                 mTvGuige.setText(specifications.get(0).getPS_AttributeNames()); //需要处理
@@ -579,27 +581,29 @@ public class IdleDetailActivity extends AppCompatActivity {
         //设置商品评价
         mRvComment.setLayoutManager(new LinearLayoutManager(IdleDetailActivity.this));
         List<BussnessBean.OrderReviewListBean> list = mbussness.getOrder_review_list();
-        if (list.size() > 0 && list.size() < 4) {
-            mAdapter = new DetailCommentAdapter(R.layout.review_item, list, mbussness, 0);
-            mRvComment.setVisibility(View.VISIBLE);
-            mTvNocomment.setVisibility(View.GONE);
-            mBtMorecomment.setVisibility(View.VISIBLE);
-            mRvComment.setAdapter(mAdapter);
-        } else if (list.size() >= 4) {
-            ArrayList<BussnessBean.OrderReviewListBean> been = new ArrayList<>();
-            for (int i = 0; i < 3; i++) {
-                been.add(list.get(i));
-            }
-            mAdapter = new DetailCommentAdapter(R.layout.review_item, been, mbussness, 0);
-            mRvComment.setVisibility(View.VISIBLE);
-            mTvNocomment.setVisibility(View.GONE);
-            mBtMorecomment.setVisibility(View.VISIBLE);
-            mRvComment.setAdapter(mAdapter);
+        if (list != null) {
+            if (list.size() > 0 && list.size() < 4) {
+                mAdapter = new DetailCommentAdapter(R.layout.review_item, list, mbussness, 0);
+                mRvComment.setVisibility(View.VISIBLE);
+                mTvNocomment.setVisibility(View.GONE);
+                mBtMorecomment.setVisibility(View.VISIBLE);
+                mRvComment.setAdapter(mAdapter);
+            } else if (list.size() >= 4) {
+                ArrayList<BussnessBean.OrderReviewListBean> been = new ArrayList<>();
+                for (int i = 0; i < 3; i++) {
+                    been.add(list.get(i));
+                }
+                mAdapter = new DetailCommentAdapter(R.layout.review_item, been, mbussness, 0);
+                mRvComment.setVisibility(View.VISIBLE);
+                mTvNocomment.setVisibility(View.GONE);
+                mBtMorecomment.setVisibility(View.VISIBLE);
+                mRvComment.setAdapter(mAdapter);
 
-        } else {
-            mRvComment.setVisibility(View.GONE);
-            mTvNocomment.setVisibility(View.VISIBLE);
-            mBtMorecomment.setVisibility(View.GONE);
+            } else {
+                mRvComment.setVisibility(View.GONE);
+                mTvNocomment.setVisibility(View.VISIBLE);
+                mBtMorecomment.setVisibility(View.GONE);
+            }
         }
         mTvCommentnumber.setText("（" + mbussness.getOrder_review_list().size() + "）");
         mTvImpressionnumber.setText("（" + mbussness.getOrder_sellerfigure().size() + "）");
@@ -1116,8 +1120,8 @@ public class IdleDetailActivity extends AppCompatActivity {
         TextView tvleav = (TextView) inflate.findViewById(R.id.tv_leav);
 
 
-        Button btup = (Button) inflate.findViewById(R.id.bt_up);
-        Button btdown = (Button) inflate.findViewById(R.id.bt_down);
+        RelativeLayout btup = (RelativeLayout) inflate.findViewById(R.id.bt_up);
+        RelativeLayout btdown = (RelativeLayout) inflate.findViewById(R.id.bt_down);
         View tagline = inflate.findViewById(R.id.tagline);
 
         LinearLayout llsearch = (LinearLayout) inflate.findViewById(R.id.ll_search);
