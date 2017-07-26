@@ -10,12 +10,23 @@ import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.gson.reflect.TypeToken;
+import com.zpfan.manzhu.Aplication;
 import com.zpfan.manzhu.R;
+import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.ShopCartbean;
-import com.zpfan.manzhu.myui.EditListener;
+import com.zpfan.manzhu.myui.MyToast;
+import com.zpfan.manzhu.utils.EditListener;
+import com.zpfan.manzhu.utils.GoodChangeListener;
+import com.zpfan.manzhu.utils.Utils;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2017/7/25 0025.
@@ -26,10 +37,13 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
     EditListener mListener ;
     private double price = 0.00;
     ArrayList<ShopCartbean.CarshoplistBean.CargoodslistBean> checeGood = new ArrayList<>();
+    public boolean allCheck = false;
+
+
 
     public ShopCartAdapter(@LayoutRes int layoutResId, @Nullable List<ShopCartbean.CarshoplistBean> data,EditListener listener) {
         super(layoutResId, data);
-
+        checeGood.clear();
         mListener = listener;
 
     }
@@ -37,7 +51,7 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
 
     @Override
     protected void convert(final BaseViewHolder helper, final ShopCartbean.CarshoplistBean item) {
-        checeGood.clear();
+
 
         if (item.getCargoodslist().size() > 0) {
             helper.setText(R.id.tv_shopname, item.getMember_Name())
@@ -49,7 +63,55 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
 
             rv_shop.setLayoutManager(new LinearLayoutManager(mContext));
             final List<ShopCartbean.CarshoplistBean.CargoodslistBean> cargoodslist = item.getCargoodslist();
-            final ShopGoodadapter goodadapter = new ShopGoodadapter(R.layout.item_shopgoods, cargoodslist);
+            //发送请求 我能拿到的数据有 uid
+            final ShopGoodadapter goodadapter = new ShopGoodadapter(R.layout.item_shopgoods, cargoodslist, new GoodChangeListener() {
+                @Override
+                public void goodchange(String scuid, String gooduid, String goods_ps_uid, String bussiness_uid, String car_count) {
+                    String uid = item.getMember_UID();
+                    Call<String> operaaddupdateshopcart = Aplication.mIinterface.operaaddupdateshopcart(scuid, uid, gooduid, goods_ps_uid, bussiness_uid, car_count);
+
+                    operaaddupdateshopcart.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            String body = response.body();
+                            if (body != null) {
+                                Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                                }.getType();
+
+                                ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                                AvatorBean bean = avatorBeen.get(0);
+                                if (bean != null) {
+
+                                    String retmsg = bean.getRetmsg();
+                                    if (retmsg.equals("true")) {
+                                        MyToast.show("购物车变更成功", R.mipmap.com_icon_cross_w);
+                                    } else {
+                                        MyToast.show("购物车变更失败", R.mipmap.com_icon_cross_w);
+                                    }
+
+
+                                }
+
+
+
+                            }
+
+
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+
+
+
+
+                }
+            });
             rv_shop.setAdapter(goodadapter);
 
             goodadapter.setOnItemChildClickListener(new OnItemChildClickListener() {
@@ -72,46 +134,14 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
             ivcheckall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    /*if (isCheckall) {
-                        for (ShopCartbean.CarshoplistBean.CargoodslistBean bean : item.getCargoodslist()) {
-                            bean.setChecked(false);
-
-                            checeGood.remove(bean);
-                        }
-                        goodadapter.notifyDataSetChanged();
-                        ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_ept);
-
-                    } else {
-                        for (ShopCartbean.CarshoplistBean.CargoodslistBean bean : item.getCargoodslist()) {
-                            bean.setChecked(true);
-                            checeGood.add(bean);
-
-                        }
-                        goodadapter.notifyDataSetChanged();
-                        ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_bl);
-                    }*/
-                    for (ShopCartbean.CarshoplistBean.CargoodslistBean bean : item.getCargoodslist()) {
-                        boolean checked = bean.isChecked();
-                        bean.setChecked(!checked);
-
-                        if (!checked) {
-                            checeGood.add(bean);
-                            ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_bl);
-                        } else {
-                            checeGood.remove(bean);
-                            ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_ept);
-                        }
-
-                    }
-
-
-
-                    goodadapter.notifyDataSetChanged();
-                    mListener.edit(checeGood);
+                    checkAll(item, ivcheckall, goodadapter);
                 }
             });
 
+
+            if (allCheck) {
+                checkAll(item, ivcheckall, goodadapter);
+            }
 
 
 
@@ -151,6 +181,24 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
 
 
 
+    }
+
+    public void checkAll(ShopCartbean.CarshoplistBean item, ImageView ivcheckall, ShopGoodadapter goodadapter) {
+        for (ShopCartbean.CarshoplistBean.CargoodslistBean bean : item.getCargoodslist()) {
+            boolean checked = bean.isChecked();
+            bean.setChecked(!checked);
+
+            if (!checked) {
+                checeGood.add(bean);
+                ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_bl);
+            } else {
+                checeGood.remove(bean);
+                ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_ept);
+            }
+
+        }
+        goodadapter.notifyDataSetChanged();
+        mListener.edit(checeGood);
     }
 
 

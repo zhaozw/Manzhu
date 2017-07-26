@@ -141,6 +141,24 @@ public class ShopCartbean {
             private String SC_UID;
             private GoodsModelBean goods_model;
             private boolean isChecked =false;
+            private int ChangeCount;
+            private String spUid;
+
+            public int getChangeCount() {
+                return ChangeCount;
+            }
+
+            public void setChangeCount(int changeCount) {
+                ChangeCount = changeCount;
+            }
+
+            public String getSpUid() {
+                return spUid;
+            }
+
+            public void setSpUid(String spUid) {
+                this.spUid = spUid;
+            }
 
             public boolean isChecked() {
                 return isChecked;

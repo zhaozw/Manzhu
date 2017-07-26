@@ -948,12 +948,12 @@ public class IdleDetailActivity extends AppCompatActivity {
                 //点击了购物车
 
                 if (Utils.isUserLogin()) {
-                    Call<String> operaaddupdateshopcart = Aplication.mIinterface.operaaddupdateshopcart("ShoppingCar" + Utils.getloginuid(), Utils.getloginuid(), mbussness.getG_UID(), mSpecificationId, mShopBean.getM_UID(), prdnumber+"");
+                    Call<String> operaaddupdateshopcart = Aplication.mIinterface.operaaddupdateshopcart("", Utils.getloginuid(), mbussness.getG_UID(), mSpecificationId, mShopBean.getM_UID(), prdnumber+"");
 
                     operaaddupdateshopcart.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Log.i("zc", "onResponse:   看看数据" + call.request().toString());
+
                             String body = response.body();
                             if (body != null) {
                                 Type type = new TypeToken<ArrayList<AvatorBean>>() {
@@ -1133,7 +1133,15 @@ public class IdleDetailActivity extends AppCompatActivity {
         btup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvprdnumber.setText((++prdnumber ) + "");
+
+                int i = ++prdnumber;
+                if (i > mbussness.getG_StockNum()) {
+                    i = mbussness.getG_StockNum();
+                    MyToast.show("已经是最大库存了",R.mipmap.com_icon_cross_w);
+                    tvprdnumber.setText(i + "");
+                } else {
+                    tvprdnumber.setText(i + "");
+                }
 
             }
         });
@@ -1141,7 +1149,6 @@ public class IdleDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (prdnumber == 1) {
-
                 } else {
                     tvprdnumber.setText((--prdnumber) + "");
                 }

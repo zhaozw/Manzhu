@@ -1,4 +1,4 @@
-package com.zpfan.manzhu.myui;
+package com.zpfan.manzhu.utils;
 
 import com.zpfan.manzhu.bean.ShopCartbean;
 

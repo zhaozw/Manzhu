@@ -292,6 +292,13 @@ public interface APIinterface {
     Call<String> getsprcification(@Query("gs_uid") String gs_uid);
 
 
+    /**
+     * 清空全部购物车的商品的接口
+     * @param member_uid
+     * @return
+     */
+    @GET("opera_allclear_shoppingcar_function")
+    Call<String> clerarallshopcart(@Query("member_uid") String member_uid);
 
 
 

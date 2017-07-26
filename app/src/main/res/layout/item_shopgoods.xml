@@ -135,6 +135,7 @@
                 android:layout_height="50dp">
 
                 <RelativeLayout
+                    android:id="@+id/bt_up"
                     android:background="@drawable/add_button_bg"
                     android:layout_width="25dp"
                     android:layout_height="25dp"> 
@@ -151,6 +152,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"/>
                 <TextView
+                    android:id="@+id/tv_count"
                     android:text="1"
                     android:textColor="@color/maintextcolor"
                     android:textSize="24sp"
@@ -162,7 +164,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"/>
                 <RelativeLayout
-
+                    android:id="@+id/bt_down"
                     android:background="@drawable/add_button_bg"
                     android:layout_width="25dp"
                     android:layout_height="25dp">
@@ -184,6 +186,7 @@
                 android:layout_height="0.5dp"/>
 
             <LinearLayout
+                android:id="@+id/ll_checkformate"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:gravity="center_vertical"
@@ -193,6 +196,7 @@
                 android:layout_height="0dp">
 
                 <TextView
+                    android:id="@+id/tv_checkformate"
                     android:text="规格1、规格2"
                     android:textSize="14sp"
                     android:textColor="@color/maintextcolor"
