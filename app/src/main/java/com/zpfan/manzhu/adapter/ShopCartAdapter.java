@@ -4,6 +4,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,6 +44,7 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
     ArrayList<ShopCartbean.CarshoplistBean.CargoodslistBean> checeGood = new ArrayList<>();
     public boolean allCheck = false;
     List<ShopCartbean.CarshoplistBean> data;
+   public ArrayList<ShopCartbean.CarshoplistBean> checkshoplist = new ArrayList<>();
 
     public ShopCartAdapter(@LayoutRes int layoutResId, @Nullable List<ShopCartbean.CarshoplistBean> data, EditListener listener) {
         super(layoutResId, data);
@@ -123,14 +125,17 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
             goodadapter.setOnItemChildClickListener(new OnItemChildClickListener() {
                 @Override
                 public void onItemChildClick(BaseQuickAdapter adapter, View view, final int position) {
+                    Log.i("zc", "onItemChildClick:  看看点击的是什么。。。。" + position);
                     switch (view.getId()) {
                         case R.id.iv_check:
                             boolean checked = cargoodslist.get(position).isChecked();
                             cargoodslist.get(position).setChecked(!checked);
                             if (!checked) {
                                 checeGood.add(cargoodslist.get(position));
+                                item.getCheckgoodslist().add(cargoodslist.get(position));
                             } else {
                                 checeGood.remove(cargoodslist.get(position));
+                                item.getCheckgoodslist().remove(cargoodslist.get(position));
                             }
                             goodadapter.notifyDataSetChanged();
                             mListener.edit(checeGood);

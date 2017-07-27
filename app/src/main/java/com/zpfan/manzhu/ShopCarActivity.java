@@ -155,8 +155,7 @@ public class ShopCarActivity extends AppCompatActivity {
 
                              ArrayList<ShopCartbean> shoplist = Utils.gson.fromJson(retmsg, type1);
                             mCartbean = shoplist.get(0);
-                            mcheckshoplist.clear();
-                            mcheckshoplist.addAll(mCartbean.getCarshoplist());
+
                             mTvSearchtop1.setText("闲置（" + mCartbean.getIdle_number() + "）");
                             mTvSearchtop2.setText("新品（" + mCartbean.getNew_number() + "）");
                             mTvSearchshaixuan.setText("约单（" + mCartbean.getServer_number() + "）");
@@ -289,10 +288,16 @@ public class ShopCarActivity extends AppCompatActivity {
 
             case R.id.tv_settlement:
                 //结算的操作  跳转到订单确认的界面
+                mcheckshoplist.clear();
                 if (morderlist.size() > 0) {
                     Intent intent = new Intent(this, OrderSureActivity.class);
+                    for (ShopCartbean.CarshoplistBean bean : mShopCartList) {
+                        if (bean.getCheckgoodslist().size() > 0) {
+                            mcheckshoplist.add(bean);
+                        }
 
-                    intent.putParcelableArrayListExtra("shopcat", mShopCartList);
+                    }
+                    intent.putParcelableArrayListExtra("shopcat", mcheckshoplist);
 
 
                     intent.putExtra("type","sopcart");

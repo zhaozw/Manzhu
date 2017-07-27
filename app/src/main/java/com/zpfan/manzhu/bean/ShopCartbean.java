@@ -74,6 +74,15 @@ public class ShopCartbean implements Parcelable {
         private String Member_Name;
         private String Member_UID;
         private List<CargoodslistBean> cargoodslist;
+        private List<CargoodslistBean> checkgoodslist = new ArrayList<>();
+
+        public List<CargoodslistBean> getCheckgoodslist() {
+            return checkgoodslist;
+        }
+
+        public void setCheckgoodslist(List<CargoodslistBean> checkgoodslist) {
+            this.checkgoodslist = checkgoodslist;
+        }
 
         public boolean isIsPerson() {
             return IsPerson;
