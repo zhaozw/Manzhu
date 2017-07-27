@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <com.zpfan.manzhu.myui.TopLin
+        android:id="@+id/tl_ordersure"
+        app:toptext="订单确定"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:id="@+id/line1"
+        android:layout_below="@+id/tl_ordersure"
+        android:background="@color/threebackground"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/separatedline"/>
+    <LinearLayout
+        android:layout_below="@+id/line1"
+        android:id="@+id/ll_location"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@color/bootmbc"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/order_locationh">
+
+        <ImageView
+            android:src="@mipmap/com_icon_loca_b"
+            android:layout_width="@dimen/order_location_iconwh"
+            android:layout_height="@dimen/order_location_iconwh"/>
+
+
+        <LinearLayout
+            android:layout_marginRight="7.5dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="7.5dp"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <!--  收货人和电话一栏-->
+            <LinearLayout
+                android:paddingTop="12.5dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/maintextcolor"
+                    android:textSize="14sp"
+                    android:text="收货人：猪排子"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
+
+                <TextView
+                    android:textSize="14sp"
+                    android:textColor="@color/maintextcolor"
+                    android:text="1800000000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_marginTop="12.5dp"
+                android:text="收货地址：成都市锦江区工业园区锦华路三段86号汇融国际E座"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="12sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:src="@mipmap/com_icon_go_thn_gra"
+            android:layout_width="15dp"
+            android:layout_height="15dp"/>
+
+        <!--收获地址的按钮-->
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/line2"
+        android:layout_below="@+id/ll_location"
+        android:background="@color/threebackground"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/separatedline"/>
+
+</RelativeLayout>

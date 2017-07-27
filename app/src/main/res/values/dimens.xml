@@ -18,6 +18,11 @@
 
     <!--   图标距离左边的距离 20px -->
     <dimen name="iconl">  10dp </dimen>
+    
+    <!-- 分隔栏的高度  15px-->
+    <dimen name="separatedline"> 7.5dp </dimen>
+
+
 
 
     <!--                  登陆界面                    -->
@@ -687,11 +692,16 @@
     <!--  头像一栏的高度 140px -->
     <dimen name="detail_topiconh">  70dp </dimen>
 
+    
+    <!--  订单确认页面 地址图标的宽高  45px-->
+    <dimen name="order_location_iconwh">  22.5dp </dimen>
+
+    <!--  地址栏栏高 150px-->
+    <dimen name="order_locationh">  75dp </dimen>
 
 
-
-
-
+    <!--  确认订单的底部菜单栏的高度 90px-->
+    <dimen name="order_bottommenuh"> 45dp </dimen>
 
 
 

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zpfan.manzhu.OrderSureActivity">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_ordersure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_importorder"
+        android:orientation="horizontal"
+        android:background="@color/bootmbc"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/order_bottommenuh">
+
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <TextView
+
+            android:textColor="@color/maintextcolor"
+            android:textSize="12sp"
+            android:text="合计:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/pricetextcolor"
+            android:text=" ¥ "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="5999.00"
+            android:textSize="12sp"
+            android:textColor="@color/pricetextcolor"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="@color/buttontext"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:text="提交订单"
+            android:background="@color/maintextcolor"
+            android:layout_width="105dp"
+            android:layout_height="match_parent"/>
+
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

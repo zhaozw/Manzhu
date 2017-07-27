@@ -301,6 +301,13 @@ public interface APIinterface {
     Call<String> clerarallshopcart(@Query("member_uid") String member_uid);
 
 
+    /**
+     * 删除购物车的商品
+     * @param car_uid
+     * @return
+     */
+    @GET("opera_delete_shoppingcar_function")
+    Call<String> operadeleteshop(@Query("car_uid") String car_uid);
 
 
 

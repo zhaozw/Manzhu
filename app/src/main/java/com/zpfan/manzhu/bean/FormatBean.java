@@ -1,10 +1,14 @@
 package com.zpfan.manzhu.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrator on 2017/7/25 0025.
  */
 
-public class FormatBean {
+public class FormatBean implements Parcelable {
+
 
     /**
      * PS_ArticleCode :
@@ -169,4 +173,63 @@ public class FormatBean {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.PS_ArticleCode);
+        dest.writeString(this.PS_AttributeNames);
+        dest.writeString(this.PS_AttributeValues);
+        dest.writeInt(this.PS_BasicLease);
+        dest.writeString(this.PS_CorrespAmount);
+        dest.writeString(this.PS_DepositPrice);
+        dest.writeString(this.PS_FixedPrice);
+        dest.writeInt(this.PS_Inventory);
+        dest.writeByte(this.PS_IsDefaultSelected ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.PS_IsShelves ? (byte) 1 : (byte) 0);
+        dest.writeString(this.PS_MarketingPrice);
+        dest.writeString(this.PS_RenewalPrice);
+        dest.writeString(this.PS_UniqueID);
+        dest.writeInt(this.PS_Weight);
+        dest.writeString(this.Product_UniqueID);
+        dest.writeInt(this.id);
+    }
+
+    public FormatBean() {
+    }
+
+    protected FormatBean(Parcel in) {
+        this.PS_ArticleCode = in.readString();
+        this.PS_AttributeNames = in.readString();
+        this.PS_AttributeValues = in.readString();
+        this.PS_BasicLease = in.readInt();
+        this.PS_CorrespAmount = in.readString();
+        this.PS_DepositPrice = in.readString();
+        this.PS_FixedPrice = in.readString();
+        this.PS_Inventory = in.readInt();
+        this.PS_IsDefaultSelected = in.readByte() != 0;
+        this.PS_IsShelves = in.readByte() != 0;
+        this.PS_MarketingPrice = in.readString();
+        this.PS_RenewalPrice = in.readString();
+        this.PS_UniqueID = in.readString();
+        this.PS_Weight = in.readInt();
+        this.Product_UniqueID = in.readString();
+        this.id = in.readInt();
+    }
+
+    public static final Parcelable.Creator<FormatBean> CREATOR = new Parcelable.Creator<FormatBean>() {
+        @Override
+        public FormatBean createFromParcel(Parcel source) {
+            return new FormatBean(source);
+        }
+
+        @Override
+        public FormatBean[] newArray(int size) {
+            return new FormatBean[size];
+        }
+    };
 }

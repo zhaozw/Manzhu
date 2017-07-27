@@ -19,6 +19,7 @@ import com.zpfan.manzhu.R;
 import com.zpfan.manzhu.bean.FormatBean;
 import com.zpfan.manzhu.bean.ShopCartbean;
 import com.zpfan.manzhu.myui.MyToast;
+import com.zpfan.manzhu.utils.DeleteListener;
 import com.zpfan.manzhu.utils.GoodChangeListener;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
     private boolean isedit = false;
     ArrayList<Integer> checedid = new ArrayList<>();
     GoodChangeListener mListener ;
+    DeleteListener mDeleteListener;
     private boolean ischang = true;
     private  int max ;
     private  int mCount;
@@ -44,10 +46,11 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
 
 
 
-    public ShopGoodadapter(@LayoutRes int layoutResId, @Nullable List<ShopCartbean.CarshoplistBean.CargoodslistBean> data,GoodChangeListener listener) {
+    public ShopGoodadapter(@LayoutRes int layoutResId, @Nullable List<ShopCartbean.CarshoplistBean.CargoodslistBean> data,GoodChangeListener listener,DeleteListener deleteListener) {
         super(layoutResId, data);
         mListener = listener;
         this.data = data;
+        mDeleteListener = deleteListener;
     }
 
     @Override
@@ -194,7 +197,8 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
         final int position = helper.getPosition();
 
 
-        helper.addOnClickListener(R.id.iv_check);
+        helper.addOnClickListener(R.id.iv_check)
+                .addOnClickListener(R.id.ll_delete);
 
         if (data.get(position).isChecked()) {
             mIvcheck.setImageResource(R.mipmap.com_icon_multcheck_bl);

@@ -152,6 +152,8 @@
         </activity>
         <activity android:name=".ShopCarActivity">
         </activity>
+        <activity android:name=".OrderSureActivity">
+        </activity>
     </application>
 
 </manifest>

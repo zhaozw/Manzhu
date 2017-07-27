@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+
+    <View
+        android:background="@color/threebackground"
+        android:layout_width="match_parent"
+        android:layout_height="7.5dp"/>
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+
+
+        <ImageView
+            android:src="@mipmap/type_icon_shop"
+            android:layout_width="12dp"
+            android:layout_height="12dp"/>
+
+        <TextView
+            android:layout_marginLeft="4dp"
+            android:textSize="12sp"
+            android:textColor="@color/maintextcolor"
+            android:id="@+id/tv_shopname"
+            android:text="卖家cn/店铺的名称"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_userlv"
+            android:gravity="center"
+            android:layout_marginLeft="4dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:background="@drawable/message_leve_bg"
+            android:textColor="@color/buttontext"
+            android:text="Lv.9"
+            android:textSize="8sp"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"/>
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+        <LinearLayout
+            android:id="@+id/ll_edit"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_message"
+            android:visibility="visible"
+            android:src="@mipmap/com_icon_msg_ept"
+            android:layout_width="12dp"
+            android:layout_height="12dp"/>
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:visibility="visible"
+            android:layout_marginLeft="4dp"
+            android:text="联系卖家"
+            android:textColor="@color/secondtextcolor"
+            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_finishedit"
+            android:gravity="center_vertical"
+            android:background="@drawable/message_leve_bg"
+            android:orientation="horizontal"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp">
+        
+            <ImageView
+                android:src="@mipmap/com_icon_finish_edt_w"
+                android:layout_width="10dp"
+                android:layout_height="10dp"/>
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:text="完成编辑"
+                android:textColor="@color/buttontext"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:visibility="visible"
+        android:id="@+id/rv_orderitem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+
+
+
+</LinearLayout>

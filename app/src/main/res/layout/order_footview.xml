@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <View
+        android:background="@color/weaklin"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+    <!-- 交易方式的选择-->
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+
+        <TextView
+            android:text="交易方式"
+            android:textSize="14sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <ImageView
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="7.5dp"
+            android:src="@mipmap/com_icon_ques_gra"
+            android:layout_width="12.5dp"
+            android:layout_height="12.5dp"/>
+
+        <TextView
+            android:textColor="@color/maintextcolor"
+            android:textSize="14sp"
+            android:text="线上交易"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_marginLeft="7.5dp"
+            android:src="@mipmap/com_icon_arr_down_gra"
+            android:layout_width="10dp"
+            android:layout_height="10dp"/>
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <TextView
+            android:text="总运费　¥　"
+            android:textColor="@color/secondtextcolor"
+            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="10.00"
+            android:textColor="@color/secondtextcolor"
+            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/weaklin"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+
+    <!-- 优惠劵的使用-->
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+
+        <TextView
+            android:text="使用优惠"
+            android:textSize="14sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <ImageView
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="7.5dp"
+            android:src="@mipmap/com_icon_ques_gra"
+            android:layout_width="12.5dp"
+            android:layout_height="12.5dp"/>
+
+        <TextView
+            android:textColor="@color/maintextcolor"
+            android:textSize="14sp"
+            android:text="优惠劵名称"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_marginLeft="7.5dp"
+            android:src="@mipmap/com_icon_arr_down_gra"
+            android:layout_width="10dp"
+            android:layout_height="10dp"/>
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <TextView
+            android:text="优惠　¥　"
+            android:textColor="@color/secondtextcolor"
+            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="10.00"
+            android:textColor="@color/secondtextcolor"
+            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/weaklin"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+
+    <!-- 其它设置-->
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+
+        <TextView
+            android:text="其它设置"
+            android:textSize="14sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <ImageView
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="7.5dp"
+            android:src="@mipmap/com_icon_ques_gra"
+            android:layout_width="12.5dp"
+            android:layout_height="12.5dp"/>
+
+
+
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <ImageView
+            android:src="@mipmap/com_icon_go_thn_gra"
+            android:layout_width="15dp"
+            android:layout_height="15dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/weaklin"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+    <!-- 其它设置-->
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+
+        <TextView
+            android:text="买家留言"
+            android:textSize="14sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:maxWidth="250dp"
+            android:layout_marginLeft="15dp"
+            android:singleLine="true"
+            android:text="给卖家的补充说明都可以写在这里aaaaaaaaaaaaaaaaa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <ImageView
+            android:src="@mipmap/com_icon_go_thn_gra"
+            android:layout_width="15dp"
+            android:layout_height="15dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/weaklin"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+
+
+
+</LinearLayout>

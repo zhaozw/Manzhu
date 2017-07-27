@@ -1,5 +1,8 @@
 package com.zpfan.manzhu.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +10,9 @@ import java.util.List;
  * Created by Administrator on 2017/7/24 0024.
  */
 
-public class ShopCartbean {
+public class ShopCartbean implements Parcelable {
+
+
 
 
     /**
@@ -54,7 +59,8 @@ public class ShopCartbean {
         this.carshoplist = carshoplist;
     }
 
-    public static class CarshoplistBean {
+    public static class CarshoplistBean implements Parcelable {
+
         /**
          * IsPerson : true
          * Member_Level : 5
@@ -109,7 +115,8 @@ public class ShopCartbean {
             this.cargoodslist = cargoodslist;
         }
 
-        public static class CargoodslistBean {
+        public static class CargoodslistBean implements Parcelable {
+
             @Override
             public String toString() {
                 return "CargoodslistBean{" +
@@ -224,7 +231,12 @@ public class ShopCartbean {
                 this.goods_model = goods_model;
             }
 
-            public static class GoodsModelBean {
+            public static class GoodsModelBean implements Parcelable {
+
+
+
+
+
 
                 @Override
                 public String toString() {
@@ -506,7 +518,7 @@ public class ShopCartbean {
                 private int shop_coupon_count;
                 private int showtype;
                 private List<FormatBean> goods_specifications;
-                private List<?> order_review_list;
+                private List<FormatBean> order_review_list;
                 private List<OrderSellerfigureBean> order_sellerfigure;
 
                 public String getBrandID() {
@@ -1221,11 +1233,11 @@ public class ShopCartbean {
                     this.goods_specifications = goods_specifications;
                 }
 
-                public List<?> getOrder_review_list() {
+                public List<FormatBean> getOrder_review_list() {
                     return order_review_list;
                 }
 
-                public void setOrder_review_list(List<?> order_review_list) {
+                public void setOrder_review_list(List<FormatBean> order_review_list) {
                     this.order_review_list = order_review_list;
                 }
 
@@ -1237,7 +1249,8 @@ public class ShopCartbean {
                     this.order_sellerfigure = order_sellerfigure;
                 }
 
-                public static class GMemberOBJBean {
+                public static class GMemberOBJBean implements Parcelable {
+
                     /**
                      * M_Account_Status : 正常
                      * M_Area : 市辖区
@@ -1511,9 +1524,92 @@ public class ShopCartbean {
                     public void setOrder_deal_count(int order_deal_count) {
                         this.order_deal_count = order_deal_count;
                     }
+
+                    @Override
+                    public int describeContents() {
+                        return 0;
+                    }
+
+                    @Override
+                    public void writeToParcel(Parcel dest, int flags) {
+                        dest.writeString(this.M_Account_Status);
+                        dest.writeString(this.M_Area);
+                        dest.writeString(this.M_Avatar);
+                        dest.writeString(this.M_BusinessType);
+                        dest.writeString(this.M_City);
+                        dest.writeString(this.M_Email);
+                        dest.writeString(this.M_FCode);
+                        dest.writeString(this.M_IDCard);
+                        dest.writeByte(this.M_IsBusiness ? (byte) 1 : (byte) 0);
+                        dest.writeByte(this.M_IsLock ? (byte) 1 : (byte) 0);
+                        dest.writeByte(this.M_IsRealNameAuth ? (byte) 1 : (byte) 0);
+                        dest.writeByte(this.M_IsSkill ? (byte) 1 : (byte) 0);
+                        dest.writeInt(this.M_MemberLevel);
+                        dest.writeString(this.M_Name);
+                        dest.writeString(this.M_Phone);
+                        dest.writeString(this.M_Province);
+                        dest.writeString(this.M_Pwd);
+                        dest.writeString(this.M_RegIP);
+                        dest.writeString(this.M_RegTime);
+                        dest.writeString(this.M_Sex);
+                        dest.writeInt(this.M_StoreLevel);
+                        dest.writeString(this.M_UID);
+                        dest.writeString(this.M_UserName);
+                        dest.writeInt(this.N_AllLevel);
+                        dest.writeDouble(this.S_DisputeProportion);
+                        dest.writeString(this.member_identity);
+                        dest.writeInt(this.order_deal_count);
+                    }
+
+                    public GMemberOBJBean() {
+                    }
+
+                    protected GMemberOBJBean(Parcel in) {
+                        this.M_Account_Status = in.readString();
+                        this.M_Area = in.readString();
+                        this.M_Avatar = in.readString();
+                        this.M_BusinessType = in.readString();
+                        this.M_City = in.readString();
+                        this.M_Email = in.readString();
+                        this.M_FCode = in.readString();
+                        this.M_IDCard = in.readString();
+                        this.M_IsBusiness = in.readByte() != 0;
+                        this.M_IsLock = in.readByte() != 0;
+                        this.M_IsRealNameAuth = in.readByte() != 0;
+                        this.M_IsSkill = in.readByte() != 0;
+                        this.M_MemberLevel = in.readInt();
+                        this.M_Name = in.readString();
+                        this.M_Phone = in.readString();
+                        this.M_Province = in.readString();
+                        this.M_Pwd = in.readString();
+                        this.M_RegIP = in.readString();
+                        this.M_RegTime = in.readString();
+                        this.M_Sex = in.readString();
+                        this.M_StoreLevel = in.readInt();
+                        this.M_UID = in.readString();
+                        this.M_UserName = in.readString();
+                        this.N_AllLevel = in.readInt();
+                        this.S_DisputeProportion = in.readDouble();
+                        this.member_identity = in.readString();
+                        this.order_deal_count = in.readInt();
+                    }
+
+                    public static final Creator<GMemberOBJBean> CREATOR = new Creator<GMemberOBJBean>() {
+                        @Override
+                        public GMemberOBJBean createFromParcel(Parcel source) {
+                            return new GMemberOBJBean(source);
+                        }
+
+                        @Override
+                        public GMemberOBJBean[] newArray(int size) {
+                            return new GMemberOBJBean[size];
+                        }
+                    };
                 }
 
-                public static class OrderSellerfigureBean {
+                public static class OrderSellerfigureBean implements Parcelable {
+
+
                     /**
                      * Comments_object : 买家
                      * GoodsCate : 二手商品
@@ -1777,8 +1873,417 @@ public class ShopCartbean {
                     public void setReviewmember_avator(String reviewmember_avator) {
                         this.reviewmember_avator = reviewmember_avator;
                     }
+
+                    @Override
+                    public int describeContents() {
+                        return 0;
+                    }
+
+                    @Override
+                    public void writeToParcel(Parcel dest, int flags) {
+                        dest.writeString(this.Comments_object);
+                        dest.writeString(this.GoodsCate);
+                        dest.writeString(this.Goods_UID);
+                        dest.writeString(this.Member_UID);
+                        dest.writeInt(this.OP_Buyerdegrees);
+                        dest.writeString(this.OP_Buyersimpression);
+                        dest.writeInt(this.OP_Sellerdeliveryspeed);
+                        dest.writeInt(this.OP_Sellerserviceattitude);
+                        dest.writeInt(this.OP_ServerType);
+                        dest.writeInt(this.OP_Server_attitude);
+                        dest.writeInt(this.OP_Server_completespeed);
+                        dest.writeInt(this.OP_Server_professionaldegree);
+                        dest.writeInt(this.OR_BabyPerformance);
+                        dest.writeInt(this.OR_BabydescriptionMatch);
+                        dest.writeString(this.OR_Evaluation);
+                        dest.writeString(this.OR_GoodsComment);
+                        dest.writeInt(this.OR_Sellerdegrees);
+                        dest.writeString(this.OR_Sellerimpression);
+                        dest.writeString(this.OR_Time);
+                        dest.writeString(this.OrderCate);
+                        dest.writeString(this.Order_UID);
+                        dest.writeString(this.Store_UID);
+                        dest.writeString(this.goods_spcification_name);
+                        dest.writeInt(this.id);
+                        dest.writeInt(this.reivewmember_level);
+                        dest.writeString(this.reviewmember_avator);
+                    }
+
+                    public OrderSellerfigureBean() {
+                    }
+
+                    protected OrderSellerfigureBean(Parcel in) {
+                        this.Comments_object = in.readString();
+                        this.GoodsCate = in.readString();
+                        this.Goods_UID = in.readString();
+                        this.Member_UID = in.readString();
+                        this.OP_Buyerdegrees = in.readInt();
+                        this.OP_Buyersimpression = in.readString();
+                        this.OP_Sellerdeliveryspeed = in.readInt();
+                        this.OP_Sellerserviceattitude = in.readInt();
+                        this.OP_ServerType = in.readInt();
+                        this.OP_Server_attitude = in.readInt();
+                        this.OP_Server_completespeed = in.readInt();
+                        this.OP_Server_professionaldegree = in.readInt();
+                        this.OR_BabyPerformance = in.readInt();
+                        this.OR_BabydescriptionMatch = in.readInt();
+                        this.OR_Evaluation = in.readString();
+                        this.OR_GoodsComment = in.readString();
+                        this.OR_Sellerdegrees = in.readInt();
+                        this.OR_Sellerimpression = in.readString();
+                        this.OR_Time = in.readString();
+                        this.OrderCate = in.readString();
+                        this.Order_UID = in.readString();
+                        this.Store_UID = in.readString();
+                        this.goods_spcification_name = in.readString();
+                        this.id = in.readInt();
+                        this.reivewmember_level = in.readInt();
+                        this.reviewmember_avator = in.readString();
+                    }
+
+                    public static final Creator<OrderSellerfigureBean> CREATOR = new Creator<OrderSellerfigureBean>() {
+                        @Override
+                        public OrderSellerfigureBean createFromParcel(Parcel source) {
+                            return new OrderSellerfigureBean(source);
+                        }
+
+                        @Override
+                        public OrderSellerfigureBean[] newArray(int size) {
+                            return new OrderSellerfigureBean[size];
+                        }
+                    };
                 }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeString(this.BrandID);
+                    dest.writeString(this.Demand_FK);
+                    dest.writeString(this.G_Agent_Member_UID);
+                    dest.writeString(this.G_Area);
+                    dest.writeString(this.G_AuditStatus);
+                    dest.writeInt(this.G_BasicLease);
+                    dest.writeString(this.G_City);
+                    dest.writeString(this.G_CommissionMoney);
+                    dest.writeString(this.G_ContactPhone);
+                    dest.writeString(this.G_ContactQQ);
+                    dest.writeString(this.G_CorrespAmount);
+                    dest.writeString(this.G_CosworkIDs);
+                    dest.writeInt(this.G_CourierCompanyID);
+                    dest.writeString(this.G_CourierMoney);
+                    dest.writeString(this.G_Cover);
+                    dest.writeString(this.G_DepositPrice);
+                    dest.writeString(this.G_DetailRemarks);
+                    dest.writeString(this.G_FixedPrice);
+                    dest.writeString(this.G_GoodsFreightNum);
+                    dest.writeInt(this.G_Hits);
+                    dest.writeString(this.G_Images);
+                    dest.writeByte(this.G_IsChange ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_IsDepositDeal ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_IsFreeService ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_IsFreeShip ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_IsMorePrice ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_IsOfflineDeal ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_IsOffline_rentdeal ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_IsOnline_rentdeal ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_IsRecommend ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_IsRent ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_IsSale ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_IsServiceBook ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_IsShelves ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_IsShowIndex ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_IsTJByShop ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_Isdraught ? (byte) 1 : (byte) 0);
+                    dest.writeByte(this.G_Isurgentsale ? (byte) 1 : (byte) 0);
+                    dest.writeString(this.G_MarketingPrice);
+                    dest.writeParcelable(this.G_Member_OBJ, flags);
+                    dest.writeString(this.G_NewOldDegree);
+                    dest.writeString(this.G_NoPassReason);
+                    dest.writeString(this.G_NoPassReasonDetail);
+                    dest.writeInt(this.G_OrderNum);
+                    dest.writeString(this.G_Province);
+                    dest.writeInt(this.G_ReadCount);
+                    dest.writeString(this.G_RefreshTime);
+                    dest.writeString(this.G_RenewalPrice);
+                    dest.writeInt(this.G_SaleNum);
+                    dest.writeInt(this.G_ShareNumber);
+                    dest.writeInt(this.G_ShopOrderNum);
+                    dest.writeInt(this.G_StockNum);
+                    dest.writeString(this.G_SubTitle);
+                    dest.writeString(this.G_Title);
+                    dest.writeString(this.G_Type);
+                    dest.writeString(this.G_UID);
+                    dest.writeString(this.G_UpTime);
+                    dest.writeDouble(this.G_Weight);
+                    dest.writeInt(this.G_appointment_mintime_value);
+                    dest.writeString(this.G_appointment_price_1);
+                    dest.writeString(this.G_appointment_price_2);
+                    dest.writeString(this.G_appointment_price_3);
+                    dest.writeInt(this.G_appointment_time_value_1);
+                    dest.writeInt(this.G_appointment_time_value_2);
+                    dest.writeInt(this.G_appointment_time_value_3);
+                    dest.writeInt(this.G_appointment_time_value_4);
+                    dest.writeInt(this.G_appointment_time_value_5);
+                    dest.writeInt(this.G_appointment_time_value_6);
+                    dest.writeInt(this.GoodsTypeID);
+                    dest.writeInt(this.GoodsTypeID2);
+                    dest.writeString(this.Member_UID);
+                    dest.writeString(this.TelevisionWorks_FK);
+                    dest.writeString(this.VirtualRole_FK);
+                    dest.writeString(this.attitude_number_value);
+                    dest.writeString(this.bbkpd_member_value);
+                    dest.writeString(this.bbmsxfd_member_value);
+                    dest.writeInt(this.collection_number);
+                    dest.writeString(this.complatespeed_value);
+                    dest.writeString(this.czrkpd_member_value);
+                    dest.writeString(this.goods_cosworks);
+                    dest.writeString(this.goods_parameter);
+                    dest.writeInt(this.id);
+                    dest.writeString(this.mjfhsd_member_value);
+                    dest.writeString(this.mjfutd_member_value);
+                    dest.writeString(this.mjkpd_member_value);
+                    dest.writeString(this.professionaldegree_value);
+                    dest.writeInt(this.shop_coupon_count);
+                    dest.writeInt(this.showtype);
+                    dest.writeTypedList(this.goods_specifications);
+                    dest.writeTypedList(this.order_review_list);
+                    dest.writeTypedList(this.order_sellerfigure);
+                }
+
+                public GoodsModelBean() {
+                }
+
+                protected GoodsModelBean(Parcel in) {
+                    this.BrandID = in.readString();
+                    this.Demand_FK = in.readString();
+                    this.G_Agent_Member_UID = in.readString();
+                    this.G_Area = in.readString();
+                    this.G_AuditStatus = in.readString();
+                    this.G_BasicLease = in.readInt();
+                    this.G_City = in.readString();
+                    this.G_CommissionMoney = in.readString();
+                    this.G_ContactPhone = in.readString();
+                    this.G_ContactQQ = in.readString();
+                    this.G_CorrespAmount = in.readString();
+                    this.G_CosworkIDs = in.readString();
+                    this.G_CourierCompanyID = in.readInt();
+                    this.G_CourierMoney = in.readString();
+                    this.G_Cover = in.readString();
+                    this.G_DepositPrice = in.readString();
+                    this.G_DetailRemarks = in.readString();
+                    this.G_FixedPrice = in.readString();
+                    this.G_GoodsFreightNum = in.readString();
+                    this.G_Hits = in.readInt();
+                    this.G_Images = in.readString();
+                    this.G_IsChange = in.readByte() != 0;
+                    this.G_IsDepositDeal = in.readByte() != 0;
+                    this.G_IsFreeService = in.readByte() != 0;
+                    this.G_IsFreeShip = in.readByte() != 0;
+                    this.G_IsMorePrice = in.readByte() != 0;
+                    this.G_IsOfflineDeal = in.readByte() != 0;
+                    this.G_IsOffline_rentdeal = in.readByte() != 0;
+                    this.G_IsOnline_rentdeal = in.readByte() != 0;
+                    this.G_IsRecommend = in.readByte() != 0;
+                    this.G_IsRent = in.readByte() != 0;
+                    this.G_IsSale = in.readByte() != 0;
+                    this.G_IsServiceBook = in.readByte() != 0;
+                    this.G_IsShelves = in.readByte() != 0;
+                    this.G_IsShowIndex = in.readByte() != 0;
+                    this.G_IsTJByShop = in.readByte() != 0;
+                    this.G_Isdraught = in.readByte() != 0;
+                    this.G_Isurgentsale = in.readByte() != 0;
+                    this.G_MarketingPrice = in.readString();
+                    this.G_Member_OBJ = in.readParcelable(GMemberOBJBean.class.getClassLoader());
+                    this.G_NewOldDegree = in.readString();
+                    this.G_NoPassReason = in.readString();
+                    this.G_NoPassReasonDetail = in.readString();
+                    this.G_OrderNum = in.readInt();
+                    this.G_Province = in.readString();
+                    this.G_ReadCount = in.readInt();
+                    this.G_RefreshTime = in.readString();
+                    this.G_RenewalPrice = in.readString();
+                    this.G_SaleNum = in.readInt();
+                    this.G_ShareNumber = in.readInt();
+                    this.G_ShopOrderNum = in.readInt();
+                    this.G_StockNum = in.readInt();
+                    this.G_SubTitle = in.readString();
+                    this.G_Title = in.readString();
+                    this.G_Type = in.readString();
+                    this.G_UID = in.readString();
+                    this.G_UpTime = in.readString();
+                    this.G_Weight = in.readDouble();
+                    this.G_appointment_mintime_value = in.readInt();
+                    this.G_appointment_price_1 = in.readString();
+                    this.G_appointment_price_2 = in.readString();
+                    this.G_appointment_price_3 = in.readString();
+                    this.G_appointment_time_value_1 = in.readInt();
+                    this.G_appointment_time_value_2 = in.readInt();
+                    this.G_appointment_time_value_3 = in.readInt();
+                    this.G_appointment_time_value_4 = in.readInt();
+                    this.G_appointment_time_value_5 = in.readInt();
+                    this.G_appointment_time_value_6 = in.readInt();
+                    this.GoodsTypeID = in.readInt();
+                    this.GoodsTypeID2 = in.readInt();
+                    this.Member_UID = in.readString();
+                    this.TelevisionWorks_FK = in.readString();
+                    this.VirtualRole_FK = in.readString();
+                    this.attitude_number_value = in.readString();
+                    this.bbkpd_member_value = in.readString();
+                    this.bbmsxfd_member_value = in.readString();
+                    this.collection_number = in.readInt();
+                    this.complatespeed_value = in.readString();
+                    this.czrkpd_member_value = in.readString();
+                    this.goods_cosworks = in.readString();
+                    this.goods_parameter = in.readString();
+                    this.id = in.readInt();
+                    this.mjfhsd_member_value = in.readString();
+                    this.mjfutd_member_value = in.readString();
+                    this.mjkpd_member_value = in.readString();
+                    this.professionaldegree_value = in.readString();
+                    this.shop_coupon_count = in.readInt();
+                    this.showtype = in.readInt();
+                    this.goods_specifications = in.createTypedArrayList(FormatBean.CREATOR);
+                    this.order_review_list = in.createTypedArrayList(FormatBean.CREATOR);
+                    this.order_sellerfigure = in.createTypedArrayList(OrderSellerfigureBean.CREATOR);
+                }
+
+                public static final Creator<GoodsModelBean> CREATOR = new Creator<GoodsModelBean>() {
+                    @Override
+                    public GoodsModelBean createFromParcel(Parcel source) {
+                        return new GoodsModelBean(source);
+                    }
+
+                    @Override
+                    public GoodsModelBean[] newArray(int size) {
+                        return new GoodsModelBean[size];
+                    }
+                };
             }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(this.Bussiness_UID);
+                dest.writeInt(this.CarCount);
+                dest.writeString(this.Goods_Spcification_UID);
+                dest.writeString(this.Goods_UID);
+                dest.writeString(this.Member_UID);
+                dest.writeString(this.SC_UID);
+                dest.writeParcelable(this.goods_model, flags);
+                dest.writeByte(this.isChecked ? (byte) 1 : (byte) 0);
+                dest.writeInt(this.ChangeCount);
+                dest.writeString(this.spUid);
+            }
+
+            public CargoodslistBean() {
+            }
+
+            protected CargoodslistBean(Parcel in) {
+                this.Bussiness_UID = in.readString();
+                this.CarCount = in.readInt();
+                this.Goods_Spcification_UID = in.readString();
+                this.Goods_UID = in.readString();
+                this.Member_UID = in.readString();
+                this.SC_UID = in.readString();
+                this.goods_model = in.readParcelable(GoodsModelBean.class.getClassLoader());
+                this.isChecked = in.readByte() != 0;
+                this.ChangeCount = in.readInt();
+                this.spUid = in.readString();
+            }
+
+            public static final Creator<CargoodslistBean> CREATOR = new Creator<CargoodslistBean>() {
+                @Override
+                public CargoodslistBean createFromParcel(Parcel source) {
+                    return new CargoodslistBean(source);
+                }
+
+                @Override
+                public CargoodslistBean[] newArray(int size) {
+                    return new CargoodslistBean[size];
+                }
+            };
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeByte(this.IsPerson ? (byte) 1 : (byte) 0);
+            dest.writeInt(this.Member_Level);
+            dest.writeString(this.Member_Name);
+            dest.writeString(this.Member_UID);
+            dest.writeList(this.cargoodslist);
+        }
+
+        public CarshoplistBean() {
+        }
+
+        protected CarshoplistBean(Parcel in) {
+            this.IsPerson = in.readByte() != 0;
+            this.Member_Level = in.readInt();
+            this.Member_Name = in.readString();
+            this.Member_UID = in.readString();
+            this.cargoodslist = new ArrayList<CargoodslistBean>();
+            in.readList(this.cargoodslist, CargoodslistBean.class.getClassLoader());
+        }
+
+        public static final Creator<CarshoplistBean> CREATOR = new Creator<CarshoplistBean>() {
+            @Override
+            public CarshoplistBean createFromParcel(Parcel source) {
+                return new CarshoplistBean(source);
+            }
+
+            @Override
+            public CarshoplistBean[] newArray(int size) {
+                return new CarshoplistBean[size];
+            }
+        };
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.idle_number);
+        dest.writeInt(this.new_number);
+        dest.writeInt(this.server_number);
+        dest.writeList(this.carshoplist);
+    }
+
+    public ShopCartbean() {
+    }
+
+    protected ShopCartbean(Parcel in) {
+        this.idle_number = in.readInt();
+        this.new_number = in.readInt();
+        this.server_number = in.readInt();
+        this.carshoplist = new ArrayList<CarshoplistBean>();
+        in.readList(this.carshoplist, CarshoplistBean.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<ShopCartbean> CREATOR = new Parcelable.Creator<ShopCartbean>() {
+        @Override
+        public ShopCartbean createFromParcel(Parcel source) {
+            return new ShopCartbean(source);
+        }
+
+        @Override
+        public ShopCartbean[] newArray(int size) {
+            return new ShopCartbean[size];
+        }
+    };
 }
