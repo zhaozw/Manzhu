@@ -58,7 +58,7 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
         mhelper = helper;
         Log.i("zc", "convert:   看看carid" + item.getSC_UID());
          final ArrayList<String> format = new ArrayList<>();
-         ArrayList<String> formatid = new ArrayList<>();
+         final ArrayList<String> formatid = new ArrayList<>();
         helper.setText(R.id.tv_goodname, item.getGoods_model().getG_Title())
         .setText(R.id.tv_carcount,"x"+item.getCarCount());
         ImageView  mIvcheck = helper.getView(R.id.iv_check);
@@ -161,17 +161,26 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
         llformat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopwindow(format);
+                showPopwindow(format,formatid);
 
 
             }
 
-            private void showPopwindow(ArrayList<String> format) {
+            private void showPopwindow(final ArrayList<String> format, final ArrayList<String> formatid) {
                 final PopupWindow popupWindow = new PopupWindow(mContext);
                 final View pop = View.inflate(mContext, R.layout.format_popwindow, null);
                 RecyclerView rvformat = (RecyclerView) pop.findViewById(R.id.rv_format);
                 rvformat.setLayoutManager(new LinearLayoutManager(mContext));
                 FormartAdapter adapter = new FormartAdapter(R.layout.item_location_popr, format);
+                adapter.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        Log.i("zc", "onItemClick:  看看你选的是什么规格" + format.get(position) +formatid.get(position) );
+                        item.setGoods_Spcification_UID(formatid.get(position));
+                        notifyDataSetChanged();
+                        popupWindow.dismiss();
+                    }
+                });
                 rvformat.setAdapter(adapter);
 
                 popupWindow.setContentView(pop);

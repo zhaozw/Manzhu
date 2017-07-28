@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <View
+        android:background="@color/weaklin"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+    <LinearLayout
+
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_shopcover"
+           android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/u583"
+            app:riv_corner_radius="5dip"
+            />
+
+
+        <!-- 正常的界面-->
+        <LinearLayout
+            android:id="@+id/ll_normal"
+            android:visibility="visible"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:visibility="visible"
+                android:id="@+id/tv_goodname"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/maintextcolor"
+                android:text="商品标题商品标题商品标题商品标题商品标题"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:visibility="visible"
+                android:id="@+id/tv_format"
+                android:text="规格1,规格2"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="10sp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+
+            <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/ll_price"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/pricetextcolor"
+                    android:text="¥ "
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+                <TextView
+                    android:id="@+id/tv_goodprice"
+                    android:textColor="@color/pricetextcolor"
+                    android:textSize="12sp"
+                    android:text="5449.00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
+
+                <TextView
+                    android:id="@+id/tv_carcount"
+                    android:textSize="12sp"
+                    android:text="x1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_edit"
+            android:visibility="visible"
+            android:src="@mipmap/com_icon_order_edit_corn"
+            android:layout_width="22.5dp"
+            android:layout_height="45dp"/>
+
+        <!-- 点击编辑以后的界面-->
+
+
+
+
+        <!-- 点击编辑以后的界面 -->
+        <LinearLayout
+            android:id="@+id/ll_edit"
+            android:visibility="gone"
+            android:layout_gravity="top"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+
+
+            <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/ll_editmoney"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:textColor="@color/pricetextcolor"
+                    android:text="¥"
+                    android:layout_width="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/et_goodmoney"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null"
+                    android:background="@drawable/order_edit_money"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"/>
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/dashline1"
+                android:background="@drawable/dash_line_shape"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/ll_checkformate"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+
+
+
+
+                <TextView
+                    android:id="@+id/tv_checkformate"
+                    android:text="规格1、规格2"
+                    android:textSize="14sp"
+                    android:textColor="@color/maintextcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
+                
+                <ImageView
+                    android:src="@mipmap/com_icon_arr_down_gra"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"/>
+                
+                
+                
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <!-- 删除的按钮-->
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_finish"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_finishedit"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@color/secondbuttonbc"
+                android:layout_width="match_parent"
+                android:layout_weight="0.8"
+                android:layout_height="0dp">
+
+                <ImageView
+                    android:src="@mipmap/com_icon_finish_edt_w"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"/>
+
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:text="完成\n编辑"
+                    android:textSize="10sp"
+                    android:textColor="@color/buttontext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                
+                
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/ll_delete"
+                android:orientation="horizontal"
+                android:background="@color/numbertextcolor"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_weight="0.4"
+                android:layout_height="0dp">
+            <ImageView
+                android:src="@mipmap/com_icon_close_3_w"
+                android:layout_width="10dp"
+                android:layout_height="10dp"/>
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:text="删除"
+                android:textColor="@color/buttontext"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            </LinearLayout>
+            
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/dashline"
+        android:background="@drawable/dash_line_shape"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:gravity="center_vertical"
+            android:textColor="@color/maintextcolor"
+            android:text="购买数量"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tv_kucun"
+            android:textColor="@color/secondtextcolor"
+            android:text="（库存：56）"
+            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+
+
+        <RelativeLayout
+            android:id="@+id/bt_up"
+            android:background="@drawable/add_button_bg"
+            android:layout_width="25dp"
+            android:layout_height="25dp">
+
+            <ImageView
+                android:src="@mipmap/com_icon_plus_2_w"
+                android:layout_centerInParent="true"
+                android:layout_width="12.5dp"
+                android:layout_height="12.5dp"/>
+
+        </RelativeLayout>
+        <View
+            android:layout_weight="0.3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+        <TextView
+            android:id="@+id/tv_count"
+            android:text="1"
+            android:textColor="@color/maintextcolor"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_weight="0.3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+        <RelativeLayout
+            android:id="@+id/bt_down"
+            android:background="@drawable/add_button_bg"
+            android:layout_width="25dp"
+            android:layout_height="25dp">
+
+            <ImageView
+                android:src="@mipmap/com_icon_minus_2_w"
+                android:layout_centerInParent="true"
+                android:layout_width="12.5dp"
+                android:layout_height="12.5dp"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

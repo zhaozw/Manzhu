@@ -310,6 +310,14 @@ public interface APIinterface {
     Call<String> operadeleteshop(@Query("car_uid") String car_uid);
 
 
+    /**
+     * 获取会员收获地址的列表
+     * @param member_uid
+     * @return
+     */
+    @GET("getmembershippingaddresslist")
+    Call<String> getshippingaddr(@Query("member_uid") String member_uid);
+
 
 
 

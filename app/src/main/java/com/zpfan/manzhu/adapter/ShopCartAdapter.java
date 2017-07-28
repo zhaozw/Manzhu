@@ -240,7 +240,6 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
                 ArrayList<ShopCartbean.CarshoplistBean.CargoodslistBean> been = new ArrayList<>();
                 cargoodslist.removeAll(been);
                // goodadapter.notifyDataSetChanged();
-
             }
         }
     }
@@ -250,13 +249,19 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
             boolean checked = bean.isChecked();
             bean.setChecked(!checked);
 
+
+
             if (!checked) {
                 checeGood.add(bean);
+                item.getCheckgoodslist().add(bean);
                 ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_bl);
             } else {
                 checeGood.remove(bean);
+                item.getCheckgoodslist().remove(bean);
                 ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_ept);
             }
+
+
 
         }
         goodadapter.notifyDataSetChanged();

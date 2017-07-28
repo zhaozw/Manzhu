@@ -38,12 +38,14 @@ import com.zpfan.manzhu.Aplication;
 import com.zpfan.manzhu.IdleActivity;
 import com.zpfan.manzhu.LaterActivity;
 import com.zpfan.manzhu.LocationActivity;
+import com.zpfan.manzhu.LoginActivity;
 import com.zpfan.manzhu.MakeUpActivity;
 import com.zpfan.manzhu.NewActivity;
 import com.zpfan.manzhu.PhotoActivity;
 import com.zpfan.manzhu.R;
 import com.zpfan.manzhu.SearchCnResultActivity;
 import com.zpfan.manzhu.SearchResultsActivity;
+import com.zpfan.manzhu.ShopCarActivity;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.SearchBean;
 import com.zpfan.manzhu.bean.TypeBean;
@@ -565,7 +567,11 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                 break;
             case R.id.iv_shopcart:
                 //购物车的按钮
-
+                if (Utils.isUserLogin()) {
+                    startActivity(new Intent(getContext(), ShopCarActivity.class));
+                } else {
+                    startActivity(new Intent(getContext(),LoginActivity.class));
+                }
 
                 break;
             case R.id.tv_treasure:
@@ -785,7 +791,11 @@ public class HomeFragment extends Fragment implements BDLocationListener {
 
             case R.id.rl_shopcart:
                 //底部的购物车的按钮
-
+                if (Utils.isUserLogin()) {
+                    startActivity(new Intent(getContext(), ShopCarActivity.class));
+                } else {
+                    startActivity(new Intent(getContext(),LoginActivity.class));
+                }
 
                 break;
             case R.id.rl_up:

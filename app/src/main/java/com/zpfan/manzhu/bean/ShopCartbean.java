@@ -61,6 +61,7 @@ public class ShopCartbean implements Parcelable {
 
     public static class CarshoplistBean implements Parcelable {
 
+
         /**
          * IsPerson : true
          * Member_Level : 5
@@ -159,6 +160,7 @@ public class ShopCartbean implements Parcelable {
             private boolean isChecked =false;
             private int ChangeCount;
             private String spUid;
+
 
             public int getChangeCount() {
                 return ChangeCount;
@@ -2173,6 +2175,9 @@ public class ShopCartbean implements Parcelable {
                 };
             }
 
+            public CargoodslistBean() {
+            }
+
             @Override
             public int describeContents() {
                 return 0;
@@ -2190,9 +2195,6 @@ public class ShopCartbean implements Parcelable {
                 dest.writeByte(this.isChecked ? (byte) 1 : (byte) 0);
                 dest.writeInt(this.ChangeCount);
                 dest.writeString(this.spUid);
-            }
-
-            public CargoodslistBean() {
             }
 
             protected CargoodslistBean(Parcel in) {
@@ -2221,6 +2223,9 @@ public class ShopCartbean implements Parcelable {
             };
         }
 
+        public CarshoplistBean() {
+        }
+
         @Override
         public int describeContents() {
             return 0;
@@ -2232,10 +2237,8 @@ public class ShopCartbean implements Parcelable {
             dest.writeInt(this.Member_Level);
             dest.writeString(this.Member_Name);
             dest.writeString(this.Member_UID);
-            dest.writeList(this.cargoodslist);
-        }
-
-        public CarshoplistBean() {
+            dest.writeTypedList(this.cargoodslist);
+            dest.writeTypedList(this.checkgoodslist);
         }
 
         protected CarshoplistBean(Parcel in) {
@@ -2243,8 +2246,8 @@ public class ShopCartbean implements Parcelable {
             this.Member_Level = in.readInt();
             this.Member_Name = in.readString();
             this.Member_UID = in.readString();
-            this.cargoodslist = new ArrayList<CargoodslistBean>();
-            in.readList(this.cargoodslist, CargoodslistBean.class.getClassLoader());
+            this.cargoodslist = in.createTypedArrayList(CargoodslistBean.CREATOR);
+            this.checkgoodslist = in.createTypedArrayList(CargoodslistBean.CREATOR);
         }
 
         public static final Creator<CarshoplistBean> CREATOR = new Creator<CarshoplistBean>() {

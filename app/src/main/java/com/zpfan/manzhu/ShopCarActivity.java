@@ -115,7 +115,7 @@ public class ShopCarActivity extends AppCompatActivity {
 
         //发送网络请求去获取数据
         mGetloginuid = Utils.getloginuid();
-
+        Log.i("zc", "initView:   看看mambe uid" + mGetloginuid);
         if (mGetloginuid != null) {
             getshopcartlist(mGetloginuid,"闲置");
         }
@@ -151,7 +151,7 @@ public class ShopCarActivity extends AppCompatActivity {
                         if (retmsg != null) {
                             Type type1 = new TypeToken<ArrayList<ShopCartbean>>() {
                             }.getType();
-                            Log.i("zc", "onResponse: 去获取数据了吗" + body + call.request().toString());
+
 
                              ArrayList<ShopCartbean> shoplist = Utils.gson.fromJson(retmsg, type1);
                             mCartbean = shoplist.get(0);
@@ -297,6 +297,7 @@ public class ShopCarActivity extends AppCompatActivity {
                         }
 
                     }
+
                     intent.putParcelableArrayListExtra("shopcat", mcheckshoplist);
 
 
@@ -368,7 +369,6 @@ public class ShopCarActivity extends AppCompatActivity {
 
                     ArrayList<AvatorBean> been = Utils.gson.fromJson(body, type);
                     AvatorBean bean = been.get(0);
-                    Log.i("zc", "onResponse:   看看删除购物车方法的返回" + bean.getRetmsg());
                     String retmsg = bean.getRetmsg();
 
                     if (retmsg.equals("true")) {
