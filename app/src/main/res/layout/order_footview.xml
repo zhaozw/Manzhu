@@ -35,12 +35,14 @@
             android:layout_height="12.5dp"/>
 
         <TextView
+            android:id="@+id/tv_online"
             android:textColor="@color/maintextcolor"
             android:textSize="14sp"
             android:text="线上交易"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <ImageView
+            android:id="@+id/iv_online"
             android:layout_marginLeft="7.5dp"
             android:src="@mipmap/com_icon_arr_down_gra"
             android:layout_width="10dp"
@@ -99,12 +101,14 @@
             android:layout_height="12.5dp"/>
 
         <TextView
+            android:id="@+id/tv_coupon"
             android:textColor="@color/maintextcolor"
             android:textSize="14sp"
             android:text="优惠劵名称"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <ImageView
+            android:id="@+id/iv_coupon"
             android:layout_marginLeft="7.5dp"
             android:src="@mipmap/com_icon_arr_down_gra"
             android:layout_width="10dp"
@@ -166,11 +170,13 @@
 
 
         <View
+            android:id="@+id/other"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="0dp"/>
 
         <ImageView
+            android:id="@+id/iv_other"
             android:src="@mipmap/com_icon_go_thn_gra"
             android:layout_width="15dp"
             android:layout_height="15dp"/>
@@ -201,6 +207,7 @@
 
 
         <TextView
+            android:id="@+id/tv_leavemessage"
             android:maxWidth="250dp"
             android:layout_marginLeft="15dp"
             android:singleLine="true"
@@ -210,11 +217,13 @@
 
 
         <View
+            android:id="@+id/leavemessage"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="0dp"/>
 
         <ImageView
+            android:id="@+id/iv_leavemessage"
             android:src="@mipmap/com_icon_go_thn_gra"
             android:layout_width="15dp"
             android:layout_height="15dp"/>

@@ -319,6 +319,19 @@ public interface APIinterface {
     Call<String> getshippingaddr(@Query("member_uid") String member_uid);
 
 
+    /**
+     * 订单确认界面 获取优惠劵列表
+     * @param member_uid
+     * @param bussiness_uid
+     * @param totalmoney
+     * @param buy_cate
+     * @param shortrentday
+     * @return
+     */
+    @GET("get_orderindexpage_bycouponlist")
+    Call<String> getordercouponlist(@Query("member_uid") String member_uid,@Query("bussiness_uid") String bussiness_uid, @Query("totalmoney") String totalmoney,@Query("buy_cate") String buy_cate,@Query("shortrentday") String shortrentday );
+
+
 
 
 }

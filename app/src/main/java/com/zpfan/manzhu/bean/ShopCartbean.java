@@ -76,6 +76,23 @@ public class ShopCartbean implements Parcelable {
         private String Member_UID;
         private List<CargoodslistBean> cargoodslist;
         private List<CargoodslistBean> checkgoodslist = new ArrayList<>();
+        private String liuyan = "给卖家的补充说明都可以写在这里";
+
+        public String getLiuyan() {
+            return liuyan;
+        }
+
+        public void setLiuyan(String liuyan) {
+            this.liuyan = liuyan;
+        }
+
+        public boolean isPerson() {
+            return IsPerson;
+        }
+
+        public void setPerson(boolean person) {
+            IsPerson = person;
+        }
 
         public List<CargoodslistBean> getCheckgoodslist() {
             return checkgoodslist;
@@ -531,6 +548,33 @@ public class ShopCartbean implements Parcelable {
                 private List<FormatBean> goods_specifications;
                 private List<FormatBean> order_review_list;
                 private List<OrderSellerfigureBean> order_sellerfigure;
+                private  String yunfei;
+                private String youhuijuan;
+                private  String  jifen;
+
+                public String getYouhuijuan() {
+                    return youhuijuan;
+                }
+
+                public void setYouhuijuan(String youhuijuan) {
+                    this.youhuijuan = youhuijuan;
+                }
+
+                public String getJifen() {
+                    return jifen;
+                }
+
+                public void setJifen(String jifen) {
+                    this.jifen = jifen;
+                }
+
+                public String getYunfei() {
+                    return yunfei;
+                }
+
+                public void setYunfei(String yunfei) {
+                    this.yunfei = yunfei;
+                }
 
                 public String getBrandID() {
                     return BrandID;
@@ -1965,6 +2009,9 @@ public class ShopCartbean implements Parcelable {
                     };
                 }
 
+                public GoodsModelBean() {
+                }
+
                 @Override
                 public int describeContents() {
                     return 0;
@@ -2063,9 +2110,9 @@ public class ShopCartbean implements Parcelable {
                     dest.writeTypedList(this.goods_specifications);
                     dest.writeTypedList(this.order_review_list);
                     dest.writeTypedList(this.order_sellerfigure);
-                }
-
-                public GoodsModelBean() {
+                    dest.writeString(this.yunfei);
+                    dest.writeString(this.youhuijuan);
+                    dest.writeString(this.jifen);
                 }
 
                 protected GoodsModelBean(Parcel in) {
@@ -2160,6 +2207,9 @@ public class ShopCartbean implements Parcelable {
                     this.goods_specifications = in.createTypedArrayList(FormatBean.CREATOR);
                     this.order_review_list = in.createTypedArrayList(FormatBean.CREATOR);
                     this.order_sellerfigure = in.createTypedArrayList(OrderSellerfigureBean.CREATOR);
+                    this.yunfei = in.readString();
+                    this.youhuijuan = in.readString();
+                    this.jifen = in.readString();
                 }
 
                 public static final Creator<GoodsModelBean> CREATOR = new Creator<GoodsModelBean>() {
@@ -2239,6 +2289,7 @@ public class ShopCartbean implements Parcelable {
             dest.writeString(this.Member_UID);
             dest.writeTypedList(this.cargoodslist);
             dest.writeTypedList(this.checkgoodslist);
+            dest.writeString(this.liuyan);
         }
 
         protected CarshoplistBean(Parcel in) {
@@ -2248,6 +2299,7 @@ public class ShopCartbean implements Parcelable {
             this.Member_UID = in.readString();
             this.cargoodslist = in.createTypedArrayList(CargoodslistBean.CREATOR);
             this.checkgoodslist = in.createTypedArrayList(CargoodslistBean.CREATOR);
+            this.liuyan = in.readString();
         }
 
         public static final Creator<CarshoplistBean> CREATOR = new Creator<CarshoplistBean>() {

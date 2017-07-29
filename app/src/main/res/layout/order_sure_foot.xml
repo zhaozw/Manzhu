@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+
+              android:background="@color/bootmbc"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <View
+        android:background="@color/threebackground"
+        android:layout_width="match_parent"
+        android:layout_height="7.5dp"/>
+    <!--  积分一栏-->
+    <LinearLayout
+     android:background="@color/bootmbc"
+        android:gravity="center_vertical"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+
+        <TextView
+            android:text="积分抵扣"
+            android:textSize="14sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <ImageView
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="7.5dp"
+            android:src="@mipmap/com_icon_ques_gra"
+            android:layout_width="12.5dp"
+            android:layout_height="12.5dp"/>
+
+        <TextView
+            android:textColor="@color/secondtextcolor"
+            android:textSize="14sp"
+            android:text="（可用积分 3453）"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+
+
+        <EditText
+            android:id="@+id/et_jifen"
+            android:gravity="center"
+            android:singleLine="true"
+            android:background="@drawable/order_edit_money"
+            android:textCursorDrawable="@null"
+            android:layout_width="80dp"
+            android:layout_height="30dp"/>
+
+
+
+
+    </LinearLayout>
+
+    <!-- 结算信息分隔栏-->
+    <LinearLayout
+        android:id="@+id/line_detail"
+        android:background="@color/threebackground"
+        android:layout_below="@+id/ll_format"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_detailh">
+
+        <View
+            android:background="@color/stronglin"
+            android:layout_width="@dimen/detail_linew"
+            android:layout_height="1dp"/>
+
+
+        <ImageView
+            android:layout_marginLeft="7.5dp"
+            android:src="@mipmap/com_icon_sa_lb"
+            android:layout_width="@dimen/detail_release_iconwh"
+            android:layout_height="@dimen/detail_release_iconwh"/>
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/stronglin"
+            android:text="结算信息"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_marginLeft="7.5dp"
+            android:background="@color/stronglin"
+            android:layout_width="@dimen/detail_linew"
+            android:layout_height="1dp"/>
+
+
+    </LinearLayout>
+
+    <!--  总共有多少件宝贝-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/bootmbc"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总计"
+            android:textColor="@color/maintextcolor"
+            android:textSize="14sp"/>
+        <TextView
+            android:id="@+id/tv_allcount"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:textColor="@color/numbertextcolor"
+            android:text="4"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:text="件宝贝，结算金额如下"
+            android:textColor="@color/maintextcolor"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="7.5dp"
+            android:src="@mipmap/com_icon_ques_gra"
+            android:layout_width="12.5dp"
+            android:layout_height="12.5dp"/>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/dashline"
+        android:background="@drawable/dash_line_shape"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <!--  结算金额-->
+    <LinearLayout
+        android:paddingRight="10dp"
+        android:background="@color/bootmbc"
+        android:gravity="right|center_vertical"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="115dp">
+
+        <!-- 商品总价-->
+      <LinearLayout
+          android:orientation="horizontal"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+
+          <TextView
+              android:textSize="14sp"
+              android:textColor="@color/secondtextcolor"
+              android:text="商品总价:"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"/>
+          <TextView
+              android:text=" ¥ "
+              android:textColor="@color/pricetextcolor"
+              android:textSize="14sp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"/>
+          <TextView
+              android:id="@+id/tv_allprice"
+              android:text="9500.00"
+              android:textColor="@color/pricetextcolor"
+              android:textSize="14sp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"/>
+
+
+
+      </LinearLayout>
+        <!-- 运费-->
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="14sp"
+                android:textColor="@color/secondtextcolor"
+                android:text="运费:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text=" ¥ "
+                android:textColor="@color/duojiage"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_yunfei"
+                android:text="10.00"
+                android:textColor="@color/duojiage"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+        <!-- 优惠劵抵扣-->
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="14sp"
+                android:textColor="@color/secondtextcolor"
+                android:text="优惠劵抵扣:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text=" - ¥ "
+                android:textColor="@color/outlin"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_youhuijuan"
+                android:text="9500.00"
+                android:textColor="@color/outlin"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+        <!-- 积分抵扣-->
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="14sp"
+                android:textColor="@color/secondtextcolor"
+                android:text="积分抵扣:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text=" - ¥ "
+                android:textColor="@color/outlin"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_jifen"
+                android:text="9500.00"
+                android:textColor="@color/outlin"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/dashline1"
+        android:background="@drawable/dash_line_shape"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@color/bootmbc"
+        android:gravity="right|center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="@color/maintextcolor"
+            android:text="应付金额："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text=" ¥ "
+            android:textColor="@color/pricetextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_payprice"
+            android:textStyle="bold"
+            android:textColor="@color/pricetextcolor"
+            android:textSize="14sp"
+            android:text="95000.00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

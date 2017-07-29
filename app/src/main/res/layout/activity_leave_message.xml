@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/threebackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zpfan.manzhu.LeaveMessageActivity">
+
+    <com.zpfan.manzhu.myui.TopLin
+        app:toptext = "买家留言"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    
+    
+    <EditText
+        android:id="@+id/et_message"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="top"
+        android:textColor="@color/secondtextcolor"
+        android:textSize="14sp"
+        android:paddingRight="7.5dp"
+        android:paddingLeft="7.5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="12.5dp"
+        android:textCursorDrawable="@null"
+        android:background="@color/bootmbc"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
+
+
+    <Button
+        android:id="@+id/bt_import"
+        android:textSize="15sp"
+        android:text="提 交"
+        android:textColor="@color/buttontext"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/message_leve_bg"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"/>
+    
+
+
+</LinearLayout>

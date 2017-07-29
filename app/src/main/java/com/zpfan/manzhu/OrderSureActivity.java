@@ -14,11 +14,15 @@ import com.google.gson.reflect.TypeToken;
 import com.zpfan.manzhu.adapter.OrderSureAdapter;
 import com.zpfan.manzhu.bean.AddressBean;
 import com.zpfan.manzhu.bean.AvatorBean;
+import com.zpfan.manzhu.bean.FormatBean;
 import com.zpfan.manzhu.bean.ShopCartbean;
+import com.zpfan.manzhu.utils.EditListener;
 import com.zpfan.manzhu.utils.Utils;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +39,12 @@ public class OrderSureActivity extends AppCompatActivity {
     private TextView mTvaddrname;
     private TextView mTvaddrlocation;
     private TextView mTvphone;
+    private View mFootView;
+    private ArrayList<ShopCartbean.CarshoplistBean> mMorderlist;
+    private double allprice  = 0;
+    private double yunfeni  = 0;
+    private int allnumber = 0;
+    private OrderSureAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,19 +64,25 @@ public class OrderSureActivity extends AppCompatActivity {
         String type = intent.getStringExtra("type");
 
         if (type.equals("sopcart")) {
-            ArrayList<ShopCartbean.CarshoplistBean> morderlist = intent.getParcelableArrayListExtra("shopcat");
-            for (ShopCartbean.CarshoplistBean bean : morderlist) {
+            mMorderlist = intent.getParcelableArrayListExtra("shopcat");
+            for (ShopCartbean.CarshoplistBean bean : mMorderlist) {
                 Log.i("zc", "initView:   看看数据对不对" + bean.getCheckgoodslist().size());
             }
-            OrderSureAdapter adapter = new OrderSureAdapter(R.layout.item_ordersure, morderlist);
-            View headview1 = View.inflate(this, R.layout.rv_order_sure_head, null);
-            mTvaddrname = (TextView) headview1.findViewById(R.id.tv_addrname);
-            mTvaddrlocation = (TextView) headview1.findViewById(R.id.tv_addrlocation);
-            mTvphone = (TextView) headview1.findViewById(R.id.tv_phone);
+            mAdapter = new OrderSureAdapter(R.layout.item_ordersure, mMorderlist, new EditListener() {
+                @Override
+                public void edit(ArrayList<ShopCartbean.CarshoplistBean.CargoodslistBean> checeGood) {
+                 initFootView();
+                }
+            });
+            mFootView = View.inflate(this, R.layout.order_sure_foot, null);
+            initFootView();
+            mTvaddrname = (TextView) headview.findViewById(R.id.tv_addrname);
+            mTvaddrlocation = (TextView) headview.findViewById(R.id.tv_addrlocation);
+            mTvphone = (TextView) headview.findViewById(R.id.tv_phone);
 
             getLocation(Utils.getloginuid());
-            
-            headview1.setOnClickListener(new View.OnClickListener() {
+
+            headview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.i("zc", "onClick:   跳转到地址选择的界面");
@@ -74,11 +90,62 @@ public class OrderSureActivity extends AppCompatActivity {
             });
             
             
-            adapter.addHeaderView(headview1);
-            mRvOrdersure.setAdapter(adapter);
+            mAdapter.addHeaderView(headview);
+            mAdapter.addFooterView(mFootView);
+            mRvOrdersure.setAdapter(mAdapter);
 
 
         }
+
+    }
+
+    private void initFootView() {
+        allprice = 0;
+        yunfeni = 0;
+        allnumber = 0;
+        TextView tvallcount = (TextView) mFootView.findViewById(R.id.tv_allcount);
+        TextView tvallprice = (TextView) mFootView.findViewById(R.id.tv_allprice);
+        TextView tvyunfei = (TextView) mFootView.findViewById(R.id.tv_yunfei);
+        TextView tvyouhuijuan = (TextView) mFootView.findViewById(R.id.tv_youhuijuan);
+        TextView tvjifen = (TextView) mFootView.findViewById(R.id.tv_jifen);
+        TextView tvpayprice = (TextView) mFootView.findViewById(R.id.tv_payprice);
+
+
+        for (ShopCartbean.CarshoplistBean bean : mMorderlist) {
+            for (ShopCartbean.CarshoplistBean.CargoodslistBean cargoodslistBean : bean.getCheckgoodslist()) {
+                allnumber = allnumber + 1 * cargoodslistBean.getCarCount();
+                yunfeni = yunfeni + Double.valueOf(cargoodslistBean.getGoods_model().getG_CourierMoney());
+                String uid = cargoodslistBean.getGoods_Spcification_UID();
+                if (uid.equals("")) {
+                    allprice = allprice + Double.valueOf(cargoodslistBean.getGoods_model().getG_FixedPrice()) * cargoodslistBean.getCarCount();
+                } else {
+                    List<FormatBean> specifications = cargoodslistBean.getGoods_model().getGoods_specifications();
+
+                    for (FormatBean specification : specifications) {
+                        if (specification.getPS_UniqueID().equals(uid)) {
+                            allprice = allprice + Double.valueOf(specification.getPS_FixedPrice()) * cargoodslistBean.getCarCount();
+                        }
+                    }
+
+
+                }
+
+
+            }
+        }
+
+        tvallcount.setText(allnumber + "");
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        tvallprice.setText(df.format(allprice));
+        //运费的计算
+        tvyunfei.setText(df.format(yunfeni));
+
+
+
+
+
+
 
     }
 
@@ -146,6 +213,15 @@ public class OrderSureActivity extends AppCompatActivity {
 
 
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("shuaxin", "onResume: 刷新了数据了吗");
+        mAdapter.notifyDataSetChanged();
+    }
+
 
 
 }

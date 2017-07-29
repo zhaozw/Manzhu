@@ -20,6 +20,7 @@ import com.zpfan.manzhu.R;
 import com.zpfan.manzhu.bean.FormatBean;
 import com.zpfan.manzhu.bean.ShopCartbean;
 import com.zpfan.manzhu.myui.MyToast;
+import com.zpfan.manzhu.utils.EditListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +32,11 @@ import java.util.List;
 public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBean.CargoodslistBean,BaseViewHolder> {
 
     int max;
+    EditListener mListener;
 
-
-    public OrderGoodAdapter(@LayoutRes int layoutResId, @Nullable List<ShopCartbean.CarshoplistBean.CargoodslistBean> data) {
+    public OrderGoodAdapter(@LayoutRes int layoutResId, @Nullable List<ShopCartbean.CarshoplistBean.CargoodslistBean> data,EditListener listener) {
         super(layoutResId, data);
-
+        mListener = listener;
     }
 
     @Override
@@ -221,7 +222,7 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                     //编辑栏要隐藏
                     llfinish.setVisibility(View.GONE);
                     lledit.setVisibility(View.GONE);
-
+                mListener.edit(null);
 
                     llnormal.setVisibility(View.VISIBLE);
                     ivedit.setVisibility(View.VISIBLE);
