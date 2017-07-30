@@ -6,10 +6,7 @@
               android:layout_height="wrap_content">
 
 
-    <View
-        android:background="@color/threebackground"
-        android:layout_width="match_parent"
-        android:layout_height="7.5dp"/>
+
 
     <LinearLayout
         android:paddingLeft="10dp"
@@ -111,6 +108,11 @@
         android:id="@+id/rv_orderitem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <View
+        android:background="@color/threebackground"
+        android:layout_width="match_parent"
+        android:layout_height="2.5dp"/>
 
 
 

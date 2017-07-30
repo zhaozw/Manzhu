@@ -9,7 +9,7 @@
     <View
         android:background="@color/threebackground"
         android:layout_width="match_parent"
-        android:layout_height="7.5dp"/>
+        android:layout_height="5dp"/>
     <!--  积分一栏-->
     <LinearLayout
      android:background="@color/bootmbc"
@@ -275,7 +275,7 @@
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/tv_jifen"
-                android:text="9500.00"
+                android:text="0.00"
                 android:textColor="@color/outlin"
                 android:textSize="14sp"
                 android:layout_width="wrap_content"

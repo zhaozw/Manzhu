@@ -33,8 +33,13 @@ public class LeaveMessageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mItem = intent.getParcelableExtra("item");
         String a = intent.getStringExtra("a");
+        if (a.equals("给卖家的补充说明都可以写在这里")) {
+            mEtMessage.setHint("给卖家的补充说明都可以写在这里");
+        } else {
         mEtMessage.setText(a);
         mEtMessage.setSelection(a.length());
+
+        }
 
 
     }

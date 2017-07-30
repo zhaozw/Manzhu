@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -16,6 +17,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.hyphenate.chat.EMMessage;
 import com.zpfan.manzhu.Aplication;
 import com.zpfan.manzhu.LeaveMessageActivity;
+import com.zpfan.manzhu.OtherActivity;
 import com.zpfan.manzhu.R;
 import com.zpfan.manzhu.bean.ShopCartbean;
 import com.zpfan.manzhu.event.LeaveMessageEvent;
@@ -28,6 +30,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -163,11 +167,13 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
 
     private void initFootView(final ShopCartbean.CarshoplistBean item) {
         TextView tvcoupon = (TextView) mFootView.findViewById(R.id.tv_coupon);
-        TextView tvonline = (TextView) mFootView.findViewById(R.id.tv_online);
+        final TextView tvonline = (TextView) mFootView.findViewById(R.id.tv_online);
         final TextView tvleavemessage = (TextView) mFootView.findViewById(R.id.tv_leavemessage);
+        final TextView yunfei = (TextView) mFootView.findViewById(R.id.tv_yunfei);
+        final TextView tvcouponmoney = (TextView) mFootView.findViewById(R.id.tv_couponmoney);
 
         View other = mFootView.findViewById(R.id.other);
-        View leavemessage = mFootView.findViewById(R.id.leavemessage);
+
 
         ImageView ivleavemessage = (ImageView) mFootView.findViewById(R.id.iv_leavemessage);
         ImageView ivother = (ImageView) mFootView.findViewById(R.id.iv_other);
@@ -175,7 +181,19 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
         ImageView ivonline = (ImageView) mFootView.findViewById(R.id.iv_online);
 
         tvleavemessage.setText(item.getLiuyan());
-
+        DecimalFormat df = new DecimalFormat("0.00");
+        double zongyunfei = 0.00;
+        double youhuijuan = 0.00;
+        for (ShopCartbean.CarshoplistBean.CargoodslistBean bean : item.getCheckgoodslist()) {
+            String money = bean.getGoods_model().getG_CourierMoney();
+            Double aDouble = Double.valueOf(money);
+            zongyunfei = zongyunfei + aDouble;
+            yunfei.setText(df.format(zongyunfei));
+            item.setYunfei(zongyunfei);
+            mListener.edit(null);
+        }
+        yunfei.setText(df.format(zongyunfei));
+        tvcouponmoney.setText(df.format(youhuijuan));
 
         // 优惠劵的选择
         tvcoupon.setOnClickListener(new View.OnClickListener() {
@@ -186,23 +204,81 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
         });
 
 
+        tvonline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("zc", "onClick:  点击了吗");
+                final PopupWindow popupWindow = new PopupWindow(mContext);
+                final View pop = View.inflate(mContext, R.layout.format_popwindow, null);
+                RecyclerView rvformat = (RecyclerView) pop.findViewById(R.id.rv_format);
+                rvformat.setLayoutManager(new LinearLayoutManager(mContext));
+                ArrayList<String> location = new ArrayList<String>();
+                location.add("线上交易");
+                location.add("线下交易");
+                FormartAdapter adapter = new FormartAdapter(R.layout.item_location_popr, location);
+                adapter.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                DecimalFormat df = new DecimalFormat("0.00");
+                                double zongyunfei = 0.00;
+                        if (position == 0) {
+                            //线上交易
+                            for (ShopCartbean.CarshoplistBean.CargoodslistBean bean : item.getCheckgoodslist()) {
+                                String money = bean.getGoods_model().getG_CourierMoney();
+                                Double aDouble = Double.valueOf(money);
+
+                                zongyunfei = zongyunfei + aDouble;
+                                yunfei.setText(df.format(zongyunfei));
+                                item.setYunfei(zongyunfei);
+                            }
+                        } else {
+                            //线下交易
+                            zongyunfei = 0.00;
+                            yunfei.setText(df.format(zongyunfei));
+                            item.setYunfei(zongyunfei);
+                        }
+                      // notifyDataSetChanged();
+                        mListener.edit(null);
+                        popupWindow.dismiss();
+                    }
+                });
+                rvformat.setAdapter(adapter);
+                popupWindow.setContentView(pop);
+                // int height = dp2px(LinearLayout.LayoutParams.WRAP_CONTENT);
+                popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+                popupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+                popupWindow.setTouchable(true);
+                popupWindow.setOutsideTouchable(true);
+
+                popupWindow.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.home_toppop_bg));
+                popupWindow.showAsDropDown(tvonline);
+
+            }
+        });
+
+
+
+
+
         tvleavemessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editLiuyan(item, tvleavemessage);
             }
         });
-        leavemessage.setOnClickListener(new View.OnClickListener() {
+
+
+        ivleavemessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editLiuyan(item, tvleavemessage);
             }
         });
 
-        ivleavemessage.setOnClickListener(new View.OnClickListener() {
+        other.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editLiuyan(item, tvleavemessage);
+              mContext.startActivity(new Intent(mContext, OtherActivity.class));
             }
         });
 

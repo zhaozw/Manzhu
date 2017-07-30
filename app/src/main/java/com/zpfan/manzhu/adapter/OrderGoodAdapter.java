@@ -182,6 +182,7 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                     item.setCarCount(integer);
 
                 }
+                mListener.edit(null);
 
             }
         });
@@ -204,7 +205,7 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                     tvcount.setText(integer + "");
                     item.setCarCount(integer);
                 }
-
+                mListener.edit(null);
 
 
 
@@ -222,7 +223,7 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                     //编辑栏要隐藏
                     llfinish.setVisibility(View.GONE);
                     lledit.setVisibility(View.GONE);
-                mListener.edit(null);
+                  mListener.edit(null);
 
                     llnormal.setVisibility(View.VISIBLE);
                     ivedit.setVisibility(View.VISIBLE);

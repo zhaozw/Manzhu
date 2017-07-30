@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+
+    <View
+        android:background="@color/threebackground"
+        android:layout_width="match_parent"
+        android:layout_height="2.5dp"/>
+
+  <LinearLayout
+
+      android:paddingRight="10dp"
+      android:paddingLeft="10dp"
+      android:background="@color/bootmbc"
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="80dp">
+
+      <LinearLayout
+          android:orientation="vertical"
+          android:layout_weight="1"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content">
+          <LinearLayout
+              android:layout_marginTop="10dp"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+              <TextView
+                  android:id="@+id/tv_name"
+                  android:text="收获人名字"
+                  android:textColor="@color/maintextcolor"
+                  android:textSize="12sp"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+
+              <View
+                  android:layout_weight="1"
+                  android:layout_width="0dp"
+                  android:layout_height="0dp"/>
+
+              <TextView
+                  android:id="@+id/tv_phone"
+                  android:textColor="@color/maintextcolor"
+                  android:text="15029498047"
+                  android:textSize="12sp"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+
+
+
+          </LinearLayout>
+
+          <TextView
+              android:id="@+id/tv_location"
+              android:textColor="@color/secondtextcolor"
+              android:layout_marginTop="10dp"
+              android:text="地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址"
+              android:textSize="10sp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"/>
+
+
+      </LinearLayout>
+
+      <ImageView
+          android:id="@+id/iv_check"
+          android:visibility="invisible"
+          android:layout_gravity="center_vertical"
+          android:layout_marginLeft="15dp"
+          android:src="@mipmap/com_icon_check_g"
+          android:layout_width="17.5dp"
+          android:layout_height="17.5dp"/>
+
+
+  </LinearLayout>
+    
+    
+    
+
+</LinearLayout>

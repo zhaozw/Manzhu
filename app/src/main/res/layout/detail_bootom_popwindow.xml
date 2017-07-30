@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="75dp">
+
+    <LinearLayout
+        android:id="@+id/ll_change"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_change"
+                android:src="@mipmap/com_icon_excha"
+                android:layout_width="17.5dp"
+                android:layout_height="17.5dp"/>
+
+            <TextView
+                android:id="@+id/tv_change"
+                android:layout_marginLeft="5dp"
+                android:text="我想交换"
+                android:textColor="@color/maintextcolor"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_change1"
+            android:maxWidth="75dp"
+            android:textSize="8sp"
+            android:layout_marginTop="7.5dp"
+            android:text="正好有卖家想换的宝贝，通知TA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/stronglin"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/ll_rent"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_rent"
+                android:layout_width="17.5dp"
+                android:layout_height="17.5dp"
+                android:src="@mipmap/com_icon_rent"/>
+
+            <TextView
+                android:id="@+id/tv_rent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="我要租赁"
+                android:textColor="@color/maintextcolor"
+                android:textSize="12sp"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_rent1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7.5dp"
+            android:maxWidth="75dp"
+            android:text="只需支付租金，用完后还给卖家就行啦"
+            android:textSize="8sp"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/stronglin"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"/>
+    <LinearLayout
+        android:id="@+id/ll_buy"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@mipmap/com_icon_sell"
+                android:layout_width="17.5dp"
+                android:layout_height="17.5dp"/>
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:text="我要购买"
+                android:textColor="@color/maintextcolor"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:maxWidth="75dp"
+            android:textSize="8sp"
+            android:layout_marginTop="7.5dp"
+            android:text="付款后，本宝贝就归我啦"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

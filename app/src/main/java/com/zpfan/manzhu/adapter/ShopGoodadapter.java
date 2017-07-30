@@ -163,7 +163,6 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
             public void onClick(View v) {
                 showPopwindow(format,formatid);
 
-
             }
 
             private void showPopwindow(final ArrayList<String> format, final ArrayList<String> formatid) {

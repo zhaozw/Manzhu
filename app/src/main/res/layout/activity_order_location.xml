@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/threebackground"
+    android:orientation="vertical"
+    tools:context="com.zpfan.manzhu.OrderLocationActivity">
+
+
+    <RelativeLayout
+        android:background="@color/bootmbc"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topmenuh"
+        android:elevation="5dp">
+
+        <ImageView
+            android:id="@+id/iv_top_back"
+            android:layout_width="@dimen/topmenuwh"
+            android:layout_height="@dimen/topmenuwh"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/toastmarglr"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/com_icon_back"/>
+
+
+        <TextView
+            android:id="@+id/tv_top_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/toastmarglr"
+            android:gravity="center"
+            android:text="选择收货地址"
+            android:textColor="@color/maintextcolor"
+            android:textSize="15sp"/>
+
+        <ImageView
+            android:id="@+id/iv_clearall"
+            android:layout_width="17.5dp"
+            android:layout_height="17.5dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/tv_clearall"
+            android:src="@mipmap/com_icon_loca_b"/>
+
+        <TextView
+            android:id="@+id/tv_clearall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="管理\n地址"
+            android:textColor="@color/maintextcolor"
+            android:textSize="8sp"/>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_defult"
+        android:layout_marginTop="7.5dp"
+        android:layout_marginBottom="5dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:background="@color/bootmbc"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="20dp">
+                
+                <TextView
+                    android:textSize="10sp"
+                    android:gravity="center"
+                    android:background="@drawable/fanmai_shape"
+                    android:textColor="@color/buttontext"
+                    android:text="默认"
+                    android:layout_width="32.5dp"
+                    android:layout_height="17.5dp"/>
+
+                <TextView
+
+                    android:layout_marginLeft="7.5dp"
+                    android:id="@+id/tv_moren"
+                    android:text="收获人名字"
+                    android:textColor="@color/maintextcolor"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
+
+                <TextView
+                    android:id="@+id/tv_mophone"
+                    android:textColor="@color/maintextcolor"
+                    android:text="15029498047"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_molocation"
+                android:textColor="@color/secondtextcolor"
+                android:layout_marginTop="10dp"
+                android:text="地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="17.5dp"
+            android:layout_height="17.5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@mipmap/com_icon_check_g"
+            android:visibility="visible"/>
+
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_orderloctaion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+
+</LinearLayout>

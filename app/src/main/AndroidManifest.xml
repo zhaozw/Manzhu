@@ -156,6 +156,12 @@
         </activity>
         <activity android:name=".LeaveMessageActivity">
         </activity>
+        <activity android:name=".OtherActivity">
+        </activity>
+        <activity android:name=".OrderLocationActivity">
+        </activity>
+        <activity android:name=".OrderImmediatelyActivity">
+        </activity>
     </application>
 
 </manifest>

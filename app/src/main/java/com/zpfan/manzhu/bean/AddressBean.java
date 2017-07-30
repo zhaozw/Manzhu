@@ -1,10 +1,15 @@
 package com.zpfan.manzhu.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrator on 2017/7/28 0028.
  */
 
-public class AddressBean {
+public class AddressBean implements Parcelable {
+
+
     /**
      * MD_Address : aaaaaaaaaaaaaaaaaaa
      * MD_Area : 辰溪县
@@ -26,6 +31,15 @@ public class AddressBean {
     private String MD_Province;
     private String Member_UID;
     private int id;
+    private boolean ischeck = false;
+
+    public boolean ischeck() {
+        return ischeck;
+    }
+
+    public void setIscheck(boolean ischeck) {
+        this.ischeck = ischeck;
+    }
 
     public String getMD_Address() {
         return MD_Address;
@@ -98,4 +112,51 @@ public class AddressBean {
     public void setId(int id) {
         this.id = id;
     }
+
+    public AddressBean() {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.MD_Address);
+        dest.writeString(this.MD_Area);
+        dest.writeString(this.MD_City);
+        dest.writeByte(this.MD_IsDefault ? (byte) 1 : (byte) 0);
+        dest.writeString(this.MD_Name);
+        dest.writeString(this.MD_Phone);
+        dest.writeString(this.MD_Province);
+        dest.writeString(this.Member_UID);
+        dest.writeInt(this.id);
+        dest.writeByte(this.ischeck ? (byte) 1 : (byte) 0);
+    }
+
+    protected AddressBean(Parcel in) {
+        this.MD_Address = in.readString();
+        this.MD_Area = in.readString();
+        this.MD_City = in.readString();
+        this.MD_IsDefault = in.readByte() != 0;
+        this.MD_Name = in.readString();
+        this.MD_Phone = in.readString();
+        this.MD_Province = in.readString();
+        this.Member_UID = in.readString();
+        this.id = in.readInt();
+        this.ischeck = in.readByte() != 0;
+    }
+
+    public static final Creator<AddressBean> CREATOR = new Creator<AddressBean>() {
+        @Override
+        public AddressBean createFromParcel(Parcel source) {
+            return new AddressBean(source);
+        }
+
+        @Override
+        public AddressBean[] newArray(int size) {
+            return new AddressBean[size];
+        }
+    };
 }

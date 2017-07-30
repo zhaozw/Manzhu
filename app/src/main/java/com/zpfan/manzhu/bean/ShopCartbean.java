@@ -77,6 +77,24 @@ public class ShopCartbean implements Parcelable {
         private List<CargoodslistBean> cargoodslist;
         private List<CargoodslistBean> checkgoodslist = new ArrayList<>();
         private String liuyan = "给卖家的补充说明都可以写在这里";
+        private double yunfei = 0;
+        private double youhui = 0;
+
+        public double getYouhui() {
+            return youhui;
+        }
+
+        public void setYouhui(double youhui) {
+            this.youhui = youhui;
+        }
+
+        public double getYunfei() {
+            return yunfei;
+        }
+
+        public void setYunfei(double yunfei) {
+            this.yunfei = yunfei;
+        }
 
         public String getLiuyan() {
             return liuyan;
@@ -174,7 +192,7 @@ public class ShopCartbean implements Parcelable {
             private String Member_UID;
             private String SC_UID;
             private GoodsModelBean goods_model;
-            private boolean isChecked =false;
+            private boolean isChecked = false;
             private int ChangeCount;
             private String spUid;
 
@@ -260,10 +278,6 @@ public class ShopCartbean implements Parcelable {
             }
 
             public static class GoodsModelBean implements Parcelable {
-
-
-
-
 
 
                 @Override
@@ -548,9 +562,9 @@ public class ShopCartbean implements Parcelable {
                 private List<FormatBean> goods_specifications;
                 private List<FormatBean> order_review_list;
                 private List<OrderSellerfigureBean> order_sellerfigure;
-                private  String yunfei;
+                private String yunfei;
                 private String youhuijuan;
-                private  String  jifen;
+                private String jifen;
 
                 public String getYouhuijuan() {
                     return youhuijuan;
@@ -2290,6 +2304,8 @@ public class ShopCartbean implements Parcelable {
             dest.writeTypedList(this.cargoodslist);
             dest.writeTypedList(this.checkgoodslist);
             dest.writeString(this.liuyan);
+            dest.writeDouble(this.yunfei);
+            dest.writeDouble(this.youhui);
         }
 
         protected CarshoplistBean(Parcel in) {
@@ -2300,6 +2316,8 @@ public class ShopCartbean implements Parcelable {
             this.cargoodslist = in.createTypedArrayList(CargoodslistBean.CREATOR);
             this.checkgoodslist = in.createTypedArrayList(CargoodslistBean.CREATOR);
             this.liuyan = in.readString();
+            this.yunfei = in.readDouble();
+            this.youhui = in.readDouble();
         }
 
         public static final Creator<CarshoplistBean> CREATOR = new Creator<CarshoplistBean>() {

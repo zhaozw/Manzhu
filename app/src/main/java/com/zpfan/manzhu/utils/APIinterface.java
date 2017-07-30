@@ -332,6 +332,13 @@ public interface APIinterface {
     Call<String> getordercouponlist(@Query("member_uid") String member_uid,@Query("bussiness_uid") String bussiness_uid, @Query("totalmoney") String totalmoney,@Query("buy_cate") String buy_cate,@Query("shortrentday") String shortrentday );
 
 
+    /**
+     *  提交购物订单
+     * @param map
+     * @return
+     */
+    @GET("OrderSubmit")
+    Call<String> orderSubmit(@QueryMap Map<String, String> map);
 
 
 }
