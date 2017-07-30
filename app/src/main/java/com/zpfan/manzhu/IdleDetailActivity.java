@@ -1071,6 +1071,21 @@ public class IdleDetailActivity extends AppCompatActivity {
                         Intent intent = new Intent(IdleDetailActivity.this,OrderImmediatelyActivity.class);
 
                         intent.putExtra("detail",mbussness);
+                        intent.putExtra("type", "buy");
+                        startActivity(intent);
+
+                    }
+                });
+
+                llrent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //点击到租的订单的界面
+
+                        Intent intent = new Intent(IdleDetailActivity.this,OrderImmediatelyActivity.class);
+
+                        intent.putExtra("detail",mbussness);
+                        intent.putExtra("type", "rent");
                         startActivity(intent);
 
                     }

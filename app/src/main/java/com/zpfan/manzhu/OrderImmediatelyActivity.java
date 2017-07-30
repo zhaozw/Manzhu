@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -19,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.hyphenate.chat.EMMessage;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.zpfan.manzhu.adapter.CheckFormatAdapter;
+import com.zpfan.manzhu.adapter.FormartAdapter;
 import com.zpfan.manzhu.bean.AddressBean;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.BussnessBean;
@@ -45,6 +48,7 @@ import static com.zpfan.manzhu.Aplication.mContext;
 public class OrderImmediatelyActivity extends AppCompatActivity {
 
     private static final int REQUESY_LOCATINO = 5;
+    private static final int REQUEST_LEAVEMESSAGE = 10;
     @BindView(R.id.tl_ordersure)
     TopLin mTlOrdersure;
     @BindView(R.id.line1)
@@ -164,6 +168,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
     private ShopBean mShopBean = new ShopBean();
     private int max = 0;
     private List<BussnessBean.GoodsSpecificationsBean> mSpecifications;
+    private boolean isRent = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,6 +184,15 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         mDetail = intent.getParcelableExtra("detail");
+        String type = intent.getStringExtra("type");
+
+        if (type.equals("rent")) {
+            //说明是要租的商品
+            isRent = true;
+        }
+
+
+
 
         //获取地址信息
         getLocation(Utils.getloginuid());
@@ -186,6 +200,50 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
         getShopDetail(mDetail.getMember_UID());
         //设置基本的信息
         mTvGoodname.setText(mDetail.getG_Title());
+        //设置虚线
+        mDashline.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
+        mDashline1.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
+        mDashline2.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
+        mDashline3.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
+
+        //设置运费
+
+        String money = mDetail.getG_CourierMoney();
+        Double aDouble = Double.valueOf(money);
+        final DecimalFormat df = new DecimalFormat("0.00");
+        mTvYunfei.setText(df.format(aDouble));
+        mTvZongyunfei.setText(df.format(aDouble));
+
+        //设置优惠劵
+        mTvYouhuijuan.setText("0.00");
+        mTvCouponmoney.setText("0.00");
+
+        //设置积分抵扣
+        mEtJifen.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String s1 = s.toString();
+                if (s1.length() > 0) {
+                    Double aDouble1 = Double.valueOf(s1);
+                    double jifen = aDouble1 / 100;
+                    mTvJifen.setText(df.format(jifen));
+                }
+                calculationMoney();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 0) {
+                    mTvJifen.setText("0.00");
+
+                }
+            }
+        });
 
         mSpecifications = mDetail.getGoods_specifications();
         if (mSpecifications.size() > 0) {
@@ -207,11 +265,6 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
             max =  mDetail.getG_StockNum();
             calculationMoney();
         }
-
-
-
-
-
     }
 
     private void getShopDetail(String uid) {
@@ -332,7 +385,8 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.ll_location, R.id.ll_message,R.id.iv_edit,R.id.ll_editfinish,R.id.ll_delete,R.id.bt_up,R.id.bt_down,R.id.ll_checkformate,R.id.tv_online})
+    @OnClick({R.id.ll_location, R.id.ll_message,R.id.iv_edit,R.id.ll_editfinish,R.id.ll_delete,R.id.bt_up,R.id.bt_down,R.id.ll_checkformate,R.id.tv_online,R.id.other,R.id.tv_leavemessage
+    ,R.id.iv_leavemessage})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_location:
@@ -446,11 +500,67 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
                 break;
             case R.id.tv_online:
+            //线上交易和线下交易
+                final PopupWindow onlineWindow = new PopupWindow(OrderImmediatelyActivity.this);
+                final View onlinepop = View.inflate(OrderImmediatelyActivity.this, R.layout.format_popwindow, null);
+                RecyclerView rvonline = (RecyclerView) onlinepop.findViewById(R.id.rv_format);
+                rvonline.setLayoutManager(new LinearLayoutManager(OrderImmediatelyActivity.this));
+                ArrayList<String> location = new ArrayList<String>();
+                location.add("线上交易");
+                location.add("线下交易");
+                FormartAdapter onlineadapter = new FormartAdapter(R.layout.item_location_popr, location);
+                onlineadapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        DecimalFormat df = new DecimalFormat("0.00");
+                        double zongyunfei = 0.00;
+                        if (position == 0) {
+                            //线上交易
 
+                                String money = mDetail.getG_CourierMoney();
+                                Double aDouble = Double.valueOf(money);
+                                zongyunfei = zongyunfei + aDouble;
+                                mTvYunfei.setText(df.format(zongyunfei));
+                                mTvZongyunfei.setText(df.format(zongyunfei));
 
+                        } else {
+                            //线下交易
+                            zongyunfei = 0.00;
+                            mTvYunfei.setText(df.format(zongyunfei));
+                            mTvZongyunfei.setText(df.format(zongyunfei));
+                        }
+                        onlineWindow.dismiss();
+                    }
+                });
+                rvonline.setAdapter(onlineadapter);
+                onlineWindow.setContentView(onlinepop);
+                // int height = dp2px(LinearLayout.LayoutParams.WRAP_CONTENT);
+                onlineWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+                onlineWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+                onlineWindow.setTouchable(true);
+                onlineWindow.setOutsideTouchable(true);
+
+                onlineWindow.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.home_toppop_bg));
+                onlineWindow.showAsDropDown(mTvOnline);
 
 
                 break;
+
+            case R.id.other:
+                //其它的按钮
+                startActivity(new Intent(OrderImmediatelyActivity.this, OtherActivity.class));
+                break;
+
+            case R.id.iv_leavemessage:
+
+            case R.id.tv_leavemessage:
+                Intent leavemessage = new Intent(OrderImmediatelyActivity.this, LeaveMessageActivity.class);
+                String s2 = mTvLeavemessage.getText().toString();
+                leavemessage.putExtra("b", "b");
+                leavemessage.putExtra("a", s2);
+                startActivityForResult(leavemessage,REQUEST_LEAVEMESSAGE);
+                break;
+
 
         }
     }
@@ -463,6 +573,23 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
         Integer count = Integer.valueOf(s1);
         double v = price * count;
         mTvAllprice.setText(df.format(v));
+
+        String zongyunfei = mTvZongyunfei.getText().toString();
+        Double yunfei = Double.valueOf(zongyunfei);
+
+        String zongjifen = mTvJifen.getText().toString();
+        Double jifen = Double.valueOf(zongjifen);
+
+        String youhuijuan = mTvYouhuijuan.getText().toString();
+        Double youhui = Double.valueOf(youhuijuan);
+
+
+        double pay = v + yunfei - jifen - youhui;
+
+        mTvPayprice.setText(df.format(pay));
+
+        mTvPay.setText(df.format(pay));
+
 
     }
 
@@ -486,6 +613,19 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
             mTvPhone.setText(location.getMD_Phone());
             mTvAddrlocation.setText(location.getMD_Province() + location.getMD_City() + location.getMD_Area() + location.getMD_Address());
         }
+
+        if (requestCode == REQUEST_LEAVEMESSAGE && resultCode == 1) {
+            //卖家l留言
+
+            String message = data.getStringExtra("message");
+
+            mTvLeavemessage.setText(message);
+
+
+
+        }
+
+
 
     }
 

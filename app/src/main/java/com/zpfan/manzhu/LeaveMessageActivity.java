@@ -23,6 +23,7 @@ public class LeaveMessageActivity extends AppCompatActivity {
     @BindView(R.id.bt_import)
     Button mBtImport;
     private ShopCartbean.CarshoplistBean mItem;
+    private boolean isfromeac = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +34,19 @@ public class LeaveMessageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mItem = intent.getParcelableExtra("item");
         String a = intent.getStringExtra("a");
-        if (a.equals("给卖家的补充说明都可以写在这里")) {
+        if (a != null && a.equals("给卖家的补充说明都可以写在这里")) {
             mEtMessage.setHint("给卖家的补充说明都可以写在这里");
         } else {
         mEtMessage.setText(a);
         mEtMessage.setSelection(a.length());
-
         }
+
+        String b = intent.getStringExtra("b");
+
+        if (b != null && b.equals("b")) {
+            isfromeac = true;
+        }
+
 
 
     }
@@ -51,10 +58,20 @@ public class LeaveMessageActivity extends AppCompatActivity {
             case R.id.et_message:
                 break;
             case R.id.bt_import:
-                String s = mEtMessage.getText().toString();
-                LeaveMessageEvent event = new LeaveMessageEvent(s);
-                event.bussness = mItem.getMember_UID();
-                EventBus.getDefault().post(event);
+                if (!isfromeac) {
+                    String s = mEtMessage.getText().toString();
+                    LeaveMessageEvent event = new LeaveMessageEvent(s);
+                    event.bussness = mItem.getMember_UID();
+                    EventBus.getDefault().post(event);
+                } else {
+                    String s = mEtMessage.getText().toString();
+                    Intent intent = new Intent();
+                    intent.putExtra("message", s);
+
+                    this.setResult(1,intent);
+
+                }
+
                 finish();
                 break;
         }
