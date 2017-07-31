@@ -59,10 +59,44 @@
 
 
     <LinearLayout
+        android:gravity="center|center_vertical"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="65dp">
 
+        <TextView
+            android:clickable="true"
+           android:textColor="@drawable/orde_generation_textcolor_selector"
+           android:textSize="12sp"
+           android:gravity="center"
+           android:paddingLeft="10dp"
+           android:paddingRight="10dp"
+           android:background="@drawable/order_generation_button_selector"
+           android:text="回首页"
+           android:layout_width="85dp"
+           android:layout_height="30dp"/>
+        <TextView
+            android:clickable="true"
+            android:textColor="@drawable/orde_generation_textcolor_selector"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/order_generation_button_selector"
+            android:text="回首页"
+            android:layout_width="85dp"
+            android:layout_height="30dp"/>
+        <TextView
+            android:clickable="true"
+            android:textColor="@drawable/orde_generation_textcolor_selector1"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/order_generation_button_selector1"
+            android:text="回首页"
+            android:layout_width="85dp"
+            android:layout_height="30dp"/>
 
 
 
