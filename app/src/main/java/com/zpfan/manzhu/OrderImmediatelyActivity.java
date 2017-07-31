@@ -785,7 +785,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                 map.put("deduction_buy_score_number", jifen);
                 map.put("see_sell_my_data_mm", "");
                 map.put("share_uid", "");
-                map.put("appointment_date", "");
+                map.put("appointment_date", "2017-07-31");
                 map.put("appointment_time", "");
                 map.put("yunfei_value_model", "");
                 String trading = mTvOnline.getText().toString();
@@ -810,7 +810,14 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                             ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
 
                             if (avatorBeen != null && avatorBeen.size() > 0) {
-                                Log.i("zc", "onResponse:  看看返回的数据" + avatorBeen.get(0).getRetmsg() );
+                                AvatorBean bean = avatorBeen.get(0);
+
+                                Intent orderIntent = new Intent(OrderImmediatelyActivity.this,OrderGenerationActivity.class);
+                                orderIntent.putExtra("avator", bean);
+                                orderIntent.putExtra("type", "idle");
+                                startActivity(orderIntent);
+
+
 
                             }
 

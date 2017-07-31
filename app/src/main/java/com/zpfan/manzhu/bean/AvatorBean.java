@@ -1,12 +1,16 @@
 package com.zpfan.manzhu.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrator on 2017/6/15 0015.
  */
 
 
 
-public class AvatorBean {
+public class AvatorBean implements Parcelable {
+
     /**
      * moredata : false
      * pagename :
@@ -50,4 +54,39 @@ public class AvatorBean {
     public void setRetmsg(String retmsg) {
         this.retmsg = retmsg;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte(this.moredata ? (byte) 1 : (byte) 0);
+        dest.writeString(this.pagename);
+        dest.writeByte(this.ret ? (byte) 1 : (byte) 0);
+        dest.writeString(this.retmsg);
+    }
+
+    public AvatorBean() {
+    }
+
+    protected AvatorBean(Parcel in) {
+        this.moredata = in.readByte() != 0;
+        this.pagename = in.readString();
+        this.ret = in.readByte() != 0;
+        this.retmsg = in.readString();
+    }
+
+    public static final Parcelable.Creator<AvatorBean> CREATOR = new Parcelable.Creator<AvatorBean>() {
+        @Override
+        public AvatorBean createFromParcel(Parcel source) {
+            return new AvatorBean(source);
+        }
+
+        @Override
+        public AvatorBean[] newArray(int size) {
+            return new AvatorBean[size];
+        }
+    };
 }
