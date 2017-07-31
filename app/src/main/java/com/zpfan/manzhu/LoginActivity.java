@@ -91,6 +91,9 @@ public class LoginActivity extends AppCompatActivity {
     private String mUserAvator;
     private String mCn;
     private String mUid;
+    private String mIntegral;
+    private String mAvailableMoney;
+    private String mProvince;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -310,6 +313,9 @@ public class LoginActivity extends AppCompatActivity {
                                     mUserPhone = user.getM_Phone();
                                     mCn = user.getM_UserName();
                                     mUid = user.getM_UID();
+                                    mIntegral = user.getMember_AvailableIntegral();
+                                    mAvailableMoney = user.getMember_AvailableMoney();
+                                    mProvince = user.getM_Province();
 
                                 }
                                 SPUtils.getInstance().put("user", message);
@@ -331,6 +337,9 @@ public class LoginActivity extends AppCompatActivity {
                                             SPUtils.getInstance().put("userinfo", message);
                                             SPUtils.getInstance().put("userlogin", true);
                                             SPUtils.getInstance().put("userid", mUid);
+                                            SPUtils.getInstance().put("userjifen",mIntegral);
+                                            SPUtils.getInstance().put("useryue",mAvailableMoney);
+                                            SPUtils.getInstance().put("usesheng",mProvince);
                                             //判断用户是否是第一次登陆
 
                                             EaseUI instance = EaseUI.getInstance();

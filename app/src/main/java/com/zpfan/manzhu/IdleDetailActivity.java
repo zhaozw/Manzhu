@@ -475,7 +475,7 @@ public class IdleDetailActivity extends AppCompatActivity {
             }
 
             //设置优惠劵的数量
-            mTvCoupon.setText(mbussness.getShop_coupon_count() + "");
+            mTvCoupon.setText(" " + mbussness.getShop_coupon_count() + " ");
 
             //查看是否有规格
             List<BussnessBean.GoodsSpecificationsBean> specifications = mbussness.getGoods_specifications();
@@ -743,6 +743,15 @@ public class IdleDetailActivity extends AppCompatActivity {
 
             case R.id.ll_coupon:
                 //优惠劵的点击事件
+                if (mbussness.getShop_coupon_count() == 0) {
+                    MyToast.show("本商品暂无可领优惠劵", R.mipmap.com_icon_cross_w);
+                } else {
+                String uid = mbussness.getMember_UID();
+                Intent couponintent = new Intent(IdleDetailActivity.this, BussnessCouponActivity.class);
+                couponintent.putExtra("uid", uid);
+                startActivity(couponintent);
+                }
+
 
 
                 break;
@@ -1014,24 +1023,24 @@ public class IdleDetailActivity extends AppCompatActivity {
                     change.setImageResource(R.mipmap.com_icon_excha);
                     tvchange.setTextColor(getResources().getColor(R.color.maintextcolor));
                     tvchange1.setText("正好有卖家想换的宝贝，通知TA");
-                    llchange.setClickable(true);
+                    llchange.setEnabled(true);
                 }else{
                     change.setImageResource(R.mipmap.com_icon_excha_ept);
                     tvchange.setTextColor(getResources().getColor(R.color.secondtextcolor));
                     tvchange1.setText("本宝贝暂不支持交换");
-                    llchange.setClickable(false);
+                    llchange.setEnabled(false);
                 }
 
                 if (mbussness.isG_IsRent()) {
                     rent.setImageResource(R.mipmap.com_icon_rent);
                     tvrent.setTextColor(getResources().getColor(R.color.maintextcolor));
                     tvrent1.setText("只需支付租金，用完后还给卖家就行啦");
-                    llrent.setClickable(true);
+                    llrent.setEnabled(true);
                 } else {
                     rent.setImageResource(R.mipmap.com_icon_rent_ept);
                     tvrent.setTextColor(getResources().getColor(R.color.secondtextcolor));
                     tvrent1.setText("本宝贝暂不支持租赁");
-                    llrent.setClickable(false);
+                    llrent.setEnabled(false);
                 }
 
 

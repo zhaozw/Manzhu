@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/threebackground"
+    android:layout_height="match_parent"
+    tools:context="com.zpfan.manzhu.BussnessCouponActivity">
+
+
+    <com.zpfan.manzhu.myui.TopLin
+
+        android:background="@color/bootmbc"
+        app:toptext = "店铺优惠劵"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_bussnesscoupon"
+        android:layout_marginTop="7.5dp"
+        android:background="@color/bootmbc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+
+</LinearLayout>

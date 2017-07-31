@@ -162,6 +162,8 @@
         </activity>
         <activity android:name=".OrderImmediatelyActivity">
         </activity>
+        <activity android:name=".BussnessCouponActivity">
+        </activity>
     </application>
 
 </manifest>

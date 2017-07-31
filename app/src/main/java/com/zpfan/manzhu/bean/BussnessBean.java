@@ -984,12 +984,24 @@ public class BussnessBean implements Parcelable {
         private String S_DisputeProportion;
         private String member_identity;
         private int order_deal_count;
+        private String member_AvailableMoney;
+        private String member_AvailableIntegral;
 
+        public String getMember_AvailableMoney() {
+            return member_AvailableMoney;
+        }
 
+        public void setMember_AvailableMoney(String member_AvailableMoney) {
+            this.member_AvailableMoney = member_AvailableMoney;
+        }
 
+        public String getMember_AvailableIntegral() {
+            return member_AvailableIntegral;
+        }
 
-
-
+        public void setMember_AvailableIntegral(String member_AvailableIntegral) {
+            this.member_AvailableIntegral = member_AvailableIntegral;
+        }
 
         public String getM_Account_Status() {
             return M_Account_Status;
@@ -1244,7 +1256,8 @@ public class BussnessBean implements Parcelable {
             dest.writeString(this.S_DisputeProportion);
             dest.writeString(this.member_identity);
             dest.writeInt(this.order_deal_count);
-
+            dest.writeString(this.member_AvailableMoney);
+            dest.writeString(this.member_AvailableIntegral);
         }
 
         protected GMemberOBJBean(Parcel in) {
@@ -1275,7 +1288,8 @@ public class BussnessBean implements Parcelable {
             this.S_DisputeProportion = in.readString();
             this.member_identity = in.readString();
             this.order_deal_count = in.readInt();
-
+            this.member_AvailableMoney = in.readString();
+            this.member_AvailableIntegral = in.readString();
         }
 
         public static final Creator<GMemberOBJBean> CREATOR = new Creator<GMemberOBJBean>() {

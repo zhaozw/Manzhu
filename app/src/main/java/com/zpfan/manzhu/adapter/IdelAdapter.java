@@ -87,7 +87,9 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
             String[] split = fk.split(",");
             if (split.length == 1) {
                 //就显示一个
-                helper.setText(R.id.tv_change1, split[0].substring(1)).setText(R.id.tv_more,"");
+                if (split[0].length() > 0) {
+                    helper.setText(R.id.tv_change1, split[0].substring(1)).setText(R.id.tv_more,"");
+                }
                 change2.setVisibility(View.GONE);
             } else if (split.length == 2){
                 //就显示两个

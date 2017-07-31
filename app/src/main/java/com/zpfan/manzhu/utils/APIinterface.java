@@ -341,4 +341,42 @@ public interface APIinterface {
     Call<String> orderSubmit(@QueryMap Map<String, String> map);
 
 
+    /**
+     * 获取店铺的优惠劵列表
+     * @param member_uid
+     * @return
+     */
+    @GET("getcouponlist_byshopmodel")
+    Call<String> getcouponlist(@Query("member_uid") String member_uid,@Query("use_member_uid") String use_member_uid);
+
+
+    /**
+     * 领取店铺优惠劵的方法
+     * @param member_uid
+     * @param couponID
+     * @return
+     */
+    @GET("opera_shopcoupon_receive_function")
+    Call<String> operashopcoupon(@Query("member_uid") String member_uid,@Query("couponID") String couponID);
+
+
+    /**
+     * 获取交易方式的方法
+     * @param car_buy
+     * @param goods_type
+     * @param member_uid
+     * @param busniss_province
+     * @param member_province
+     * @param all_weight
+     * @param goods_uid_arry
+     * @return
+     */
+    @GET("get_orderindexpage_bydealstyle")
+    Call<String> getorderbydealstyle(@Query("car_buy") String car_buy, @Query("goods_type") String goods_type,
+                                     @Query("member_uid") String member_uid, @Query("busniss_province") String busniss_province,
+                                     @Query("member_province") String member_province, @Query("all_weight") String all_weight,
+                                     @Query("goods_uid_arry") String goods_uid_arry);
+
+
+
 }

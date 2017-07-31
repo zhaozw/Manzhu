@@ -64,6 +64,24 @@ public class UserBean {
     private  String member_identity;
     private String S_DisputeProportion;
     private String order_deal_count;
+    private String member_AvailableMoney;
+    private String member_AvailableIntegral;
+
+    public String getMember_AvailableMoney() {
+        return member_AvailableMoney;
+    }
+
+    public void setMember_AvailableMoney(String member_AvailableMoney) {
+        this.member_AvailableMoney = member_AvailableMoney;
+    }
+
+    public String getMember_AvailableIntegral() {
+        return member_AvailableIntegral;
+    }
+
+    public void setMember_AvailableIntegral(String member_AvailableIntegral) {
+        this.member_AvailableIntegral = member_AvailableIntegral;
+    }
 
     public String getMember_identity() {
         return member_identity;

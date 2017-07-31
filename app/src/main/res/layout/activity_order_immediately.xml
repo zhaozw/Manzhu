@@ -294,6 +294,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
+                    <TextView
+                        android:id="@+id/tv_yajin"
+                        android:text="（押金）"
+                        android:textColor="@color/secondtextcolor"
+                        android:textSize="10sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
                     <View
                         android:layout_weight="1"
                         android:layout_width="0dp"
@@ -497,6 +505,7 @@
 
 
         <LinearLayout
+            android:id="@+id/ll_rentde"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -619,6 +628,13 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/dashline4"
+            android:background="@drawable/dash_line_shape"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
 
 
 
@@ -706,7 +722,109 @@
             android:layout_height="0.5dp"/>
 
 
+        <!--  租的时候显示的条目-->
+        <LinearLayout
+            android:id="@+id/ll_renttime"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="12.5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="42.5dp">
 
+            <TextView
+                android:textSize="10sp"
+                android:textColor="@color/buttontext"
+                android:gravity="center"
+                android:text="租期\n3天"
+                android:layout_weight="0.25"
+                android:background="@drawable/rent_left_shape"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:textSize="10sp"
+                android:textColor="@color/buttontext"
+                android:gravity="center"
+                android:text="归还期\n24小时"
+                android:layout_weight="0.15"
+                android:background="#ff9966"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+
+            <TextView
+                android:textSize="10sp"
+                android:textColor="@color/buttontext"
+                android:gravity="center"
+                android:text="违约期\n33天"
+                android:layout_weight="0.6"
+                android:background="@drawable/rent_right_shape"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_rentday"
+            android:gravity="center_vertical"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+
+            <TextView
+                android:text="租期"
+                android:textSize="14sp"
+                android:textColor="@color/maintextcolor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <ImageView
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="7.5dp"
+                android:src="@mipmap/com_icon_ques_gra"
+                android:layout_width="12.5dp"
+                android:layout_height="12.5dp"/>
+
+            <TextView
+                android:id="@+id/tv_rentday"
+                android:textColor="@color/maintextcolor"
+                android:textSize="14sp"
+                android:text="3天"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/iv_rentday"
+                android:layout_marginLeft="7.5dp"
+                android:src="@mipmap/com_icon_arr_down_gra"
+                android:layout_width="10dp"
+                android:layout_height="10dp"/>
+
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+
+            <TextView
+                android:text="租金　¥　"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_rentmoney"
+                android:text="10.00"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
 
         <!-- 交易方式的选择-->
@@ -909,12 +1027,11 @@
 
 
             <TextView
-
                 android:id="@+id/tv_leavemessage"
                 android:maxWidth="250dp"
                 android:layout_marginLeft="15dp"
                 android:singleLine="true"
-                android:text="给卖家的补充说明都可以写在这里aaaaaaaaaaaaaaaaa"
+                android:text="给卖家的补充说明都可以写在这里"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
@@ -966,6 +1083,7 @@
                 android:layout_height="12.5dp"/>
 
             <TextView
+                android:id="@+id/tv_userjifen"
                 android:textColor="@color/secondtextcolor"
                 android:textSize="14sp"
                 android:text="（可用积分 3453）"
@@ -1115,7 +1233,7 @@
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/tv_allprice"
-                    android:text="9500.00"
+                    android:text="0.00"
                     android:textColor="@color/pricetextcolor"
                     android:textSize="14sp"
                     android:layout_width="wrap_content"
@@ -1148,7 +1266,7 @@
                     android:id="@+id/tv_zongyunfei"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10.00"
+                    android:text="0.00"
                     android:textColor="@color/duojiage"
                     android:textSize="14sp"/>
 
@@ -1175,7 +1293,7 @@
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/tv_youhuijuan"
-                    android:text="9500.00"
+                    android:text="0.00"
                     android:textColor="@color/outlin"
                     android:textSize="14sp"
                     android:layout_width="wrap_content"
@@ -1318,6 +1436,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/tv_submit"
             android:textColor="@color/buttontext"
             android:textSize="12sp"
             android:gravity="center"
