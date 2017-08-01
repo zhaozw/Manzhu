@@ -78,15 +78,50 @@ public class ShopCartbean implements Parcelable {
         private List<CargoodslistBean> checkgoodslist = new ArrayList<>();
         private String liuyan = "给卖家的补充说明都可以写在这里";
         private double yunfei = 0;
-        private double youhui = 0;
+        private String couponid = "";
+        private String coupon = "0.00";
+        private String jiaoyi = "";
+        private String huoqujiaoyi = "";
 
-        public double getYouhui() {
-            return youhui;
+
+
+
+
+        public String getHuoqujiaoyi() {
+            return huoqujiaoyi;
         }
 
-        public void setYouhui(double youhui) {
-            this.youhui = youhui;
+        public void setHuoqujiaoyi(String huoqujiaoyi) {
+            this.huoqujiaoyi = huoqujiaoyi;
         }
+
+        public String getJiaoyi() {
+            return jiaoyi;
+        }
+
+        public void setJiaoyi(String jiaoyi) {
+            this.jiaoyi = jiaoyi;
+        }
+
+        public String getCoupon() {
+            return coupon;
+        }
+
+        public void setCoupon(String coupon) {
+            this.coupon = coupon;
+        }
+
+        public String getCouponid() {
+            return couponid;
+        }
+
+        public void setCouponid(String couponid) {
+            this.couponid = couponid;
+        }
+
+
+
+
 
         public double getYunfei() {
             return yunfei;
@@ -194,8 +229,28 @@ public class ShopCartbean implements Parcelable {
             private GoodsModelBean goods_model;
             private boolean isChecked = false;
             private int ChangeCount;
-            private String spUid;
+            private String spUid = "";
+            private int kycun  = 0;
+            private String editMoney;
 
+
+
+
+            public String getEditMoney() {
+                return editMoney;
+            }
+
+            public void setEditMoney(String editMoney) {
+                this.editMoney = editMoney;
+            }
+
+            public int getKycun() {
+                return kycun;
+            }
+
+            public void setKycun(int kycun) {
+                this.kycun = kycun;
+            }
 
             public int getChangeCount() {
                 return ChangeCount;
@@ -2281,6 +2336,8 @@ public class ShopCartbean implements Parcelable {
                 dest.writeByte(this.isChecked ? (byte) 1 : (byte) 0);
                 dest.writeInt(this.ChangeCount);
                 dest.writeString(this.spUid);
+                dest.writeInt(this.kycun);
+                dest.writeString(this.editMoney);
             }
 
             protected CargoodslistBean(Parcel in) {
@@ -2294,6 +2351,8 @@ public class ShopCartbean implements Parcelable {
                 this.isChecked = in.readByte() != 0;
                 this.ChangeCount = in.readInt();
                 this.spUid = in.readString();
+                this.kycun = in.readInt();
+                this.editMoney = in.readString();
             }
 
             public static final Creator<CargoodslistBean> CREATOR = new Creator<CargoodslistBean>() {
@@ -2327,7 +2386,10 @@ public class ShopCartbean implements Parcelable {
             dest.writeTypedList(this.checkgoodslist);
             dest.writeString(this.liuyan);
             dest.writeDouble(this.yunfei);
-            dest.writeDouble(this.youhui);
+            dest.writeString(this.couponid);
+            dest.writeString(this.coupon);
+            dest.writeString(this.jiaoyi);
+            dest.writeString(this.huoqujiaoyi);
         }
 
         protected CarshoplistBean(Parcel in) {
@@ -2339,7 +2401,10 @@ public class ShopCartbean implements Parcelable {
             this.checkgoodslist = in.createTypedArrayList(CargoodslistBean.CREATOR);
             this.liuyan = in.readString();
             this.yunfei = in.readDouble();
-            this.youhui = in.readDouble();
+            this.couponid = in.readString();
+            this.coupon = in.readString();
+            this.jiaoyi = in.readString();
+            this.huoqujiaoyi = in.readString();
         }
 
         public static final Creator<CarshoplistBean> CREATOR = new Creator<CarshoplistBean>() {

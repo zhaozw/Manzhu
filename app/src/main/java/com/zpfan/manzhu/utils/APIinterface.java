@@ -388,5 +388,25 @@ public interface APIinterface {
     Call<String> getOrderDetails(@Query("order_uid") String order_uid);
 
 
+    /**
+     * 获取订单下单成功，支付成功的页面信息
+     * @param AssociationNumber
+     * @return
+     */
+    @GET("get_ordersubmit_pay_success_Page")
+    Call<String> getordersubmitpaysuccess(@Query("AssociationNumber") String AssociationNumber);
+
+
+    /**
+     * 获取用户可用的积分和余额
+     * @param m_uid
+     * @param value_type
+     * @return
+     */
+    @GET("get_memberaccout_money_integral")
+    Call<String> getmembermoneyintegral(@Query("m_uid") String m_uid, @Query("value_type") String value_type);
+
+
+
 
 }

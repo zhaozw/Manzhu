@@ -4,11 +4,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:gravity="center"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.zpfan.manzhu.OrderGenerationActivity">
 
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_right"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@mipmap/com_icon_cross_r"
+            android:layout_width="25dp"
+            android:layout_height="25dp"/>
+
+        <TextView
+            android:layout_marginLeft="12.5dp"
+            android:text="下单失败"
+            android:textSize="18sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+    <TextView
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/tv_failure"
+        android:textColor="@color/secondtextcolor"
+        android:textSize="10sp"
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <ScrollView
+        android:visibility="visible"
+        android:id="@+id/sv_isret"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <LinearLayout
@@ -65,6 +103,7 @@
         android:layout_height="65dp">
 
         <TextView
+            android:id="@+id/bt_backhome"
             android:clickable="true"
            android:textColor="@drawable/orde_generation_textcolor_selector"
            android:textSize="12sp"
@@ -76,6 +115,8 @@
            android:layout_width="85dp"
            android:layout_height="30dp"/>
         <TextView
+            android:id="@+id/bt_backgood"
+            android:layout_marginLeft="15dp"
             android:clickable="true"
             android:textColor="@drawable/orde_generation_textcolor_selector"
             android:textSize="12sp"
@@ -83,10 +124,12 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:background="@drawable/order_generation_button_selector"
-            android:text="回首页"
+            android:text="回商品页"
             android:layout_width="85dp"
             android:layout_height="30dp"/>
         <TextView
+            android:id="@+id/bt_usercenter"
+            android:layout_marginLeft="15dp"
             android:clickable="true"
             android:textColor="@drawable/orde_generation_textcolor_selector1"
             android:textSize="12sp"
@@ -94,7 +137,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:background="@drawable/order_generation_button_selector1"
-            android:text="回首页"
+            android:text="个人中心"
             android:layout_width="85dp"
             android:layout_height="30dp"/>
 
@@ -107,7 +150,7 @@
         android:layout_width="match_parent"
         android:layout_height="7.5dp"/>
 
-
+    <!--订单编号-->
     <LinearLayout
         android:gravity="center_vertical"
         android:paddingRight="10dp"
@@ -123,22 +166,22 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/tv_ordernumber"
             android:layout_marginLeft="15dp"
             android:textColor="@color/secondtextcolor"
             android:textSize="12sp"
             android:text="2017351535153"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"/>
 
-        <View
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"/>
+
 
 
        <LinearLayout
-           android:paddingLeft="5dp"
-           android:paddingRight="5dp"
+           android:id="@+id/ll_getorderdetil"
+           android:paddingLeft="10dp"
+           android:paddingRight="10dp"
            android:gravity="center_vertical"
            android:orientation="horizontal"
            android:background="@drawable/location_button_bg2"
@@ -151,6 +194,7 @@
                android:layout_height="12.5dp"/>
 
             <TextView
+                android:layout_marginLeft="5dp"
                 android:text="查看订单"
                 android:textSize="10sp"
                 android:textColor="@color/buttontext"
@@ -186,6 +230,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/tv_buystyle"
             android:layout_marginLeft="15dp"
             android:textColor="@color/secondtextcolor"
             android:textSize="12sp"
@@ -194,6 +239,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/tv_style"
             android:text="（买家确认收货后卖家得到货款）"
             android:textColor="@color/secondtextcolor"
             android:textSize="10sp"
@@ -227,6 +273,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/tv_ordertime"
             android:layout_marginLeft="15dp"
             android:textColor="@color/secondtextcolor"
             android:textSize="12sp"
@@ -347,6 +394,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tv_goodtitle"
                 android:layout_marginTop="7.5dp"
                 android:textColor="#333333"
                 android:text="商品标题商品商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题"
@@ -357,6 +405,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/tv_goodformat"
                 android:textSize="10sp"
                 android:text="规格1、规格2"
                 android:textColor="@color/secondtextcolor"
@@ -369,6 +418,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_goodcount"
             android:layout_marginLeft="10dp"
             android:textColor="@color/secondtextcolor"
             android:textSize="10sp"
@@ -377,6 +427,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:layout_marginLeft="12.5dp"
             android:text=" ¥ "
             android:textSize="10sp"
             android:textColor="@color/pricetextcolor"
@@ -384,6 +435,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/tv_goodprice"
             android:textColor="@color/pricetextcolor"
             android:textSize="10sp"
             android:text="1000.00"
@@ -429,7 +481,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
-
+            android:id="@+id/tv_yunfei"
             android:textColor="@color/duojiage"
             android:textSize="12sp"
             android:text="0.00"
@@ -485,6 +537,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/tv_youhui"
             android:textColor="@color/outlin"
             android:textSize="12sp"
             android:text="0.00"
@@ -537,7 +590,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
-
+                android:id="@+id/tv_jifen"
                 android:textColor="@color/outlin"
                 android:textSize="12sp"
                 android:text="0.00"
@@ -589,7 +642,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
-
+                android:id="@+id/tv_allpay"
                 android:textColor="@color/pricetextcolor"
                 android:textSize="12sp"
                 android:text="0.00"

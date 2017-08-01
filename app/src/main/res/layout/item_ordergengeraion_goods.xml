@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="65dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_shopcover"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/u583"
+            app:riv_corner_radius="5dip"
+            />
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_goodtitle"
+                android:layout_marginTop="7.5dp"
+                android:textColor="#333333"
+                android:text="商品标题商品商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题"
+                android:ellipsize="end"
+                android:textSize="10sp"
+                android:maxLines="2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_goodformat"
+                android:textSize="10sp"
+                android:text="规格1、规格2"
+                android:textColor="@color/secondtextcolor"
+                android:layout_marginTop="7.5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_goodcount"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/secondtextcolor"
+            android:textSize="10sp"
+            android:text="x1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginLeft="12.5dp"
+            android:text=" ¥ "
+            android:textSize="10sp"
+            android:textColor="@color/pricetextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_goodprice"
+            android:textColor="@color/pricetextcolor"
+            android:textSize="10sp"
+            android:text="1000.00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

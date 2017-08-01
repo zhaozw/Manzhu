@@ -84,6 +84,7 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
         //编辑数量
         tvcount.setText(item.getCarCount() + "");
         mCount = item.getCarCount();
+        //初始化规格的显示
         final String uid = item.getGoods_Spcification_UID();
         if (!uid.equals("")) {
             for (FormatBean specification : specifications) {
@@ -106,6 +107,10 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
             formatid.clear();
             helper.setText(R.id.tv_goodprice, item.getGoods_model().getG_FixedPrice());
         }
+
+
+
+
 
 
         btup.setOnClickListener(new View.OnClickListener() {

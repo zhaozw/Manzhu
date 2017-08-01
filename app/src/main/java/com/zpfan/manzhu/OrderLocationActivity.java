@@ -91,7 +91,6 @@ public class OrderLocationActivity extends AppCompatActivity {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent1 = new Intent();
-
                 AddressBean value = other.get(position);
                 value.setIscheck(true);
                 intent1.putExtra("location", value);

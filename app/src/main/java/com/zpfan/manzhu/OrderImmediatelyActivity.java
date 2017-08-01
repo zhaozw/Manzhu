@@ -192,13 +192,14 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
     private int max = 0;
     private List<BussnessBean.GoodsSpecificationsBean> mSpecifications;
     private boolean isRent = false;
-    private Double mJifen;
+    private double mJifen;
     private ArrayList<OrderCouponBean> mCouponBeanArrayList = new ArrayList<>();
     private DecimalFormat mDf;
     private String goospuid = "";
     private String addruid = "";
     private String couponid = "";
     private String mBuystyle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,6 +219,10 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
         mSpecifications = mDetail.getGoods_specifications();
         String type = intent.getStringExtra("type");
 
+        getUserIntegral();
+
+
+
         if (type.equals("rent")) {
             //说明是要租的商品
             isRent = true;
@@ -226,8 +231,6 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
             mLlRentday.setVisibility(View.VISIBLE);
             mLlRentde.setVisibility(View.VISIBLE);
             mDashline4.setVisibility(View.VISIBLE);
-
-
 
 
 
@@ -285,9 +288,8 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
 
         //设置用户积分
-        final String userjifen = SPUtils.getInstance().getString("userjifen", "0");
-        mJifen = Double.valueOf(userjifen);
-        mTvUserjifen.setText(userjifen);
+
+
 
 
 
@@ -308,25 +310,47 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String s1 = s.toString();
-                if (s1.length() > 0) {
-                    Double aDouble1 = Double.valueOf(s1);
+                mEtJifen.setSelection(s.length());
 
+                if (s1.length() > 0) {
+                    Double aDouble1 = Double.valueOf(s1); //用户输入的积分数量
+                    double jifen = aDouble1 / 100; // 输入的积分可以抵扣的钱
+                    String s2 = mTvAllprice.getText().toString();
+                    Double allprice = Double.valueOf(s2);
+
+                    //积分大于剩余的积分的时候  只能输入到剩余积分
                     if (aDouble1 > mJifen) {
                         aDouble1 = mJifen;
-                        mEtJifen.setText(userjifen);
 
+                        mEtJifen.setText(aDouble1 + "");
+                        mTvJifen.setText(mDf.format(aDouble1 / 100));
+
+                    } else {
+
+                        mTvJifen.setText(mDf.format(aDouble1 / 100));
                     }
-                    double jifen = aDouble1 / 100;
-                    mTvJifen.setText(mDf.format(jifen));
+                    //积分能抵扣商品价格的时候 所能使用的积分只能是商品那么多
+
+
+                    if (jifen > allprice){
+                        jifen = allprice;
+                        mEtJifen.setText(jifen * 100 + "");
+                        mTvJifen.setText(mDf.format(jifen));
+                        Log.i("zc", "onTextChanged:   进入了价格积分");
+                    }
+
+
+                }else if(s.length() == 0){
+
+                    mTvJifen.setText("0.00");
+
                 }
                 calculationMoney();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() == 0) {
-                    mTvJifen.setText("0.00");
-                }
+
             }
         });
 
@@ -338,6 +362,54 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
         double allweight = aDouble * count;
         getbuyStyle(usesheng,mDf.format(allweight),mDetail.getG_UID());
+    }
+
+    /**
+     * 获取用户的积分或者余额
+     */
+    private void getUserIntegral() {
+        Call<String> getmemberintegral = Aplication.mIinterface.getmembermoneyintegral(Utils.getloginuid(), "积分");
+
+        getmemberintegral.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String body = response.body();
+                if (body != null) {
+                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                    }.getType();
+
+                    ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                    if (avatorBeen != null && avatorBeen.size() > 0) {
+                        AvatorBean bean = avatorBeen.get(0);
+
+                        String retmsg = bean.getRetmsg();
+                        if (retmsg != null) {
+                            mTvUserjifen.setText("（可用积分 " +retmsg + "）");
+                            Double aDouble = Double.valueOf(retmsg);
+                            mJifen = aDouble;
+                        }
+
+
+
+                    }
+
+
+
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
+
+
     }
 
     private void getCouponList() {
@@ -388,9 +460,6 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
 
                     }
-
-
-
 
                 }
 
@@ -485,7 +554,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                                     if (bean.isMD_IsDefault()) {
                                         mTvAddrname.setText("收货人：" + bean.getMD_Name());
                                         mTvPhone.setText(bean.getMD_Phone());
-                                        mTvAddrlocation.setText(bean.getMD_Province() + bean.getMD_City() + bean.getMD_Area() + bean.getMD_Address());
+                                        mTvAddrlocation.setText("收货地址：" +bean.getMD_Province() + bean.getMD_City() + bean.getMD_Area() + bean.getMD_Address());
                                         addruid = bean.getId()+ "";
                                     }
 
@@ -639,7 +708,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
             case R.id.tv_online:
                 //获取交易方式
-                Log.i("zc", "onViewClicked:   看看长度" + mBuystyle.length());
+
                if (mBuystyle.length() > 5){
                    //线上交易和线下交易
                    final PopupWindow onlineWindow = new PopupWindow(OrderImmediatelyActivity.this);
@@ -729,6 +798,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
             case R.id.iv_coupon:
 
             case R.id.tv_coupon:
+                //获取优惠劵
                 getCouponList();
                 final PopupWindow couponWindow = new PopupWindow(OrderImmediatelyActivity.this);
                 final View couponpop = View.inflate(OrderImmediatelyActivity.this, R.layout.format_popwindow, null);
@@ -811,7 +881,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
                             if (avatorBeen != null && avatorBeen.size() > 0) {
                                 AvatorBean bean = avatorBeen.get(0);
-
+                                Log.i("zc", "onResponse:   看看订单的编号" + bean.getRetmsg());
                                 Intent orderIntent = new Intent(OrderImmediatelyActivity.this,OrderGenerationActivity.class);
                                 orderIntent.putExtra("avator", bean);
                                 orderIntent.putExtra("type", "idle");

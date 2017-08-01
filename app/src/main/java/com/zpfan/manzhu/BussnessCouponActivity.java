@@ -52,9 +52,6 @@ public class BussnessCouponActivity extends AppCompatActivity {
             Call<String> getcouponlist = Aplication.mIinterface.getcouponlist(uid,Utils.getloginuid());
 
             getcouponlist.enqueue(new Callback<String>() {
-
-
-
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     String body = response.body();
@@ -82,42 +79,43 @@ public class BussnessCouponActivity extends AppCompatActivity {
                                         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                             final CouponBean bean = mCouponlist.get(position);
                                             //领取优惠劵的方法
-                                            Call<String> operashopcoupon = Aplication.mIinterface.operashopcoupon(Utils.getloginuid(), bean.getId() + "");
+                                            if (bean.getMember_use_get_status().equals("未领用")) {
+                                                Call<String> operashopcoupon = Aplication.mIinterface.operashopcoupon(Utils.getloginuid(), bean.getId() + "");
 
-                                            operashopcoupon.enqueue(new Callback<String>() {
-                                                @Override
-                                                public void onResponse(Call<String> call, Response<String> response) {
-                                                    String body = response.body();
+                                                operashopcoupon.enqueue(new Callback<String>() {
+                                                    @Override
+                                                    public void onResponse(Call<String> call, Response<String> response) {
+                                                        String body = response.body();
 
-                                                    if (body != null) {
+                                                        if (body != null) {
 
-                                                        Type type = new TypeToken<ArrayList<AvatorBean>>() {
-                                                        }.getType();
+                                                            Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                                                            }.getType();
 
-                                                        ArrayList<AvatorBean> list = Utils.gson.fromJson(body, type);
+                                                            ArrayList<AvatorBean> list = Utils.gson.fromJson(body, type);
 
-                                                        if (list != null) {
-                                                            AvatorBean bean1 = list.get(0);
-                                                            if (bean1.getRetmsg().equals("True")) {
-                                                                Log.i("zc", "onResponse:   优惠劵领用成功" );
+                                                            if (list != null) {
+                                                                AvatorBean bean1 = list.get(0);
+                                                                if (bean1.getRetmsg().equals("True")) {
+                                                                    bean.setMember_use_get_status("已领用");
+                                                                    mAdapter.notifyDataSetChanged();
+                                                                }
+
+
                                                             }
 
 
                                                         }
 
 
-
                                                     }
 
+                                                    @Override
+                                                    public void onFailure(Call<String> call, Throwable t) {
 
-
-                                                }
-
-                                                @Override
-                                                public void onFailure(Call<String> call, Throwable t) {
-
-                                                }
-                                            });
+                                                    }
+                                                });
+                                            }
 
                                         }
                                     });

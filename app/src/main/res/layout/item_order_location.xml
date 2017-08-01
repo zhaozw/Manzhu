@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
+
               android:layout_height="wrap_content">
 
 
@@ -11,13 +12,13 @@
         android:layout_height="2.5dp"/>
 
   <LinearLayout
-
+      android:minHeight="70dp"
       android:paddingRight="10dp"
       android:paddingLeft="10dp"
       android:background="@color/bootmbc"
       android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="80dp">
+      android:layout_height="wrap_content">
 
       <LinearLayout
           android:orientation="vertical"
@@ -59,12 +60,11 @@
               android:id="@+id/tv_location"
               android:textColor="@color/secondtextcolor"
               android:layout_marginTop="10dp"
+              android:layout_marginBottom="10dp"
               android:text="地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址"
               android:textSize="10sp"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"/>
-
-
       </LinearLayout>
 
       <ImageView

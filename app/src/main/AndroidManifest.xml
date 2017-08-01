@@ -166,6 +166,8 @@
         </activity>
         <activity android:name=".OrderGenerationActivity">
         </activity>
+        <activity android:name=".ShopCartOrderGeneraActivity">
+        </activity>
     </application>
 
 </manifest>

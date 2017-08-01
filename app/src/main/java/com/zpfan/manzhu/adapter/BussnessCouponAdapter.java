@@ -7,6 +7,7 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -41,6 +42,16 @@ public class BussnessCouponAdapter extends BaseQuickAdapter<CouponBean,BaseViewH
         //最后一个不显示虚线
         if (position == data.size() -1 ) {
             dashline.setVisibility(View.GONE);
+        }
+
+        String status = item.getMember_use_get_status();
+        TextView tvused = helper.getView(R.id.tv_used);
+        if (status.equals("已领用")) {
+            tvused.setText("已领用");
+            tvused.setBackground(mContext.getResources().getDrawable(R.drawable.coupon_used_shape));
+        } else if (status.equals("未领用")) {
+            tvused.setText("未领用");
+            tvused.setBackground(mContext.getResources().getDrawable(R.drawable.coupon_unused_shape));
         }
 
 

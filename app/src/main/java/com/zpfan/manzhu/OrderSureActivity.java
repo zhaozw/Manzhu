@@ -20,12 +20,13 @@ import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.FormatBean;
 import com.zpfan.manzhu.bean.ShopCartbean;
 import com.zpfan.manzhu.utils.EditListener;
+import com.zpfan.manzhu.utils.SPUtils;
 import com.zpfan.manzhu.utils.Utils;
 
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +56,18 @@ public class OrderSureActivity extends AppCompatActivity {
     private int allnumber = 0;
     private OrderSureAdapter mAdapter;
     private ArrayList<AddressBean> mAddressBeen;
-    private Map<String, String> mMap;
+
+    private TextView mTvuserjifen;
+    private Double mJifen;
+    private DecimalFormat mDf;
+    private TextView mTvjifen;
+    private TextView mTvallprice;
+    private TextView mTvyunfei;
+    private TextView mTvyouhuijuan;
+    private TextView mTvpayprice;
+    private String locationid = "";
+    private EditText mEtjifen;
+    private String mBuystyle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,42 +80,42 @@ public class OrderSureActivity extends AppCompatActivity {
 
     private void initView() {
 
-        mMap = new HashMap<>();
-        mMap.put("member_uid", Utils.getloginuid());
-        mMap.put("Count", " ");
-        mMap.put("goods_uid", " ");
-        mMap.put("goods_ps_uid", " ");
-        mMap.put("goods_id_btn", " ");
-        mMap.put("Finally_Address_ID", " ");
-        mMap.put("liuyan_m", " ");
-        mMap.put("CarOrBuy", " ");
-        mMap.put("OrderCate", " ");
-        mMap.put("liuyan_m", " ");
-        mMap.put("shopcoupon_bymemberlist", " ");
-        mMap.put("deduction_buy_score_number", " ");
-        mMap.put("see_sell_my_data_mm", " ");
-        mMap.put("share_uid", " ");
-        mMap.put("appointment_date", " ");
-        mMap.put("appointment_time", " ");
-        mMap.put("yunfei_value_model", " ");
-        mMap.put("trading_value_model", " ");
-        mMap.put("edit_goods_single_price_model", " ");
+        mDf = new DecimalFormat("0.00");
 
+
+        String usesheng = SPUtils.getInstance().getString("usesheng", "");
         View headview = View.inflate(this, R.layout.rv_order_sure_head, null);
         mRvOrdersure.setLayoutManager(new LinearLayoutManager(this));
         Intent intent = getIntent();
-
         String type = intent.getStringExtra("type");
+
+
+
+
 
         if (type.equals("sopcart")) {
             mMorderlist = intent.getParcelableArrayListExtra("shopcat");
+
             for (ShopCartbean.CarshoplistBean bean : mMorderlist) {
-                Log.i("zc", "initView:   看看数据对不对" + bean.getCheckgoodslist().size());
+                double allweight = 0;
+                String uid = "";
+                List<ShopCartbean.CarshoplistBean.CargoodslistBean> cargoodslist = bean.getCheckgoodslist();
+                if (cargoodslist.size() > 0) {
+                    ShopCartbean.CarshoplistBean.CargoodslistBean bean1 = cargoodslist.get(0);
+                    for (ShopCartbean.CarshoplistBean.CargoodslistBean cargoodslistBean : cargoodslist) {
+                        allweight = allweight + cargoodslistBean.getGoods_model().getG_Weight() * cargoodslistBean.getCarCount();
+                        uid = uid +"," + bean1.getGoods_UID();
+                    }
+                    getbuyStyle(usesheng,mDf.format(allweight),uid,bean1.getGoods_model().getG_Province(),bean);
+                }
+
+
             }
+
+
             mAdapter = new OrderSureAdapter(R.layout.item_ordersure, mMorderlist, new EditListener() {
                 @Override
                 public void edit(ArrayList<ShopCartbean.CarshoplistBean.CargoodslistBean> checeGood) {
-                    Log.i("zc", "edit:   更新底部数据");
                     initFootView();
                 }
             });
@@ -135,32 +147,116 @@ public class OrderSureActivity extends AppCompatActivity {
 
 
 
-
-
             mLlImportorder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //发送请求去提交订单
-                    Call<String> orderSubmit = Aplication.mIinterface.orderSubmit(mMap);
 
-                    orderSubmit.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                            String body = response.body();
-                            Log.i("zc", "onResponse:   请求成功" + call.request().toString());
-                            if (body != null) {
+                    Map<String, String>  mMap = new LinkedHashMap<>();
+                    mMap.put("member_uid", Utils.getloginuid());
+                    mMap.put("Count", "0");
+                    mMap.put("goods_uid", "");
+                    mMap.put("goods_ps_uid", "");
+                    mMap.put("goods_id_btn", "");
+                    mMap.put("Finally_Address_ID", locationid);
+                    mMap.put("liuyan_m", " ");
+                    mMap.put("CarOrBuy", "Car");
+                    mMap.put("OrderCate", "购物订单");
+                    mMap.put("liuyan_m", "");
+                    mMap.put("shopcoupon_bymemberlist", "");
+                    String jifen = mEtjifen.getText().toString();
+                    mMap.put("deduction_buy_score_number", jifen);
+                    mMap.put("see_sell_my_data_mm", "");
+                    mMap.put("share_uid", "");
+                    mMap.put("appointment_date", "2017-07-31");
+                    mMap.put("appointment_time", "");
+                    mMap.put("yunfei_value_model", "");
+                    mMap.put("trading_value_model", "");
+                    mMap.put("edit_goods_single_price_model", "");
 
-                                Log.i("zc", "onResponse:   看看body" + body + call.request().toString());
+                    for (ShopCartbean.CarshoplistBean bean : mMorderlist) {
+                        List<ShopCartbean.CarshoplistBean.CargoodslistBean> checkgoodslist = bean.getCheckgoodslist();
+                        for (ShopCartbean.CarshoplistBean.CargoodslistBean cargoodslistBean : checkgoodslist) {
+                            String btn = mMap.get("goods_id_btn");
+                            if (!btn.isEmpty()) {
+                                mMap.put("goods_id_btn", btn + "," + cargoodslistBean.getSC_UID());
+                            } else {
+                                mMap.put("goods_id_btn",  cargoodslistBean.getSC_UID());
+                            }
 
+                            //添加编辑的价格
+                            String edit = mMap.get("edit_goods_single_price_model");
+                            if (edit.isEmpty()) {
+                                mMap.put("edit_goods_single_price_model", cargoodslistBean.getEditMoney());
+                            } else {
+                                mMap.put("edit_goods_single_price_model",edit+ "," + cargoodslistBean.getEditMoney());
                             }
 
 
 
                         }
+                        //添加留言
+                        String liu = mMap.get("liuyan_m");
+                        if (!liu.isEmpty()) {
+                            mMap.put("liuyan_m", liu + "," + bean.getLiuyan());
+                        } else {
+                            mMap.put("liuyan_m", bean.getLiuyan());
+                        }
+                        //添加优惠劵
+                        String bymemberlist = mMap.get("shopcoupon_bymemberlist");
+                        if (!bean.getCouponid().equals("")) {
+                            if (!bymemberlist.isEmpty()) {
+                                mMap.put("shopcoupon_bymemberlist", bymemberlist + "," + bean.getCouponid());
+                            } else {
+                                mMap.put("shopcoupon_bymemberlist",  bean.getCouponid());
+                            }
+                        }
+                        //添加交易方式
+                        String model = mMap.get("trading_value_model");
+                        if (model.isEmpty()) {
+                            mMap.put("trading_value_model", bean.getJiaoyi());
+                        } else {
+                            mMap.put("trading_value_model", model+ "," + bean.getJiaoyi());
+                        }
+
+                    }
+
+                    String number = mMap.get("deduction_buy_score_number");
+                    if (number.isEmpty()) {
+                        mMap.put("deduction_buy_score_number", "0");
+                    }
+
+                    //发送请求去提交订单
+                    Call<String> orderSubmit = Aplication.mIinterface.orderSubmit(mMap);
+                    Log.i("zc", "onClick:   看看请求的参数" + mMap.toString());
+                    orderSubmit.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Log.i("zc", "onResponse:   看看失败的原因" + call.request().toString());
+                            String body = response.body();
+                            if (body != null) {
+                                Type type1 = new TypeToken<ArrayList<AvatorBean>>() {
+                                }.getType();
+
+                                ArrayList<AvatorBean> list = Utils.gson.fromJson(body, type1);
+
+                                if (list != null && list.size() > 0){
+                                    AvatorBean bean = list.get(0);
+                                    Log.i("zc", "onResponse:   看看失败的原因" +bean.getRetmsg() );
+                                    Intent orderIntent = new Intent(OrderSureActivity.this,ShopCartOrderGeneraActivity.class);
+                                    orderIntent.putExtra("avator", bean);
+                                    orderIntent.putExtra("type", "idle");
+                                    startActivity(orderIntent);
+                                }
+
+
+
+                            }
+
+                        }
 
                         @Override
                         public void onFailure(Call<String> call, Throwable t) {
-                            Log.i("zc", "onFailure:   请求失败" + call.request().toString());
+
                         }
                     });
 
@@ -178,31 +274,26 @@ public class OrderSureActivity extends AppCompatActivity {
         allnumber = 0;
         youhui = 0;
         TextView tvallcount = (TextView) mFootView.findViewById(R.id.tv_allcount);
-        TextView tvallprice = (TextView) mFootView.findViewById(R.id.tv_allprice);
-        TextView tvyunfei = (TextView) mFootView.findViewById(R.id.tv_yunfei);
-        TextView tvyouhuijuan = (TextView) mFootView.findViewById(R.id.tv_youhuijuan);
-        final TextView tvjifen = (TextView) mFootView.findViewById(R.id.tv_jifen);
-        final TextView tvpayprice = (TextView) mFootView.findViewById(R.id.tv_payprice);
-        final EditText etjifen = (EditText) mFootView.findViewById(R.id.et_jifen);
+        mTvallprice = (TextView) mFootView.findViewById(R.id.tv_allprice);
+        mTvyunfei = (TextView) mFootView.findViewById(R.id.tv_yunfei);
+        mTvyouhuijuan = (TextView) mFootView.findViewById(R.id.tv_youhuijuan);
+        mTvjifen = (TextView) mFootView.findViewById(R.id.tv_jifen);
+        mTvpayprice = (TextView) mFootView.findViewById(R.id.tv_payprice);
+        mTvuserjifen = (TextView) mFootView.findViewById(R.id.tv_userjifen);
+        mEtjifen = (EditText) mFootView.findViewById(R.id.et_jifen);
         View dashinle = mFootView.findViewById(R.id.dashline1);
         dashinle.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
+        getUserIntegral();
+
 
         for (ShopCartbean.CarshoplistBean bean : mMorderlist) {
-
+            Log.i("zc", "initFootView:   看看所有的运费" + bean.getYunfei());
             yunfeni = yunfeni + bean.getYunfei();
-            youhui = youhui + bean.getYouhui();
-                String m = mMap.get("liuyan_m");
-            String liuyan = m + "," + bean.getLiuyan();
+            youhui = youhui + Double.valueOf(bean.getCoupon());
+
+
             for (ShopCartbean.CarshoplistBean.CargoodslistBean cargoodslistBean : bean.getCheckgoodslist()) {
-                String btn = mMap.get("goods_id_btn");
-                String id = btn + ","+ cargoodslistBean.getSC_UID();
-
-
-
-                mMap.put("goods_id_btn", id);
-                mMap.put("OrderCate", "购物订单");
-                mMap.put("CarOrBuy", "car");
 
                 allnumber = allnumber + 1 * cargoodslistBean.getCarCount();
                 String uid = cargoodslistBean.getGoods_Spcification_UID();
@@ -227,22 +318,22 @@ public class OrderSureActivity extends AppCompatActivity {
 
         tvallcount.setText(allnumber + "");
 
-        final DecimalFormat df = new DecimalFormat("0.00");
-        tvallprice.setText(df.format(allprice));
+
+        mTvallprice.setText(mDf.format(allprice));
         //运费的计算
-        tvyunfei.setText(df.format(yunfeni));
+        mTvyunfei.setText(mDf.format(yunfeni));
         //优惠劵的金额
-        tvyouhuijuan.setText(df.format(youhui));
-        String s = tvjifen.getText().toString();
+        mTvyouhuijuan.setText(mDf.format(youhui));
+        String s = mTvjifen.getText().toString();
         Double jifen = Double.valueOf(s);
 
         //积分折扣的钱
         double endmoney = allprice + yunfeni - youhui - jifen;
 
-        tvpayprice.setText(df.format(endmoney));
-        mTvPay.setText(df.format(endmoney));
+        mTvpayprice.setText(mDf.format(endmoney));
+        mTvPay.setText(mDf.format(endmoney));
 
-        etjifen.addTextChangedListener(new TextWatcher() {
+        mEtjifen.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -250,34 +341,95 @@ public class OrderSureActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String w = s.toString();
-                double v = 0;
-                if (!w.isEmpty()) {
-                    Double aDouble = Double.valueOf(w);
-                    v = aDouble / 100;
-                    tvjifen.setText(df.format(v));
-                    //积分折扣的钱
-                    double endmoney = allprice + yunfeni - youhui - v;
-                    tvpayprice.setText(df.format(endmoney));
-                    mTvPay.setText(df.format(endmoney));
+                String s1 = s.toString();
+
+                if (s1.length() > 0) {
+                    mEtjifen.setSelection(mEtjifen.getText().length());
+                    Double aDouble1 = Double.valueOf(s1); //用户输入的积分数量
+                    double jifen = aDouble1 / 100; // 输入的积分可以抵扣的钱
+                    String s2 = mTvallprice.getText().toString();
+                    Double allprice = Double.valueOf(s2);
+
+                    //积分大于剩余的积分的时候  只能输入到剩余积分
+                    if (aDouble1 > mJifen) {
+                        aDouble1 = mJifen;
+
+                        mEtjifen.setText(aDouble1 + "");
+                        mTvjifen.setText(mDf.format(aDouble1 / 100));
+
+                    } else {
+
+                        mTvjifen.setText(mDf.format(aDouble1 / 100));
+                    }
+                    //积分能抵扣商品价格的时候 所能使用的积分只能是商品那么多
+                    if (jifen > allprice){
+                        jifen = allprice;
+                        mEtjifen.setText(jifen * 100 + "");
+                        mTvjifen.setText(mDf.format(jifen));
+                        Log.i("zc", "onTextChanged:   进入了价格积分");
+                    }
+
+
+                }else if(s.length() == 0){
+
+                    mTvjifen.setText("0.00");
+
                 }
+
+                jisuanMoney();
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() == 0) {
-
-                    tvjifen.setText(df.format(0));
-                    //积分折扣的钱
-                    double endmoney = allprice + yunfeni - youhui - 0;
-                    tvpayprice.setText(df.format(endmoney));
-                    mTvPay.setText(df.format(endmoney));
-                }
-
 
             }
         });
 
+
+    }
+
+    private void getUserIntegral() {
+
+        Call<String> getmemberintegral = Aplication.mIinterface.getmembermoneyintegral(Utils.getloginuid(), "积分");
+
+        getmemberintegral.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String body = response.body();
+                if (body != null) {
+                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                    }.getType();
+
+                    ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                    if (avatorBeen != null && avatorBeen.size() > 0) {
+                        AvatorBean bean = avatorBeen.get(0);
+
+                        String retmsg = bean.getRetmsg();
+                        if (retmsg != null) {
+                            mTvuserjifen.setText("（可用积分 " +retmsg + "）");
+                            Double aDouble = Double.valueOf(retmsg);
+                            mJifen = aDouble;
+                        }
+
+
+
+                    }
+
+
+
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
 
     }
 
@@ -312,8 +464,8 @@ public class OrderSureActivity extends AppCompatActivity {
                                     if (bean.isMD_IsDefault()) {
                                         mTvaddrname.setText("收货人：" + bean.getMD_Name());
                                         mTvphone.setText(bean.getMD_Phone());
-                                        mTvaddrlocation.setText(bean.getMD_Province() + bean.getMD_City() + bean.getMD_Area() + bean.getMD_Address());
-                                        mMap.put("Finally_Address_ID", bean.getId() + "");
+                                        mTvaddrlocation.setText("收货地址：" +bean.getMD_Province() + bean.getMD_City() + bean.getMD_Area() + bean.getMD_Address());
+                                        locationid = bean.getId() + "";
                                     }
 
                                 }
@@ -352,6 +504,72 @@ public class OrderSureActivity extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
     }
 
+
+    protected  void jisuanMoney(){
+        String s = mTvallprice.getText().toString();
+        Double allprice = Double.valueOf(s);
+
+        String yun = mTvyunfei.getText().toString();
+        Double yunfei = Double.valueOf(yun);
+
+        String you = mTvyouhuijuan.getText().toString();
+        Double youhui = Double.valueOf(you);
+
+        String jife = mTvjifen.getText().toString();
+        Double jifen = Double.valueOf(jife);
+
+        double pay = allprice + yunfei - youhui - jifen;
+
+        mTvpayprice.setText(mDf.format(pay));
+        mTvPay.setText(mDf.format(pay));
+    }
+
+    private void getbuyStyle(String usesheng, String format, String uid, String bussnesssheng, final ShopCartbean.CarshoplistBean item) {
+
+        Call<String> getorderbydealstyle = Aplication.mIinterface.getorderbydealstyle("Car", "二手商品", Utils.getloginuid(),bussnesssheng, usesheng, format, uid);
+        getorderbydealstyle.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+         Log.i("zc", "getbuyStyle:   看看发送的请求" + call.request().toString());
+                String body = response.body();
+
+                if (body != null) {
+                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                    }.getType();
+
+                    ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+
+                    if (avatorBeen != null && avatorBeen.size() > 0) {
+
+                        AvatorBean bean = avatorBeen.get(0);
+
+                        mBuystyle = bean.getRetmsg();
+                        Log.i("zc", "onResponse:   看看获取的交易方式i" + mBuystyle);
+                        item.setHuoqujiaoyi(mBuystyle);
+                    }
+                } else {
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+
+
+
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -365,7 +583,9 @@ public class OrderSureActivity extends AppCompatActivity {
                         bean.setIscheck(false);
                     }
                 }
+                locationid = location.getId() + "";
             }
+
 
             mTvaddrname.setText("收货人：" + location.getMD_Name());
             mTvphone.setText(location.getMD_Phone());
@@ -373,4 +593,8 @@ public class OrderSureActivity extends AppCompatActivity {
 
         }
     }
+
+
+
+
 }

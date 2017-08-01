@@ -48,6 +48,7 @@ import com.zpfan.manzhu.SearchResultsActivity;
 import com.zpfan.manzhu.ShopCarActivity;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.SearchBean;
+import com.zpfan.manzhu.bean.ShopCartbean;
 import com.zpfan.manzhu.bean.TypeBean;
 import com.zpfan.manzhu.utils.MyScrollView;
 import com.zpfan.manzhu.utils.ScrollViewListener;
@@ -267,7 +268,100 @@ public class HomeFragment extends Fragment implements BDLocationListener {
         });
 
 
+
+        showShopCartNumber();
+
         super.onResume();
+    }
+
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        showShopCartNumber();
+
+    }
+
+    private void showShopCartNumber() {
+        if (Utils.isUserLogin()) {
+            mTvShopcart.setVisibility(View.VISIBLE);
+            mTvBtshopcart.setVisibility(View.VISIBLE);
+            //用户登陆  去查询购物车的数量
+            Call<String> getshopcarlist = Aplication.mIinterface.getshopcarlist(Utils.getloginuid(), "闲置");
+
+            getshopcarlist.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    String body = response.body();
+                    Log.i("zc", "onResponse:   看看数据" + call.request().toString());
+
+                    if (body != null) {
+                        Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                        }.getType();
+
+                        ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                        if (avatorBeen != null && avatorBeen.size() > 0) {
+                            String retmsg = avatorBeen.get(0).getRetmsg();
+                            if (retmsg != null && retmsg.contains("[")) {
+                                // String substring = retmsg.substring(1, retmsg.lastIndexOf("]"));
+
+                                // if (substring != null) {
+
+                                Type type1 = new TypeToken<ArrayList<ShopCartbean>>() {
+                                }.getType();
+                                int count = 0;
+                                ArrayList<ShopCartbean> cartbeen = Utils.gson.fromJson(retmsg, type1);
+
+                                for (ShopCartbean cartbean : cartbeen) {
+                                    count = count + cartbean.getIdle_number() + cartbean.getNew_number() + cartbean.getServer_number();
+                                }
+                                if (count > 99) {
+                                    mTvShopcart.setText("99+");
+                                    mTvBtshopcart.setText("99+");
+                                }
+
+                                mTvShopcart.setText(count+"");
+                                mTvBtshopcart.setText(count+"");
+
+
+
+
+                                // }
+
+
+
+
+
+
+
+                            }
+
+
+
+
+                        }
+
+
+
+                    }
+
+
+
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+
+                }
+            });
+
+
+
+        } else {
+            //用户没有登陆 购物车数量不显示
+            mTvShopcart.setVisibility(View.GONE);
+            mTvBtshopcart.setVisibility(View.GONE);
+        }
     }
 
     private void reservation() {

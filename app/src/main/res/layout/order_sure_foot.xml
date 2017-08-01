@@ -37,6 +37,7 @@
             android:layout_height="12.5dp"/>
 
         <TextView
+            android:id="@+id/tv_userjifen"
             android:textColor="@color/secondtextcolor"
             android:textSize="14sp"
             android:text="（可用积分 3453）"

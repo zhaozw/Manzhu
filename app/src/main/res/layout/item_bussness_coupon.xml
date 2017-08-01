@@ -6,7 +6,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
-    
+
     <LinearLayout
         android:id="@+id/ll_coupon"
        android:layout_toLeftOf="@+id/iv_ques"
@@ -107,9 +107,23 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_used"
+        android:textSize="9sp"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="5dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:gravity="center"
+        android:textColor="@color/buttontext"
+        android:text="已领用"
+        android:background="@drawable/coupon_used_shape"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"/>
 
 
     <ImageView
+
         android:id="@+id/iv_ques"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"

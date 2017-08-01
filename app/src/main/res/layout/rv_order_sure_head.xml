@@ -76,13 +76,13 @@
 
             <TextView
                 android:id="@+id/tv_addrlocation"
-                android:layout_marginTop="12.5dp"
+                android:layout_marginTop="10dp"
                 android:text="收货地址：成都市锦江区工业园区锦华路三段86号汇融国际E座"
                 android:textColor="@color/secondtextcolor"
                 android:textSize="12sp"
+                android:maxLines="2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
         </LinearLayout>
 
 

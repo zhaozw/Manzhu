@@ -72,57 +72,59 @@
         android:background="@color/bootmbc"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:minHeight="80dp"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content">
+
             <LinearLayout
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="20dp">
-                
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:textSize="10sp"
-                    android:gravity="center"
-                    android:background="@drawable/fanmai_shape"
-                    android:textColor="@color/buttontext"
-                    android:text="默认"
                     android:layout_width="32.5dp"
-                    android:layout_height="17.5dp"/>
+                    android:layout_height="17.5dp"
+                    android:background="@drawable/fanmai_shape"
+                    android:gravity="center"
+                    android:text="默认"
+                    android:textColor="@color/buttontext"
+                    android:textSize="10sp"/>
 
                 <TextView
 
-                    android:layout_marginLeft="7.5dp"
                     android:id="@+id/tv_moren"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7.5dp"
                     android:text="收获人名字"
                     android:textColor="@color/maintextcolor"
-                    android:textSize="14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="14sp"/>
 
                 <View
-                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"/>
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
 
                 <TextView
                     android:id="@+id/tv_mophone"
-                    android:textColor="@color/maintextcolor"
-                    android:text="15029498047"
-                    android:textSize="14sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
+                    android:layout_height="wrap_content"
+                    android:text="15029498047"
+                    android:textColor="@color/maintextcolor"
+                    android:textSize="14sp"/>
 
 
             </LinearLayout>
 
             <TextView
+                android:layout_marginBottom="10dp"
                 android:id="@+id/tv_molocation"
                 android:textColor="@color/secondtextcolor"
                 android:layout_marginTop="10dp"

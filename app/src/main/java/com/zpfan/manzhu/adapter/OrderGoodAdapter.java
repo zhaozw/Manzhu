@@ -31,7 +31,7 @@ import java.util.List;
 
 public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBean.CargoodslistBean,BaseViewHolder> {
 
-    int max;
+
     EditListener mListener;
 
     public OrderGoodAdapter(@LayoutRes int layoutResId, @Nullable List<ShopCartbean.CarshoplistBean.CargoodslistBean> data,EditListener listener) {
@@ -65,10 +65,12 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
         final ImageView  ivedit = helper.getView(R.id.iv_edit);
         ImageView ivshopcover = helper.getView(R.id.iv_shopcover);
 
+
+
         Glide.with(mContext).load(model.getG_Cover()).into(ivshopcover);
 
 
-        EditText edgoodmoney = helper.getView(R.id.et_goodmoney);
+        final EditText edgoodmoney = helper.getView(R.id.et_goodmoney);
 
            String uid = item.getGoods_Spcification_UID();
        if (uid.equals("")){
@@ -79,7 +81,8 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
            helper.setText(R.id.tv_goodprice, model.getG_FixedPrice())
                    .setText(R.id.tv_kucun,"（库存：" + model.getG_StockNum() + "）");
            edgoodmoney.setText(model.getG_FixedPrice());
-           max = model.getG_StockNum();
+           item.setEditMoney(model.getG_FixedPrice());
+            item.setKycun(model.getG_StockNum());
        }else {
            List<FormatBean> specifications = model.getGoods_specifications();
            for (FormatBean specification : specifications) {
@@ -91,7 +94,8 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                    helper.setText(R.id.tv_goodprice, specification.getPS_FixedPrice())
                    .setText(R.id.tv_kucun,"（库存：" +specification.getPS_Inventory() + "）");
                     edgoodmoney.setText(specification.getPS_FixedPrice());
-                   max = specification.getPS_Inventory();
+                   item.setEditMoney(specification.getPS_FixedPrice());
+                    item.setKycun(specification.getPS_Inventory());
                }
 
 
@@ -158,19 +162,21 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
             }
         });
 
-
+        helper.addOnClickListener(R.id.bt_up)
+                .addOnClickListener(R.id.bt_down);
 
 
         btup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String count = tvcount.getText().toString();
-
                 Integer integer = Integer.valueOf(count) + 1;
 
-                if (integer > max) {
+                int kycun = item.getKycun();
 
-                    integer = max;
+                if (integer > kycun) {
+
+                    integer = kycun;
                     tvcarcount.setText("x" + integer);
                     tvcount.setText(integer + "");
                     item.setCarCount(integer);
@@ -223,7 +229,10 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                     //编辑栏要隐藏
                     llfinish.setVisibility(View.GONE);
                     lledit.setVisibility(View.GONE);
-                  mListener.edit(null);
+                String s1 = edgoodmoney.getText().toString();
+                item.setEditMoney(s1);
+
+                mListener.edit(null);
 
                     llnormal.setVisibility(View.VISIBLE);
                     ivedit.setVisibility(View.VISIBLE);

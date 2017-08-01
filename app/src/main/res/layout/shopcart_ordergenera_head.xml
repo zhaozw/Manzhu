@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@mipmap/com_icon_check_g"
+            android:layout_width="25dp"
+            android:layout_height="25dp"/>
+
+        <TextView
+            android:layout_marginLeft="12.5dp"
+            android:text="恭喜您，下单成功"
+            android:textSize="18sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:textColor="@color/secondtextcolor"
+        android:textSize="10sp"
+        android:text="由于您当前拍下的是闲置物品，卖家需要先确认当前是否有货后，您才可进行支付操作（如卖家24小时内未确认的，订单会自动取消）。在完成支付前，您和卖家均可在【个人中心 - 我买到的（我卖出的）】中修改本订单信息。"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="12.5dp"
+        android:background="@color/weaklin"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+
+    <LinearLayout
+        android:gravity="center|center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="65dp">
+
+        <TextView
+            android:id="@+id/bt_backhome"
+            android:clickable="true"
+            android:textColor="@drawable/orde_generation_textcolor_selector"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/order_generation_button_selector"
+            android:text="回首页"
+            android:layout_width="85dp"
+            android:layout_height="30dp"/>
+        <TextView
+            android:id="@+id/bt_backgood"
+            android:layout_marginLeft="15dp"
+            android:clickable="true"
+            android:textColor="@drawable/orde_generation_textcolor_selector"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/order_generation_button_selector"
+            android:text="回商品页"
+            android:layout_width="85dp"
+            android:layout_height="30dp"/>
+        <TextView
+            android:id="@+id/bt_usercenter"
+            android:layout_marginLeft="15dp"
+            android:clickable="true"
+            android:textColor="@drawable/orde_generation_textcolor_selector1"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/order_generation_button_selector1"
+            android:text="个人中心"
+            android:layout_width="85dp"
+            android:layout_height="30dp"/>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/threebackground"
+        android:layout_width="match_parent"
+        android:layout_height="7.5dp"/>
+
+
+
+</LinearLayout>
