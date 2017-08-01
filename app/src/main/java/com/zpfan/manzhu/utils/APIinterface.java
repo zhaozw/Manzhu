@@ -378,5 +378,15 @@ public interface APIinterface {
                                      @Query("goods_uid_arry") String goods_uid_arry);
 
 
+    /**
+     *
+     *获取订单详情的方法
+     * @param order_uid
+     * @return
+     */
+    @GET("OrderDetails")
+    Call<String> getOrderDetails(@Query("order_uid") String order_uid);
+
+
 
 }

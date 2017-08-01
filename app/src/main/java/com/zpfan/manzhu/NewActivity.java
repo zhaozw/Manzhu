@@ -1,5 +1,6 @@
 package com.zpfan.manzhu;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -174,6 +175,16 @@ public class NewActivity extends AppCompatActivity implements View.OnClickListen
 
                                 mBussnessBeen = Utils.gson.fromJson(substring, type1);
                                 mAdapter = new NewAdapter(R.layout.item_new, mBussnessBeen);
+                                mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                        Intent intent = new Intent(NewActivity.this, IdleDetailActivity.class);
+                                        intent.putExtra("id", mBussnessBeen.get(position));
+
+                                        startActivity(intent);
+
+                                    }
+                                });
                                 mHeadView = View.inflate(NewActivity.this, R.layout.new_head, null);
                                 mAdapter.addHeaderView(mHeadView);
                                 mRvIdel.setAdapter(mAdapter);
