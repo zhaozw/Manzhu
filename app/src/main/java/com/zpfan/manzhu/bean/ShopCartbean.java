@@ -74,18 +74,35 @@ public class ShopCartbean implements Parcelable {
         private int Member_Level;
         private String Member_Name;
         private String Member_UID;
-        private List<CargoodslistBean> cargoodslist;
-        private List<CargoodslistBean> checkgoodslist = new ArrayList<>();
+        private ArrayList<CargoodslistBean> cargoodslist;
+        private ArrayList<CargoodslistBean> checkgoodslist = new ArrayList<>();
         private String liuyan = "给卖家的补充说明都可以写在这里";
         private double yunfei = 0;
         private String couponid = "";
         private String coupon = "0.00";
         private String jiaoyi = "";
         private String huoqujiaoyi = "";
+        private boolean ischeckallgood = false;
+        private boolean iscleancheck = false;
 
 
 
 
+        public boolean iscleancheck() {
+            return iscleancheck;
+        }
+
+        public void setIscleancheck(boolean iscleancheck) {
+            this.iscleancheck = iscleancheck;
+        }
+
+        public boolean ischeckallgood() {
+            return ischeckallgood;
+        }
+
+        public void setIscheckallgood(boolean ischeckallgood) {
+            this.ischeckallgood = ischeckallgood;
+        }
 
         public String getHuoqujiaoyi() {
             return huoqujiaoyi;
@@ -147,11 +164,11 @@ public class ShopCartbean implements Parcelable {
             IsPerson = person;
         }
 
-        public List<CargoodslistBean> getCheckgoodslist() {
+        public ArrayList<CargoodslistBean> getCheckgoodslist() {
             return checkgoodslist;
         }
 
-        public void setCheckgoodslist(List<CargoodslistBean> checkgoodslist) {
+        public void setCheckgoodslist(ArrayList<CargoodslistBean> checkgoodslist) {
             this.checkgoodslist = checkgoodslist;
         }
 
@@ -191,7 +208,7 @@ public class ShopCartbean implements Parcelable {
             return cargoodslist;
         }
 
-        public void setCargoodslist(List<CargoodslistBean> cargoodslist) {
+        public void setCargoodslist(ArrayList<CargoodslistBean> cargoodslist) {
             this.cargoodslist = cargoodslist;
         }
 
@@ -232,9 +249,18 @@ public class ShopCartbean implements Parcelable {
             private String spUid = "";
             private int kycun  = 0;
             private String editMoney;
+            private boolean nodelete = false;
 
 
 
+
+            public boolean isNodelete() {
+                return nodelete;
+            }
+
+            public void setNodelete(boolean nodelete) {
+                this.nodelete = nodelete;
+            }
 
             public String getEditMoney() {
                 return editMoney;
@@ -2338,6 +2364,7 @@ public class ShopCartbean implements Parcelable {
                 dest.writeString(this.spUid);
                 dest.writeInt(this.kycun);
                 dest.writeString(this.editMoney);
+                dest.writeByte(this.nodelete ? (byte) 1 : (byte) 0);
             }
 
             protected CargoodslistBean(Parcel in) {
@@ -2353,6 +2380,7 @@ public class ShopCartbean implements Parcelable {
                 this.spUid = in.readString();
                 this.kycun = in.readInt();
                 this.editMoney = in.readString();
+                this.nodelete = in.readByte() != 0;
             }
 
             public static final Creator<CargoodslistBean> CREATOR = new Creator<CargoodslistBean>() {
@@ -2390,6 +2418,8 @@ public class ShopCartbean implements Parcelable {
             dest.writeString(this.coupon);
             dest.writeString(this.jiaoyi);
             dest.writeString(this.huoqujiaoyi);
+            dest.writeByte(this.ischeckallgood ? (byte) 1 : (byte) 0);
+            dest.writeByte(this.iscleancheck ? (byte) 1 : (byte) 0);
         }
 
         protected CarshoplistBean(Parcel in) {
@@ -2405,6 +2435,8 @@ public class ShopCartbean implements Parcelable {
             this.coupon = in.readString();
             this.jiaoyi = in.readString();
             this.huoqujiaoyi = in.readString();
+            this.ischeckallgood = in.readByte() != 0;
+            this.iscleancheck = in.readByte() != 0;
         }
 
         public static final Creator<CarshoplistBean> CREATOR = new Creator<CarshoplistBean>() {

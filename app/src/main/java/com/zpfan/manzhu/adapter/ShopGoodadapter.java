@@ -46,11 +46,13 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
 
 
 
-    public ShopGoodadapter(@LayoutRes int layoutResId, @Nullable List<ShopCartbean.CarshoplistBean.CargoodslistBean> data,GoodChangeListener listener,DeleteListener deleteListener) {
+
+    public ShopGoodadapter(@LayoutRes int layoutResId, @Nullable List<ShopCartbean.CarshoplistBean.CargoodslistBean> data, GoodChangeListener listener, DeleteListener deleteListener) {
         super(layoutResId, data);
         mListener = listener;
         this.data = data;
         mDeleteListener = deleteListener;
+
     }
 
     @Override
@@ -84,22 +86,42 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
         //编辑数量
         tvcount.setText(item.getCarCount() + "");
         mCount = item.getCarCount();
-        //初始化规格的显示
-        final String uid = item.getGoods_Spcification_UID();
-        if (!uid.equals("")) {
-            for (FormatBean specification : specifications) {
-                format.add(specification.getPS_AttributeValues());
-                formatid.add(specification.getPS_UniqueID());
 
-                if (specification.getPS_UniqueID().equals(uid)) {
+        //初始化规格的显示  先查看该商品是否有规格  如果有规格的话就显示选中的规格  如果没有规格 就选中默认的规格
+        List<FormatBean> specifications1 = item.getGoods_model().getGoods_specifications();
+            final String uid = item.getGoods_Spcification_UID();
+        if (specifications1 != null && specifications1.size() > 0) {
+            if (!uid.equals("")) {
+                //有选中的规格
+                for (FormatBean specification : specifications) {
+                    format.add(specification.getPS_AttributeValues());
+                    formatid.add(specification.getPS_UniqueID());
 
-                    helper.setText(R.id.tv_format, specification.getPS_AttributeValues());
-                    helper.setText(R.id.tv_goodprice, specification.getPS_FixedPrice());
-                    helper.setText(R.id.tv_checkformate, specification.getPS_AttributeValues());
-                    max = specification.getPS_Inventory();
+                    if (specification.getPS_UniqueID().equals(uid)) {
+                        helper.setText(R.id.tv_format, specification.getPS_AttributeValues());
+                        helper.setText(R.id.tv_goodprice, specification.getPS_FixedPrice());
+                        helper.setText(R.id.tv_checkformate, specification.getPS_AttributeValues());
+                        max = specification.getPS_Inventory();
+                    }
+
+
                 }
 
+            } else {
+                //没有选中的规格  选中默认的规格
+                for (FormatBean specification : specifications) {
+                    if (specification.isPS_IsDefaultSelected()) {
+                        helper.setText(R.id.tv_format, specification.getPS_AttributeValues());
+                        helper.setText(R.id.tv_goodprice, specification.getPS_FixedPrice());
+                        helper.setText(R.id.tv_checkformate, specification.getPS_AttributeValues());
+                        max = specification.getPS_Inventory();
+                        item.setGoods_Spcification_UID(specification.getPS_UniqueID());
+                    }
+                }
 
+              /*  format.clear();
+                formatid.clear();
+                helper.setText(R.id.tv_goodprice, item.getGoods_model().getG_FixedPrice());*/
             }
 
         } else {
@@ -111,13 +133,10 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
 
 
 
-
-
         btup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //数量增加  但是最大不能超过max
-              
                 if (uid.equals("")) {
                     max = item.getGoods_model().getG_StockNum();
                 }
@@ -136,8 +155,6 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
                     item.setCarCount(i);
                 }
                 mCount = i;
-
-
 
             }
         });
@@ -158,7 +175,6 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
                 }
                 mCount = i;
                 Log.i("zc", "onClick:   " + mCount);
-
             }
         });
 
@@ -181,6 +197,8 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                         Log.i("zc", "onItemClick:  看看你选的是什么规格" + format.get(position) +formatid.get(position) );
                         item.setGoods_Spcification_UID(formatid.get(position));
+                        item.setCarCount(1);
+                        tvcount.setText("1");
                         notifyDataSetChanged();
                         popupWindow.dismiss();
                     }
@@ -211,7 +229,8 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
 
 
         helper.addOnClickListener(R.id.iv_check)
-                .addOnClickListener(R.id.ll_delete);
+                .addOnClickListener(R.id.ll_delete)
+                ;
 
         if (data.get(position).isChecked()) {
             mIvcheck.setImageResource(R.mipmap.com_icon_multcheck_bl);

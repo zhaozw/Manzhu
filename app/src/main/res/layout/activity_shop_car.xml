@@ -184,7 +184,11 @@
         android:orientation="horizontal"
         android:paddingLeft="10dp">
 
-
+    <LinearLayout
+       android:gravity="center_vertical"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
         <ImageView
             android:id="@+id/iv_checkall"
             android:layout_width="17.5dp"
@@ -236,10 +240,9 @@
             android:text="（不含运费）"
             android:textSize="10sp"/>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+    </LinearLayout>
+
+
 
         <TextView
             android:id="@+id/tv_settlement"

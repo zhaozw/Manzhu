@@ -32,18 +32,20 @@ import java.util.List;
 public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBean.CargoodslistBean,BaseViewHolder> {
 
 
+    private final List<ShopCartbean.CarshoplistBean.CargoodslistBean> data;
     EditListener mListener;
 
     public OrderGoodAdapter(@LayoutRes int layoutResId, @Nullable List<ShopCartbean.CarshoplistBean.CargoodslistBean> data,EditListener listener) {
         super(layoutResId, data);
         mListener = listener;
+        this.data = data;
     }
 
     @Override
     protected void convert(BaseViewHolder helper, final ShopCartbean.CarshoplistBean.CargoodslistBean item) {
 
-        final ArrayList<String> format = new ArrayList<>();
-        final ArrayList<String> formatid = new ArrayList<>();
+        final ArrayList<FormatBean> format = new ArrayList<>();
+
         ShopCartbean.CarshoplistBean.CargoodslistBean.GoodsModelBean model = item.getGoods_model();
         helper.setText(R.id.tv_goodname, model.getG_Title());
         View dashline = helper.getView(R.id.dashline);
@@ -55,15 +57,21 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
         final LinearLayout llcheckformate = helper.getView(R.id.ll_checkformate); // 规格的选择
         LinearLayout llfinishedit = helper.getView(R.id.ll_finishedit); // 完成编辑的按钮
         final LinearLayout llfinish = helper.getView(R.id.ll_finish); //删除 和完成编辑
-        LinearLayout lldelete = helper.getView(R.id.ll_delete); //删除商品的按钮
+        //删除商品的按钮
+        LinearLayout  mLldelete = helper.getView(R.id.ll_delete);
         final LinearLayout llnormal = helper.getView(R.id.ll_normal); //删除商品的按钮
         final LinearLayout lledit = helper.getView(R.id.ll_edit); //删除商品的按钮
         final TextView tvformat = helper.getView(R.id.tv_format);
         final TextView tvcheckformat = helper.getView(R.id.tv_checkformate);
+        final TextView tvgooprice = helper.getView(R.id.tv_goodprice);
 
 
         final ImageView  ivedit = helper.getView(R.id.iv_edit);
         ImageView ivshopcover = helper.getView(R.id.iv_shopcover);
+
+        if (item.isNodelete()) {
+            mLldelete.setVisibility(View.GONE);
+        }
 
 
 
@@ -75,7 +83,7 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
            String uid = item.getGoods_Spcification_UID();
        if (uid.equals("")){
            format.clear();
-           formatid.clear();
+
            tvformat.setText("");
            tvcheckformat.setText("");
            helper.setText(R.id.tv_goodprice, model.getG_FixedPrice())
@@ -86,8 +94,8 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
        }else {
            List<FormatBean> specifications = model.getGoods_specifications();
            for (FormatBean specification : specifications) {
-               format.add(specification.getPS_AttributeValues());
-               formatid.add(specification.getPS_UniqueID());
+               format.add(specification);
+
                if (specification.getPS_UniqueID().equals(uid)) {
                    tvformat.setText(specification.getPS_AttributeValues());
                    tvcheckformat.setText(specification.getPS_AttributeValues());
@@ -114,7 +122,7 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
         edgoodmoney.setSelection(s.length());
 
         //如果有规格的话 就把规格的选项展示出来 如果没有的话 就不展示
-        List<FormatBean> specifications = item.getGoods_model().getGoods_specifications();
+        final List<FormatBean> specifications = item.getGoods_model().getGoods_specifications();
         Log.i("zc", "convert:   看看规格" + specifications.size());
         if (specifications.size() == 0) {
             llcheckformate.setVisibility(View.GONE);
@@ -130,21 +138,21 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
         llcheckformate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopwindow(format,formatid);
+                showPopwindow(format);
             }
-            private void showPopwindow(final ArrayList<String> format, final ArrayList<String> formatid) {
+            private void showPopwindow(final ArrayList<FormatBean> format) {
                 final PopupWindow popupWindow = new PopupWindow(mContext);
                 final View pop = View.inflate(mContext, R.layout.format_popwindow, null);
                 RecyclerView rvformat = (RecyclerView) pop.findViewById(R.id.rv_format);
                 rvformat.setLayoutManager(new LinearLayoutManager(mContext));
-                FormartAdapter adapter = new FormartAdapter(R.layout.item_location_popr, format);
+                FormartBeanAdapter adapter = new FormartBeanAdapter(R.layout.item_location_popr, format);
                 adapter.setOnItemClickListener(new OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        Log.i("zc", "onItemClick:  看看你选的是什么规格" + format.get(position) +formatid.get(position) );
-                        item.setGoods_Spcification_UID(formatid.get(position));
-                        notifyDataSetChanged();
+                        item.setGoods_Spcification_UID(format.get(position).getPS_UniqueID());
+                        edgoodmoney.setText(format.get(position).getPS_FixedPrice());
                         popupWindow.dismiss();
+
                     }
                 });
                 rvformat.setAdapter(adapter);
@@ -230,10 +238,24 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                     llfinish.setVisibility(View.GONE);
                     lledit.setVisibility(View.GONE);
                 String s1 = edgoodmoney.getText().toString();
+                if (s1.length() == 0) {
+                    s1 = "0";
+                }
                 item.setEditMoney(s1);
+                tvgooprice.setText(s1);
+                //改价格的时候有两种情况  一种是没有规格的价格 一种是有规格的价格
+                item.getGoods_model().setG_FixedPrice(s1);
+                String uid1 = item.getGoods_Spcification_UID();
+                Log.i("zc", "onClick:   看看是不是有uid的"  + uid1);
+                List<FormatBean> specifications1 = item.getGoods_model().getGoods_specifications();
+                for (FormatBean bean : specifications1) {
+                    if (bean.getPS_UniqueID().equals(uid1)) {
+                        bean.setPS_FixedPrice(s1);
+                    }
+                }
 
+                notifyDataSetChanged();
                 mListener.edit(null);
-
                     llnormal.setVisibility(View.VISIBLE);
                     ivedit.setVisibility(View.VISIBLE);
 
@@ -256,13 +278,9 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
         });
 
 
-
-
-
-
-
-
     }
+
+
 
 
 

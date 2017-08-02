@@ -179,7 +179,7 @@
 
                 <TextView
                     android:id="@+id/tv_shaixuan"
-                    android:text="COS相关"
+                    android:text="相关COS"
                     android:layout_marginLeft="7.5dp"
                     android:textColor="@color/secondtextcolor"
                     android:textSize="12sp"
@@ -926,7 +926,7 @@
             android:textStyle="bold"
             android:textColor="@color/numbertextcolor"
             android:textSize="14sp"
-            android:text=" 2 "
+            android:text=" 0 "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

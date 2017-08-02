@@ -1,10 +1,12 @@
 package com.zpfan.manzhu.adapter;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,11 +19,22 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.gson.reflect.TypeToken;
+import com.zpfan.manzhu.Aplication;
+import com.zpfan.manzhu.LoginActivity;
 import com.zpfan.manzhu.R;
+import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.BussnessBean;
+import com.zpfan.manzhu.myui.MyToast;
 import com.zpfan.manzhu.utils.Utils;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2017/7/12 0012.
@@ -37,7 +50,7 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, BussnessBean item) {
+    protected void convert(BaseViewHolder helper, final BussnessBean item) {
             //点击按钮以后要显示的界面
         final ImageView  mAvator = helper.getView(R.id.iv_avator);
         final ImageView  mRenzheng = helper.getView(R.id.iv_renzheng);
@@ -64,6 +77,20 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
         final LinearLayout mHuan = helper.getView(R.id.ll_huan);
         TextView moreprice = helper.getView(R.id.tv_moreprice);
         TextView change2 = helper.getView(R.id.tv_change2);
+
+
+        helper.addOnClickListener(R.id.iv_bussness_photo)
+                .addOnClickListener(R.id.iv_renzheng)
+                .addOnClickListener(R.id.iv_shop)
+                .addOnClickListener(R.id.iv_manor)
+                .addOnClickListener(R.id.ll_baoyou)
+                .addOnClickListener(R.id.ll_fanmai)
+                .addOnClickListener(R.id.ll_zu)
+                .addOnClickListener(R.id.ll_huan);
+
+
+
+
 
         //设置商品的封面
         Glide.with(mContext).load(item.getG_Cover()).into(mBussnessphoto);
@@ -98,7 +125,6 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
             } else if (split.length > 2) {
                 //还是显示两个  和等
                 helper.setText(R.id.tv_change1, split[0]).setText(R.id.tv_change2,split[1].substring(1)).setText(R.id.tv_more,"等");
-
 
             }
 
@@ -182,7 +208,7 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
             moreprice.setVisibility(View.INVISIBLE);
         }
 
-        BussnessBean.GMemberOBJBean obj = item.getG_Member_OBJ();
+        final BussnessBean.GMemberOBJBean obj = item.getG_Member_OBJ();
 
 
         //设置头像 圆形
@@ -200,7 +226,7 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
         });
 
         //设置店铺的名字
-        helper.setText(R.id.tv_name, obj.getM_Name()).setText(R.id.tv_dizhi,obj.getM_Province() + "-" + obj.getM_City());
+        helper.setText(R.id.tv_name, obj.getM_Name()).setText(R.id.tv_dizhi,obj.getM_Province() + " - " + obj.getM_City());
         //设置性别
         if (obj.getM_Sex().equals("男")) {
             mManor.setImageResource(R.mipmap.com_icon_male);
@@ -223,10 +249,44 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
         helper.setText(R.id.tv_baobeikaopu, item.getBbkpd_member_value())
                 .setText(R.id.tv_maikaopu, item.getMjkpd_member_value())
                 .setText(R.id.tv_zukaopu, item.getCzrkpd_member_value());
+        final ImageView ivcollect = helper.getView(R.id.iv_collect);
+
+        //检查是否收藏过该商品
+        Call<String> iscollection = Aplication.mIinterface.operaisCollection("商品", item.getId() + "", Utils.getloginuid());
+
+        iscollection.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.i("zc", "onResponse:   看看请求" + call.request().toString());
+                String body = response.body();
+
+                if (body != null) {
+                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                    }.getType();
+
+                    ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                    if (avatorBeen != null && avatorBeen.size() > 0) {
+                        AvatorBean bean = avatorBeen.get(0);
+                        String retmsg = bean.getRetmsg();
+                        if (retmsg.equals("true")) {
+                            ivcollect.setImageResource(R.mipmap.com_icon_fav_w);
+                        } else if (retmsg.equals("false")) {
+                            ivcollect.setImageResource(R.mipmap.com_icon_share_ept_w);
+                        }
+                    }
+
+                }
 
 
 
 
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                ivcollect.setImageResource(R.mipmap.com_icon_share_ept_w);
+            }
+        });
 
 
 
@@ -289,6 +349,108 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
 
             }
         });
+
+        //收藏的按钮
+        mCollect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("zc", "onItemChildClick:   收藏");
+                if (Utils.isUserLogin()) {
+                    Call<String> operacollectionfunction = Aplication.mIinterface.operacollectionfunction("商品", item.getId() + "", Utils.getloginuid());
+
+                    operacollectionfunction.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Log.i("zc", "onResponse:    看看请求的数据"  + call.request().toString());
+                            String body1 = response.body();
+                            if (body1 != null) {
+                                Type type2 = new TypeToken<ArrayList<AvatorBean>>() {
+                                }.getType();
+
+                                ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body1, type2);
+                                if (avatorBeen != null && avatorBeen.size() > 0) {
+                                    AvatorBean bean1 = avatorBeen.get(0);
+                                    String retmsg1 = bean1.getRetmsg();
+                                   notifyDataSetChanged();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+
+
+                } else {
+                    mContext.startActivity(new Intent(mContext,LoginActivity.class));
+                }
+
+
+            }
+        });
+
+
+        //购物车按钮
+        mShopcar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //加入购物车的方法
+                Log.i("zc", "onItemChildClick:   购物车");
+                if (Utils.isUserLogin()) {
+
+                    Call<String> operaaddupdateshopcart = Aplication.mIinterface.operaaddupdateshopcart("", Utils.getloginuid(), item.getG_UID(),"", item.getMember_UID(), "1");
+
+                    operaaddupdateshopcart.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Log.i("zc", "onResponse:   看看是什么情况i" + call.request().toString());
+
+                            String body = response.body();
+                            if (body != null) {
+                                Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                                }.getType();
+
+                                ArrayList<AvatorBean> been = Utils.gson.fromJson(body, type);
+                                if (been != null) {
+                                    AvatorBean bean = been.get(0);
+                                    Log.i("zc", "onResponse:   看看请求返回的结果" + bean.getRetmsg());
+                                    if (bean.getRetmsg().equals("true")) {
+
+                                        MyToast.show("添加到购物车成功", R.mipmap.com_icon_check_w);
+
+                                    } else {
+                                        MyToast.show("添加到购物车失败", R.mipmap.com_icon_cross_w);
+                                    }
+
+
+                                }
+                            } else {
+                                Log.i("zc", "onFailure:   看看错误的地方" + call.request().toString() + "-----"+ response.code());
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Log.i("zc", "onFailure:   看看错误的地方" + call.request().toString());
+                        }
+                    });
+
+
+
+
+
+                } else {
+                    mContext.startActivity(new Intent(mContext,LoginActivity.class));
+                }
+
+
+            }
+        });
+
 
 
 

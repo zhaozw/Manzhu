@@ -89,10 +89,11 @@
 
             <TextView
                 android:id="@+id/tv_addrlocation"
-                android:layout_marginTop="12.5dp"
+                android:layout_marginTop="10dp"
                 android:text="收货地址：成都市锦江区工业园区锦华路三段86号汇融国际E座"
                 android:textColor="@color/secondtextcolor"
                 android:textSize="12sp"
+                android:maxLines="2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -668,20 +669,20 @@
                 android:layout_height="0dp"/>
 
 
-
             <RelativeLayout
-                android:id="@+id/bt_up"
+                android:id="@+id/bt_down"
                 android:background="@drawable/add_button_bg"
                 android:layout_width="25dp"
                 android:layout_height="25dp">
 
                 <ImageView
-                    android:src="@mipmap/com_icon_plus_2_w"
+                    android:src="@mipmap/com_icon_minus_2_w"
                     android:layout_centerInParent="true"
                     android:layout_width="12.5dp"
                     android:layout_height="12.5dp"/>
 
             </RelativeLayout>
+
             <View
                 android:layout_weight="0.3"
                 android:layout_width="0dp"
@@ -699,13 +700,13 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"/>
             <RelativeLayout
-                android:id="@+id/bt_down"
+                android:id="@+id/bt_up"
                 android:background="@drawable/add_button_bg"
                 android:layout_width="25dp"
                 android:layout_height="25dp">
 
                 <ImageView
-                    android:src="@mipmap/com_icon_minus_2_w"
+                    android:src="@mipmap/com_icon_plus_2_w"
                     android:layout_centerInParent="true"
                     android:layout_width="12.5dp"
                     android:layout_height="12.5dp"/>
@@ -872,7 +873,7 @@
                 android:layout_height="0dp"/>
 
             <TextView
-                android:text="总运费　¥　"
+                android:text="总运费 ¥ "
                 android:textColor="@color/secondtextcolor"
                 android:textSize="10sp"
                 android:layout_width="wrap_content"
@@ -939,7 +940,7 @@
                 android:layout_height="0dp"/>
 
             <TextView
-                android:text="优惠　¥　"
+                android:text="优惠 ¥ "
                 android:textColor="@color/secondtextcolor"
                 android:textSize="10sp"
                 android:layout_width="wrap_content"

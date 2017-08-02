@@ -97,6 +97,7 @@
 
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden">
         </activity>
         <activity
@@ -134,7 +135,9 @@
 
         <activity android:name=".LocationActivity">
         </activity>
-        <activity android:name=".IdleActivity">
+        <activity
+            android:name=".IdleActivity"
+            android:launchMode="singleTask">
         </activity>
         <activity android:name=".PhotoActivity">
         </activity>
@@ -167,6 +170,8 @@
         <activity android:name=".OrderGenerationActivity">
         </activity>
         <activity android:name=".ShopCartOrderGeneraActivity">
+        </activity>
+        <activity android:name=".UserCenterActivity">
         </activity>
     </application>
 

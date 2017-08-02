@@ -26,8 +26,10 @@ import com.zpfan.manzhu.bean.OrderCouponBean;
 import com.zpfan.manzhu.bean.ShopCartbean;
 import com.zpfan.manzhu.event.LeaveMessageEvent;
 import com.zpfan.manzhu.myui.EaseActivity;
+import com.zpfan.manzhu.myui.MyButtonDialog;
 import com.zpfan.manzhu.myui.MyToast;
 import com.zpfan.manzhu.utils.EditListener;
+import com.zpfan.manzhu.utils.SPUtils;
 import com.zpfan.manzhu.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -103,31 +105,53 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
         getCouponlist(item,mCouponBeanArrayList);
         mFootView = View.inflate(mContext, R.layout.order_footview, null);
         initFootView(item,mCouponBeanArrayList);
-        mOrderGoodAdapter.notifyDataSetChanged();
+       // mOrderGoodAdapter.notifyDataSetChanged();
         mOrderGoodAdapter.addFooterView(mFootView);
         mOrderGoodAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemChildClick(BaseQuickAdapter adapter, final View view, final int position) {
                 switch (view.getId()) {
                     case R.id.ll_delete:
-                        if (data.size() > 1) {
-                            ShopCartbean.CarshoplistBean bean = data.get(helper.getPosition() -1);
-                            bean.getCheckgoodslist().remove(position);
-                            if (bean.getCheckgoodslist().size() == 0) {
-                                remove(helper.getPosition() - 1);
+                        final MyButtonDialog dialog = new MyButtonDialog(mContext, R.style.Dialog, "订单管理", "确认删除该商品？");
+                        dialog.show();
+                        dialog.setoncancleClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
                             }
-                            notifyDataSetChanged();
-                        } else if (data.size() == 1) {
-                            ShopCartbean.CarshoplistBean bean = data.get(0);
-                            if (bean.getCheckgoodslist().size() == 1) {
-                                MyToast.show("最后一件商品不能删除",R.mipmap.com_icon_cross_w);
-                            } else if (bean.getCheckgoodslist().size() > 1) {
-                                bean.getCheckgoodslist().remove(position);
+                        });
 
+                        dialog.setonsureClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (data.size() > 1) {
+                                    ShopCartbean.CarshoplistBean bean = data.get(helper.getPosition() -1);
+                                    bean.getCheckgoodslist().remove(position);
+                                    if (bean.getCheckgoodslist().size() == 0) {
+                                        remove(helper.getPosition() - 1);
+
+                                    }
+                                    notifyDataSetChanged();
+                                } else if (data.size() == 1) {
+                                    ShopCartbean.CarshoplistBean bean = data.get(0);
+                                    if (bean.getCheckgoodslist().size() == 1) {
+
+
+                                    }else if (bean.getCheckgoodslist().size() == 2){
+                                        bean.getCheckgoodslist().remove(position);
+                                        ShopCartbean.CarshoplistBean.CargoodslistBean bean1 = bean.getCheckgoodslist().get(0);
+                                        bean1.setNodelete(true);
+                                    }else if (bean.getCheckgoodslist().size() > 1) {
+                                        bean.getCheckgoodslist().remove(position);
+
+                                    }
+                                    notifyDataSetChanged();
+
+                                }
+                                dialog.dismiss();
                             }
-                            notifyDataSetChanged();
+                        });
 
-                        }
 
 
                         break;
@@ -139,8 +163,90 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
         });
         rvorder.setAdapter(mOrderGoodAdapter);
 
+        //去查询交易方式
+        String usesheng = SPUtils.getInstance().getString("usesheng", "");
+        for (ShopCartbean.CarshoplistBean bean : data) {
+            double allweight = 0;
+            String uid = "";
+            List<ShopCartbean.CarshoplistBean.CargoodslistBean> cargoodslist = bean.getCheckgoodslist();
+            if (cargoodslist.size() > 0) {
+                ShopCartbean.CarshoplistBean.CargoodslistBean bean1 = cargoodslist.get(0);
+                for (ShopCartbean.CarshoplistBean.CargoodslistBean cargoodslistBean : cargoodslist) {
+                    allweight = allweight + cargoodslistBean.getGoods_model().getG_Weight() * cargoodslistBean.getCarCount();
+                    uid = uid +"," + bean1.getGoods_UID();
+                }
+                getbuyStyle(usesheng,mDf.format(allweight),uid,bean1.getGoods_model().getG_Province(),bean);
+            }
+
+
+        }
+
+
+
 
     }
+
+    private void getbuyStyle(String usesheng, String format, String uid, String bussnesssheng, final ShopCartbean.CarshoplistBean item) {
+
+        Call<String> getorderbydealstyle = Aplication.mIinterface.getorderbydealstyle("Car", "二手商品", Utils.getloginuid(),bussnesssheng, usesheng, format, uid);
+        getorderbydealstyle.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.i("zc", "getbuyStyle:   看看发送的请求" + call.request().toString());
+                String body = response.body();
+
+                if (body != null) {
+                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                    }.getType();
+
+                    ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+
+                    if (avatorBeen != null && avatorBeen.size() > 0) {
+
+                        AvatorBean bean = avatorBeen.get(0);
+
+
+                        String retmsg = bean.getRetmsg();
+                        item.setHuoqujiaoyi(retmsg);
+                        //初始化交易方式 默认为线上
+                        if (retmsg.contains("线上")) {
+                            //设置为线上交易
+                            item.setJiaoyi("线上交易");
+                            //同时初始化运费
+                            List<ShopCartbean.CarshoplistBean.CargoodslistBean> checkgoodslist = item.getCheckgoodslist();
+                            double yunfei = 0;
+                            for (ShopCartbean.CarshoplistBean.CargoodslistBean cargoodslistBean : checkgoodslist) {
+                                String money = cargoodslistBean.getGoods_model().getG_CourierMoney();
+                                Double aDouble = Double.valueOf(money);
+                                yunfei = yunfei + aDouble;
+                            }
+                            item.setYunfei(yunfei);
+
+
+                        } else {
+                            item.setJiaoyi("线下交易");
+                        }
+
+
+
+                    }
+                } else {
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
 
     private void getCouponlist(ShopCartbean.CarshoplistBean item, final ArrayList<OrderCouponBean> mCouponBeanArrayList) {
         double price = 0;
@@ -261,23 +367,7 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
         yunfei.setText(df.format(zongyunfei));
         tvcouponmoney.setText(df.format(youhuijuan));
 
-        //交易方式的初始化
-        String jiaoyi = item.getJiaoyi();
-        Log.i("zc", "initFootView:    看看长度" + jiaoyi);
-        if (jiaoyi.contains("线上") && jiaoyi.contains("线下")) {
-            Log.i("zc", "initFootView:   来初始化 交易方式了吗");
-            item.setJiaoyi("线上交易");
-            double zongyunfe = 0;
-            //线上交易  遍历　运费相加
-            for (ShopCartbean.CarshoplistBean.CargoodslistBean bean : item.getCheckgoodslist()) {
 
-                Double aDouble = Double.valueOf(bean.getGoods_model().getG_CourierMoney());
-                zongyunfe = zongyunfe + aDouble;
-            }
-            yunfei.setText(df.format(zongyunfe));
-            item.setYunfei(zongyunfe);
-            tvonline.setText("线上交易");
-        }
 
 
 
@@ -291,37 +381,42 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                 RecyclerView rvcoupon = (RecyclerView) couponpop.findViewById(R.id.rv_format);
                 rvcoupon.setLayoutManager(new LinearLayoutManager(mContext));
 
-                CouponpopAdapter couponadapter = new CouponpopAdapter(R.layout.item_location_popr, mCouponBeanArrayList);
-                couponadapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        OrderCouponBean bean = mCouponBeanArrayList.get(position);
+                if (mCouponBeanArrayList.size() > 0) {
+                    CouponpopAdapter couponadapter = new CouponpopAdapter(R.layout.item_location_popr, mCouponBeanArrayList);
+                    couponadapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                            OrderCouponBean bean = mCouponBeanArrayList.get(position);
 
-                        item.setCouponid(bean.getId() + "");
+                            item.setCouponid(bean.getId() + "");
 
 
-                        String money = bean.getMC_PreferentialMoney();
-                        Double aDouble = Double.valueOf(money);
-                        tvcouponmoney.setText(mDf.format(aDouble));
-                        item.setCoupon(mDf.format(aDouble));
-                        tvcoupon.setText("满"+ bean.getMC_MeetMoney() +"减"+ bean.getMC_PreferentialMoney());
+                            String money = bean.getMC_PreferentialMoney();
+                            Double aDouble = Double.valueOf(money);
+                            tvcouponmoney.setText(mDf.format(aDouble));
+                            item.setCoupon(mDf.format(aDouble));
+                            tvcoupon.setText("满 ¥ " + bean.getMC_MeetMoney() + "减 ¥ " + bean.getMC_PreferentialMoney());
 
-                        couponWindow.dismiss();
-                        mListener.edit(null);
-                    }
-                });
+                            couponWindow.dismiss();
+                            mListener.edit(null);
+                        }
+                    });
 
-                rvcoupon.setAdapter(couponadapter);
-                couponWindow.setContentView(couponpop);
-                // int height = dp2px(LinearLayout.LayoutParams.WRAP_CONTENT);
-                couponWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+                    rvcoupon.setAdapter(couponadapter);
+                    couponWindow.setContentView(couponpop);
+                    // int height = dp2px(LinearLayout.LayoutParams.WRAP_CONTENT);
+                    couponWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                couponWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
-                couponWindow.setTouchable(true);
-                couponWindow.setOutsideTouchable(true);
+                    couponWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+                    couponWindow.setTouchable(true);
+                    couponWindow.setOutsideTouchable(true);
 
-                couponWindow.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.home_toppop_bg));
-                couponWindow.showAsDropDown(tvcoupon);
+                    couponWindow.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.home_toppop_bg));
+                    couponWindow.showAsDropDown(tvcoupon);
+                } else {
+                    MyToast.show("暂无可用优惠劵",R.mipmap.com_icon_cross_w);
+                    tvcoupon.setEnabled(false);
+                }
 
             }
         });
@@ -330,9 +425,9 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
         tvonline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("zc", "onClick:   进来了吗");
+
                 String jiaoyi = item.getHuoqujiaoyi();
-                Log.i("zc", "onClick:  看看交易方式");
+
                 if (jiaoyi.length() > 5){
                     //线上交易和线下交易
                     Log.i("zc", "onClick:   进来了吗");
@@ -402,13 +497,14 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                         item.setYunfei(zongyunfe);
                         tvonline.setText("线上交易");
                         item.setJiaoyi("线上交易");
-
+                        MyToast.show("本商品只支持线上交易",R.mipmap.com_icon_cross_w);
                     } else if (jiaoyi.equals("线下交易|")) {
                         tvonline.setText("线下交易");
                         zongyunfei = 0.00;
                         yunfei.setText(mDf.format(zongyunfei));
                         item.setYunfei(0.00);
                         item.setJiaoyi("线下交易");
+                        MyToast.show("线下交易",R.mipmap.com_icon_cross_w);
                     }
 
                 }

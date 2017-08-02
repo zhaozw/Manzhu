@@ -11,6 +11,7 @@
         android:layout_height="@dimen/idle_itemmargt"/>
 
         <ImageView
+            android:clickable="true"
             android:visibility="visible"
             android:id="@+id/iv_bussness_photo"
             android:layout_below="@+id/line"
@@ -55,6 +56,7 @@
             android:layout_width="30dp"
             android:layout_height="15dp"/>
         <TextView
+            android:paddingRight="10dp"
             android:id="@+id/tv_title"
             android:visibility="visible"
             android:textColor="@color/maintextcolor"
@@ -119,6 +121,7 @@
 
 
         <TextView
+            android:layout_marginRight="10dp"
             android:id="@+id/tv_moreprice"
             android:layout_gravity="center"
             android:gravity="center"
@@ -222,7 +225,6 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-
                 android:layout_gravity="bottom"
                 android:id="@+id/tv_zudayxiaoshu"
                 android:textColor="@color/pricetextcolor"

@@ -37,6 +37,7 @@ import com.zpfan.manzhu.adapter.DetailCommentAdapter;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.BussnessBean;
 import com.zpfan.manzhu.bean.CosBean;
+import com.zpfan.manzhu.bean.CouponBean;
 import com.zpfan.manzhu.bean.ShopBean;
 import com.zpfan.manzhu.myui.EaseActivity;
 import com.zpfan.manzhu.myui.MyToast;
@@ -287,6 +288,7 @@ public class IdleDetailActivity extends AppCompatActivity {
     private String mSpecificationId = "" ;
     private ShopBean mShopBean;
     private int prdnumber = 1;
+    private boolean isCollect = false;
 
 
     @Override
@@ -383,12 +385,14 @@ public class IdleDetailActivity extends AppCompatActivity {
 
             //设置是否是换的商品
             if (mbussness.isG_IsChange()) {
+
                 ViewGroup.LayoutParams params = mLlChange.getLayoutParams();
                 params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 mLlChange.setLayoutParams(params);
                 //设置换的商品   所有的 都要显示出来
                 String fk = mbussness.getDemand_FK();
                 String[] changes = fk.split(",");
+                Log.i("zc", "initView:   看看出问题的商品的信息"  + fk  + mbussness.isG_IsChange() );
                 for (String change : changes) {
                     if (change.length() > 1) {
                         final TextView inflate = (TextView) IdleDetailActivity.this.getLayoutInflater().inflate(R.layout.change_tv, null);
@@ -419,8 +423,7 @@ public class IdleDetailActivity extends AppCompatActivity {
 
             //设置成色的信息
             String degree = mbussness.getG_NewOldDegree();
-            Log.i("zc", "initView:   看看出问题的商品的id" + mbussness.getId());
-            String neworold = null;
+             String neworold = null;
             if (degree.contains("成")) {
                 neworold = degree.substring(0, degree.indexOf("成"));
                 mTvNewold.setText(neworold);
@@ -434,7 +437,8 @@ public class IdleDetailActivity extends AppCompatActivity {
             mTvExpress.setText(mbussness.getG_CourierMoney() + "（成都 到 北京）");
 
             //设置发布时间
-            mTvUptime.setText(mbussness.getG_UpTime().substring(0, 11));
+            String substring = mbussness.getG_UpTime().substring(0, 11);
+            mTvUptime.setText(substring.replace("-"," -  "));
 
             //设置看过的人数
             mTvViewnumber.setText(mbussness.getG_Hits() + "");
@@ -476,17 +480,30 @@ public class IdleDetailActivity extends AppCompatActivity {
                 }
             }
 
-            //设置优惠劵的数量
-            mTvCoupon.setText(" " + mbussness.getShop_coupon_count() + " ");
+            //设置优惠劵的数量  发送网络请求去获取优惠劵的数量
+            getCanUseCouponNumber();
+
+            //发送网络请求 去查看是否收藏过该商品
+            isCollection();
+
+
+            // mTvCoupon.setText(" " + mbussness.getShop_coupon_count() + " ");
 
             //查看是否有规格
             List<BussnessBean.GoodsSpecificationsBean> specifications = mbussness.getGoods_specifications();
             if (specifications == null ||specifications.size() == 0) {
                 mLlFormat.setVisibility(View.GONE);
             } else {
-                mTvGuige.setText(specifications.get(0).getPS_AttributeNames()); //需要处理
-            }
+                // 有规格 显示默认的规格
+                for (BussnessBean.GoodsSpecificationsBean specification : specifications) {
+                    Log.i("zc", "initView:   有规格");
+                    if (specification.isPS_IsDefaultSelected()) {
 
+                     mTvGuige.setText(specification.getPS_AttributeValues()); //显示默认的规格
+                    }
+                }
+
+            }
 
             //是否是商家 如果是商家  弹出的东西就要有变化 如果不是商家 直接就把bussness 传进去
 
@@ -616,6 +633,115 @@ public class IdleDetailActivity extends AppCompatActivity {
 
     }
 
+    private void isCollection() {
+        Call<String> isCollection = Aplication.mIinterface.operaisCollection("商品", mbussness.getId() + "", Utils.getloginuid());
+
+        isCollection.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String body = response.body();
+
+                if (body != null) {
+                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                    }.getType();
+
+                    ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+
+                    if (avatorBeen != null && avatorBeen.size() > 0) {
+                        AvatorBean bean = avatorBeen.get(0);
+                        String retmsg = bean.getRetmsg();
+                        if (retmsg.equals("true")) {
+                            mIvCollect.setImageResource(R.mipmap.com_icon_fav);
+                            mTvCollect.setText("已收藏");
+                            isCollect = true;
+                        } else if (retmsg.equals("false")) {
+                            mIvCollect.setImageResource(R.mipmap.com_icon_fav_gra);
+                            isCollect = false;
+                            mTvCollect.setText("未收藏");
+                        }
+
+                    }
+
+
+                } else {
+                    mIvCollect.setImageResource(R.mipmap.com_icon_fav_gra);
+                    mTvCollect.setText("未收藏");
+                    isCollect = false;
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                mIvCollect.setImageResource(R.mipmap.com_icon_fav_gra);
+                mTvCollect.setText("未收藏");
+                isCollect = false;
+            }
+        });
+
+
+
+
+
+    }
+
+    private void getCanUseCouponNumber() {
+        Call<String> getcouponlist = Aplication.mIinterface.getcouponlist(mbussness.getMember_UID(), Utils.getloginuid());
+        getcouponlist.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String body = response.body();
+                Log.i("zc", "onResponse:   请求成功" + call.request().toString());
+                if (body != null) {
+                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                    }.getType();
+
+                    ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                    if (avatorBeen != null) {
+                        AvatorBean bean = avatorBeen.get(0);
+                        String retmsg = bean.getRetmsg();
+                        if (retmsg != null && retmsg.contains("[")) {
+                            String substring = retmsg.substring(1, retmsg.lastIndexOf("]"));
+
+                            if (substring != null) {
+                                Type type1 = new TypeToken<ArrayList<CouponBean>>() {
+                                }.getType();
+                                ArrayList<CouponBean>   couponlist = Utils.gson.fromJson(substring, type1);
+                                int cancoupon = 0;
+
+                                for (CouponBean couponBean : couponlist) {
+                                    if (couponBean.getMember_use_get_status().equals("未领用")) {
+                                        cancoupon = cancoupon + 1;
+                                    }
+                                }
+                                mTvCoupon.setText(" " +cancoupon + " ");
+
+
+
+
+                            }
+
+
+                        }
+
+
+                    }
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
     /**
      * 获取相关cos 并显示的方法
      *
@@ -667,6 +793,12 @@ public class IdleDetailActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getCanUseCouponNumber();
     }
 
     @Override
@@ -924,11 +1056,17 @@ public class IdleDetailActivity extends AppCompatActivity {
                                 ArrayList<AvatorBean> been = Utils.gson.fromJson(body, type);
                                 if (been != null) {
                                     String retmsg = been.get(0).getRetmsg();
-                                    Log.i("zc", "onResponse:   看看返回的是什么" + retmsg);
                                     if (retmsg.equals("true")) {
-                                        MyToast.show("收藏成功", R.mipmap.com_icon_check_w);
-                                        mLlCollect.setClickable(false);
-                                        mIvCollect.setImageResource(R.mipmap.com_icon_fav);
+                                        if (!isCollect) {
+                                            MyToast.show("收藏成功", R.mipmap.com_icon_check_w);
+                                            mIvCollect.setImageResource(R.mipmap.com_icon_fav);
+                                            mTvCollect.setText("已收藏");
+                                        } else {
+                                            MyToast.show("取消收藏成功", R.mipmap.com_icon_check_w);
+                                            mIvCollect.setImageResource(R.mipmap.com_icon_fav_gra);
+                                            mTvCollect.setText("未收藏");
+                                        }
+                                        isCollect = !isCollect;
 
                                     } else {
                                         MyToast.show("收藏失败，您可能已经收藏过该商品", R.mipmap.com_icon_cross_w);
@@ -952,6 +1090,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                 } else {
                     startActivity(new Intent(IdleDetailActivity.this, LoginActivity.class));
                 }
+
 
 
                 break;
@@ -998,8 +1137,6 @@ public class IdleDetailActivity extends AppCompatActivity {
                             Log.i("zc", "onFailure:   看看错误的地方" + call.request().toString());
                         }
                     });
-
-
 
 
                 } else {
@@ -1132,7 +1269,7 @@ public class IdleDetailActivity extends AppCompatActivity {
         mWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         mWindow.setOutsideTouchable(true);
         mWindow.update();
-        mWindow.showAtLocation(mRvTopline, Gravity.NO_GRAVITY, 0, 0);
+        mWindow.showAtLocation(mRvTopline, Gravity.TOP, 0, 0);
 
         mWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override

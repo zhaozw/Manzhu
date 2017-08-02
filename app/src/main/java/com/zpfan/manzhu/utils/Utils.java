@@ -73,7 +73,7 @@ public class Utils {
      * @return
      */
     public  static String getloginuid() {
-        String userid = SPUtils.getInstance().getString("userid", null);
+        String userid = SPUtils.getInstance().getString("userid", "");
 
         return userid;
 

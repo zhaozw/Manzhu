@@ -157,6 +157,7 @@
                     android:layout_height="wrap_content"/>
 
                 <EditText
+                    android:inputType="number"
                     android:id="@+id/et_goodmoney"
                     android:gravity="center"
                     android:singleLine="true"
@@ -323,13 +324,13 @@
 
 
         <RelativeLayout
-            android:id="@+id/bt_up"
+            android:id="@+id/bt_down"
             android:background="@drawable/add_button_bg"
             android:layout_width="25dp"
             android:layout_height="25dp">
 
             <ImageView
-                android:src="@mipmap/com_icon_plus_2_w"
+                android:src="@mipmap/com_icon_minus_2_w"
                 android:layout_centerInParent="true"
                 android:layout_width="12.5dp"
                 android:layout_height="12.5dp"/>
@@ -351,14 +352,15 @@
             android:layout_weight="0.3"
             android:layout_width="0dp"
             android:layout_height="0dp"/>
+
         <RelativeLayout
-            android:id="@+id/bt_down"
+            android:id="@+id/bt_up"
             android:background="@drawable/add_button_bg"
             android:layout_width="25dp"
             android:layout_height="25dp">
 
             <ImageView
-                android:src="@mipmap/com_icon_minus_2_w"
+                android:src="@mipmap/com_icon_plus_2_w"
                 android:layout_centerInParent="true"
                 android:layout_width="12.5dp"
                 android:layout_height="12.5dp"/>

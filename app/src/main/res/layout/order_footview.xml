@@ -54,7 +54,7 @@
             android:layout_height="0dp"/>
 
         <TextView
-            android:text="总运费　¥　"
+            android:text="总运费 ¥ "
             android:textColor="@color/secondtextcolor"
             android:textSize="10sp"
             android:layout_width="wrap_content"
@@ -121,7 +121,7 @@
             android:layout_height="0dp"/>
 
         <TextView
-            android:text="优惠　¥　"
+            android:text="优惠 ¥ "
             android:textColor="@color/secondtextcolor"
             android:textSize="10sp"
             android:layout_width="wrap_content"

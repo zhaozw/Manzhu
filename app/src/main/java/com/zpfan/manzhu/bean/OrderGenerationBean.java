@@ -116,8 +116,8 @@ public class OrderGenerationBean {
     private int O_ExtendLeaseNumber;
     private int O_Final_Deal_Money;
     private int O_GoodsAllCount;
-    private int O_GoodsAllMoney;
-    private int O_GoodsFreight;
+    private String O_GoodsAllMoney;
+    private String O_GoodsFreight;
     private String O_InvoicesCate;
     private String O_InvoicesName;
     private boolean O_IsApplyExtendLease;
@@ -136,11 +136,11 @@ public class OrderGenerationBean {
     private boolean O_MemberIsUpload;
     private String O_MemberUpload_pic;
     private String O_MemberUpload_text;
-    private int O_OrderAllMoney;
+    private String O_OrderAllMoney;
     private String O_OrderCate;
     private String O_OrderTime;
     private String O_Order_Example_Pic;
-    private int O_PayMoney;
+    private String O_PayMoney;
     private String O_ReceiptArea;
     private String O_ReceiptCity;
     private String O_ReceiptDetail;
@@ -390,19 +390,19 @@ public class OrderGenerationBean {
         this.O_GoodsAllCount = O_GoodsAllCount;
     }
 
-    public int getO_GoodsAllMoney() {
+    public String getO_GoodsAllMoney() {
         return O_GoodsAllMoney;
     }
 
-    public void setO_GoodsAllMoney(int O_GoodsAllMoney) {
+    public void setO_GoodsAllMoney(String O_GoodsAllMoney) {
         this.O_GoodsAllMoney = O_GoodsAllMoney;
     }
 
-    public int getO_GoodsFreight() {
+    public String getO_GoodsFreight() {
         return O_GoodsFreight;
     }
 
-    public void setO_GoodsFreight(int O_GoodsFreight) {
+    public void setO_GoodsFreight(String O_GoodsFreight) {
         this.O_GoodsFreight = O_GoodsFreight;
     }
 
@@ -550,11 +550,11 @@ public class OrderGenerationBean {
         this.O_MemberUpload_text = O_MemberUpload_text;
     }
 
-    public int getO_OrderAllMoney() {
+    public String getO_OrderAllMoney() {
         return O_OrderAllMoney;
     }
 
-    public void setO_OrderAllMoney(int O_OrderAllMoney) {
+    public void setO_OrderAllMoney(String O_OrderAllMoney) {
         this.O_OrderAllMoney = O_OrderAllMoney;
     }
 
@@ -582,11 +582,11 @@ public class OrderGenerationBean {
         this.O_Order_Example_Pic = O_Order_Example_Pic;
     }
 
-    public int getO_PayMoney() {
+    public String getO_PayMoney() {
         return O_PayMoney;
     }
 
-    public void setO_PayMoney(int O_PayMoney) {
+    public void setO_PayMoney(String O_PayMoney) {
         this.O_PayMoney = O_PayMoney;
     }
 

@@ -1,7 +1,9 @@
 package com.zpfan.manzhu;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,7 @@ import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.FormatBean;
 import com.zpfan.manzhu.bean.ShopCartbean;
 import com.zpfan.manzhu.event.DeleteGoodEvent;
+import com.zpfan.manzhu.myui.MyButtonDialog;
 import com.zpfan.manzhu.myui.MyToast;
 import com.zpfan.manzhu.utils.EditListener;
 import com.zpfan.manzhu.utils.Utils;
@@ -28,7 +31,9 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -91,6 +96,7 @@ public class ShopCarActivity extends AppCompatActivity {
     private ShopCartbean mCartbean;
     private ArrayList<ShopCartbean.CarshoplistBean.CargoodslistBean> morderlist = new ArrayList<>();
     private ArrayList<ShopCartbean.CarshoplistBean>  mcheckshoplist  = new ArrayList<>();
+    private String mleixin = "闲置" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,7 +185,8 @@ public class ShopCarActivity extends AppCompatActivity {
                             }
 
 
-                            mShopCartAdapter = new ShopCartAdapter(R.layout.item_shopcatlist, mShopCartList, new EditListener() {
+                            mShopCartAdapter = new ShopCartAdapter(R.layout.item_shopcatlist, mShopCartList,mleixin, new EditListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                                 @Override
                                 public void edit(ArrayList<ShopCartbean.CarshoplistBean.CargoodslistBean> checeGood) {
                                     morderlist.clear();
@@ -216,12 +223,10 @@ public class ShopCarActivity extends AppCompatActivity {
 
 
                                         }
-
-
-
                                         mTvAllprice.setText(df.format(mPrice));
                                         mTvPrdnumber.setText(mcount + "");
-
+                                        mTvSettlement.setBackground(getResources().getDrawable(R.color.maintextcolor));
+                                        mTvSettlement.setEnabled(true);
 
                                     } else {
 
@@ -229,6 +234,8 @@ public class ShopCarActivity extends AppCompatActivity {
                                         mcount = 0;
                                         mTvAllprice.setText("0.00");
                                         mTvPrdnumber.setText(mcount + "");
+                                        mTvSettlement.setBackground(getResources().getDrawable(R.color.weaklin));
+                                        mTvSettlement.setEnabled(false);
                                     }
 
 
@@ -267,16 +274,38 @@ public class ShopCarActivity extends AppCompatActivity {
 
             case R.id.tv_clearall:
                 //清楚全部购物车的操作
+                final MyButtonDialog dialog = new MyButtonDialog(ShopCarActivity.this, R.style.Dialog, "购物车管理", "确认清空全部商品？");
+                dialog.show();
+                dialog.setonsureClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        clearAllshopcart(mGetloginuid);
+                        dialog.dismiss();
+                    }
+                });
 
-                clearAllshopcart(mGetloginuid);
+                dialog.setoncancleClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
 
                 break;
 
             case R.id.iv_checkall:
                 //全选的操作
-                mShopCartAdapter.allCheck = true;
-                mShopCartAdapter.notifyDataSetChanged();
                 ischeckall = !ischeckall;
+                Log.i("alcheck", "onViewClicked:   看看全选还是不是全选" + ischeckall);
+
+                for (ShopCartbean.CarshoplistBean bean : mShopCartList) {
+                    bean.setIscheckallgood(ischeckall);
+
+                }
+
+                mShopCartAdapter.allcheck(ischeckall);
+
                 if (ischeckall) {
                     mIvCheckall.setImageResource(R.mipmap.com_icon_multcheck_bl);
                 } else {
@@ -284,25 +313,85 @@ public class ShopCarActivity extends AppCompatActivity {
                 }
 
 
+
                 break;
 
             case R.id.tv_settlement:
                 //结算的操作  跳转到订单确认的界面
                 mcheckshoplist.clear();
+                Map<String, String> map = new LinkedHashMap<>();
+                map.put("guid", "");
                 if (morderlist.size() > 0) {
-                    Intent intent = new Intent(this, OrderSureActivity.class);
+                    final Intent intent = new Intent(this, OrderSureActivity.class);
                     for (ShopCartbean.CarshoplistBean bean : mShopCartList) {
                         if (bean.getCheckgoodslist().size() > 0) {
                             mcheckshoplist.add(bean);
                         }
+                    }
+
+                    for (ShopCartbean.CarshoplistBean bean : mcheckshoplist) {
+                        ArrayList<ShopCartbean.CarshoplistBean.CargoodslistBean> checkgoodslist = bean.getCheckgoodslist();
+                        for (ShopCartbean.CarshoplistBean.CargoodslistBean cargoodslistBean : checkgoodslist) {
+                            String guid = map.get("guid");
+                            if (guid.isEmpty()) {
+                                map.put("guid", cargoodslistBean.getGoods_UID());
+                            } else {
+                                map.put("guid", guid + "," + cargoodslistBean.getGoods_UID());
+                            }
+                        }
+
 
                     }
 
                     intent.putParcelableArrayListExtra("shopcat", mcheckshoplist);
-
-
                     intent.putExtra("type","sopcart");
-                    startActivity(intent);
+                    //发送请求去查看购物车里的物品是否失效
+                    Call<String> guid = Aplication.mIinterface.checkGoodnormalSattus(map.get("guid"));
+                    guid.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Log.i("zc", "onResponse:  看看返回 "  +  call.request().toString());
+                            String body = response.body();
+
+                            if (body != null) {
+                                Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                                }.getType();
+
+                                ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                                if (avatorBeen != null && avatorBeen.size() > 0) {
+                                    AvatorBean bean = avatorBeen.get(0);
+                                    String retmsg = bean.getRetmsg();
+                                    if (retmsg.equals("true")) {
+                                        //没有失效的宝贝
+                                        startActivity(intent);
+
+                                    } else {
+                                        MyToast.show("您的结算订单中包含已下架商品（服务），请删除后再结算",R.mipmap.com_icon_cross_w);
+                                    }
+
+                                }
+
+
+
+
+                            }
+
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+
+
+
+
+
+
+
                 } else {
                     MyToast.show("你还没有选择商品，无法结算",R.mipmap.com_icon_cross_w);
                 }
@@ -318,8 +407,10 @@ public class ShopCarActivity extends AppCompatActivity {
                 mIvSearchshaixuan.setImageResource(R.mipmap.com_icon_serv_ept);
                 mTvSearchshaixuan.setTextColor(getResources().getColor(R.color.secondtextcolor));
 
+                mleixin = "闲置";
                 getshopcartlist(mGetloginuid,"闲置");
-
+                mIvCheckall.setImageResource(R.mipmap.com_icon_multcheck_ept);
+                ischeckall = false;
                 break;
 
             case R.id.ll_searchtop2:
@@ -331,9 +422,10 @@ public class ShopCarActivity extends AppCompatActivity {
                 mIvSearchshaixuan.setImageResource(R.mipmap.com_icon_serv_ept);
                 mTvSearchshaixuan.setTextColor(getResources().getColor(R.color.secondtextcolor));
 
+                mleixin = "新品";
                 getshopcartlist(mGetloginuid, "新品");
-
-
+                mIvCheckall.setImageResource(R.mipmap.com_icon_multcheck_ept);
+                ischeckall = false;
                 break;
 
             case R.id.ll_searchtop3:
@@ -346,7 +438,10 @@ public class ShopCarActivity extends AppCompatActivity {
                 mIvSearchshaixuan.setImageResource(R.mipmap.com_icon_serv);
                 mTvSearchshaixuan.setTextColor(getResources().getColor(R.color.maintextcolor));
 
+                mleixin = "服务";
                 getshopcartlist(mGetloginuid,"服务");
+                mIvCheckall.setImageResource(R.mipmap.com_icon_multcheck_ept);
+                ischeckall = false;
 
                 break;
 
@@ -398,7 +493,20 @@ public class ShopCarActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void deletGood(DeleteGoodEvent event) {
-        mTvSearchtop1.setText("闲置（" + mShopCartList.size() + "）");
+
+
+        String leixin = event.getLeixin();
+        if (leixin.equals("闲置")) {
+            mTvSearchtop1.setText("闲置（" + mShopCartList.size() + "）");
+        } else if (leixin.equals("新品")) {
+            mTvSearchtop2.setText("新品（" + mShopCartList.size() + "）");
+        } else if (leixin.equals("约单")) {
+            mTvSearchshaixuan.setText("约单（" + mShopCartList.size() + "）");
+        }
+
+
+
+
     }
 
 

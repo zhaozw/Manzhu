@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import com.zpfan.manzhu.adapter.BussnessCouponAdapter;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.CouponBean;
+import com.zpfan.manzhu.myui.MyToast;
 import com.zpfan.manzhu.utils.Utils;
 
 import java.lang.reflect.Type;
@@ -115,6 +116,9 @@ public class BussnessCouponActivity extends AppCompatActivity {
 
                                                     }
                                                 });
+                                            } else {
+                                                MyToast.show("你已经领取过该优惠劵，请勿重复领取",R.mipmap.com_icon_cross_w);
+                                                view.setEnabled(false);
                                             }
 
                                         }

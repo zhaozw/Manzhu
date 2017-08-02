@@ -1,10 +1,11 @@
 package com.zpfan.manzhu.adapter;
 
+import android.os.Build;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +18,7 @@ import com.zpfan.manzhu.R;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.ShopCartbean;
 import com.zpfan.manzhu.event.DeleteGoodEvent;
+import com.zpfan.manzhu.myui.MyButtonDialog;
 import com.zpfan.manzhu.myui.MyToast;
 import com.zpfan.manzhu.utils.DeleteListener;
 import com.zpfan.manzhu.utils.EditListener;
@@ -39,6 +41,7 @@ import retrofit2.Response;
 
 public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBean, BaseViewHolder> {
 
+    private final String leixin;
     EditListener mListener;
     private double price = 0.00;
     ArrayList<ShopCartbean.CarshoplistBean.CargoodslistBean> checeGood = new ArrayList<>();
@@ -46,11 +49,12 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
     List<ShopCartbean.CarshoplistBean> data;
    public ArrayList<ShopCartbean.CarshoplistBean> checkshoplist = new ArrayList<>();
 
-    public ShopCartAdapter(@LayoutRes int layoutResId, @Nullable List<ShopCartbean.CarshoplistBean> data, EditListener listener) {
+    public ShopCartAdapter(@LayoutRes int layoutResId, @Nullable List<ShopCartbean.CarshoplistBean> data,String leixin, EditListener listener) {
         super(layoutResId, data);
         checeGood.clear();
         mListener = listener;
         this.data = data;
+        this.leixin = leixin;
     }
 
 
@@ -123,87 +127,121 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
             rv_shop.setAdapter(goodadapter);
 
             goodadapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void onItemChildClick(BaseQuickAdapter adapter, View view, final int position) {
-                    Log.i("zc", "onItemChildClick:  看看点击的是什么。。。。" + position);
+
                     switch (view.getId()) {
                         case R.id.iv_check:
-                            boolean checked = cargoodslist.get(position).isChecked();
+                            //商品的选中界面
+                            final boolean checked = cargoodslist.get(position).isChecked();
+                            //之前是选中的商品  要变成未选中。。。 同时要改变全选的状态
                             cargoodslist.get(position).setChecked(!checked);
                             if (!checked) {
                                 checeGood.add(cargoodslist.get(position));
                                 item.getCheckgoodslist().add(cargoodslist.get(position));
                             } else {
+                                //取消选中的时候 要更改店铺的全选状态和底部全选状态
                                 checeGood.remove(cargoodslist.get(position));
                                 item.getCheckgoodslist().remove(cargoodslist.get(position));
+                                ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_ept);
                             }
                             goodadapter.notifyDataSetChanged();
                             mListener.edit(checeGood);
                             break;
                         case R.id.ll_delete:
-                            ShopCartbean.CarshoplistBean.CargoodslistBean bean = cargoodslist.get(position);
 
-                            Call<String> operadeleteshop = Aplication.mIinterface.operadeleteshop(bean.getSC_UID());
-                            operadeleteshop.enqueue(new Callback<String>() {
+                            final MyButtonDialog dialog = new MyButtonDialog(mContext, R.style.Dialog, "购物车管理", "确认删除该商品？");
+                            dialog.show();
+                            dialog.setonsureClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onResponse(Call<String> call, Response<String> response) {
+                                public void onClick(View v) {
+                                    ShopCartbean.CarshoplistBean.CargoodslistBean bean = cargoodslist.get(position);
 
+                                    Call<String> operadeleteshop = Aplication.mIinterface.operadeleteshop(bean.getSC_UID());
+                                    operadeleteshop.enqueue(new Callback<String>() {
+                                        @Override
+                                        public void onResponse(Call<String> call, Response<String> response) {
+                                            String body = response.body();
 
-                                    String body = response.body();
+                                            if (body != null) {
+                                                Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                                                }.getType();
 
-                                    if (body != null) {
-                                        Type type = new TypeToken<ArrayList<AvatorBean>>() {
-                                        }.getType();
+                                                ArrayList<AvatorBean> been  = Utils.gson.fromJson(body, type);
 
-                                        ArrayList<AvatorBean> been  = Utils.gson.fromJson(body, type);
+                                                AvatorBean bean = been.get(0);
+                                                if (bean != null) {
+                                                    String retmsg = bean.getRetmsg();
+                                                    if (retmsg.equals("true")) {
+                                                        if (checeGood.contains(cargoodslist.get(position))) {
+                                                            checeGood.remove(cargoodslist.get(position));
+                                                            mListener.edit(checeGood);
+                                                        }
+                                                        cargoodslist.remove(position);
+                                                        if (cargoodslist.size() == 0) {
+                                                            remove(helper.getPosition());
 
-                                        AvatorBean bean = been.get(0);
-                                        if (bean != null) {
-                                            String retmsg = bean.getRetmsg();
-                                            if (retmsg.equals("true")) {
-                                                cargoodslist.remove(position);
-                                                if (cargoodslist.size() == 0) {
-                                                    remove(helper.getPosition());
+                                                        }
+                                                        dialog.dismiss();
+                                                        goodadapter.notifyDataSetChanged();
+
+                                                        EventBus.getDefault().post(new DeleteGoodEvent(data.size() + "",leixin));
+                                                    } else {
+                                                        MyToast.show("由于未知原因，删除失败",R.mipmap.com_icon_cross_w);
+
+                                                    }
                                                 }
-                                                goodadapter.notifyDataSetChanged();
-                                                EventBus.getDefault().post(new DeleteGoodEvent(data.size() + ""));
-                                            } else {
-                                                MyToast.show("由于未知原因，删除失败",R.mipmap.com_icon_cross_w);
-
                                             }
                                         }
-                                    }
+
+                                        @Override
+                                        public void onFailure(Call<String> call, Throwable t) {
+
+                                        }
+                                    });
+
+
                                 }
-
+                            });
+                            dialog.setoncancleClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onFailure(Call<String> call, Throwable t) {
+                                public void onClick(View v) {
 
+
+                                    dialog.dismiss();
                                 }
                             });
 
 
-
-
-
                             break;
+
                     }
 
 
                 }
             });
-
-
+            if (item.ischeckallgood()) {
+                ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_bl);
+            } else {
+                ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_ept);
+            }
+            shopCheckAll(item.ischeckallgood(), item, goodadapter);
             ivcheckall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    checkAll(item, ivcheckall, goodadapter);
+                    boolean ischeckallgood = item.ischeckallgood();
+                    item.setIscheckallgood(!ischeckallgood);
+                    shopCheckAll(!ischeckallgood, item, goodadapter);
+                    if (!ischeckallgood) {
+                        ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_bl);
+                    } else {
+                        ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_ept);
+                    }
                 }
             });
 
 
-            if (allCheck) {
-                checkAll(item, ivcheckall, goodadapter);
-            }
 
 
             final LinearLayout lledit = helper.getView(R.id.ll_edit);
@@ -234,6 +272,33 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
 
     }
 
+    private void shopCheckAll(boolean ischeckallgood, ShopCartbean.CarshoplistBean item, ShopGoodadapter goodadapter) {
+        //店铺全选和不是全选的状态
+        List<ShopCartbean.CarshoplistBean.CargoodslistBean> cargoodslist1 = item.getCargoodslist();
+        if (ischeckallgood) {
+            //ArrayList<ShopCartbean.CarshoplistBean.CargoodslistBean> checkgoodslist = item.getCheckgoodslist();
+
+            for (ShopCartbean.CarshoplistBean.CargoodslistBean bean : cargoodslist1) {
+                checeGood.add(bean);
+                bean.setChecked(true);
+                item.getCheckgoodslist().add(bean);
+                item.setIscheckallgood(true);
+            }
+
+        } else {
+           // ArrayList<ShopCartbean.CarshoplistBean.CargoodslistBean> checkgoodslist = item.getCheckgoodslist();
+            for (ShopCartbean.CarshoplistBean.CargoodslistBean bean : cargoodslist1) {
+                bean.setChecked(false);
+                checeGood.remove(bean);
+                item.getCheckgoodslist().remove(bean);
+                item.setIscheckallgood(false);
+            }
+
+        }
+        goodadapter.notifyDataSetChanged();
+        mListener.edit(checeGood);
+    }
+
     private void deleteGood(String scuid, List<ShopCartbean.CarshoplistBean.CargoodslistBean> cargoodslist) {
         for (ShopCartbean.CarshoplistBean.CargoodslistBean bean : cargoodslist) {
             if (bean.getSC_UID().equals(scuid)) {
@@ -244,31 +309,13 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
         }
     }
 
-    public void checkAll(ShopCartbean.CarshoplistBean item, ImageView ivcheckall, ShopGoodadapter goodadapter) {
-        for (ShopCartbean.CarshoplistBean.CargoodslistBean bean : item.getCargoodslist()) {
-            boolean checked = bean.isChecked();
-            bean.setChecked(!checked);
-
-
-
-            if (!checked) {
-                checeGood.add(bean);
-                item.getCheckgoodslist().add(bean);
-                ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_bl);
-            } else {
-                checeGood.remove(bean);
-                item.getCheckgoodslist().remove(bean);
-                ivcheckall.setImageResource(R.mipmap.com_icon_multcheck_ept);
-            }
-
-
-
+    public void allcheck(boolean ischeckall){
+        checeGood.clear();
+        for (ShopCartbean.CarshoplistBean bean : data) {
+            bean.setIscheckallgood(ischeckall);
         }
-        goodadapter.notifyDataSetChanged();
-        mListener.edit(checeGood);
+        notifyDataSetChanged();
+
     }
-
-
-
 
     }

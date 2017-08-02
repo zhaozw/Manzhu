@@ -6,6 +6,20 @@ package com.zpfan.manzhu.event;
 
 public class DeleteGoodEvent  {
     String scuid;
+    String leixin;
+
+    public DeleteGoodEvent(String scuid, String leixin) {
+        this.scuid = scuid;
+        this.leixin = leixin;
+    }
+
+    public String getLeixin() {
+        return leixin;
+    }
+
+    public void setLeixin(String leixin) {
+        this.leixin = leixin;
+    }
 
     public DeleteGoodEvent(String s) {
         scuid = s;

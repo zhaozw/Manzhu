@@ -407,6 +407,26 @@ public interface APIinterface {
     Call<String> getmembermoneyintegral(@Query("m_uid") String m_uid, @Query("value_type") String value_type);
 
 
+    /**
+     * 检查购物车商品是否有失效的商品
+     * @param goods_uids
+     * @return
+     */
+    @GET("opera_checkGoodsNormalStatus_function")
+    Call<String> checkGoodnormalSattus(@Query("goods_uids") String goods_uids);
+
+
+    /**
+     * 检查是否收藏过这个物品
+     * @param obj_cate
+     * @param obj_id
+     * @param obj_member_uid
+     * @return
+     */
+    @GET("opera_Judge_iscollection_function")
+    Call<String> operaisCollection(@Query("obj_cate") String obj_cate, @Query("obj_id") String obj_id, @Query("obj_member_uid") String obj_member_uid);
+
+
 
 
 }

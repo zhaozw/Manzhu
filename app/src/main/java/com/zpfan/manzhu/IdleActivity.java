@@ -154,9 +154,9 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
         Call<String> getgoodslist = Aplication.mIinterface.getgoodslist(mMap);
         getgoodslist.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(final Call<String> call, Response<String> response) {
                 String body = response.body();
-
+                Log.i("zc", "onResponse:  看看数据" + call.request().toString());
                 if (body != null) {
 
                     Type type = new TypeToken<ArrayList<AvatorBean>>() {
@@ -164,7 +164,7 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
 
                     ArrayList<AvatorBean> been = Utils.gson.fromJson(body, type);
                     if (been != null) {
-                        AvatorBean bean = been.get(0);
+                        final AvatorBean bean = been.get(0);
                         String retmsg = bean.getRetmsg();
                         if (retmsg.contains("[")) {
                             String substring = retmsg.substring(1, retmsg.lastIndexOf("]"));
@@ -175,18 +175,44 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
 
                                 mBussnessBeen = Utils.gson.fromJson(substring, type1);
                                 mAdapter = new IdelAdapter(R.layout.item_idel, mBussnessBeen);
-                                mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                                mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
                                     @Override
-                                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                                        switch (view.getId()) {
+                                            case R.id.iv_bussness_photo:
+                                            case R.id.iv_renzheng:
+                                            case R.id.iv_shop:
+                                            case R.id.iv_manor:
+                                            case R.id.ll_baoyou:
+                                            case R.id.ll_fanmai:
+                                            case R.id.ll_zu:
+                                            case R.id.ll_huan:
+                                                Intent intent = new Intent(IdleActivity.this, IdleDetailActivity.class);
+                                                intent.putExtra("id", mBussnessBeen.get(position));
+                                                startActivity(intent);
+                                                break;
 
-                                        Intent intent = new Intent(IdleActivity.this, IdleDetailActivity.class);
-                                        intent.putExtra("id", mBussnessBeen.get(position));
 
-                                        startActivity(intent);
+                                        }
+
+
+
 
 
                                     }
                                 });
+
+
+
+
+
+
+
+
+
+
+
+
                                 mHeadView = View.inflate(IdleActivity.this, R.layout.idle_head, null);
                                 mAdapter.addHeaderView(mHeadView);
                                 mRvIdel.setAdapter(mAdapter);
@@ -249,7 +275,6 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.ll_top1:
                 showDrawable(1);
                 //发送请求 去获取新的数据 来刷新界面
-
 
                 mMap.put("issale", "true");
                 mMap.put("is_rent", "false");
@@ -341,7 +366,6 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
                 mRvpop.setVisibility(View.GONE);
                 mRvfilter.setVisibility(View.VISIBLE);
                 mLlbutton.setVisibility(View.VISIBLE);
-
                 break;
 
 

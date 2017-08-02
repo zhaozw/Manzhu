@@ -58,7 +58,7 @@ public class OrderSureActivity extends AppCompatActivity {
     private ArrayList<AddressBean> mAddressBeen;
 
     private TextView mTvuserjifen;
-    private Double mJifen;
+    private Integer mJifen;
     private DecimalFormat mDf;
     private TextView mTvjifen;
     private TextView mTvallprice;
@@ -246,6 +246,7 @@ public class OrderSureActivity extends AppCompatActivity {
                                     orderIntent.putExtra("avator", bean);
                                     orderIntent.putExtra("type", "idle");
                                     startActivity(orderIntent);
+                                    finish();
                                 }
 
 
@@ -325,7 +326,7 @@ public class OrderSureActivity extends AppCompatActivity {
         //优惠劵的金额
         mTvyouhuijuan.setText(mDf.format(youhui));
         String s = mTvjifen.getText().toString();
-        Double jifen = Double.valueOf(s);
+        final Double jifen = Double.valueOf(s);
 
         //积分折扣的钱
         double endmoney = allprice + yunfeni - youhui - jifen;
@@ -341,40 +342,29 @@ public class OrderSureActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String s1 = s.toString();
-
+                String s1 = s.toString(); // 获取到用户输入的值
+                String s2 = mEtjifen.getText().toString();
+                mEtjifen.setSelection(s2.length());
                 if (s1.length() > 0) {
-                    mEtjifen.setSelection(mEtjifen.getText().length());
-                    Double aDouble1 = Double.valueOf(s1); //用户输入的积分数量
-                    double jifen = aDouble1 / 100; // 输入的积分可以抵扣的钱
-                    String s2 = mTvallprice.getText().toString();
-                    Double allprice = Double.valueOf(s2);
-
-                    //积分大于剩余的积分的时候  只能输入到剩余积分
-                    if (aDouble1 > mJifen) {
-                        aDouble1 = mJifen;
-
-                        mEtjifen.setText(aDouble1 + "");
-                        mTvjifen.setText(mDf.format(aDouble1 / 100));
-
-                    } else {
-
-                        mTvjifen.setText(mDf.format(aDouble1 / 100));
+                    Integer integer = Integer.valueOf(s1);  //用户输入的值
+                    if (integer > mJifen) {
+                        integer = mJifen;
+                        mEtjifen.setText(mJifen + "");
                     }
-                    //积分能抵扣商品价格的时候 所能使用的积分只能是商品那么多
-                    if (jifen > allprice){
-                        jifen = allprice;
-                        mEtjifen.setText(jifen * 100 + "");
-                        mTvjifen.setText(mDf.format(jifen));
-                        Log.i("zc", "onTextChanged:   进入了价格积分");
+                    if (integer > allprice * 100) {
+                        integer = (int)allprice;
+                        mEtjifen.setText(integer + "");
                     }
+                    String s3 = integer + "";
+                    Double aDouble = Double.valueOf(s3);
+                    mTvjifen.setText(mDf.format(aDouble / 100));
 
 
-                }else if(s.length() == 0){
-
+                } else if (s1.length() == 0){
+                    mEtjifen.setText(0+ "");
                     mTvjifen.setText("0.00");
-
                 }
+
 
                 jisuanMoney();
 
@@ -408,7 +398,7 @@ public class OrderSureActivity extends AppCompatActivity {
                         String retmsg = bean.getRetmsg();
                         if (retmsg != null) {
                             mTvuserjifen.setText("（可用积分 " +retmsg + "）");
-                            Double aDouble = Double.valueOf(retmsg);
+                            Integer aDouble = Integer.valueOf(retmsg);
                             mJifen = aDouble;
                         }
 
@@ -546,6 +536,27 @@ public class OrderSureActivity extends AppCompatActivity {
                         mBuystyle = bean.getRetmsg();
                         Log.i("zc", "onResponse:   看看获取的交易方式i" + mBuystyle);
                         item.setHuoqujiaoyi(mBuystyle);
+                        //初始化交易方式 默认为线上
+                        if (mBuystyle.contains("线上")) {
+                            //设置为线上交易
+                            item.setJiaoyi("线上交易");
+                            //同时初始化运费
+                            List<ShopCartbean.CarshoplistBean.CargoodslistBean> checkgoodslist = item.getCheckgoodslist();
+                            double yunfei = 0;
+                            for (ShopCartbean.CarshoplistBean.CargoodslistBean cargoodslistBean : checkgoodslist) {
+                                String money = cargoodslistBean.getGoods_model().getG_CourierMoney();
+                                Double aDouble = Double.valueOf(money);
+                                yunfei = yunfei + aDouble;
+                            }
+                            item.setYunfei(yunfei);
+
+
+                        } else {
+                            item.setJiaoyi("线下交易");
+                        }
+
+
+
                     }
                 } else {
 
@@ -563,8 +574,6 @@ public class OrderSureActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
 

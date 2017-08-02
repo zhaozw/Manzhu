@@ -318,6 +318,9 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                                 if (count > 99) {
                                     mTvShopcart.setText("99+");
                                     mTvBtshopcart.setText("99+");
+                                } else if (count == 0) {
+                                    mTvShopcart.setVisibility(View.GONE);
+                                    mTvBtshopcart.setVisibility(View.GONE);
                                 }
 
                                 mTvShopcart.setText(count+"");

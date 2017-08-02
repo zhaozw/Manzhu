@@ -213,14 +213,13 @@ public class OrderGenerationActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.bt_backhome:
 
-
+                startActivity(new Intent(OrderGenerationActivity.this,MainActivity.class));
                 break;
             case R.id.bt_backgood:
-
-
+                startActivity(new Intent(OrderGenerationActivity.this,IdleActivity.class));
                 break;
             case R.id.bt_usercenter:
-
+                startActivity(new Intent(OrderGenerationActivity.this,UserCenterActivity.class));
 
                 break;
             case R.id.ll_message:

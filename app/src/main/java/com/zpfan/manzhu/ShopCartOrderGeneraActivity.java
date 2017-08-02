@@ -101,13 +101,12 @@ public class ShopCartOrderGeneraActivity extends AppCompatActivity {
                             mGenerationBeen = Utils.gson.fromJson(substring, type1);
                             ShopcartOrderGeneraAdapter adapter = new ShopcartOrderGeneraAdapter(R.layout.item_shopcartorder, mGenerationBeen);
                             View headview = View.inflate(ShopCartOrderGeneraActivity.this, R.layout.shopcart_ordergenera_head, null);
+                            initHeadView(headview);
                             View footView = View.inflate(ShopCartOrderGeneraActivity.this, R.layout.shopcart_ordergenera_foot, null);
                             initFootView(footView,mGenerationBeen);
                             adapter.addHeaderView(headview);
-
                             adapter.addFooterView(footView);
                             mRvShopcartgenera.setAdapter(adapter);
-
                         }
 
 
@@ -126,15 +125,48 @@ public class ShopCartOrderGeneraActivity extends AppCompatActivity {
 
     }
 
+    private void initHeadView(View headview) {
+        TextView btbackhome = (TextView) headview.findViewById(R.id.bt_backhome);
+        TextView btbackgood = (TextView) headview.findViewById(R.id.bt_backgood);
+        TextView btusercenter = (TextView) headview.findViewById(R.id.bt_usercenter);
+
+        btbackhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ShopCartOrderGeneraActivity.this,MainActivity.class));
+            }
+        });
+
+        btbackgood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ShopCartOrderGeneraActivity.this,IdleActivity.class));
+                finish();
+            }
+        });
+
+
+        btusercenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ShopCartOrderGeneraActivity.this,UserCenterActivity.class));
+            }
+        });
+
+
+
+
+    }
+
     private void initFootView(View footView, ArrayList<OrderGenerationBean> generationBeen) {
         TextView tvallpay = (TextView) footView.findViewById(R.id.tv_allpay);
         TextView tvjifen = (TextView) footView.findViewById(R.id.tv_jifen);
-        int allpay = 0;
-        int alljifen = 0;
+        Double allpay = 0.00;
+        double alljifen = 0;
 
         for (OrderGenerationBean bean : generationBeen) {
-            allpay = allpay + bean.getO_PayMoney();
-            alljifen =  alljifen + Integer.valueOf(bean.getO_DeductionIntegralMoney()) ;
+            allpay = allpay + Double.valueOf(bean.getO_PayMoney());
+            alljifen =  alljifen + Double.valueOf(bean.getO_DeductionIntegralMoney()) ;
         }
 
         String s1 = alljifen + "";

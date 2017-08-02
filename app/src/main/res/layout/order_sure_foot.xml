@@ -53,6 +53,8 @@
 
 
         <EditText
+            android:maxLength="7"
+            android:inputType="number"
             android:id="@+id/et_jifen"
             android:gravity="center"
             android:singleLine="true"
