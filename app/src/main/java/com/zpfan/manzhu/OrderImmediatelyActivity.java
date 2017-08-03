@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -225,11 +224,12 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
     private String couponid = "";
     private String mBuystyle;
     private double allprice = 0;
+    private double singleprice = 0;
     private int baseday = 2;
     private int maxday = 0;
     private String mFrome;
-    private String rentDay = "2";
-    private int weiyueDay = 0;
+    private String rentDay = "1";
+
 
 
     @Override
@@ -271,6 +271,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
             //设置为租赁数量
             mTvNumbertype.setText("租赁数量");
 
+
             //查看商品的规格 获取租赁的价格
             if (mSpecifications.size() > 0) {
                 //商品有规格 但是不知道有没有 具体的规格
@@ -290,8 +291,8 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                     mTvZudate.setText("租期\n" + bean.getPS_BasicLease() + "天"); //默认租期是起租的日期
                     Double yajin = Double.valueOf(price);
                     Double zujin = Double.valueOf(rennewal);
-                    mTvWeiyue.setText("违约期\n" + (int) (yajin / zujin) + "天");                                             //违约租期是押金/续租租金
-                    weiyueDay = (int) (yajin / zujin);
+                                                       //违约租期是押金/续租租金
+
                     baseday = bean.getPS_BasicLease();
                     maxday = (int) (yajin / zujin);
                     mTvWeiyuejin.setText("违约金为续租租金的" + mDetail.getPP_Lease_period_proportion() + "倍");
@@ -324,8 +325,8 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                     Double yajin = Double.valueOf(price);
                     Double zujin = Double.valueOf(rennewal);
 
-                    mTvWeiyue.setText("违约期\n" + (int) (yajin / zujin) + "天");
-                    weiyueDay = (int) (yajin / zujin);
+
+
                     baseday = msp.getPS_BasicLease();
                     maxday = (int) (yajin / zujin);
 
@@ -360,8 +361,8 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                 Double yajin = Double.valueOf(price);
                 Double zujin = Double.valueOf(rennewal);
 
-                mTvWeiyue.setText("违约期\n" + (int) (yajin / zujin) + "天");
-                weiyueDay = (int) (yajin / zujin);
+
+
                 baseday = mDetail.getG_BasicLease();
                 maxday = (int) (yajin / zujin);
 
@@ -791,6 +792,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                     for (BussnessBean.GoodsSpecificationsBean specification : mSpecifications) {
                         if (specification.getId() == msp.getId()) {
                             specification.setPS_FixedPrice(s3);
+                            singleprice = Double.valueOf(s3);
                             msp.setPS_FixedPrice(s3);
                             if (isRent) {
                                 //如果是租的商品
@@ -800,9 +802,14 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                                 msp.setPS_RenewalPrice(eRentData);
                                 Double aDouble = Double.valueOf(eStartrent);
                                 Double bDouble = Double.valueOf(eRentData);
-
                                 mTvRentprice.setText(mDf.format(aDouble));
                                 mTvRentrewal.setText(mDf.format(bDouble));
+                                //重新计算能够租的时间
+                                double v = singleprice / bDouble;
+                             maxday = (int) v;
+
+
+
 
                             }
                         }
@@ -913,8 +920,8 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                         mEtRentdate.setText(price);
                         Double yajin = Double.valueOf(price1);
                         Double zujin = Double.valueOf(price);
-                        mTvWeiyue.setText("违约期\n" + (int) (yajin / zujin) + "天");
-                        weiyueDay = (int) (yajin / zujin);
+
+
                         baseday = bean.getPS_BasicLease();
                         maxday = (int) (yajin / zujin);
                         mDetail.setMsp(bean);
@@ -1248,9 +1255,8 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                         Integer integer2 = Integer.valueOf(rentDay);
                         mTvZudate.setText("租期\n" + rentDay + "天"); //默认租期是起租的日期
 
+                        int i = maxday - integer2;
 
-                        int i = weiyueDay - integer2;
-                        mTvWeiyue.setText("违约期\n" + i + "天");
                         mTvRentday.setText(s4);
                         onlineWindow.dismiss();
                     }
@@ -1318,6 +1324,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
         Double price = Double.valueOf(s);
         String s1 = mTvCount.getText().toString();
         Integer count = Integer.valueOf(s1);
+        singleprice = price;
         allprice = price * count;
         mTvAllprice.setText(df.format(allprice));
 

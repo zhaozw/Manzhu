@@ -451,6 +451,9 @@ public class IdleDetailActivity extends AppCompatActivity {
                 mLlNewxiaoliang.setVisibility(View.GONE);
                 mLlFineness.setVisibility(View.VISIBLE);
             } else if (mType.equals("new")) {
+                //把标题换了
+                mTvPagetitle.setText("新商品");
+                mTvIcontopText.setText("新商品");
                 //设置新商品的品牌名 和总销量 别的都一样
                 mLlFineness.setVisibility(View.GONE);
                 mLlNewxiaoliang.setVisibility(View.VISIBLE);
