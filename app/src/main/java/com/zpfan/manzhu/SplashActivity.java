@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -117,7 +116,7 @@ public class SplashActivity extends AppCompatActivity implements BDLocationListe
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == REQUEST_LOCATIONALL) {
-            Log.i("per", "onRequestPermissionsResult:   看看哪两个没搞定 + "+  grantResults[0] + grantResults[1]  +grantResults[2] + PackageManager.PERMISSION_GRANTED);
+
             if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED &&grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
 
                 SPUtils.getInstance().put("isper",true);
@@ -134,7 +133,7 @@ public class SplashActivity extends AppCompatActivity implements BDLocationListe
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Log.i("location", "run:   回调到的地址" + location.getCity());
+
             }
         });
 

@@ -5,7 +5,6 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -99,7 +98,7 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
         //展示商品的信息
         RecyclerView rvorder = helper.getView(R.id.rv_orderitem);
         rvorder.setLayoutManager(new LinearLayoutManager(mContext));
-        Log.i("zc", "convert:   查看数据" + item.getCheckgoodslist().size());
+
 
         mOrderGoodAdapter = new OrderGoodAdapter(R.layout.item_ordergoods, item.getCheckgoodslist(),mListener);
         getCouponlist(item,mCouponBeanArrayList);
@@ -192,7 +191,7 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
         getorderbydealstyle.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("zc", "getbuyStyle:   看看发送的请求" + call.request().toString());
+
                 String body = response.body();
 
                 if (body != null) {
@@ -274,7 +273,7 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
 
         }
 
-        Log.i("zc", "getCouponlist:  看看总价格对不对" + price);
+
 
 
 
@@ -337,7 +336,7 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
     }
 
     private void initFootView(final ShopCartbean.CarshoplistBean item, final ArrayList<OrderCouponBean> mCouponBeanArrayList) {
-        Log.i("zc", "initFootView:   初始化foot了吗");
+
         final TextView tvcoupon = (TextView) mFootView.findViewById(R.id.tv_coupon);
         final TextView tvonline = (TextView) mFootView.findViewById(R.id.tv_online);
         final TextView tvleavemessage = (TextView) mFootView.findViewById(R.id.tv_leavemessage);
@@ -430,7 +429,7 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
 
                 if (jiaoyi.length() > 5){
                     //线上交易和线下交易
-                    Log.i("zc", "onClick:   进来了吗");
+
                     final PopupWindow onlineWindow = new PopupWindow(mContext);
                     final View onlinepop = View.inflate(mContext, R.layout.format_popwindow, null);
                     RecyclerView rvonline = (RecyclerView) onlinepop.findViewById(R.id.rv_format);
@@ -452,7 +451,7 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                                     Double aDouble = Double.valueOf(bean.getGoods_model().getG_CourierMoney());
                                     zongyunfe = zongyunfe + aDouble;
                                 }
-                                    Log.i("zc", "onItemClick:   看看总运费"+ zongyunfe);
+
 
                                 yunfei.setText(df.format(zongyunfe));
                                 item.setYunfei(zongyunfe);
@@ -491,7 +490,7 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                             Double aDouble = Double.valueOf(bean.getGoods_model().getG_CourierMoney());
                             zongyunfe = zongyunfe + aDouble;
 
-                            Log.i("zc", "onItemClick:   看看总运费"+ zongyunfe);
+
                         }
                         yunfei.setText(mDf.format(zongyunfe));
                         item.setYunfei(zongyunfe);
@@ -555,7 +554,7 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public  void getliuyan(LeaveMessageEvent event){
-        Log.i("zc", "getliuyan:   接受到消息了吗");
+
         for (ShopCartbean.CarshoplistBean bean : data) {
             if (bean.getMember_UID().equals(event.getBussness())) {
                 bean.setLiuyan(event.getMessagae());

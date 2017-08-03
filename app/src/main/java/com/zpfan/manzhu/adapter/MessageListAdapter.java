@@ -125,7 +125,7 @@ public class MessageListAdapter extends BaseQuickAdapter<UserBean, BaseViewHolde
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getcount(EMMessage count) {
-        Log.i("zc", "getcount:   接受到了 eventbus发送的消息" + count.toString());
+
 
         /*
         mMessage = count;
@@ -133,7 +133,7 @@ public class MessageListAdapter extends BaseQuickAdapter<UserBean, BaseViewHolde
         EventBus.getDefault().post("收到了消息");*/
 
         for (UserBean bean : data) {
-            Log.i(TAG, "getcount:     看看两数据的问题" + count.getFrom() + " -----" + bean.getM_Phone());
+
 
             int i = data.indexOf(bean);
             if (bean.getM_Phone().equals(count.getFrom())) {
@@ -179,7 +179,7 @@ public class MessageListAdapter extends BaseQuickAdapter<UserBean, BaseViewHolde
     }
 
     private void addUserbean(final EMMessage emMessage) {
-        Log.i("zc", "addUserbean: 没有这个用户 我们需要去增加");
+
         //发送网络请求
         String from = emMessage.getFrom();
         //根据手机号去获取到用户信息 并刷新
@@ -293,12 +293,12 @@ public class MessageListAdapter extends BaseQuickAdapter<UserBean, BaseViewHolde
                                 LastMessageBean bean1 = lastMessageBeen.get(0);
 
                                 String tumlog = bean1.getCL_ChatLog();
-                                Log.i("zc", "onResponse:    看看应该显示的是什么" + tumlog );
+
                               //  String log = "";
                                 if (tumlog != null) {
                                     if ( tumlog.contains("txt")) {
                                       String  aaa =   tumlog.substring(tumlog.indexOf("\"")).replace("\"","").trim();
-                                        Log.i("zc", "onResponse:    看看应该显示的是什么" + aaa );
+
                                         databean.setLastMessage(aaa);
                                     } else if (tumlog.contains("voice")) {
 
@@ -311,7 +311,7 @@ public class MessageListAdapter extends BaseQuickAdapter<UserBean, BaseViewHolde
                                 }
 
 
-                                Log.i("zc", "onResponse:    看看时间是什么" + bean1.getCL_ChatTime());
+
                                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                // Long aLong = TimeStringUtil.getFormDataLong(bean1.getCL_ChatTime());
                                         String time1 = bean1.getCL_ChatTime();
@@ -334,7 +334,7 @@ public class MessageListAdapter extends BaseQuickAdapter<UserBean, BaseViewHolde
                                 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(databean.getM_Phone());
                                 if (conversation != null) {
                                     int unredcount = conversation.getUnreadMsgCount();
-                                    Log.i("zc", "convert:    应该是根据每个item来获取未读消息数量的、" + unredcount + databean.getM_Phone());
+
                                     databean.setUnredCount(unredcount);
                                 }
                                     notifyDataSetChanged();

@@ -144,7 +144,7 @@ public class MessageFragment extends Fragment implements EMConnectionListener, E
                             if (retmsg.contains("[")) {
                                 //先去掉外面的一层数组
                                 String substring = retmsg.substring(1, retmsg.lastIndexOf("]"));
-                                Log.i("zc", "onResponse:    看看获取到的消息列表"  + substring);
+
                                 Type type1 = new TypeToken<ArrayList<UserBean>>() {
                                 }.getType();
 
@@ -211,7 +211,7 @@ public class MessageFragment extends Fragment implements EMConnectionListener, E
                 public EaseUser getUser(String username) {
                     EaseUser user1 = new EaseUser(username);
                     user1.setAvatar(Utils.imgUrl + mBean.getM_Avatar());
-                    Log.i("tttt", "getUser:  看看是不是这里设置的头像 有问题" + mBean.getM_Avatar() + mBean.getM_Phone());
+
 
                     return user1;
                 }
@@ -306,7 +306,7 @@ public class MessageFragment extends Fragment implements EMConnectionListener, E
     @Override
     public void onMessageReceived(List<EMMessage> messages) {
         //收到消息
-        Log.i("unred", "onMessageReceived:   收到新的消息" + messages.toString() + messages.size());
+
         EMMessage message = messages.get(0);
         int size = messages.size();
         EMConversation conversation = EMClient.getInstance().chatManager().getConversation(message.getFrom());
@@ -341,7 +341,7 @@ public class MessageFragment extends Fragment implements EMConnectionListener, E
     @Override
     public void onMessageChanged(EMMessage message, Object change) {
 
-        Log.i("zc", "onMessageChanged:     ---------------------消息状态的改变" );
+
 
 
 

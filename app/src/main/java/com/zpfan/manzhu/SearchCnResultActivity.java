@@ -46,7 +46,7 @@ public class SearchCnResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String key = intent.getStringExtra("key");
         mRvCn.setLayoutManager(new LinearLayoutManager(SearchCnResultActivity.this));
-        Log.i("zc", "onCreate:   获取到的key" + key);
+
         TextView id = (TextView) mStCn.findViewById(R.id.tv_searchkeyword);
         id.setText(" | " + key);
         searchCn(key);

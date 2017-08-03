@@ -6,7 +6,6 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -257,7 +256,7 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
         iscollection.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("zc", "onResponse:   看看请求" + call.request().toString());
+
                 String body = response.body();
 
                 if (body != null) {
@@ -354,14 +353,14 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
         mCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("zc", "onItemChildClick:   收藏");
+
                 if (Utils.isUserLogin()) {
                     Call<String> operacollectionfunction = Aplication.mIinterface.operacollectionfunction("商品", item.getId() + "", Utils.getloginuid());
 
                     operacollectionfunction.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Log.i("zc", "onResponse:    看看请求的数据"  + call.request().toString());
+
                             String body1 = response.body();
                             if (body1 != null) {
                                 Type type2 = new TypeToken<ArrayList<AvatorBean>>() {
@@ -397,7 +396,7 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
             @Override
             public void onClick(View v) {
                 //加入购物车的方法
-                Log.i("zc", "onItemChildClick:   购物车");
+
                 if (Utils.isUserLogin()) {
 
                     Call<String> operaaddupdateshopcart = Aplication.mIinterface.operaaddupdateshopcart("", Utils.getloginuid(), item.getG_UID(),"", item.getMember_UID(), "1");
@@ -405,7 +404,7 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
                     operaaddupdateshopcart.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Log.i("zc", "onResponse:   看看是什么情况i" + call.request().toString());
+
 
                             String body = response.body();
                             if (body != null) {
@@ -415,7 +414,7 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
                                 ArrayList<AvatorBean> been = Utils.gson.fromJson(body, type);
                                 if (been != null) {
                                     AvatorBean bean = been.get(0);
-                                    Log.i("zc", "onResponse:   看看请求返回的结果" + bean.getRetmsg());
+
                                     if (bean.getRetmsg().equals("true")) {
 
                                         MyToast.show("添加到购物车成功", R.mipmap.com_icon_check_w);
@@ -427,7 +426,7 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
 
                                 }
                             } else {
-                                Log.i("zc", "onFailure:   看看错误的地方" + call.request().toString() + "-----"+ response.code());
+
                             }
 
 
@@ -435,7 +434,7 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
 
                         @Override
                         public void onFailure(Call<String> call, Throwable t) {
-                            Log.i("zc", "onFailure:   看看错误的地方" + call.request().toString());
+
                         }
                     });
 

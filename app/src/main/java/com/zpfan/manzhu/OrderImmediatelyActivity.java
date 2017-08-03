@@ -1,6 +1,7 @@
 package com.zpfan.manzhu;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.hyphenate.chat.EMMessage;
@@ -47,8 +49,6 @@ import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.zpfan.manzhu.Aplication.mContext;
 
 public class OrderImmediatelyActivity extends AppCompatActivity {
 
@@ -110,8 +110,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
     LinearLayout mLlEdit;
     @BindView(R.id.ll_editfinish)
     LinearLayout mLlEditfinish;
-    @BindView(R.id.ll_delete)
-    LinearLayout mLlDelete;
+
     @BindView(R.id.ll_finish)
     LinearLayout mLlFinish;
     @BindView(R.id.dashline)
@@ -186,19 +185,51 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
     LinearLayout mLlRentde;
     @BindView(R.id.tv_userjifen)
     TextView mTvUserjifen;
+    @BindView(R.id.tv_submit)
+    TextView mTvSubmit;
+    @BindView(R.id.tv_numbertype)
+    TextView mTvNumbertype;
+    @BindView(R.id.tv_rentprice)
+    TextView mTvRentprice;
+    @BindView(R.id.tv_rentbaseday)
+    TextView mTvRentbaseday;
+    @BindView(R.id.tv_rentrewal)
+    TextView mTvRentrewal;
+    @BindView(R.id.tv_weiyuejin)
+    TextView mTvWeiyuejin;
+    @BindView(R.id.tv_zudate)
+    TextView mTvZudate;
+    @BindView(R.id.tv_weiyue)
+    TextView mTvWeiyue;
+    @BindView(R.id.ll_startrent)
+    LinearLayout mLlStartrent;
+    @BindView(R.id.ll_rentdate)
+    LinearLayout mLlRentdate;
+    @BindView(R.id.et_startrent)
+    EditText mEtStartrent;
+    @BindView(R.id.et_rentdate)
+    EditText mEtRentdate;
+    @BindView(R.id.ll_editrent)
+    LinearLayout mLlEditrent;
     private ArrayList<AddressBean> mAddressBeen;
     private BussnessBean mDetail;
     private ShopBean mShopBean = new ShopBean();
-    private int max = 0;
+    private int max = 1;
     private List<BussnessBean.GoodsSpecificationsBean> mSpecifications;
     private boolean isRent = false;
-    private double mJifen;
+    private Integer mJifen;
     private ArrayList<OrderCouponBean> mCouponBeanArrayList = new ArrayList<>();
     private DecimalFormat mDf;
     private String goospuid = "";
     private String addruid = "";
     private String couponid = "";
     private String mBuystyle;
+    private double allprice = 0;
+    private int baseday = 2;
+    private int maxday = 0;
+    private String mFrome;
+    private String rentDay = "2";
+    private int weiyueDay = 0;
 
 
     @Override
@@ -218,10 +249,12 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
         mDetail = intent.getParcelableExtra("detail");
         mSpecifications = mDetail.getGoods_specifications();
         String type = intent.getStringExtra("type");
+        mFrome = intent.getStringExtra("frome");
 
         getUserIntegral();
 
 
+        int num = mDetail.getG_StockNum();
 
         if (type.equals("rent")) {
             //说明是要租的商品
@@ -231,7 +264,115 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
             mLlRentday.setVisibility(View.VISIBLE);
             mLlRentde.setVisibility(View.VISIBLE);
             mDashline4.setVisibility(View.VISIBLE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                mLlEditfinish.setBackground(getResources().getDrawable(R.color.maintextcolor));
+            }
 
+            //设置为租赁数量
+            mTvNumbertype.setText("租赁数量");
+
+            //查看商品的规格 获取租赁的价格
+            if (mSpecifications.size() > 0) {
+                //商品有规格 但是不知道有没有 具体的规格
+                if (mDetail.getMsp() == null) {
+                    BussnessBean.GoodsSpecificationsBean bean = mSpecifications.get(0);
+                    String values = bean.getPS_AttributeValues();
+                    mTvFormat.setText(values);
+                    mTvCheckformate.setText(values);
+                    String price = bean.getPS_FixedPrice();
+                    mTvGoodprice.setText(price); //押金
+                    mTvRentprice.setText(bean.getPS_CorrespAmount()); //起步租金
+                    String rennewal = bean.getPS_RenewalPrice();
+                    mTvRentrewal.setText(rennewal); //续租租金
+                    mEtStartrent.setText(bean.getPS_CorrespAmount()); //设置编辑几步租金的初始值
+                    mEtRentdate.setText(rennewal);  //设置编辑续租租金的初始值
+                    mTvRentbaseday.setText("（" + bean.getPS_BasicLease() + "天）"); //起租日期
+                    mTvZudate.setText("租期\n" + bean.getPS_BasicLease() + "天"); //默认租期是起租的日期
+                    Double yajin = Double.valueOf(price);
+                    Double zujin = Double.valueOf(rennewal);
+                    mTvWeiyue.setText("违约期\n" + (int) (yajin / zujin) + "天");                                             //违约租期是押金/续租租金
+                    weiyueDay = (int) (yajin / zujin);
+                    baseday = bean.getPS_BasicLease();
+                    maxday = (int) (yajin / zujin);
+                    mTvWeiyuejin.setText("违约金为续租租金的" + mDetail.getPP_Lease_period_proportion() + "倍");
+
+                    mEtGoodmoney.setText(price);
+                    int inventory = bean.getPS_Inventory();
+                    mTvKucun.setText("(库存：" + inventory + ")");
+                    if (inventory == 0) {
+                        max = 1;
+                    } else {
+                        max = inventory;
+                    }
+                    calculationMoney();
+                } else {
+                    //商品有具体的规格
+                    BussnessBean.GoodsSpecificationsBean msp = mDetail.getMsp();
+                    String values = msp.getPS_AttributeValues();
+                    mTvFormat.setText(values);
+                    mTvCheckformate.setText(values);
+                    String price = msp.getPS_FixedPrice();
+                    mTvGoodprice.setText(price);
+                    mTvRentprice.setText(msp.getPS_CorrespAmount()); //起步租金
+                    String rennewal = msp.getPS_RenewalPrice();
+                    mTvRentrewal.setText(rennewal); //续租租金
+                    mEtStartrent.setText(msp.getPS_CorrespAmount()); //设置编辑几步租金的初始值
+                    mEtRentdate.setText(rennewal);  //设置编辑续租租金的初始值
+                    mTvRentbaseday.setText("（" + msp.getPS_BasicLease() + "天）"); //最短的租期
+                    mTvWeiyuejin.setText("违约金为续租租金的" + mDetail.getPP_Lease_period_proportion() + "倍"); // 违约金
+                    mTvZudate.setText("租期\n" + msp.getPS_BasicLease() + "天"); //默认租期是起租的日期
+                    Double yajin = Double.valueOf(price);
+                    Double zujin = Double.valueOf(rennewal);
+
+                    mTvWeiyue.setText("违约期\n" + (int) (yajin / zujin) + "天");
+                    weiyueDay = (int) (yajin / zujin);
+                    baseday = msp.getPS_BasicLease();
+                    maxday = (int) (yajin / zujin);
+
+                    mEtGoodmoney.setText(price);
+                    int inventory = msp.getPS_Inventory();
+                    mTvKucun.setText("(库存：" + inventory + ")");
+                    if (inventory == 0) {
+                        max = 1;
+
+                    } else {
+                        max = inventory;
+
+                    }
+                    calculationMoney();
+
+                }
+            } else {
+                //商品没有规格
+                mTvFormat.setVisibility(View.INVISIBLE);
+                mTvCheckformate.setVisibility(View.INVISIBLE);
+                String price = mDetail.getG_FixedPrice();
+                mTvGoodprice.setText(price);
+                String rennewal = mDetail.getG_RenewalPrice();
+                mTvRentprice.setText(mDetail.getG_CorrespAmount()); //起步租金
+                mTvRentrewal.setText(rennewal); //续租租金
+                mEtStartrent.setText(mDetail.getG_CorrespAmount()); //设置编辑几步租金的初始值
+                mEtRentdate.setText(rennewal);  //设置编辑续租租金的初始值
+                mTvRentbaseday.setText("（" + mDetail.getG_BasicLease() + "天）");
+                mTvWeiyuejin.setText("违约金为续租租金的" + mDetail.getPP_Lease_period_proportion() + "倍"); // 违约金
+                mTvZudate.setText("租期\n" + mDetail.getG_BasicLease() + "天"); //默认租期是起租的日期
+
+                Double yajin = Double.valueOf(price);
+                Double zujin = Double.valueOf(rennewal);
+
+                mTvWeiyue.setText("违约期\n" + (int) (yajin / zujin) + "天");
+                weiyueDay = (int) (yajin / zujin);
+                baseday = mDetail.getG_BasicLease();
+                maxday = (int) (yajin / zujin);
+
+
+                mEtGoodmoney.setText(price);
+                mTvKucun.setText("(库存：" + num + ")");
+                if (num != 0) {
+                    max = num;
+                }
+                calculationMoney();
+            }
 
 
         } else {
@@ -242,35 +383,62 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
             mLlRentde.setVisibility(View.GONE);
             mDashline4.setVisibility(View.GONE);
 
-            //设置运费
-            String money = mDetail.getG_CourierMoney();
-            Double aDouble = Double.valueOf(money);
-            mTvYunfei.setText(mDf.format(aDouble));
-            mTvZongyunfei.setText(mDf.format(aDouble));
-
-            mEtJifen.setText("0");
-
+            //设置为购买数量
+            mTvNumbertype.setText("购买数量");
 
             if (mSpecifications.size() > 0) {
-                BussnessBean.GoodsSpecificationsBean bean = mSpecifications.get(0);
-                String values = bean.getPS_AttributeValues();
-                mTvFormat.setText(values);
-                mTvCheckformate.setText(values);
-                mTvGoodprice.setText(bean.getPS_FixedPrice());
-                mEtGoodmoney.setText(bean.getPS_FixedPrice());
-                mTvKucun.setText("(库存：" + bean.getPS_Inventory() + ")");
-                max = bean.getPS_Inventory();
-                calculationMoney();
+                //商品有规格 但是不知道有没有 具体的规格
+                if (mDetail.getMsp() == null) {
+                    BussnessBean.GoodsSpecificationsBean bean = mSpecifications.get(0);
+                    String values = bean.getPS_AttributeValues();
+                    mTvFormat.setText(values);
+                    mTvCheckformate.setText(values);
+                    mTvGoodprice.setText(bean.getPS_FixedPrice());
+                    mEtGoodmoney.setText(bean.getPS_FixedPrice());
+                    int inventory = bean.getPS_Inventory();
+                    mTvKucun.setText("(库存：" + inventory + ")");
+                    if (inventory != 0) {
+                        max = inventory;
+                    }
+                    calculationMoney();
+                } else {
+                    //商品有具体的规格
+                    BussnessBean.GoodsSpecificationsBean msp = mDetail.getMsp();
+                    String values = msp.getPS_AttributeValues();
+                    mTvFormat.setText(values);
+                    mTvCheckformate.setText(values);
+                    mTvGoodprice.setText(msp.getPS_FixedPrice());
+                    mEtGoodmoney.setText(msp.getPS_FixedPrice());
+                    int inventory = msp.getPS_Inventory();
+                    mTvKucun.setText("(库存：" + inventory + ")");
+                    if (inventory != 0) {
+                        max = inventory;
+                    }
+                    calculationMoney();
+
+                }
             } else {
+                //商品没有规格
                 mTvFormat.setVisibility(View.INVISIBLE);
                 mTvCheckformate.setVisibility(View.INVISIBLE);
                 mTvGoodprice.setText(mDetail.getG_FixedPrice());
                 mEtGoodmoney.setText(mDetail.getG_FixedPrice());
-                mTvKucun.setText("(库存：" + mDetail.getG_StockNum() + ")");
-                max = mDetail.getG_StockNum();
+                mTvKucun.setText("(库存：" + num + ")");
+                if (num != 0) {
+                    max = num;
+                }
                 calculationMoney();
             }
         }
+
+        //初始化积分
+        mEtJifen.setText("0");
+
+        //设置运费
+        String money = mDetail.getG_CourierMoney();
+        Double aDouble = Double.valueOf(money);
+        mTvYunfei.setText(mDf.format(aDouble));
+        mTvZongyunfei.setText(mDf.format(aDouble));
 
 
         //获取地址信息
@@ -286,17 +454,17 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
         mDashline3.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         mDashline4.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
-
-        //设置用户积分
-
-
-
-
-
+        //设置数量
+        mTvCount.setText(mDetail.getBuyCount() + "");
+        mTvCarcount.setText("x" + mDetail.getBuyCount());
 
         //设置优惠劵
         mTvYouhuijuan.setText("0.00");
         mTvCouponmoney.setText("0.00");
+
+        //设置商品的图片
+        Glide.with(this).load(mDetail.getG_Cover()).into(mIvShopcover);
+
 
         getCouponList();
 
@@ -309,42 +477,30 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String s1 = s.toString();
-                mEtJifen.setSelection(s.length());
 
+                String s1 = s.toString(); // 获取到用户输入的值
+                String s2 = mEtJifen.getText().toString();
+                mEtJifen.setSelection(s2.length());
                 if (s1.length() > 0) {
-                    Double aDouble1 = Double.valueOf(s1); //用户输入的积分数量
-                    double jifen = aDouble1 / 100; // 输入的积分可以抵扣的钱
-                    String s2 = mTvAllprice.getText().toString();
-                    Double allprice = Double.valueOf(s2);
-
-                    //积分大于剩余的积分的时候  只能输入到剩余积分
-                    if (aDouble1 > mJifen) {
-                        aDouble1 = mJifen;
-
-                        mEtJifen.setText(aDouble1 + "");
-                        mTvJifen.setText(mDf.format(aDouble1 / 100));
-
-                    } else {
-
-                        mTvJifen.setText(mDf.format(aDouble1 / 100));
+                    Integer integer = Integer.valueOf(s1);  //用户输入的值
+                    if (integer > mJifen) {
+                        integer = mJifen;
+                        mEtJifen.setText(mJifen + "");
                     }
-                    //积分能抵扣商品价格的时候 所能使用的积分只能是商品那么多
-
-
-                    if (jifen > allprice){
-                        jifen = allprice;
-                        mEtJifen.setText(jifen * 100 + "");
-                        mTvJifen.setText(mDf.format(jifen));
-                        Log.i("zc", "onTextChanged:   进入了价格积分");
+                    if (integer > allprice * 100) {
+                        integer = (int) allprice;
+                        mEtJifen.setText(integer + "");
                     }
+                    String s3 = integer + "";
+                    Double aDouble = Double.valueOf(s3);
+                    mTvJifen.setText(mDf.format(aDouble / 100));
 
 
-                }else if(s.length() == 0){
-
+                } else if (s1.length() == 0) {
                     mTvJifen.setText("0.00");
-
                 }
+
+
                 calculationMoney();
             }
 
@@ -358,10 +514,12 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
         String cout = mTvCount.getText().toString();
         Integer count = Integer.valueOf(cout);
         String weight = mDetail.getG_Weight();
-        Double aDouble = Double.valueOf(weight);
+        Double wei = Double.valueOf(weight);
 
-        double allweight = aDouble * count;
-        getbuyStyle(usesheng,mDf.format(allweight),mDetail.getG_UID());
+        double allweight = wei * count;
+        getbuyStyle(usesheng, mDf.format(allweight), mDetail.getG_UID());
+        calculationMoney();
+
     }
 
     /**
@@ -384,20 +542,16 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
                         String retmsg = bean.getRetmsg();
                         if (retmsg != null) {
-                            mTvUserjifen.setText("（可用积分 " +retmsg + "）");
-                            Double aDouble = Double.valueOf(retmsg);
+                            mTvUserjifen.setText("（可用积分 " + retmsg + "）");
+                            Integer aDouble = Integer.valueOf(retmsg);
                             mJifen = aDouble;
                         }
-
 
 
                     }
 
 
-
-
                 }
-
 
 
             }
@@ -407,7 +561,6 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
             }
         });
-
 
 
     }
@@ -452,11 +605,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                             }
 
 
-
                         }
-
-
-
 
 
                     }
@@ -540,7 +689,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
                     if (been != null) {
                         String retmsg = been.get(0).getRetmsg();
-                        Log.i("zc", "onResponse:    看看收获地址" + retmsg.length());
+
                         if (retmsg.length() > 4 && retmsg.contains("[")) {
                             String substring = retmsg.substring(1, retmsg.lastIndexOf("]"));
 
@@ -554,8 +703,8 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                                     if (bean.isMD_IsDefault()) {
                                         mTvAddrname.setText("收货人：" + bean.getMD_Name());
                                         mTvPhone.setText(bean.getMD_Phone());
-                                        mTvAddrlocation.setText("收货地址：" +bean.getMD_Province() + bean.getMD_City() + bean.getMD_Area() + bean.getMD_Address());
-                                        addruid = bean.getId()+ "";
+                                        mTvAddrlocation.setText("收货地址：" + bean.getMD_Province() + bean.getMD_City() + bean.getMD_Area() + bean.getMD_Address());
+                                        addruid = bean.getId() + "";
                                     }
 
                                 }
@@ -587,8 +736,8 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.ll_location, R.id.ll_message, R.id.iv_edit, R.id.ll_editfinish, R.id.ll_delete, R.id.bt_up, R.id.bt_down, R.id.ll_checkformate, R.id.tv_online, R.id.other, R.id.tv_leavemessage
-            , R.id.iv_leavemessage, R.id.iv_online,R.id.tv_coupon,R.id.iv_coupon,R.id.tv_submit})
+    @OnClick({R.id.ll_location, R.id.ll_message, R.id.iv_edit, R.id.ll_editfinish, R.id.bt_up, R.id.bt_down, R.id.ll_checkformate, R.id.tv_online, R.id.other, R.id.tv_leavemessage
+            , R.id.iv_leavemessage, R.id.iv_online, R.id.tv_coupon, R.id.iv_coupon, R.id.tv_submit, R.id.tv_rentday})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_location:
@@ -615,31 +764,98 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
                 mLlFinish.setVisibility(View.VISIBLE);
                 mLlEdit.setVisibility(View.VISIBLE);
+                mLlStartrent.setVisibility(View.GONE);
+                mLlRentdate.setVisibility(View.GONE);
+                mLlEditrent.setVisibility(View.VISIBLE);
 
                 break;
             case R.id.ll_editfinish:
                 mLlNormal.setVisibility(View.VISIBLE);
                 mIvEdit.setVisibility(View.VISIBLE);
+                mLlEditrent.setVisibility(View.GONE);
+                mBtUp.setClickable(true);
+                mBtDown.setClickable(true);
+
+                //数量也改为1
+                mTvCount.setText("1");
+                mTvCarcount.setText("x" + 1);
+
+                //在完成编辑后  把价格修改了  如果有规格 要修改 规格的价格
+                String s3 = mEtGoodmoney.getText().toString();
+                if (s3.isEmpty()) {
+                    s3 = 0 + "";
+                    mEtGoodmoney.setText(0 + "");
+                }
+                if (mDetail.getGoods_specifications().size() > 0) {
+                    BussnessBean.GoodsSpecificationsBean msp = mDetail.getMsp();
+                    for (BussnessBean.GoodsSpecificationsBean specification : mSpecifications) {
+                        if (specification.getId() == msp.getId()) {
+                            specification.setPS_FixedPrice(s3);
+                            msp.setPS_FixedPrice(s3);
+                            if (isRent) {
+                                //如果是租的商品
+                                String eStartrent = mEtStartrent.getText().toString(); //修改后的起始租金
+                                String eRentData = mEtRentdate.getText().toString();  //修改后的续租租金
+                                msp.setPS_CorrespAmount(eStartrent);
+                                msp.setPS_RenewalPrice(eRentData);
+                                Double aDouble = Double.valueOf(eStartrent);
+                                Double bDouble = Double.valueOf(eRentData);
+
+                                mTvRentprice.setText(mDf.format(aDouble));
+                                mTvRentrewal.setText(mDf.format(bDouble));
+
+                            }
+                        }
+                    }
+                    String price = msp.getPS_FixedPrice();
+                    Double aDouble = Double.valueOf(price);
+                    mTvGoodprice.setText(mDf.format(aDouble));
+                    calculationMoney();
+                } else {
+                    //没有规格
+                    String s = mEtGoodmoney.getText().toString();
+                    Double aDouble = Double.valueOf(s);
+                    //把商品的价格修改了
+                    mDetail.setG_FixedPrice(mDf.format(aDouble));
+                    mTvGoodprice.setText(mDf.format(aDouble));
+
+                    if (isRent) {
+                        //是租的商品修改租金
+                        String eStartrent = mEtStartrent.getText().toString(); //修改后的起始租金
+                        String eRentData = mEtRentdate.getText().toString();  //修改后的续租租金
+                        mDetail.setG_CorrespAmount(eStartrent);
+                        mDetail.setG_RenewalPrice(eRentData);
+                        mTvRentprice.setText(eStartrent);
+                        mTvRentrewal.setText(eRentData);
+
+                    }
+
+
+                    calculationMoney();
+
+                }
+
 
                 mLlFinish.setVisibility(View.GONE);
                 mLlEdit.setVisibility(View.GONE);
+                mLlStartrent.setVisibility(View.VISIBLE);
+                mLlRentdate.setVisibility(View.VISIBLE);
 
                 break;
 
-            case R.id.ll_delete:
-                //删除的操作
-
-                MyToast.show("最后一件商品不能删除", R.mipmap.com_icon_cross_w);
-                mLlDelete.setClickable(false);
-                break;
 
             case R.id.bt_up:
                 //增加
                 mBtDown.setClickable(true);
                 String s = mTvCount.getText().toString();
                 Integer integer = Integer.valueOf(s) + 1;
+
                 if (integer > max) {
                     integer = max;
+                    if (max == 0) {
+                        integer = 1;
+                        mBtUp.setClickable(true);
+                    }
                     MyToast.show("购买商品的数量不能超过库存的数量", R.mipmap.com_icon_cross_w);
                     mBtUp.setClickable(false);
                 } else {
@@ -670,21 +886,40 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
                 break;
             case R.id.ll_checkformate:
+                //选择规格
                 final PopupWindow popupWindow = new PopupWindow(this);
                 final View pop = View.inflate(this, R.layout.format_popwindow, null);
                 RecyclerView rvformat = (RecyclerView) pop.findViewById(R.id.rv_format);
-                rvformat.setLayoutManager(new LinearLayoutManager(mContext));
+                rvformat.setLayoutManager(new LinearLayoutManager(OrderImmediatelyActivity.this));
                 CheckFormatAdapter adapter = new CheckFormatAdapter(R.layout.item_location_popr, mSpecifications);
                 adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        String values = mSpecifications.get(position).getPS_AttributeValues();
+                        BussnessBean.GoodsSpecificationsBean bean = mSpecifications.get(position);
+                        String values = bean.getPS_AttributeValues();
                         mTvCheckformate.setText(values);
                         mTvFormat.setText(values);
-                        mTvGoodprice.setText(mSpecifications.get(position).getPS_FixedPrice());
-                        mEtGoodmoney.setText(mSpecifications.get(position).getPS_FixedPrice());
-                        mTvKucun.setText("(库存：" + mSpecifications.get(position).getPS_Inventory() + ")");
-                        goospuid = mSpecifications.get(position).getProduct_UniqueID();
+                        String price1 = bean.getPS_FixedPrice();
+                        mTvGoodprice.setText(price1);
+                        mEtGoodmoney.setText(price1);
+                        int inventory = bean.getPS_Inventory();
+                        mTvKucun.setText("(库存：" + inventory + ")");
+                        goospuid = bean.getProduct_UniqueID();
+                        String amount = bean.getPS_CorrespAmount();
+                        mTvRentprice.setText(amount); //起步租金
+                        String price = bean.getPS_RenewalPrice();
+                        mTvRentrewal.setText(price); //续租租金
+                        mEtStartrent.setText(amount);
+                        mEtRentdate.setText(price);
+                        Double yajin = Double.valueOf(price1);
+                        Double zujin = Double.valueOf(price);
+                        mTvWeiyue.setText("违约期\n" + (int) (yajin / zujin) + "天");
+                        weiyueDay = (int) (yajin / zujin);
+                        baseday = bean.getPS_BasicLease();
+                        maxday = (int) (yajin / zujin);
+                        mDetail.setMsp(bean);
+
+                        max = inventory;
 
                         calculationMoney();
                         popupWindow.dismiss();
@@ -700,7 +935,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                 popupWindow.setTouchable(true);
                 popupWindow.setOutsideTouchable(true);
 
-                popupWindow.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.home_toppop_bg));
+                popupWindow.setBackgroundDrawable(OrderImmediatelyActivity.this.getResources().getDrawable(R.drawable.home_toppop_bg));
                 popupWindow.showAsDropDown(mLlCheckformate);
 
                 break;
@@ -709,73 +944,71 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
             case R.id.tv_online:
                 //获取交易方式
 
-               if (mBuystyle.length() > 5){
-                   //线上交易和线下交易
-                   final PopupWindow onlineWindow = new PopupWindow(OrderImmediatelyActivity.this);
-                   final View onlinepop = View.inflate(OrderImmediatelyActivity.this, R.layout.format_popwindow, null);
-                   RecyclerView rvonline = (RecyclerView) onlinepop.findViewById(R.id.rv_format);
-                   rvonline.setLayoutManager(new LinearLayoutManager(OrderImmediatelyActivity.this));
-                   ArrayList<String> location = new ArrayList<String>();
-                   location.add("线上交易");
-                   location.add("线下交易");
-                   FormartAdapter onlineadapter = new FormartAdapter(R.layout.item_location_popr, location);
-                   onlineadapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                       @Override
-                       public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                           DecimalFormat df = new DecimalFormat("0.00");
-                           double zongyunfei = 0.00;
-                           if (position == 0) {
-                               //线上交易
-                               String money = mDetail.getG_CourierMoney();
-                               Double aDouble = Double.valueOf(money);
-                               zongyunfei = zongyunfei + aDouble;
-                               mTvYunfei.setText(df.format(zongyunfei));
-                               mTvZongyunfei.setText(df.format(zongyunfei));
-                               mTvOnline.setText("线上交易");
+                if (mBuystyle.length() > 5) {
+                    //线上交易和线下交易
+                    final PopupWindow onlineWindow = new PopupWindow(OrderImmediatelyActivity.this);
+                    final View onlinepop = View.inflate(OrderImmediatelyActivity.this, R.layout.format_popwindow, null);
+                    RecyclerView rvonline = (RecyclerView) onlinepop.findViewById(R.id.rv_format);
+                    rvonline.setLayoutManager(new LinearLayoutManager(OrderImmediatelyActivity.this));
+                    ArrayList<String> location = new ArrayList<String>();
+                    location.add("线上交易");
+                    location.add("线下交易");
+                    FormartAdapter onlineadapter = new FormartAdapter(R.layout.item_location_popr, location);
+                    onlineadapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                            DecimalFormat df = new DecimalFormat("0.00");
+                            double zongyunfei = 0.00;
+                            if (position == 0) {
+                                //线上交易
+                                String money = mDetail.getG_CourierMoney();
+                                Double aDouble = Double.valueOf(money);
+                                zongyunfei = zongyunfei + aDouble;
+                                mTvYunfei.setText(df.format(zongyunfei));
+                                mTvZongyunfei.setText(df.format(zongyunfei));
+                                mTvOnline.setText("线上交易");
 
-                           } else {
-                               //线下交易
-                               mTvOnline.setText("线下交易");
-                               zongyunfei = 0.00;
-                               mTvYunfei.setText(df.format(zongyunfei));
-                               mTvZongyunfei.setText(df.format(zongyunfei));
-                           }
-                           calculationMoney();
-                           onlineWindow.dismiss();
-                       }
-                   });
-                   rvonline.setAdapter(onlineadapter);
-                   onlineWindow.setContentView(onlinepop);
-                   // int height = dp2px(LinearLayout.LayoutParams.WRAP_CONTENT);
-                   onlineWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-                   int i = Utils.dp2px(100);
-                   onlineWindow.setWidth(i);
-                   onlineWindow.setTouchable(true);
-                   onlineWindow.setOutsideTouchable(true);
+                            } else {
+                                //线下交易
+                                mTvOnline.setText("线下交易");
+                                zongyunfei = 0.00;
+                                mTvYunfei.setText(df.format(zongyunfei));
+                                mTvZongyunfei.setText(df.format(zongyunfei));
+                            }
+                            calculationMoney();
+                            onlineWindow.dismiss();
+                        }
+                    });
+                    rvonline.setAdapter(onlineadapter);
+                    onlineWindow.setContentView(onlinepop);
+                    // int height = dp2px(LinearLayout.LayoutParams.WRAP_CONTENT);
+                    onlineWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+                    int i = Utils.dp2px(100);
+                    onlineWindow.setWidth(i);
+                    onlineWindow.setTouchable(true);
+                    onlineWindow.setOutsideTouchable(true);
 
-                   onlineWindow.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.home_toppop_bg));
-                   onlineWindow.showAsDropDown(mTvOnline);
-               }else {
-                       double zongyunfei = 0.00;
-                   if (mBuystyle.equals("线上交易|")) {
-                       String money = mDetail.getG_CourierMoney();
-                       Double aDouble = Double.valueOf(money);
-                       zongyunfei = zongyunfei + aDouble;
-                       mTvYunfei.setText(mDf.format(zongyunfei));
-                       mTvZongyunfei.setText(mDf.format(zongyunfei));
-                       mTvOnline.setText("线上交易");
+                    onlineWindow.setBackgroundDrawable(OrderImmediatelyActivity.this.getResources().getDrawable(R.drawable.home_toppop_bg));
+                    onlineWindow.showAsDropDown(mTvOnline);
+                } else {
+                    double zongyunfei = 0.00;
+                    if (mBuystyle.equals("线上交易|")) {
+                        String money = mDetail.getG_CourierMoney();
+                        Double aDouble = Double.valueOf(money);
+                        zongyunfei = zongyunfei + aDouble;
+                        mTvYunfei.setText(mDf.format(zongyunfei));
+                        mTvZongyunfei.setText(mDf.format(zongyunfei));
+                        mTvOnline.setText("线上交易");
 
-                   } else if (mBuystyle.equals("线下交易|")) {
-                       mTvOnline.setText("线下交易");
-                       zongyunfei = 0.00;
-                       mTvYunfei.setText(mDf.format(zongyunfei));
-                       mTvZongyunfei.setText(mDf.format(zongyunfei));
+                    } else if (mBuystyle.equals("线下交易|")) {
+                        mTvOnline.setText("线下交易");
+                        zongyunfei = 0.00;
+                        mTvYunfei.setText(mDf.format(zongyunfei));
+                        mTvZongyunfei.setText(mDf.format(zongyunfei));
 
-                   }
+                    }
 
-               }
-
-
+                }
 
 
                 break;
@@ -837,75 +1070,206 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
             case R.id.tv_submit:
                 //提交订单
-                Map<String, String> map = new LinkedHashMap<>();
+                if (!isRent) {
+                    mTvSubmit.setEnabled(false);
+                    mTvSubmit.setClickable(false);
+                    mTvSubmit.setOnClickListener(null);
+                    Map<String, String> map = new LinkedHashMap<>();
 
-                map.put("member_uid", Utils.getloginuid());
-                String cunt = mTvCount.getText().toString();
-                map.put("Count", cunt);
-                map.put("goods_uid", mDetail.getG_UID());
-                map.put("goods_ps_uid", goospuid);
-                map.put("goods_id_btn", "");
-                map.put("Finally_Address_ID", addruid);
-                String liuyan = mTvLeavemessage.getText().toString();
-                map.put("liuyan_m", liuyan);
-                map.put("CarOrBuy", "Buy");
-                map.put("OrderCate", "购物订单");
-                map.put("shopcoupon_bymemberlist", couponid);
-                String jifen = mEtJifen.getText().toString();
-                map.put("deduction_buy_score_number", jifen);
-                map.put("see_sell_my_data_mm", "");
-                map.put("share_uid", "");
-                map.put("appointment_date", "2017-07-31");
-                map.put("appointment_time", "");
-                map.put("yunfei_value_model", "");
-                String trading = mTvOnline.getText().toString();
-                map.put("trading_value_model", trading);
-                String editgoodmoney = mEtGoodmoney.getText().toString();
-                map.put("edit_goods_single_price_model", editgoodmoney);
+                    map.put("member_uid", Utils.getloginuid());
+                    String cunt = mTvCount.getText().toString();
+                    map.put("Count", cunt);
+                    map.put("goods_uid", mDetail.getG_UID());
+                    String id = "";
+                    if (mDetail.getMsp() != null) {
+                        id = mDetail.getMsp().getPS_UniqueID();
+                    }
+                    map.put("goods_ps_uid", id);
+                    map.put("goods_id_btn", "");
+                    map.put("Finally_Address_ID", addruid);
+                    String liuyan = mTvLeavemessage.getText().toString();
+                    map.put("liuyan_m", liuyan);
+                    map.put("CarOrBuy", "Buy");
+                    map.put("OrderCate", "购物订单");
+                    map.put("shopcoupon_bymemberlist", couponid);
+                    String jifen = mEtJifen.getText().toString();
+                    map.put("deduction_buy_score_number", jifen);
+                    map.put("see_sell_my_data_mm", "");
+                    map.put("share_uid", "");
+                    map.put("appointment_date", "2017-07-31");
+                    map.put("appointment_time", "");
+                    map.put("yunfei_value_model", "");
+                    String trading = mTvOnline.getText().toString();
+                    map.put("trading_value_model", trading);
+                    String editgoodmoney = mEtGoodmoney.getText().toString();
+                    map.put("edit_goods_single_price_model", editgoodmoney);
 
-                Call<String> orderSubmit = Aplication.mIinterface.orderSubmit(map);
+                    Call<String> orderSubmit = Aplication.mIinterface.orderSubmit(map);
 
-                orderSubmit.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        Log.i("zc", "onResponse:   看看请求" + call.request().toString());
+                    orderSubmit.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
 
-                        String body = response.body();
 
-                        if (body != null) {
+                            String body = response.body();
 
-                            Type type = new TypeToken<ArrayList<AvatorBean>>() {
-                            }.getType();
+                            if (body != null) {
 
-                            ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                                Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                                }.getType();
 
-                            if (avatorBeen != null && avatorBeen.size() > 0) {
-                                AvatorBean bean = avatorBeen.get(0);
-                                Log.i("zc", "onResponse:   看看订单的编号" + bean.getRetmsg());
-                                Intent orderIntent = new Intent(OrderImmediatelyActivity.this,OrderGenerationActivity.class);
-                                orderIntent.putExtra("avator", bean);
-                                orderIntent.putExtra("type", "idle");
-                                startActivity(orderIntent);
+                                ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+
+                                if (avatorBeen != null && avatorBeen.size() > 0) {
+                                    AvatorBean bean = avatorBeen.get(0);
+                                    Intent orderIntent = new Intent(OrderImmediatelyActivity.this, OrderGenerationActivity.class);
+                                    orderIntent.putExtra("avator", bean);
+                                    orderIntent.putExtra("type", mFrome);
+                                    startActivity(orderIntent);
+
+                                    finish();
+                                }
+
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+                } else {
+                    //租赁订单的发起
+                    Map<String, String> map = new LinkedHashMap<>();
+
+                    map.put("member_uid", Utils.getloginuid());
+                    String count = mTvCount.getText().toString();
+                    map.put("rent_count",count); //租赁的数量
+                    map.put("goods_uid", mDetail.getG_UID()); //商品的唯一编号
+                    String psuid = "";
+                    BussnessBean.GoodsSpecificationsBean msp = mDetail.getMsp();
+                    if (msp != null) {
+                        psuid = msp.getPS_UniqueID();
+                    }
+
+                    map.put("goods_ps_uid", psuid);
+                    String liuyan  = mTvLeavemessage.getText().toString();
+                    map.put("liuyan_m", liuyan);
+                    map.put("CarOrBuy", "Buy");
+                    map.put("OrderCate","租赁订单");
+                    map.put("shopcoupon_bymemberlist", couponid);
+                    String jifen = mEtJifen.getText().toString();
+                    if (jifen.length() == 0) {
+                        jifen = "0";
+                    }
+                    map.put("deduction_buy_score_number", jifen);
+                    map.put("change_rent_day_model_v", rentDay);
+
+                    map.put("Finally_Address_ID", addruid);
+                    String trading = mTvOnline.getText().toString();
+                    map.put("trading_pattern", trading);
+                    String goodprice = mTvGoodprice.getText().toString();
+                    map.put("edit_goods_single_price", goodprice);
+                    String rentprice = mTvRentprice.getText().toString();
+                    map.put("edit_rentfirst_price", rentprice);
+                    String rentrewal = mTvRentrewal.getText().toString();
+                    map.put("edit_rentxuzu_price", rentrewal);
+
+
+                    Call<String> call = Aplication.mIinterface.submitRentOrder(map);
+
+                    call.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+
+
+                            String body = response.body();
+
+                            if (body != null) {
+
+                                Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                                }.getType();
+
+                                ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                                if (avatorBeen != null && avatorBeen.size() > 0) {
+                                    AvatorBean bean = avatorBeen.get(0);
+                                    String retmsg = bean.getRetmsg();
+
+                                    Intent orderIntent = new Intent(OrderImmediatelyActivity.this, OrderGenerationActivity.class);
+                                    orderIntent.putExtra("avator", bean);
+                                    orderIntent.putExtra("type", "rent");
+                                    startActivity(orderIntent);
+
+                                    finish();
+
+                                }
 
 
 
                             }
 
+
+
+
                         }
 
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
 
 
-                    }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-
-                    }
-                });
-
+                }
 
 
                 break;
+
+            case R.id.tv_rentday:
+                //对租期的选择
+                final ArrayList<String> rentday = new ArrayList<>();
+                for (int i = baseday; i < maxday; i++) {
+                    rentday.add(i + "天");
+                }
+
+                final PopupWindow onlineWindow = new PopupWindow(OrderImmediatelyActivity.this);
+                final View onlinepop = View.inflate(OrderImmediatelyActivity.this, R.layout.format_popwindow, null);
+                RecyclerView rvonline = (RecyclerView) onlinepop.findViewById(R.id.rv_format);
+                rvonline.setLayoutManager(new LinearLayoutManager(OrderImmediatelyActivity.this));
+                FormartAdapter onlineadapter = new FormartAdapter(R.layout.item_location_popr, rentday);
+                onlineadapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        String s4 = rentday.get(position);
+                        rentDay = s4.substring(0, s4.length() - 1);
+                        Integer integer2 = Integer.valueOf(rentDay);
+                        mTvZudate.setText("租期\n" + rentDay + "天"); //默认租期是起租的日期
+
+
+                        int i = weiyueDay - integer2;
+                        mTvWeiyue.setText("违约期\n" + i + "天");
+                        mTvRentday.setText(s4);
+                        onlineWindow.dismiss();
+                    }
+                });
+                rvonline.setAdapter(onlineadapter);
+                onlineWindow.setContentView(onlinepop);
+
+                onlineWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+                int i = Utils.dp2px(100);
+                onlineWindow.setWidth(i);
+                onlineWindow.setTouchable(true);
+                onlineWindow.setOutsideTouchable(true);
+
+                onlineWindow.setBackgroundDrawable(OrderImmediatelyActivity.this.getResources().getDrawable(R.drawable.home_toppop_bg));
+                onlineWindow.showAsDropDown(mTvRentday);
+
+
+                break;
+
 
         }
     }
@@ -930,12 +1294,11 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                         AvatorBean bean = avatorBeen.get(0);
 
                         mBuystyle = bean.getRetmsg();
-                        Log.i("zc", "onResponse:   看看获取的交易方式" + mBuystyle);
+
                     }
                 } else {
-                    Log.i("zc", "getbuyStyle:   来获取地址了吗" + call.request().toString());
-                }
 
+                }
 
 
             }
@@ -955,8 +1318,8 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
         Double price = Double.valueOf(s);
         String s1 = mTvCount.getText().toString();
         Integer count = Integer.valueOf(s1);
-        double v = price * count;
-        mTvAllprice.setText(df.format(v));
+        allprice = price * count;
+        mTvAllprice.setText(df.format(allprice));
 
         String zongyunfei = mTvZongyunfei.getText().toString();
         Double yunfei = Double.valueOf(zongyunfei);
@@ -968,7 +1331,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
         Double youhui = Double.valueOf(youhuijuan);
 
 
-        double pay = v + yunfei - jifen - youhui;
+        double pay = allprice + yunfei - jifen - youhui;
 
         mTvPayprice.setText(df.format(pay));
 

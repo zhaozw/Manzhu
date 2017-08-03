@@ -4,7 +4,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.zpfan.manzhu.R;
 import com.zpfan.manzhu.fragment.EaseChatFragment;
@@ -85,11 +84,11 @@ public class EaseActivity extends AppCompatActivity {
 
             if (grantResults.length == 3 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
 
-                Log.i("quanxian", "onRequestPermissionsResult:   全部同意三个权限");
+
 
             } else {
                 for (int i = 0; i < grantResults.length; i++) {
-                    Log.i("quanxian", "onRequestPermissionsResult:     第" + i +"个权限失败了");
+
 
                 }
 

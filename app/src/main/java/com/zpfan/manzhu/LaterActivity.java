@@ -89,14 +89,14 @@ public class LaterActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initRV() {
-        Log.i("zc", "initRV:   走了初始化的方法了吗");
+
         final ArrayList<String> strings = new ArrayList<>();
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
         if (location != null) {
             mLocation = location.substring(0,location.length() -1);
         }
-        Log.i("zc", "initRV:   看看我传的值是什么" + mLocation);
+
 
         mRvIdel.setLayoutManager(new LinearLayoutManager(LaterActivity.this));
         mTopmenu = (LinearLayout) mIcontoplin.findViewById(R.id.ll_topmenu);

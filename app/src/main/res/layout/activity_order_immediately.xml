@@ -16,10 +16,11 @@
 
 
     <com.zpfan.manzhu.utils.MyScrollView
-        android:layout_below="@+id/tl_ordersure"
-        android:layout_above="@+id/ll_importorder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tl_ordersure"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
     <LinearLayout
         android:layout_below="@+id/tl_ordersure"
         android:orientation="vertical"
@@ -369,9 +370,11 @@
                         android:layout_height="wrap_content"/>
 
                     <EditText
+                        android:inputType="number"
                         android:id="@+id/et_goodmoney"
                         android:gravity="center"
                         android:singleLine="true"
+                        android:maxLength="7"
                         android:textCursorDrawable="@null"
                         android:background="@drawable/order_edit_money"
                         android:layout_marginLeft="5dp"
@@ -467,27 +470,7 @@
 
 
 
-                <LinearLayout
-                    android:id="@+id/ll_delete"
-                    android:orientation="horizontal"
-                    android:background="@color/numbertextcolor"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_weight="0.4"
-                    android:layout_height="0dp">
-                    <ImageView
-                        android:src="@mipmap/com_icon_close_3_w"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"/>
 
-                    <TextView
-                        android:layout_marginLeft="5dp"
-                        android:text="删除"
-                        android:textColor="@color/buttontext"
-                        android:textSize="10sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
 
 
             </LinearLayout>
@@ -515,6 +498,8 @@
             android:layout_height="50dp">
 
             <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/ll_startrent"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -548,12 +533,14 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:id="@+id/tv_rentprice"
                     android:textColor="@color/pricetextcolor"
                     android:textSize="12sp"
                     android:text="1000.00"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:id="@+id/tv_rentbaseday"
                     android:textSize="10sp"
                     android:text="（天）"
                     android:layout_width="wrap_content"
@@ -568,6 +555,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/ll_rentdate"
                 android:gravity="center_vertical"
                 android:layout_marginTop="7.5dp"
                 android:orientation="horizontal"
@@ -588,6 +577,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:id="@+id/tv_rentrewal"
                     android:text="10.00"
                     android:textColor="@color/pricetextcolor"
                     android:textSize="12sp"
@@ -612,6 +602,7 @@
                     android:layout_height="0dp"/>
 
                 <TextView
+                    android:id="@+id/tv_weiyuejin"
                     android:paddingRight="5dp"
                     android:paddingLeft="5dp"
                     android:gravity="center"
@@ -622,6 +613,68 @@
                     android:layout_width="wrap_content"
                     android:layout_height="17.5dp"/>
 
+
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_editrent"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                android:gravity="center_vertical"
+                android:text="起步租金：¥"
+                android:textColor="@color/maintextcolor"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+
+            <EditText
+                android:layout_marginLeft="5dp"
+                android:inputType="number"
+                android:id="@+id/et_startrent"
+                android:maxLength="7"
+                android:gravity="center"
+                android:singleLine="true"
+                android:background="@drawable/order_edit_money"
+                android:textCursorDrawable="@null"
+                android:layout_width="62.5dp"
+                android:layout_height="30dp"/>
+
+                <TextView
+                    android:layout_marginLeft="2dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/secondtextcolor"
+                    android:text="（2天）"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:gravity="center_vertical"
+                    android:text="续租：¥"
+                    android:textColor="@color/maintextcolor"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+
+                <EditText
+                    android:layout_marginLeft="5dp"
+                    android:inputType="number"
+                    android:id="@+id/et_rentdate"
+                    android:maxLength="7"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:background="@drawable/order_edit_money"
+                    android:textCursorDrawable="@null"
+                    android:layout_width="62.5dp"
+                    android:layout_height="30dp"/>
+
+                <TextView
+                    android:layout_marginLeft="2dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/secondtextcolor"
+                    android:text="/天"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
@@ -640,6 +693,7 @@
 
 
         <LinearLayout
+            android:visibility="visible"
             android:gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -648,6 +702,7 @@
             android:layout_height="50dp">
 
             <TextView
+                android:id="@+id/tv_numbertype"
                 android:gravity="center_vertical"
                 android:textColor="@color/maintextcolor"
                 android:text="购买数量"
@@ -734,6 +789,8 @@
             android:layout_height="42.5dp">
 
             <TextView
+                android:lineSpacingExtra="2dp"
+                android:id="@+id/tv_zudate"
                 android:textSize="10sp"
                 android:textColor="@color/buttontext"
                 android:gravity="center"
@@ -744,6 +801,7 @@
                 android:layout_height="match_parent"/>
 
             <TextView
+                android:lineSpacingExtra="2dp"
                 android:textSize="10sp"
                 android:textColor="@color/buttontext"
                 android:gravity="center"
@@ -755,6 +813,8 @@
 
 
             <TextView
+                android:lineSpacingExtra="2dp"
+                android:id="@+id/tv_weiyue"
                 android:textSize="10sp"
                 android:textColor="@color/buttontext"
                 android:gravity="center"
@@ -1102,6 +1162,7 @@
             <EditText
                 android:inputType="number"
                 android:id="@+id/et_jifen"
+                android:maxLength="7"
                 android:gravity="center"
                 android:singleLine="true"
                 android:background="@drawable/order_edit_money"

@@ -427,6 +427,16 @@ public interface APIinterface {
     Call<String> operaisCollection(@Query("obj_cate") String obj_cate, @Query("obj_id") String obj_id, @Query("obj_member_uid") String obj_member_uid);
 
 
+    /**
+     * 租赁订单的提交
+     * @param map
+     * @return
+     */
+    @GET("SubmitOrder_Rent")
+    Call<String> submitRentOrder(@QueryMap Map<String, String> map);
+
+
+
 
 
 }

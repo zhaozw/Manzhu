@@ -70,7 +70,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.hyphenate.chat.EMGCMListenerService.TAG;
 import static com.zpfan.manzhu.utils.Utils.dp2px;
 
 /**
@@ -238,7 +237,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                     mEdSeach.setEnabled(true);
                     mEdSeach.requestFocus();
                     realtimesearch(s);
-                    Log.i("zc", "onTextChanged:   走了这里了吗");
+
                 } else {
                     if (mSearchwindow != null && mSearchwindow.isShowing()) {
                         mSearchwindow.dismiss();
@@ -293,7 +292,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     String body = response.body();
-                    Log.i("zc", "onResponse:   看看数据" + call.request().toString());
+
 
                     if (body != null) {
                         Type type = new TypeToken<ArrayList<AvatorBean>>() {
@@ -461,7 +460,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
 
     private void realtimesearch(CharSequence s) {
         if (mSearchwindow == null) {
-            Log.i(TAG, "realtimesearch:  创建了吗");
+
             mSearchwindow = new PopupWindow(getContext());
             mContentView = View.inflate(getContext(), R.layout.home_seach_pop, null);
             mIvclose = (ImageView) mContentView.findViewById(R.id.iv_close);
@@ -508,7 +507,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                             for (SearchBean searchBean : searchBeen) {
                                 final List<String> property = searchBean.getLinkDataProperty();
                                 String s1 = property.get(0);
-                                Log.i("zc", "onResponse:   看看数据" + s1);
+
                                 taglist.add(s1);
 
                             }
@@ -940,7 +939,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
             @Override
             public void run() {
                 mProvince = location.getProvince();
-                Log.i("zc", "onReceiveLocation:   回调的省市" + mProvince);
+
                 mTvLocation.setText(location.getCity());
             }
         });
@@ -969,7 +968,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getLocation(String city) {
 
-        Log.i("location", "getLocation:    看看获取到的城市" + city);
+
         mTvLocation.setText(city);
 
     }

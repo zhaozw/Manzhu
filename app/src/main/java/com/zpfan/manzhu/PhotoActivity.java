@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -102,7 +101,7 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initRV() {
-        Log.i("zc", "initRV:   走了初始化的方法了吗");
+
         final ArrayList<String> strings = new ArrayList<>();
         mMap = new HashMap<>();
         Intent intent = getIntent();
@@ -172,7 +171,7 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
         if (location != null) {
             mLocation = location.substring(0, location.length() - 1);
         }
-        Log.i("zc", "initRV:   看看我传的值是什么" + mLocation);
+
 
         mRvIdel.setLayoutManager(new LinearLayoutManager(PhotoActivity.this));
         mTopmenu = (LinearLayout) mIcontoplin.findViewById(R.id.ll_topmenu);
@@ -235,7 +234,7 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
                         String retmsg = bean.getRetmsg();
                         if (retmsg.contains("[")) {
                             String substring = retmsg.substring(1, retmsg.lastIndexOf("]"));
-                            Log.i("zc", "onResponse:  看看数据" + substring);
+
                             if (substring != null) {
                                 Type type1 = new TypeToken<ArrayList<BussnessBean>>() {
                                 }.getType();
@@ -394,7 +393,7 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.ll_searchtop2:
                 //本地的服务筛选
-                Log.i("zc", "onClick:   点击了本地服务的按钮" + mLocation);
+
                 showDrawable(5);
                 mMap.put("is_now", "true");
                 mMap.put("price_filter", "");

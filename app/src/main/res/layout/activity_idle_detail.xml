@@ -240,6 +240,7 @@
                     android:layout_height="@dimen/topmenuwh"/>
 
                 <TextView
+                    android:id="@+id/tv_pagetitle"
                     android:textStyle="bold"
                     android:layout_centerInParent="true"
                     android:textSize="15sp"
@@ -342,9 +343,8 @@
                 android:gravity="center"
                 android:textSize="12sp"
                 android:text="贩"
-
-                android:textColor="@color/buttontext"
-                android:background="@drawable/fanmai_shape"
+                android:textColor="@color/maintextcolor"
+                android:background="@drawable/fanmai_shape1"
                 android:layout_width="@dimen/detail_textwh"
                 android:layout_height="@dimen/detail_textwh"/>
 
@@ -375,6 +375,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
+            <TextView
+                android:id="@+id/tv_dingjin"
+                android:visibility="gone"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="10sp"
+                android:layout_marginLeft="7.5dp"
+                android:text="(包含定金：999.99)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:id="@+id/tv_moreprice"
@@ -405,8 +414,8 @@
                 android:gravity="center"
                 android:textSize="12sp"
                 android:text="租"
-                android:textColor="@color/buttontext"
-                android:background="@drawable/fanmai_shape"
+                android:textColor="@color/maintextcolor"
+                android:background="@drawable/fanmai_shape1"
                 android:layout_width="@dimen/detail_textwh"
                 android:layout_height="@dimen/detail_textwh"/>
 
@@ -525,52 +534,17 @@
                 android:textSize="12sp"
                 android:layout_marginRight="10dp"
                 android:text="换"
-                android:textColor="@color/buttontext"
-                android:background="@drawable/fanmai_shape"
+                android:textColor="@color/maintextcolor"
+                android:background="@drawable/fanmai_shape1"
                 android:layout_width="@dimen/detail_textwh"
                 android:layout_height="@dimen/detail_textwh"/>
-
-          <!--  <TextView
-                android:layout_marginLeft="10dp"
-                android:paddingRight="5dp"
-                android:paddingLeft="5dp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:id="@+id/tv_change1"
-                android:textSize="8sp"
-                android:textColor="@color/stronglin"
-                android:text="服|路飞"
-                android:background="@drawable/genghuan"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"/>
-            <TextView
-                android:layout_marginLeft="7.5dp"
-                android:paddingRight="5dp"
-                android:paddingLeft="5dp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:id="@+id/tv_change2"
-                android:textSize="8sp"
-                android:textColor="@color/stronglin"
-                android:text="服|路飞"
-                android:background="@drawable/genghuan"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"/>-->
-            <!--<TextView
-                android:gravity="center"
-                android:textSize="8sp"
-                android:textColor="@color/stronglin"
-                android:text="服|路飞"
-                android:background="@drawable/genghuan"
-                android:layout_marginLeft="5dp"
-                android:layout_width="@dimen/idle_item_huanw"
-                android:layout_height="@dimen/idle_item_huanh"/>-->
 
 
         </LinearLayout>
         
         <!-- 成色的条目-->
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_fineness"
             android:orientation="horizontal"
             android:layout_marginTop="10dp"
@@ -609,6 +583,73 @@
 
 
         </LinearLayout>
+        <LinearLayout
+
+            android:id="@+id/ll_newxiaoliang"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/ll_fineness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:id="@+id/ll_brand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/maintextcolor"
+                android:text="品牌"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:id="@+id/tv_brand"
+                android:layout_marginLeft="7.5dp"
+                android:textColor="@color/secondtextcolor"
+                android:text="品牌名"
+                android:textSize="12sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:gravity="center_vertical"
+               android:layout_marginLeft="150dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:textColor="#1E1E1E"
+                    android:textSize="12sp"
+                    android:text="总销量"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_xiaoliang"
+                    android:text="234"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="7.5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
 
         <!--  快递的条目-->
         <LinearLayout
@@ -616,7 +657,7 @@
             android:id="@+id/ll_express"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
-            android:layout_below="@+id/ll_fineness"
+            android:layout_below="@+id/ll_newxiaoliang"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_width="wrap_content"

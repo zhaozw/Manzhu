@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -111,17 +110,16 @@ public class EaseUserUtils {
      * @param username
      */
     public static void setUserAvatar(final Context context, String username, final ImageView imageView){
-        Log.i("zc", "setUserAvatar:    userName"  + username);
+
     	EaseUser user = getUserInfo(username);
         if(user != null ){
-         Log.i("zc", "setUserAvatar:     成功" + user.getAvatar());
-            Log.i("juti", "setUserAvatar:    看看具体的数据" + user.getUsername() + user.getAvatar());
+
 
             String usericon = SPUtils.getInstance().getString("usericon");
-            Log.i("juti", "setUserAvatar:    看看usericon" + usericon);
+
             if (user.getUsername().equals(loginuser)) {
                 String userAcatar = user.getAvatar();
-                Log.i("juti", "setUserAvatar:     try" + user.getUsername() +  "登陆人的头像地址" + userAcatar);
+
 
                 RequestOptions options = new RequestOptions().centerCrop();
 
@@ -137,7 +135,7 @@ public class EaseUserUtils {
 
 
             } else {
-                Log.i("juti", "setUserAvatar:     try" + user.getUsername() + "聊天对象的头像地址" + user.getAvatar());
+
 
                 Retrofit retrofit = new Retrofit.Builder().baseUrl("http://www.anipiggy.com/AppWebService.asmx/").addConverterFactory(SimpleXmlConverterFactory.create()).build();
 
@@ -147,7 +145,7 @@ public class EaseUserUtils {
                 getavator.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
-                        Log.i("zc", "onResponse:   -----------网络请求结果" + response.body().toString());
+
                         Type type = new TypeToken<ArrayList<AvatorBean>>() {
                         }.getType();
 
@@ -186,7 +184,7 @@ public class EaseUserUtils {
 
 
         }else{
-            Log.i("zc", "setUserAvatar:     完全失败"  );
+
 
             RequestOptions options = new RequestOptions().centerCrop();
             Glide.with(context).asBitmap().load(R.drawable.default_avator).apply(options).into(new BitmapImageViewTarget(imageView) {

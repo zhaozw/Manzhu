@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -227,11 +226,11 @@ public class OrderSureActivity extends AppCompatActivity {
 
                     //发送请求去提交订单
                     Call<String> orderSubmit = Aplication.mIinterface.orderSubmit(mMap);
-                    Log.i("zc", "onClick:   看看请求的参数" + mMap.toString());
+
                     orderSubmit.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Log.i("zc", "onResponse:   看看失败的原因" + call.request().toString());
+
                             String body = response.body();
                             if (body != null) {
                                 Type type1 = new TypeToken<ArrayList<AvatorBean>>() {
@@ -241,7 +240,7 @@ public class OrderSureActivity extends AppCompatActivity {
 
                                 if (list != null && list.size() > 0){
                                     AvatorBean bean = list.get(0);
-                                    Log.i("zc", "onResponse:   看看失败的原因" +bean.getRetmsg() );
+
                                     Intent orderIntent = new Intent(OrderSureActivity.this,ShopCartOrderGeneraActivity.class);
                                     orderIntent.putExtra("avator", bean);
                                     orderIntent.putExtra("type", "idle");
@@ -289,7 +288,7 @@ public class OrderSureActivity extends AppCompatActivity {
 
 
         for (ShopCartbean.CarshoplistBean bean : mMorderlist) {
-            Log.i("zc", "initFootView:   看看所有的运费" + bean.getYunfei());
+
             yunfeni = yunfeni + bean.getYunfei();
             youhui = youhui + Double.valueOf(bean.getCoupon());
 
@@ -440,7 +439,7 @@ public class OrderSureActivity extends AppCompatActivity {
 
                     if (been != null) {
                         String retmsg = been.get(0).getRetmsg();
-                        Log.i("zc", "onResponse:    看看收获地址" + retmsg.length());
+
                         if (retmsg.length() > 4 && retmsg.contains("[")) {
                             String substring = retmsg.substring(1, retmsg.lastIndexOf("]"));
 
@@ -490,7 +489,7 @@ public class OrderSureActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("shuaxin", "onResume: 刷新了数据了吗");
+
         mAdapter.notifyDataSetChanged();
     }
 
@@ -520,7 +519,7 @@ public class OrderSureActivity extends AppCompatActivity {
         getorderbydealstyle.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-         Log.i("zc", "getbuyStyle:   看看发送的请求" + call.request().toString());
+
                 String body = response.body();
 
                 if (body != null) {
@@ -534,7 +533,7 @@ public class OrderSureActivity extends AppCompatActivity {
                         AvatorBean bean = avatorBeen.get(0);
 
                         mBuystyle = bean.getRetmsg();
-                        Log.i("zc", "onResponse:   看看获取的交易方式i" + mBuystyle);
+
                         item.setHuoqujiaoyi(mBuystyle);
                         //初始化交易方式 默认为线上
                         if (mBuystyle.contains("线上")) {

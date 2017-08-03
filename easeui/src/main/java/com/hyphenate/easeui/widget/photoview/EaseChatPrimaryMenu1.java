@@ -196,26 +196,26 @@ public class EaseChatPrimaryMenu1 extends EaseChatPrimaryMenuBase implements OnC
         int id = view.getId();
         if (id == R.id.btn_send) {
             //执行具体的发送功能
-            Log.i("gai", "onClick:     点击了发送的按钮 ");
+
             if(listener != null){
                 String s = editText.getText().toString();
                 editText.setText("");
                 listener.onSendBtnClicked(s);
             }
         } else if (id == R.id.btn_set_mode_voice) {
-            Log.i("gai", "onClick:     点击了语音的按钮 ");
+
             setModeVoice();
             showNormalFaceImage();
             if(listener != null)
                 listener.onToggleVoiceBtnClicked();
         } else if (id == R.id.btn_set_mode_keyboard) {
-            Log.i("gai", "onClick:     点击了键盘的按钮 ");
+
             setModeKeyboard();
             showNormalFaceImage();
             if(listener != null)
                 listener.onToggleVoiceBtnClicked();
         } else if (id == R.id.btn_more) {
-            Log.i("gai", "onClick:   点击了 加号的按钮");
+
             buttonSetModeVoice.setVisibility(View.VISIBLE);
             buttonSetModeKeyboard.setVisibility(View.GONE);
             edittext_layout.setVisibility(View.VISIBLE);
@@ -224,7 +224,7 @@ public class EaseChatPrimaryMenu1 extends EaseChatPrimaryMenuBase implements OnC
             if(listener != null)
                 listener.onToggleExtendClicked();
         } else if (id == R.id.et_sendmessage) {
-            Log.i("gai", "onClick:      点击了 发送信息的按钮");
+
             edittext_layout.setBackgroundResource(R.drawable.ease_input_bar_bg_active);
             faceNormal.setVisibility(View.VISIBLE);
             faceChecked.setVisibility(View.INVISIBLE);
@@ -232,7 +232,7 @@ public class EaseChatPrimaryMenu1 extends EaseChatPrimaryMenuBase implements OnC
                 listener.onEditTextClicked();
         } else if (id == R.id.rl_face) {
             //表情按钮 的功能
-            Log.i("gai", "onClick:   点击了 表情的按钮");
+
             toggleFaceImage();
             if(listener != null){
                 listener.onToggleEmojiconClicked();

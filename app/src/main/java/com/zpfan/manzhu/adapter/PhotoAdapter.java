@@ -5,7 +5,6 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,7 +37,7 @@ public class PhotoAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> 
     @Override
     protected void convert(BaseViewHolder helper, BussnessBean item) {
 
-        Log.i("zc", "convert:   是不是 item 为null" + item.isG_IsFreeShip());
+
             //点击按钮以后要显示的界面
         final ImageView ivavator = helper.getView(R.id.iv_avator);
         ImageView ivshop= helper.getView(R.id.iv_shop);
@@ -149,7 +148,7 @@ public class PhotoAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> 
 
         //设置评级
         String value = item.getProfessionaldegree_value();
-        Log.i("zc", "convert:   看看数据  为什么没有设置上去" + value);
+
         if (value.equals("0.5")) {
             ivstar1.setImageResource(R.mipmap.com_icon_star_half);
             ivstar2.setImageResource(R.mipmap.com_icon_star_off);

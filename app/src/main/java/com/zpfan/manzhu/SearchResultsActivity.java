@@ -171,14 +171,14 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
                                 mBussnessBeen = Utils.gson.fromJson(substring, type1);
                                 if (mMap.get("G_TYPE").equals("二手商品")) {
                                     // 去加载二手商品
-                                    Log.i("zc", "onResponse:    看看数据二手商品" + mBussnessBeen.size());
+
                                     mIdleAdapter = new IdelAdapter(R.layout.item_idel, mBussnessBeen);
                                     mRvProduct.setAdapter(mIdleAdapter);
 
 
                                 } else if (mMap.get("G_TYPE").equals("新商品")) {
                                     //就去加载新商品
-                                    Log.i("zc", "onResponse:    看看数据新商品" + mBussnessBeen.size());
+
 
                                     mNewAdapter = new NewAdapter(R.layout.item_new, mBussnessBeen);
                                     mRvProduct.setAdapter(mNewAdapter);
@@ -188,7 +188,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
 
                             }
                         } else {
-                            Log.i("zc", "onResponse:   没有数据的时候 走这里");
+
                             mRvProduct.setVisibility(View.GONE);
                             mTvNotfind.setVisibility(View.VISIBLE);
                         }
@@ -506,13 +506,13 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
                                         }.getType();
 
                                         mBussnessBeen = Utils.gson.fromJson(substring, type1);
-                                        Log.i("zc", "onResponse:   应该进入到这里了啊" + mBussnessBeen.size());
+
                                         if (mMap.get("G_TYPE").equals("二手商品")) {
-                                            Log.i("zc", "onResponse:   二手刷新？");
+
                                             mIdleAdapter.notifyDataSetChanged();
 
                                         } else if (mMap.get("G_TYPE").equals("新商品")) {
-                                            Log.i("zc", "onResponse:   新商品刷新年？");
+
                                             mNewAdapter.setNewData(mBussnessBeen);
                                             mNewAdapter.notifyDataSetChanged();
 

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -309,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements EaseConversationL
                     if (mUserlogin) {
                         SPUtils.getInstance().put("userlogin",false);
                         SPUtils.getInstance().remove("userid");
-                        Log.i("zc", "onSuccess:   退出登陆成功");
+
                         MyToast.show("退出登陆成功",R.mipmap.com_icon_check_w);
                     }
                 }
@@ -344,7 +343,7 @@ public class MainActivity extends AppCompatActivity implements EaseConversationL
             EMClient.getInstance().logout(true, new EMCallBack() {
                 @Override
                 public void onSuccess() {
-                    Log.i("zc", "onSuccess:   退出登陆成功");
+
                     MyToast.show("退出登陆成功",R.mipmap.com_icon_check_w);
                 }
 

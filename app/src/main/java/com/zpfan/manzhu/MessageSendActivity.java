@@ -80,7 +80,7 @@ public class MessageSendActivity extends AppCompatActivity implements EMMessageL
 
         mTvTopText.setText(mCn);
 
-        Log.i("zc", "initView:  拿到的手机号 去聊天 " + mUserphone);
+
         mMessageList = new ArrayList<>();
 
         mMsgListener = this;

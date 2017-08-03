@@ -148,7 +148,7 @@ public class OrderGenerationBean {
     private String O_ReceiptPhone;
     private String O_ReceiptProvince;
     private String O_Relation_UID;
-    private int O_RemainingAmountPayMoney;
+    private String O_RemainingAmountPayMoney;
     private String O_RentToSellMessage;
     private String O_ReturnDate;
     private int O_SendPoints;
@@ -646,11 +646,11 @@ public class OrderGenerationBean {
         this.O_Relation_UID = O_Relation_UID;
     }
 
-    public int getO_RemainingAmountPayMoney() {
+    public String getO_RemainingAmountPayMoney() {
         return O_RemainingAmountPayMoney;
     }
 
-    public void setO_RemainingAmountPayMoney(int O_RemainingAmountPayMoney) {
+    public void setO_RemainingAmountPayMoney(String O_RemainingAmountPayMoney) {
         this.O_RemainingAmountPayMoney = O_RemainingAmountPayMoney;
     }
 

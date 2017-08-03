@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -305,7 +304,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (message.contains("[")) {
                                 Type type1 = new TypeToken<ArrayList<UserBean>>() {
                                 }.getType();
-                                Log.i("zc", "onResponse:     看看是什么报错" + message);
+
                                 ArrayList<UserBean> userbean = Utils.gson.fromJson(message, type1);
                                 final UserBean user = userbean.get(0);
                                 if (user != null) {
@@ -319,14 +318,14 @@ public class LoginActivity extends AppCompatActivity {
 
                                 }
                                 SPUtils.getInstance().put("user", message);
-                                Log.i("zc", "onResponse:      " + message);
+
                                 if (message.contains("M_Account_Status")) {
 
                                     EMClient.getInstance().login(user.getM_Phone(), "123", new EMCallBack() {
                                         @Override
                                         public void onSuccess() {
 
-                                            Log.i("zc", "onSuccess:    环信登陆成功");
+
 
                                             EMClient.getInstance().groupManager().loadAllGroups();
                                             EMClient.getInstance().chatManager().loadAllConversations();
@@ -349,13 +348,13 @@ public class LoginActivity extends AppCompatActivity {
                                                 public EaseUser getUser(String username) {
                                                     EaseUser user1 = new EaseUser(mUserPhone);
                                                     user1.setAvatar(Utils.imgUrl + user.getM_Avatar());
-                                                    Log.i("qqqq", "getUser:     看看登陆的是谁" + username + mUserAvator);
+
                                                     return user1;
                                                 }
                                             };
                                             instance.setUserProfileProvider(userProvider);
 
-                                            Log.i("qqqq", "onResponse:  看看登陆的是谁" + mUserPhone + mUserAvator);
+
                                             EaseUserUtils.setLoginuser(mUserPhone);
                                             //
 
@@ -370,7 +369,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                         @Override
                                         public void onError(int code, String error) {
-                                            Log.i("zc", "onError:      登陆聊天服务器失败" + code + error);
+
                                         }
 
                                         @Override

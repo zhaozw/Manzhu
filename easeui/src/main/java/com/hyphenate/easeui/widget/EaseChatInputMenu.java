@@ -288,7 +288,7 @@ public class EaseChatInputMenu extends LinearLayout {
                     if(emojicon.getEmojiText() != null){
                         chatPrimaryMenu.onEmojiconInputEvent(EaseSmileUtils.getSmiledText(context,emojicon.getEmojiText()));
                         String path = emojicon.getIconPath();
-                        Log.i("emoji", "onExpressionClicked:  按了表情的小控件" + emojicon.getIcon() + "type" + emojicon.getType());
+
                         // TODO: 2017/7/18 0018  这个地方是表情变成文字的地方
 
 
@@ -296,7 +296,7 @@ public class EaseChatInputMenu extends LinearLayout {
                     }
                 }else{
                     if(listener != null){
-                        Log.i("emoji", "onExpressionClicked:  按了表情的小控件2");
+
                         listener.onBigExpressionClicked(emojicon);
                     }
                 }
@@ -305,7 +305,7 @@ public class EaseChatInputMenu extends LinearLayout {
             @Override
             public void onDeleteImageClicked() {
                 //按了删除的按钮
-                Log.i("emoji", "onExpressionClicked:  按了表情的小控件3");
+
                 chatPrimaryMenu.onEmojiconDeleteEvent();
             }
         });

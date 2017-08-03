@@ -79,6 +79,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_detil"
         android:textColor="@color/secondtextcolor"
         android:textSize="10sp"
         android:text="由于您当前拍下的是闲置物品，卖家需要先确认当前是否有货后，您才可进行支付操作（如卖家24小时内未确认的，订单会自动取消）。在完成支付前，您和卖家均可在【个人中心 - 我买到的（我卖出的）】中修改本订单信息。"
@@ -369,6 +370,7 @@
     <!--  商品的信息展示-->
 
     <LinearLayout
+        android:id="@+id/ll_good"
         android:gravity="center_vertical"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
@@ -413,6 +415,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_rentmoney"
+                android:layout_marginTop="7.5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="租期"
+                    android:textColor="@color/maintextcolor"
+                    android:textSize="10sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text=" 3 "
+                    android:textSize="10sp"
+                    android:textColor="@color/numbertextcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textColor="@color/maintextcolor"
+                    android:textSize="10sp"
+                    android:text="天,含租金"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textColor="@color/pricetextcolor"
+                    android:text=" ¥ 190.00"
+                    android:textSize="10sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
 
 
         </LinearLayout>
@@ -426,6 +462,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <TextView
             android:layout_marginLeft="12.5dp"
             android:text=" ¥ "
@@ -433,7 +473,10 @@
             android:textColor="@color/pricetextcolor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <TextView
             android:id="@+id/tv_goodprice"
             android:textColor="@color/pricetextcolor"
@@ -443,6 +486,20 @@
             android:layout_height="wrap_content"/>
 
 
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_yajin"
+                android:textSize="9sp"
+                android:text="（押金）"
+                android:textColor="@color/secondtextcolor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+
+        </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <View

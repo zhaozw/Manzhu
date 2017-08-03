@@ -195,6 +195,35 @@ public class BussnessBean implements Parcelable {
     private String bbmsxfd_member_value;
     private String mjfutd_member_value;
     private String mjfhsd_member_value;
+    private GoodsSpecificationsBean msp = null;
+    private int buyCount = 1;
+    private String PP_Lease_period_proportion;
+
+
+
+    public String getPP_Lease_period_proportion() {
+        return PP_Lease_period_proportion;
+    }
+
+    public void setPP_Lease_period_proportion(String PP_Lease_period_proportion) {
+        this.PP_Lease_period_proportion = PP_Lease_period_proportion;
+    }
+
+    public int getBuyCount() {
+        return buyCount;
+    }
+
+    public void setBuyCount(int buyCount) {
+        this.buyCount = buyCount;
+    }
+
+    public GoodsSpecificationsBean getMsp() {
+        return msp;
+    }
+
+    public void setMsp(GoodsSpecificationsBean msp) {
+        this.msp = msp;
+    }
 
     public String getBbmsxfd_member_value() {
         return bbmsxfd_member_value;
@@ -2291,6 +2320,9 @@ public class BussnessBean implements Parcelable {
         dest.writeString(this.bbmsxfd_member_value);
         dest.writeString(this.mjfutd_member_value);
         dest.writeString(this.mjfhsd_member_value);
+        dest.writeParcelable(this.msp, flags);
+        dest.writeInt(this.buyCount);
+        dest.writeString(this.PP_Lease_period_proportion);
     }
 
     protected BussnessBean(Parcel in) {
@@ -2385,6 +2417,9 @@ public class BussnessBean implements Parcelable {
         this.bbmsxfd_member_value = in.readString();
         this.mjfutd_member_value = in.readString();
         this.mjfhsd_member_value = in.readString();
+        this.msp = in.readParcelable(GoodsSpecificationsBean.class.getClassLoader());
+        this.buyCount = in.readInt();
+        this.PP_Lease_period_proportion = in.readString();
     }
 
     public static final Creator<BussnessBean> CREATOR = new Creator<BussnessBean>() {

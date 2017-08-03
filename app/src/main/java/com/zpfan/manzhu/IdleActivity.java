@@ -156,7 +156,7 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onResponse(final Call<String> call, Response<String> response) {
                 String body = response.body();
-                Log.i("zc", "onResponse:  看看数据" + call.request().toString());
+
                 if (body != null) {
 
                     Type type = new TypeToken<ArrayList<AvatorBean>>() {
@@ -189,6 +189,7 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
                                             case R.id.ll_huan:
                                                 Intent intent = new Intent(IdleActivity.this, IdleDetailActivity.class);
                                                 intent.putExtra("id", mBussnessBeen.get(position));
+                                                intent.putExtra("type", "idle");
                                                 startActivity(intent);
                                                 break;
 
@@ -238,7 +239,7 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.i("zc", "onResponse:  是不是发送的访问不正确" + t.toString() + call.request().toString());
+
             }
         });
     }
@@ -444,7 +445,7 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
 
-                        Log.i("zc", "onResponse:   看看发送的数据" + call.request());
+
                         String body = response.body();
                         if (body != null) {
                             Type type = new TypeToken<ArrayList<AvatorBean>>() {
@@ -453,14 +454,14 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
                             ArrayList<AvatorBean> been = Utils.gson.fromJson(body, type);
                             if (been != null) {
                                 String retmsg = been.get(0).getRetmsg();
-                                Log.i("zc", "onResponse:   看看你的数据是什么" +retmsg);
+
                                 if (retmsg.contains("未查询到")) {
-                                    Log.i("zc", "onResponse:   看看进来没有");
+
                                     mBussnessBeen.clear();
                                     mAdapter.notifyDataSetChanged();
                                     mAdapter.isUseEmpty(true);
                                 } else if (retmsg.contains("[")){
-                                    Log.i("zc", "onResponse:   应该进入到这里了啊");
+
                                     String substring = retmsg.substring(1, retmsg.lastIndexOf("]"));
 
                                     if (substring != null) {
@@ -469,7 +470,7 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
                                         }.getType();
 
                                         mBussnessBeen = Utils.gson.fromJson(substring, type1);
-                                        Log.i("zc", "onResponse:   看看数据" + mBussnessBeen.size());
+
                                         mAdapter.notifyDataSetChanged();
                                         mAdapter.setNewData(mBussnessBeen);
                                         mAdapter.isUseEmpty(false);

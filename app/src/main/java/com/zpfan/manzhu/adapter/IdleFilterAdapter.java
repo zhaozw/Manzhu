@@ -59,7 +59,7 @@ public class IdleFilterAdapter extends BaseQuickAdapter<FilterBean,BaseViewHolde
                 for (Integer integer : selectPosSet) {
                     SPUtils.getInstance().put(item.getFilte(),filter.get(integer)); //发送的参数的保存
                     SPUtils.getInstance().put(item.getCondition(),integer);  //获取发送的参数
-                    Log.i("zc", "onSelected:   看看发送的字段和值" + item.getFilte()+ "========" + filter.get(integer));
+
                 }
 
             }

@@ -560,7 +560,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CAMERA) {
             if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.i("quanxian", "onRequestPermissionsResult:    回调了这个方法了吗");
+
                 selectPicFromCamera();
             } else {
                 MyToast.show("禁止权限将无法发送图片",R.mipmap.com_icon_cross_w);
@@ -870,7 +870,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         // background
         EMClient.getInstance().chatManager().removeMessageListener(this);
         voiceRecorderView.discardRecording();
-        Log.i("zzzz", "onstop:     看看走了这里没有 弹出的时候");
+
         // remove activity from foreground activity list
         EaseUI.getInstance().popActivity(getActivity());
         super.onStop();
@@ -1089,11 +1089,11 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             }
             switch (itemId) {
             case ITEM_TAKE_PICTURE:
-                Log.i("gai", "onClick:        点击了 图片 去照相");
+
                 selectPicFromCamera();
                 break;
             case ITEM_PICTURE:
-                Log.i("gai", "onClick:        点击了 图片 去相册");
+
                 selectPicFromLocal();
                 break;
             case ITEM_LOCATION:
@@ -1141,9 +1141,9 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     protected void sendTextMessage(String content) {
         if(EaseAtMessageHelper.get().containsAtUsername(content)){
             sendAtMessage(content);
-            Log.i("aaaa", "sendTextMessage:    走了 atmessage方法");
+
         }else{
-            Log.i("aaaa", "sendTextMessage:    走了 sendmessage方法");
+
             EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
             upLoadText(message);
             sendMessage(message);
@@ -1229,7 +1229,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 
     protected void sendVoiceMessage(String filePath, int length) {
         EMMessage message = EMMessage.createVoiceSendMessage(filePath, length, toChatUsername);
-        Log.i("voice", "sendVoiceMessage:     看看 语音的路径" + filePath);
+
         sendMessage(message);
         upLoadVoice(filePath,message);
     }
@@ -1237,7 +1237,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     private void upLoadVoice(String filePath, final EMMessage message) {
         //让传语音的方法
         File file1 = new File(filePath);
-        Log.i("zc", "sendVoiceMessage:     看看语音被保存在哪里" + filePath);
+
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://www.anipiggy.com/AppWebService.asmx/").addConverterFactory(SimpleXmlConverterFactory.create()).build();
 
         Apiinterface apiinterface = retrofit.create(Apiinterface.class);
@@ -1256,7 +1256,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         uploadimg.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("zc", "onResponse:      请求成功的返回" + response.body().toString());
+
 
                 String body = response.body();
                 if (body != null) {
@@ -1275,7 +1275,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                             ArrayList<String> strings = Utils.gson.fromJson(retmsg, type1);
 
                             String upload = strings.get(0);
-                            Log.i("zc", "onResponse:    看看发送的路径" + upload );
 
                             //将获取到的结果　上传给服务器
                              uploadMessage(upload,message);
@@ -1295,7 +1294,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.i("zc", "onResponse:      请求失败的返回" + t.getMessage()  + call.toString() );
+
 
             }
         });
@@ -1314,16 +1313,16 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         } else if (TumType == EMMessage.Type.TXT) {
             mMessageType = "txt";
         }
-        Log.i("zc", "uploadMessage:     查看环信ｔｙｐ" + mMessageType);
+
         //语音　ＶＯＩＣＥ　
 
 
         Call<String> saveChatLog = Aplication.mIinterface.saveChatLog(fromPhone,toPhone,retmsg,mMessageType);
-        Log.i("zc", "uploadMessage:    看看上传的消息体是什么" + retmsg);
+
         saveChatLog.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("zc", "onResponse:    看看上传的结果" + response.body().toString() );
+
 
 
             }
@@ -1338,7 +1337,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 
     protected void sendImageMessage(String imagePath) {
         EMMessage message = EMMessage.createImageSendMessage(imagePath, false, toChatUsername);
-        Log.i("zc", "sendImageMesge:  看看图片被保存在哪里" + imagePath);
+
         File file = new File(imagePath);
         upLoadVoice(imagePath,message);
 
@@ -1381,7 +1380,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         EMClient.getInstance().chatManager().sendMessage(message);
         //尝试去除 重复
         //refresh ui
-        Log.i("emoji", "sendMessage:    看看发送ｍｅｓｓａｇｅ的类型" + message.getType());
+
         if(isMessageListInited) {
             messageList.refreshSelectLast();
 

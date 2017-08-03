@@ -58,7 +58,7 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
     @Override
     protected void convert(final BaseViewHolder helper, final ShopCartbean.CarshoplistBean.CargoodslistBean item) {
         mhelper = helper;
-        Log.i("zc", "convert:   看看carid" + item.getSC_UID());
+
          final ArrayList<String> format = new ArrayList<>();
          final ArrayList<String> formatid = new ArrayList<>();
         helper.setText(R.id.tv_goodname, item.getGoods_model().getG_Title())
@@ -174,7 +174,7 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
                     item.setCarCount(i);
                 }
                 mCount = i;
-                Log.i("zc", "onClick:   " + mCount);
+
             }
         });
 
@@ -195,7 +195,7 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
                 adapter.setOnItemClickListener(new OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        Log.i("zc", "onItemClick:  看看你选的是什么规格" + format.get(position) +formatid.get(position) );
+
                         item.setGoods_Spcification_UID(formatid.get(position));
                         item.setCarCount(1);
                         tvcount.setText("1");

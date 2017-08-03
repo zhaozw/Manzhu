@@ -7,7 +7,6 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -130,7 +129,7 @@ public class MessageaddAdapter extends BaseQuickAdapter<UserBean,BaseViewHolder>
             @Override
             public void onClick(View v) {
                 String chatId = item.getM_Phone();
-                Log.i(TAG, "onClick:      查看user" + chatId);
+
                 Intent intent = new Intent(mContext, EaseActivity.class);
              /*   intent.putExtra("userphone", item.getM_Phone());
 
@@ -161,7 +160,7 @@ public class MessageaddAdapter extends BaseQuickAdapter<UserBean,BaseViewHolder>
                 public void onResponse(Call<String> call, Response<String> response) {
                     String body = response.body();
                     if (body != null) {
-                        Log.i("zc", "onResponse:     查看返回 response" + response.body());
+
                         Type type = new TypeToken<ArrayList<AvatorBean>>() {
                         }.getType();
 

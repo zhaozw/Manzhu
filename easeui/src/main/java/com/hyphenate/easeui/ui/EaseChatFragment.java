@@ -13,7 +13,6 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -313,14 +312,14 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         final List<EMMessage> msgs = conversation.getAllMessages();
         int msgCount = msgs != null ? msgs.size() : 0;
         addonversationCToDB(1);
-        Log.i("zc", "onConversationInit:    页" + (pagesize - msgCount)   + " 真的页数" + pagesize);
+
         if (msgCount < conversation.getAllMsgCount() && msgCount < pagesize) {
             String msgId = null;
             if (msgs != null && msgs.size() > 0) {
                 msgId = msgs.get(0).getMsgId();
             }
             conversation.loadMoreMsgFromDB(msgId, pagesize - msgCount);
-            Log.i("zc", "onConversationInit:     看看 这是什么数据" + (pagesize - msgCount));
+
         }
 
         conversation.markAllMessagesAsRead();
@@ -335,7 +334,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     private void addonversationCToDB(final int msgCount) {
 
         Call<String> list = mApiinterface.getChatlogList(1,mUserphone, toChatUsername);
-        Log.i("zc", "addonversationCToDB:     看看发送的对不对"  + mUserphone +  "---" + toChatUsername);
+
         list.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -352,7 +351,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                     if (retmsg != null && retmsg.contains("[")) {
                         //去掉一层
                         String substring = retmsg.substring(msgCount, retmsg.lastIndexOf("]"));
-                        Log.i("json", "onResponse:    看看是什么数据结构" + substring );
+
                         Type type1 = new TypeToken<ArrayList<AddMessageBean>>() {
                         }.getType();
 
@@ -367,7 +366,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                                 if (log.contains("txt")) {
                                     String substring1 = log.substring(log.indexOf("\""));
                                     String replace = substring1.replace("\"", "");
-                                    Log.i("zc", "onResponse:    看看每天一条消息" + replace);
+
                                     message.addBody(new EMTextMessageBody(replace));
                                 } else {
                                     message.addBody(new EMTextMessageBody(log));
@@ -770,15 +769,15 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             }
             switch (itemId) {
             case ITEM_TAKE_PICTURE:
-                Log.i("json", "onClick:      选择本地图片的方法");
+                //   选择本地图片的方法");
                 selectPicFromCamera();
                 break;
             case ITEM_PICTURE:
-                Log.i("json", "onClick:      照相机的方法");
+               //   照相机的方法");
                 selectPicFromLocal();
                 break;
             case ITEM_LOCATION:
-                Log.i("json", "onClick:      地理位置信息的方法");
+              //   地理位置信息的方法");
                 startActivityForResult(new Intent(getActivity(), EaseBaiduMapActivity.class), REQUEST_CODE_MAP);
                 break;
 
@@ -827,7 +826,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
             sendMessage(message);
         }
-        Log.i("zc", "sendTextMessage:   发送 文字消息");
+
     }
     
     /**
@@ -894,7 +893,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 
     protected void sendImageMessage(String imagePath) {
         EMMessage message = EMMessage.createImageSendMessage(imagePath, false, toChatUsername);
-        Log.i("zc", "sendImageMesge:  看看图片被保存在哪里" + imagePath);
+
         File file = new File(imagePath);
 
 /*
@@ -948,7 +947,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     
     protected void sendMessage(EMMessage message){
 
-        Log.i("json", "sendMessage:    点击了发送按钮");
+
         if (message == null) {
             return;
         }
@@ -963,9 +962,9 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         }
         //send message
         EMClient.getInstance().chatManager().sendMessage(message);
-        Log.i("zc", "sendMessage:    最后发送消息 都是走这里"  + message.getType().toString());
+
         //A 发给 B 的消息  保存在自己的服务器里面
-        Log.i("message", "sendMessage:    发送消息的是" + message.getFrom() + "接受消息的是" + message.getTo());
+
 
 
         EMMessage.Type type = message.getType();
@@ -994,9 +993,9 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                         AvatorBean bean = been.get(0);
                         String retmsg = bean.getRetmsg();
                         if (retmsg.equals("true")) {
-                            Log.i("message", "onResponse:  发送消息到服务器成功    ");
+
                         } else {
-                            Log.i("message", "onResponse:  发送消息到服务器成功    " + retmsg);
+
 
 
                         }
@@ -1009,7 +1008,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    Log.i("message", "onResponse:  发送消息到服务器失败    " +  t.toString());
+
                 }
             });
 

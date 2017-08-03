@@ -180,7 +180,7 @@ public class NewActivity extends AppCompatActivity implements View.OnClickListen
                                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                         Intent intent = new Intent(NewActivity.this, IdleDetailActivity.class);
                                         intent.putExtra("id", mBussnessBeen.get(position));
-
+                                        intent.putExtra("type", "new");
                                         startActivity(intent);
 
                                     }
@@ -403,7 +403,7 @@ public class NewActivity extends AppCompatActivity implements View.OnClickListen
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
 
-                        Log.i("zc", "onResponse:   看看发送的数据" + call.request());
+
                         String body = response.body();
                         if (body != null) {
                             Type type = new TypeToken<ArrayList<AvatorBean>>() {
@@ -412,14 +412,14 @@ public class NewActivity extends AppCompatActivity implements View.OnClickListen
                             ArrayList<AvatorBean> been = Utils.gson.fromJson(body, type);
                             if (been != null) {
                                 String retmsg = been.get(0).getRetmsg();
-                                Log.i("zc", "onResponse:   看看你的数据是什么" +retmsg);
+
                                 if (retmsg.contains("未查询到")) {
-                                    Log.i("zc", "onResponse:   看看进来没有");
+
                                     mBussnessBeen.clear();
                                     mAdapter.notifyDataSetChanged();
                                     mAdapter.isUseEmpty(true);
                                 } else if (retmsg.contains("[")){
-                                    Log.i("zc", "onResponse:   应该进入到这里了啊");
+
                                     String substring = retmsg.substring(1, retmsg.lastIndexOf("]"));
 
                                     if (substring != null) {
@@ -428,7 +428,7 @@ public class NewActivity extends AppCompatActivity implements View.OnClickListen
                                         }.getType();
 
                                         mBussnessBeen = Utils.gson.fromJson(substring, type1);
-                                        Log.i("zc", "onResponse:   看看数据" + mBussnessBeen.size());
+
                                         mAdapter.notifyDataSetChanged();
                                         mAdapter.setNewData(mBussnessBeen);
                                         mAdapter.isUseEmpty(false);

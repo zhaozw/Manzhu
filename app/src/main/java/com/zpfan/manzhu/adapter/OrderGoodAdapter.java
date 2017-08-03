@@ -4,7 +4,6 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -123,7 +122,7 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
 
         //如果有规格的话 就把规格的选项展示出来 如果没有的话 就不展示
         final List<FormatBean> specifications = item.getGoods_model().getGoods_specifications();
-        Log.i("zc", "convert:   看看规格" + specifications.size());
+
         if (specifications.size() == 0) {
             llcheckformate.setVisibility(View.GONE);
 
@@ -246,7 +245,7 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                 //改价格的时候有两种情况  一种是没有规格的价格 一种是有规格的价格
                 item.getGoods_model().setG_FixedPrice(s1);
                 String uid1 = item.getGoods_Spcification_UID();
-                Log.i("zc", "onClick:   看看是不是有uid的"  + uid1);
+
                 List<FormatBean> specifications1 = item.getGoods_model().getGoods_specifications();
                 for (FormatBean bean : specifications1) {
                     if (bean.getPS_UniqueID().equals(uid1)) {

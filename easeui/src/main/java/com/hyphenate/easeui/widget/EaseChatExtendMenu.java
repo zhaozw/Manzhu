@@ -125,7 +125,7 @@ public class EaseChatExtendMenu extends GridView{
                 @Override
                 public void onClick(View v) {
                     if(getItem(position).clickListener != null){
-                        Log.i("gai", "onClick:    点击了扩展的按钮" + position);
+
                         getItem(position).clickListener.onClick(getItem(position).id, v);
                     }
                 }

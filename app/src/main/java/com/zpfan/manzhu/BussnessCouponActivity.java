@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -46,7 +45,7 @@ public class BussnessCouponActivity extends AppCompatActivity {
 
         final String uid = intent.getStringExtra("uid");
         mRvBussnesscoupon.setLayoutManager(new LinearLayoutManager(this));
-        Log.i("zc", "initView:   看看uid" + uid + "--------" + Utils.getloginuid());
+
 
         if (uid != null) {
             //发送请求去获取优惠劵列表
@@ -56,7 +55,7 @@ public class BussnessCouponActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     String body = response.body();
-                    Log.i("zc", "onResponse:   请求成功" + call.request().toString());
+
                     if (body != null) {
                         Type type = new TypeToken<ArrayList<AvatorBean>>() {
                         }.getType();
@@ -139,7 +138,7 @@ public class BussnessCouponActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    Log.i("zc", "onResponse:   请求失败" + call.request().toString());
+
                 }
             });
 

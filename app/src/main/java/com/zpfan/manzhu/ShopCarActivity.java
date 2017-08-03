@@ -121,7 +121,7 @@ public class ShopCarActivity extends AppCompatActivity {
 
         //发送网络请求去获取数据
         mGetloginuid = Utils.getloginuid();
-        Log.i("zc", "initView:   看看mambe uid" + mGetloginuid);
+
         if (mGetloginuid != null) {
             getshopcartlist(mGetloginuid,"闲置");
         }
@@ -297,7 +297,7 @@ public class ShopCarActivity extends AppCompatActivity {
             case R.id.iv_checkall:
                 //全选的操作
                 ischeckall = !ischeckall;
-                Log.i("alcheck", "onViewClicked:   看看全选还是不是全选" + ischeckall);
+
 
                 for (ShopCartbean.CarshoplistBean bean : mShopCartList) {
                     bean.setIscheckallgood(ischeckall);
@@ -350,7 +350,7 @@ public class ShopCarActivity extends AppCompatActivity {
                     guid.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Log.i("zc", "onResponse:  看看返回 "  +  call.request().toString());
+
                             String body = response.body();
 
                             if (body != null) {

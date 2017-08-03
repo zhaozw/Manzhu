@@ -42,12 +42,12 @@ public class EaseVoiceRecorder {
             // need to create recorder every time, otherwise, will got exception
             // from setOutputFile when try to reuse
             if (recorder != null) {
-                Log.i("voice", "startRecording:    看看是不是 有值了");
+
                 recorder.release();
                 recorder = null;
             }
 
-            Log.i("voice", "startRecording:    看看是不是 没有初始化");
+
             recorder = new MediaRecorder();
             recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             recorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
@@ -63,7 +63,7 @@ public class EaseVoiceRecorder {
             voiceFileName = getVoiceFileName(EMClient.getInstance().getCurrentUser());
             voiceFilePath = PathUtil.getInstance().getVoicePath() + "/" + voiceFileName;
             file = new File(voiceFilePath);
-            Log.i("voice", "startRecording:     看看是不是 文件没有创建成功" + file.getCanonicalPath());
+
             recorder.setOutputFile(file.getAbsolutePath());
             recorder.prepare();
             isRecording = true;
@@ -103,7 +103,7 @@ public class EaseVoiceRecorder {
     public void discardRecording() {
 
         if (recorder != null) {
-            Log.i("voice", "discardRecording:   是不是 走了这个方法了" );
+
             try {
                 recorder.stop();
                 recorder.release();
@@ -119,14 +119,14 @@ public class EaseVoiceRecorder {
 
     public int stopRecoding() {
         if(recorder != null){
-            Log.i("voice", "stopRecoding:     ！= null的时候进来");
+
             isRecording = false;
             try {
                 recorder.stop();
                 recorder.release();
                 recorder = null;
             } catch (IllegalStateException e) {
-                Log.i("voice", "stopRecoding:     查看为什么" + e.toString());
+
             }
 
             
@@ -141,7 +141,7 @@ public class EaseVoiceRecorder {
             EMLog.d("voice", "voice recording finished. seconds:" + seconds + " file length:" + file.length());
             return seconds;
         }
-        Log.i("voice", "stopRecoding:    == null的时候进来");
+
         return 0;
     }
 

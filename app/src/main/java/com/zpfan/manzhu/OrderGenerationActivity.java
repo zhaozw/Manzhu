@@ -7,6 +7,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -84,6 +85,14 @@ public class OrderGenerationActivity extends AppCompatActivity {
     ScrollView mSvIsret;
     @BindView(R.id.ll_right)
     LinearLayout mLlRight;
+    @BindView(R.id.tv_detil)
+    TextView mTvDetil;
+    @BindView(R.id.tv_yajin)
+    TextView mTvYajin;
+    @BindView(R.id.ll_good)
+    LinearLayout mLlGood;
+    @BindView(R.id.ll_rentmoney)
+    LinearLayout mLlRentmoney;
     private DecimalFormat mDf;
     private OrderGenerationBean mBean1;
 
@@ -106,10 +115,22 @@ public class OrderGenerationActivity extends AppCompatActivity {
             //闲置的界面
         } else if (type.equals("new")) {
             //新商品的界面
+            mTvDetil.setText("在完成支付前，您和卖家均可在【个人中心 - 我买到的（我卖出的）】中修改本订单信息。");
+
         } else if (type.equals("server")) {
             //服务的界面
 
+        } else if (type.equals("rent")) {
+            //租赁的界面
+            mTvDetil.setText("租赁订单的押金支付请在和出租人确认实物后再继续进行。“线上交易”订单租期在租赁人确认收货后开始计算；“线下交易”订单租期在押金支付后即开始计算。完成支付前，您和出租人均可在【个人中心 - 我租到的（我租出的）】中修改本订单信息。");
+            mTvYajin.setVisibility(View.VISIBLE);
+            ViewGroup.LayoutParams params = mLlGood.getLayoutParams();
+            params.height = Utils.dp2px(80);
+            mLlGood.setLayoutParams(params);
+            mLlRentmoney.setVisibility(View.VISIBLE);
         }
+
+
         //发送请求去获取订单的详情
         if (avator.isRet()) {
             getorderDetil(avator.getRetmsg());
@@ -132,7 +153,7 @@ public class OrderGenerationActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-
+                Log.i("zc", "onResponse:   看看订单详情的数据"  + call.request().toString());
                 String body = response.body();
 
                 if (body != null) {
@@ -145,7 +166,7 @@ public class OrderGenerationActivity extends AppCompatActivity {
                         String retmsg1 = bean.getRetmsg();
 
                         if (retmsg1.contains("[")) {
-                            Log.i("zc", "onResponse:   看看数据");
+
                             String substring = retmsg1.substring(1, retmsg1.lastIndexOf("]"));
 
                             Type type1 = new TypeToken<ArrayList<OrderGenerationBean>>() {
@@ -161,7 +182,7 @@ public class OrderGenerationActivity extends AppCompatActivity {
                                 mTvStyle.setText("（买家付款后卖家即得到货款）");
                             }
 
-                            mTvOrdertime.setText(mBean1.getO_OrderTime());
+                            mTvOrdertime.setText(mBean1.getO_OrderTime().replace("-", " -  "));
                             mTvShopname.setText(mBean1.getStore_CN());
                             mTvUserlv.setText("Lv." + mBean1.getStore_Level());
                             OrderGenerationBean.GoodslistArryBean goodslistArryBean = mBean1.getGoodslist_arry().get(0);
@@ -213,13 +234,13 @@ public class OrderGenerationActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.bt_backhome:
 
-                startActivity(new Intent(OrderGenerationActivity.this,MainActivity.class));
+                startActivity(new Intent(OrderGenerationActivity.this, MainActivity.class));
                 break;
             case R.id.bt_backgood:
-                startActivity(new Intent(OrderGenerationActivity.this,IdleActivity.class));
+                startActivity(new Intent(OrderGenerationActivity.this, IdleActivity.class));
                 break;
             case R.id.bt_usercenter:
-                startActivity(new Intent(OrderGenerationActivity.this,UserCenterActivity.class));
+                startActivity(new Intent(OrderGenerationActivity.this, UserCenterActivity.class));
 
                 break;
             case R.id.ll_message:

@@ -93,7 +93,7 @@ public class ShopCartOrderGeneraActivity extends AppCompatActivity {
                         String retmsg1 = bean.getRetmsg();
 
                         if (retmsg1.contains("[")) {
-                            Log.i("zc", "onResponse:   看看数据" + retmsg1);
+
                             String substring = retmsg1.substring(1, retmsg1.lastIndexOf("]"));
 
                             Type type1 = new TypeToken<ArrayList<OrderGenerationBean>>() {

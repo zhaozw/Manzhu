@@ -13,7 +13,7 @@ public class MyLocationLinstener implements BDLocationListener {
     @Override
     public void onReceiveLocation(BDLocation location) {
 
-        Log.i("location", "onReceiveLocation:   走了这个回调没有" + location.getCity());
+
 
 
 

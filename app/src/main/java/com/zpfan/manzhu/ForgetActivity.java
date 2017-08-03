@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +16,8 @@ import com.google.gson.reflect.TypeToken;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.LoginBean;
 import com.zpfan.manzhu.bean.UserBean;
-import com.zpfan.manzhu.myui.TopLin;
 import com.zpfan.manzhu.myui.MyToast;
+import com.zpfan.manzhu.myui.TopLin;
 import com.zpfan.manzhu.utils.TimeCountUtil;
 import com.zpfan.manzhu.utils.Utils;
 
@@ -285,7 +284,7 @@ public class ForgetActivity extends AppCompatActivity  {
 
                         ArrayList<AvatorBean> list = Utils.gson.fromJson(response.body().toString(), type);
                         AvatorBean bean = list.get(0);
-                        Log.i("zc", "onResponse:   验证码" + response.body().toString());
+
                         if (bean.isRet()) {
                             //验证码是正确的
                             isright = true;
@@ -316,7 +315,7 @@ public class ForgetActivity extends AppCompatActivity  {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
 
-                            Log.i("zc", "onResponse: 看看 重新设置密码 会返回什么" + response.body().toString());
+
 
                             Type type = new TypeToken<ArrayList<AvatorBean>>() {
                             }.getType();
@@ -368,7 +367,7 @@ public class ForgetActivity extends AppCompatActivity  {
 
                 if (mUid != null && ischeckpw) {
 
-                    Log.i("zc", "onViewClicked:   看看uid" + mUid);
+
 
                     String surpw = mEdSurepw.getText().toString();
 
@@ -379,7 +378,7 @@ public class ForgetActivity extends AppCompatActivity  {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
                             String message = response.body().toString();
-                            Log.i("zc", "onResponse:     看看返回的是什么" + message);
+
 
                             Type type = new TypeToken<ArrayList<AvatorBean>>() {
                             }.getType();

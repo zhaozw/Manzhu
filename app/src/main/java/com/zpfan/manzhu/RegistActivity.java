@@ -274,7 +274,7 @@ public class RegistActivity extends AppCompatActivity implements View.OnFocusCha
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
 
-                        Log.i("zc", "onResponse:    看看 返回的数据" +  response.body().toString());
+
 
                         Type type = new TypeToken<ArrayList<AvatorBean>>() {
                         }.getType();
@@ -351,7 +351,7 @@ public class RegistActivity extends AppCompatActivity implements View.OnFocusCha
                       /*  MyToast toast = new MyToast(RegistActivity.this, "注册成功", R.mipmap.com_icon_check_w, 20);
                         toast.show();*/
                       MyToast.show("注册成功", R.mipmap.com_icon_check_w);
-                        Log.i("zc", "onResponse:   注册成功 弹了 几次toast");
+
                         finish();
                     } else {
 
@@ -403,7 +403,7 @@ public class RegistActivity extends AppCompatActivity implements View.OnFocusCha
 
                     mWebcode = list.get(0).getRetmsg();
 
-                    Log.i("zc", "onResponse:     查看验证码" + mWebcode);
+
 
                 }
 
@@ -606,7 +606,7 @@ public class RegistActivity extends AppCompatActivity implements View.OnFocusCha
 
     private void checkcn() {
         String cn = mEdCn.getText().toString().trim();
-        Log.i("zc", "checkcn:    看看 cn  的长度 " +  cn.length());
+
         if (cn.length() != 0) {
 
             mIvCn.setVisibility(View.VISIBLE);
@@ -673,12 +673,12 @@ public class RegistActivity extends AppCompatActivity implements View.OnFocusCha
      */
     private void checkPhone() {
         String phon = mEdPhone.getText().toString();
-        Log.i("zc", "checkPhone:      检查手机号");
+
         boolean b = Utils.checkPhoneNumber(phon);
 
         if (b) {
 
-            Log.i("zc", "checkPhone:     查看手机号" + phon);
+
             Call<String> getphonuseable = Aplication.mIinterface.getphonuseable(phon);
             getphonuseable.enqueue(new Callback<String>() {
                 @Override
@@ -688,9 +688,9 @@ public class RegistActivity extends AppCompatActivity implements View.OnFocusCha
                     }.getType();
 
                     ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(response.body().toString(), type);
-                    Log.i("zc", "onResponse:      " + response.body().toString());
+
                     AvatorBean bean = avatorBeen.get(0);
-                    Log.i("zc", "onResponse: =======查看是否注册过,查看集合里的数据"  + bean.getRetmsg()  + avatorBeen.size());
+
 
                     if (bean.getRetmsg().equals("false")) {
                         mIvPhone.setImageResource(R.mipmap.com_icon_check_g);

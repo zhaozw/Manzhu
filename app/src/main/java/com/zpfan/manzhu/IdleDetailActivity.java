@@ -10,7 +10,6 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -265,6 +264,18 @@ public class IdleDetailActivity extends AppCompatActivity {
     LinearLayout mLlTopmen;
     @BindView(R.id.iv_menu)
     ImageView mIvMenu;
+    @BindView(R.id.tv_pagetitle)
+    TextView mTvPagetitle;
+    @BindView(R.id.ll_newxiaoliang)
+    LinearLayout mLlNewxiaoliang;
+    @BindView(R.id.tv_brand)
+    TextView mTvBrand;
+    @BindView(R.id.ll_brand)
+    LinearLayout mLlBrand;
+    @BindView(R.id.tv_xiaoliang)
+    TextView mTvXiaoliang;
+    @BindView(R.id.tv_dingjin)
+    TextView mTvDingjin;
 
 
     private boolean isshowbabyparame = false;
@@ -285,10 +296,11 @@ public class IdleDetailActivity extends AppCompatActivity {
     private int mIvDetailTop;
     private int mMLineCommentTop;
     private int mCostop;
-    private String mSpecificationId = "" ;
+    private String mSpecificationId = "";
     private ShopBean mShopBean;
     private int prdnumber = 1;
     private boolean isCollect = false;
+    private String mType;
 
 
     @Override
@@ -323,6 +335,7 @@ public class IdleDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mDashline.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         mbussness = intent.getParcelableExtra("id");
+        mType = intent.getStringExtra("type");
         mRvCos.setLayoutManager(new LinearLayoutManager(IdleDetailActivity.this));
 
         if (mbussness != null) {
@@ -378,9 +391,10 @@ public class IdleDetailActivity extends AppCompatActivity {
 
 
             } else {
-                ViewGroup.LayoutParams params = mLlZu.getLayoutParams();
+                /*ViewGroup.LayoutParams params = mLlZu.getLayoutParams();
                 params.height = 0;
-                mLlZu.setLayoutParams(params);
+                mLlZu.setLayoutParams(params);*/
+                mLlZu.setVisibility(View.GONE);
             }
 
             //设置是否是换的商品
@@ -392,7 +406,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                 //设置换的商品   所有的 都要显示出来
                 String fk = mbussness.getDemand_FK();
                 String[] changes = fk.split(",");
-                Log.i("zc", "initView:   看看出问题的商品的信息"  + fk  + mbussness.isG_IsChange() );
+
                 for (String change : changes) {
                     if (change.length() > 1) {
                         final TextView inflate = (TextView) IdleDetailActivity.this.getLayoutInflater().inflate(R.layout.change_tv, null);
@@ -416,21 +430,43 @@ public class IdleDetailActivity extends AppCompatActivity {
 
 
             } else {
-                ViewGroup.LayoutParams params = mLlChange.getLayoutParams();
+               /* ViewGroup.LayoutParams params = mLlChange.getLayoutParams();
                 params.height = 0;
-                mLlChange.setLayoutParams(params);
+                mLlChange.setLayoutParams(params);*/
+                mLlChange.setVisibility(View.GONE);
             }
 
-            //设置成色的信息
-            String degree = mbussness.getG_NewOldDegree();
-             String neworold = null;
-            if (degree.contains("成")) {
-                neworold = degree.substring(0, degree.indexOf("成"));
-                mTvNewold.setText(neworold);
-                mTvChengse.setText("成新");
-            } else {
-                mTvNewold.setText(degree);
-                mTvChengse.setText("");
+            if (mType.equals("idle")) {
+                //设置成色的信息
+                String degree = mbussness.getG_NewOldDegree();
+                String neworold = null;
+                if (degree.contains("成")) {
+                    neworold = degree.substring(0, degree.indexOf("成"));
+                    mTvNewold.setText(neworold);
+                    mTvChengse.setText("成新");
+                } else {
+                    mTvNewold.setText(degree);
+                    mTvChengse.setText("");
+                }
+                mLlNewxiaoliang.setVisibility(View.GONE);
+                mLlFineness.setVisibility(View.VISIBLE);
+            } else if (mType.equals("new")) {
+                //设置新商品的品牌名 和总销量 别的都一样
+                mLlFineness.setVisibility(View.GONE);
+                mLlNewxiaoliang.setVisibility(View.VISIBLE);
+                String id = mbussness.getBrandID();
+                if (id.isEmpty()) {
+                    mLlBrand.setVisibility(View.INVISIBLE);
+                }
+
+                mTvXiaoliang.setText(mbussness.getG_SaleNum() + "");
+                //是否支持定金
+                if (mbussness.isG_IsDepositDeal()) {
+                    mTvDingjin.setVisibility(View.VISIBLE);
+                    mTvDingjin.setText("（包含定金:¥ " + mbussness.getG_DepositPrice() + "）");
+                }
+
+
             }
 
             //设置快递的价格
@@ -438,7 +474,7 @@ public class IdleDetailActivity extends AppCompatActivity {
 
             //设置发布时间
             String substring = mbussness.getG_UpTime().substring(0, 11);
-            mTvUptime.setText(substring.replace("-"," -  "));
+            mTvUptime.setText(substring.replace("-", " -  "));
 
             //设置看过的人数
             mTvViewnumber.setText(mbussness.getG_Hits() + "");
@@ -491,15 +527,16 @@ public class IdleDetailActivity extends AppCompatActivity {
 
             //查看是否有规格
             List<BussnessBean.GoodsSpecificationsBean> specifications = mbussness.getGoods_specifications();
-            if (specifications == null ||specifications.size() == 0) {
+            if (specifications == null || specifications.size() == 0) {
                 mLlFormat.setVisibility(View.GONE);
             } else {
                 // 有规格 显示默认的规格
                 for (BussnessBean.GoodsSpecificationsBean specification : specifications) {
-                    Log.i("zc", "initView:   有规格");
+
                     if (specification.isPS_IsDefaultSelected()) {
 
-                     mTvGuige.setText(specification.getPS_AttributeValues()); //显示默认的规格
+                        mTvGuige.setText(specification.getPS_AttributeValues()); //显示默认的规格
+                        mbussness.setMsp(specification);
                     }
                 }
 
@@ -670,7 +707,6 @@ public class IdleDetailActivity extends AppCompatActivity {
                 }
 
 
-
             }
 
             @Override
@@ -682,9 +718,6 @@ public class IdleDetailActivity extends AppCompatActivity {
         });
 
 
-
-
-
     }
 
     private void getCanUseCouponNumber() {
@@ -693,7 +726,7 @@ public class IdleDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 String body = response.body();
-                Log.i("zc", "onResponse:   请求成功" + call.request().toString());
+
                 if (body != null) {
                     Type type = new TypeToken<ArrayList<AvatorBean>>() {
                     }.getType();
@@ -708,7 +741,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                             if (substring != null) {
                                 Type type1 = new TypeToken<ArrayList<CouponBean>>() {
                                 }.getType();
-                                ArrayList<CouponBean>   couponlist = Utils.gson.fromJson(substring, type1);
+                                ArrayList<CouponBean> couponlist = Utils.gson.fromJson(substring, type1);
                                 int cancoupon = 0;
 
                                 for (CouponBean couponBean : couponlist) {
@@ -716,9 +749,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                                         cancoupon = cancoupon + 1;
                                     }
                                 }
-                                mTvCoupon.setText(" " +cancoupon + " ");
-
-
+                                mTvCoupon.setText(" " + cancoupon + " ");
 
 
                             }
@@ -730,7 +761,6 @@ public class IdleDetailActivity extends AppCompatActivity {
                     }
 
                 }
-
 
 
             }
@@ -809,7 +839,7 @@ public class IdleDetailActivity extends AppCompatActivity {
         mLineDetailTop = mLineDetail.getTop(); //详情
 
         mMLineCommentTop = mLineComment.getTop();
-        Log.i("zc", "onWindowFocusChanged:    评论的top" + mLineComment.getTop());
+
 
         mCostop = mRvCos.getBottom();
     }
@@ -1043,7 +1073,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                 //点击了收藏
                 if (Utils.isUserLogin()) {
                     //去执行收藏的方法
-                    Log.i("zc", "onViewClicked:   看看商品的id " + mbussness.getId() + "登陆人的id" + Utils.getloginuid());
+
                     Call<String> operacollectionfunction = Aplication.mIinterface.operacollectionfunction("商品", mbussness.getId() + "", Utils.getloginuid());
                     operacollectionfunction.enqueue(new Callback<String>() {
                         @Override
@@ -1092,19 +1122,18 @@ public class IdleDetailActivity extends AppCompatActivity {
                 }
 
 
-
                 break;
 
             case R.id.ll_shopcart:
                 //点击了购物车
 
                 if (Utils.isUserLogin()) {
-                    Call<String> operaaddupdateshopcart = Aplication.mIinterface.operaaddupdateshopcart("", Utils.getloginuid(), mbussness.getG_UID(), mSpecificationId, mShopBean.getM_UID(), prdnumber+"");
+                    Call<String> operaaddupdateshopcart = Aplication.mIinterface.operaaddupdateshopcart("", Utils.getloginuid(), mbussness.getG_UID(), mSpecificationId, mShopBean.getM_UID(), prdnumber + "");
 
                     operaaddupdateshopcart.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Log.i("zc", "onResponse:   看看是什么情况i" + call.request().toString());
+
 
                             String body = response.body();
                             if (body != null) {
@@ -1114,7 +1143,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                                 ArrayList<AvatorBean> been = Utils.gson.fromJson(body, type);
                                 if (been != null) {
                                     AvatorBean bean = been.get(0);
-                                    Log.i("zc", "onResponse:   看看请求返回的结果" + bean.getRetmsg());
+
                                     if (bean.getRetmsg().equals("true")) {
 
                                         MyToast.show("添加到购物车成功", R.mipmap.com_icon_check_w);
@@ -1126,7 +1155,7 @@ public class IdleDetailActivity extends AppCompatActivity {
 
                                 }
                             } else {
-                                Log.i("zc", "onFailure:   看看错误的地方" + call.request().toString() + "-----"+ response.code());
+
                             }
 
 
@@ -1134,7 +1163,7 @@ public class IdleDetailActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<String> call, Throwable t) {
-                            Log.i("zc", "onFailure:   看看错误的地方" + call.request().toString());
+
                         }
                     });
 
@@ -1221,6 +1250,7 @@ public class IdleDetailActivity extends AppCompatActivity {
 
                             intent.putExtra("detail", mbussness);
                             intent.putExtra("type", "buy");
+                            intent.putExtra("frome", mType);
                             startActivity(intent);
 
                         }
@@ -1318,7 +1348,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                 if (Utils.isUserLogin()) {
                     startActivity(new Intent(IdleDetailActivity.this, ShopCarActivity.class));
                 } else {
-                    startActivity(new Intent(IdleDetailActivity.this,LoginActivity.class));
+                    startActivity(new Intent(IdleDetailActivity.this, LoginActivity.class));
                 }
             }
         });
@@ -1367,7 +1397,7 @@ public class IdleDetailActivity extends AppCompatActivity {
         TextView tvleav = (TextView) inflate.findViewById(R.id.tv_leav);
 
 
-        RelativeLayout btup = (RelativeLayout) inflate.findViewById(R.id.bt_up);
+        final RelativeLayout btup = (RelativeLayout) inflate.findViewById(R.id.bt_up);
         RelativeLayout btdown = (RelativeLayout) inflate.findViewById(R.id.bt_down);
         View tagline = inflate.findViewById(R.id.tagline);
 
@@ -1381,13 +1411,16 @@ public class IdleDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                int i = ++prdnumber;
-                if (i > mbussness.getG_StockNum()) {
-                    i = mbussness.getG_StockNum();
-                    MyToast.show("已经是最大库存了",R.mipmap.com_icon_cross_w);
-                    tvprdnumber.setText(i + "");
+                prdnumber = prdnumber + 1;
+                if (prdnumber > mbussness.getG_StockNum()) {
+                    prdnumber = mbussness.getG_StockNum();
+                    MyToast.show("已经是最大库存了", R.mipmap.com_icon_cross_w);
+                    tvprdnumber.setText(prdnumber + "");
+                    mbussness.setBuyCount(prdnumber);
+                    btup.setEnabled(false);
                 } else {
-                    tvprdnumber.setText(i + "");
+                    tvprdnumber.setText(prdnumber + "");
+                    mbussness.setBuyCount(prdnumber);
                 }
 
             }
@@ -1397,7 +1430,10 @@ public class IdleDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (prdnumber == 1) {
                 } else {
-                    tvprdnumber.setText((--prdnumber) + "");
+                    btup.setEnabled(true);
+                    prdnumber = prdnumber - 1;
+                    tvprdnumber.setText((prdnumber) + "");
+                    mbussness.setBuyCount(prdnumber);
                 }
 
             }
@@ -1423,7 +1459,7 @@ public class IdleDetailActivity extends AppCompatActivity {
             tvleav.setText("Lv." + mbussness.getG_Member_OBJ().getN_AllLevel());
 
             tvfirstscore.setText("宝贝描述相符度  ");
-            tvpro.setText(mbussness.getBbmsxfd_member_value()+ "  ");
+            tvpro.setText(mbussness.getBbmsxfd_member_value() + "  ");
 
             tvsecandscore.setText("  卖家服务态度  ");
             tvserver.setText(mbussness.getMjfutd_member_value() + "  ");
@@ -1478,7 +1514,7 @@ public class IdleDetailActivity extends AppCompatActivity {
 
 
         final List<BussnessBean.GoodsSpecificationsBean> specifications = mbussness.getGoods_specifications();
-        Log.i("zc", "initPopData:    看看数据是什么样子的" + specifications.size());
+
         if (specifications.size() > 0) {
             formatname.clear();
             BussnessBean.GoodsSpecificationsBean bean = specifications.get(0);
@@ -1517,13 +1553,14 @@ public class IdleDetailActivity extends AppCompatActivity {
                             for (BussnessBean.GoodsSpecificationsBean specification : specifications) {
                                 if (formatvale1.get(integer).equals(specification.getPS_AttributeValues())) {
                                     //重新去设置价格
-                                    Log.i("zc", "getView:   看看进来了没有");
+
                                     String price = specification.getPS_FixedPrice();
                                     setFixPrice(tvprice, tvdecimal, price);
                                     String amount = specification.getPS_CorrespAmount();
                                     String renewal = specification.getPS_RenewalPrice();
                                     setRentPrice(tvzuprice, tvzuxiaoshu, tvzudayprice, tvzudayxiaoshu, tvzuday, amount, renewal);
                                     mSpecificationId = specification.getPS_UniqueID();
+                                    mbussness.setMsp(specification);
                                 }
 
                             }
@@ -1593,6 +1630,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                                     String renewal = specification.getPS_RenewalPrice();
                                     setRentPrice(tvzuprice, tvzuxiaoshu, tvzudayprice, tvzudayxiaoshu, tvzuday, amount, renewal);
                                     mSpecificationId = specification.getPS_UniqueID();
+                                    mbussness.setMsp(specification);
                                 }
                             }
 
@@ -1620,6 +1658,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                                     String renewal = specification.getPS_RenewalPrice();
                                     setRentPrice(tvzuprice, tvzuxiaoshu, tvzudayprice, tvzudayxiaoshu, tvzuday, amount, renewal);
                                     mSpecificationId = specification.getPS_UniqueID();
+                                    mbussness.setMsp(specification);
                                 }
                             }
 
