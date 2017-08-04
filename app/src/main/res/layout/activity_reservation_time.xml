@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@color/threebackground"
+    tools:context="com.zpfan.manzhu.ReservationTimeActivity">
+
+    <com.zpfan.manzhu.myui.TopLin
+        app:toptext="预约时段"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- 价格说明的一栏-->
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/reservation_priceh">
+
+        <TextView
+            android:gravity="center"
+            android:textColor="@color/maintextcolor"
+            android:text="价格说明"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/stronglin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <!--  不同时段的价格的显示-->
+    <LinearLayout
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_firsttime"
+            android:text="10:00 ~ 18:00"
+            android:textSize="12sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:text=" ¥ "
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/pricetextcolor"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/tv_firstprice"
+            android:text="1300.00"
+            android:textColor="@color/pricetextcolor"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:text="/小时"
+            android:textColor="@color/secondtextcolor"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_secand"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_secandtime"
+            android:text="19:00 ~ 22:00"
+            android:textSize="12sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:text=" ¥ "
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/pricetextcolor"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/tv_secandprice"
+            android:text="1300.00"
+            android:textColor="@color/pricetextcolor"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:text="/小时"
+            android:textColor="@color/secondtextcolor"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_three"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_threetime"
+            android:text="19:00 ~ 22:00"
+            android:textSize="12sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:text=" ¥ "
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/pricetextcolor"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/tv_threeprice"
+            android:text="1300.00"
+            android:textColor="@color/pricetextcolor"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:text="/小时"
+            android:textColor="@color/secondtextcolor"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="12.5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginBottom="12.5dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_minitime"
+            android:textSize="10sp"
+            android:textColor="@color/maintextcolor"
+            android:text="*2小时起租"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginTop="3dp"
+            android:textSize="10sp"
+            android:textColor="@color/maintextcolor"
+            android:text="*下单后预约时间需卖家确认后才能生效。"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginTop="3dp"
+            android:textSize="10sp"
+
+            android:textColor="@color/maintextcolor"
+            android:text="*卖家确认后12小时内未付款预约时间作废。"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="vertical"
+        android:background="@color/bootmbc"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+
+            android:layout_marginTop="22.5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="@color/maintextcolor"
+                android:text="选择预约时段"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/tv_chosetime"
+                android:textSize="12sp"
+                android:text="（当前选择日期：2017- 12- 31）"
+                android:textColor="@color/secondtextcolor"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+
+
+
+
+
+        </LinearLayout>
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/fl_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="127.5dp">
+    <LinearLayout
+        android:paddingLeft="15dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="@color/maintextcolor"
+            android:text="*已选"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tv_checkcount"
+            android:textColor="@color/numbertextcolor"
+            android:text=" 1 "
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:textColor="@color/maintextcolor"
+            android:text="小时，总租金 "
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/tv_checkprice"
+            android:textColor="@color/pricetextcolor"
+            android:text=" ¥ 700.00"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:textColor="@color/maintextcolor"
+            android:text=" 。"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="0dp"/>
+
+        <Button
+            android:id="@+id/bt_import"
+            android:textSize="15sp"
+            android:text="提 交"
+            android:textColor="@color/buttontext"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/message_leve_bg"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"/>
+        
+        
+    </LinearLayout>
+
+    
+  
+
+</LinearLayout>

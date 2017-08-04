@@ -66,6 +66,7 @@
         android:visibility="visible"
         android:id="@+id/tv_idle"
         android:gravity="center"
+        android:layout_marginRight="3dp"
         android:text="闲"
         android:textSize="10sp"
         android:textColor="@color/buttontext"
@@ -79,14 +80,14 @@
         android:visibility="visible"
         android:id="@+id/tv_phototitle"
         android:text="约单标题"
-        android:layout_toRightOf="@+id/tv_idle"
-        android:layout_alignBottom="@+id/tv_idle"
-        android:layout_marginLeft="3dp"
         android:singleLine="true"
         android:textSize="14sp"
         android:textColor="@color/maintextcolor"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_idle"
+        android:layout_toRightOf="@+id/tv_idle"
+        android:layout_toEndOf="@+id/tv_idle"/>
 
     <LinearLayout
         android:visibility="visible"
@@ -95,7 +96,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/tv_idle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
             android:layout_gravity="bottom"
@@ -129,6 +130,7 @@
 
 
         <TextView
+            android:id="@+id/tv_danwei"
             android:textColor="@color/secondtextcolor"
             android:textSize="14sp"
             android:layout_gravity="bottom"

@@ -9,7 +9,7 @@
 
     <com.zpfan.manzhu.myui.TopLin
         android:id="@+id/tl_ordersure"
-        app:toptext="订单确定"
+        app:toptext="订单确认"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -489,6 +489,99 @@
 
 
         <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_reservationday"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="预约日期"
+                android:textColor="@color/maintextcolor"
+                android:textSize="14sp"/>
+
+
+            <LinearLayout
+                android:clickable="true"
+                android:id="@+id/ll_reyear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_reyear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="2017年"
+                    android:textColor="@color/maintextcolor"
+                    android:textSize="14sp"/>w
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginLeft="7.5dp"
+                    android:src="@mipmap/com_icon_arr_down_gra"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_remonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_remonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="1月"
+                    android:textColor="@color/maintextcolor"
+                    android:textSize="14sp"/>w
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginLeft="7.5dp"
+                    android:src="@mipmap/com_icon_arr_down_gra"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_reday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_reday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="1日"
+                    android:textColor="@color/maintextcolor"
+                    android:textSize="14sp"/>w
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginLeft="7.5dp"
+                    android:src="@mipmap/com_icon_arr_down_gra"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_rentde"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
@@ -690,9 +783,57 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_reservationtime"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="预约时段"
+                android:textColor="@color/maintextcolor"
+                android:textSize="14sp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/tv_retime"
+                    android:gravity="center"
+                    android:maxLines="3"
+                    android:textSize="12sp"
+                    android:ellipsize="end"
+                    android:textColor="@color/secondtextcolor"
+                    android:text="请选择预约时段"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/iv_retime"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/com_icon_go_thn_gra"/>
+
+
+        </LinearLayout>
 
 
         <LinearLayout
+            android:id="@+id/ll_count"
             android:visibility="visible"
             android:gravity="center_vertical"
             android:layout_marginLeft="10dp"

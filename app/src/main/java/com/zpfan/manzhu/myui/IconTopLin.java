@@ -28,6 +28,8 @@ public class IconTopLin extends LinearLayout {
     private TextView mTvtop3;
     private LinearLayout mTopmenu;
     private View mInflate;
+    private TextView mTitle;
+    private ImageView mIcon;
 
     public IconTopLin(Context context) {
         super(context);
@@ -41,8 +43,8 @@ public class IconTopLin extends LinearLayout {
         mInflate = inflater.inflate(R.layout.general_icontop, this);
 
         ImageView back = (ImageView) findViewById(R.id.iv_icontop_back);
-        ImageView icon = (ImageView) findViewById(R.id.iv_menu);
-        TextView title = (TextView) findViewById(R.id.tv_icontop_text);
+        mIcon = (ImageView) findViewById(R.id.iv_menu);
+        mTitle = (TextView) findViewById(R.id.tv_icontop_text);
         mIvtop1 = (ImageView) findViewById(R.id.iv_top1);
         mIvtop2 = (ImageView) findViewById(R.id.iv_top2);
         mIvtop3 = (ImageView) findViewById(R.id.iv_top3);
@@ -54,9 +56,9 @@ public class IconTopLin extends LinearLayout {
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.Topiconmenu);
 
-        title.setText(array.getString(0));
-        title.getPaint().setFakeBoldText(true);
-        icon.setImageResource(array.getResourceId(R.styleable.Topiconmenu_topicon, 1));
+        mTitle.setText(array.getString(0));
+        mTitle.getPaint().setFakeBoldText(true);
+        mIcon.setImageResource(array.getResourceId(R.styleable.Topiconmenu_topicon, 1));
         mIvtop1.setImageResource(array.getResourceId(R.styleable.Topiconmenu_top1iv, 1));
         mIvtop2.setImageResource(array.getResourceId(R.styleable.Topiconmenu_top2iv, 2));
         mIvtop3.setImageResource(array.getResourceId(R.styleable.Topiconmenu_top3iv, 3));
@@ -88,6 +90,21 @@ public class IconTopLin extends LinearLayout {
         //隐藏菜单的方法
         mTopmenu.setVisibility(GONE);
     }
+
+    public void  settopContext(String s){
+
+        mTitle.setText(s);
+
+    }
+
+
+    public void setIcon(int i) {
+
+        mIcon.setImageResource(i);
+
+    }
+
+
 
 
 

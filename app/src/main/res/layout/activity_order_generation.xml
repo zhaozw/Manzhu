@@ -376,7 +376,8 @@
         android:paddingLeft="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="65dp">
+        android:minHeight="65dp"
+        android:layout_height="wrap_content">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/iv_shopcover"
@@ -391,9 +392,8 @@
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:layout_width="0dp"
-
             android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tv_goodtitle"
@@ -407,6 +407,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:visibility="visible"
                 android:id="@+id/tv_goodformat"
                 android:textSize="10sp"
                 android:text="规格1、规格2"
@@ -414,6 +415,29 @@
                 android:layout_marginTop="7.5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_retime"
+                android:textSize="10sp"
+                android:text="预约时间：2017- 12- 31"
+                android:textColor="@color/secondtextcolor"
+                android:layout_marginTop="7.5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_redetime"
+                android:layout_marginBottom="7.5dp"
+                android:text="18:00 - 19:00，19:00 - 20:00，20:00 - 21:00，21:00 - 22:00，22:00 - 23:00，23:00 - 24:00，23:00 - 24:00，00:00 - 01:00"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="9sp"
+                android:maxLines="3"
+                android:layout_marginTop="7.5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
 
             <LinearLayout
                 android:visibility="gone"

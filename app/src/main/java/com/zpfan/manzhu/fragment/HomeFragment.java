@@ -13,7 +13,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,10 +35,8 @@ import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 import com.zpfan.manzhu.Aplication;
 import com.zpfan.manzhu.IdleActivity;
-import com.zpfan.manzhu.LaterActivity;
 import com.zpfan.manzhu.LocationActivity;
 import com.zpfan.manzhu.LoginActivity;
-import com.zpfan.manzhu.MakeUpActivity;
 import com.zpfan.manzhu.NewActivity;
 import com.zpfan.manzhu.PhotoActivity;
 import com.zpfan.manzhu.R;
@@ -758,20 +755,22 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                 break;
             case R.id.ll_makeup:
                 //找妆娘的按钮
-                Intent makeupintent = new Intent(getContext(), MakeUpActivity.class);
+                Intent makeupintent = new Intent(getContext(), PhotoActivity.class);
                 if (mProvince != null) {
                     makeupintent.putExtra("location", mProvince);
                 }
+                    makeupintent.putExtra("typeid", 8);
 
                 startActivity(makeupintent);
 
                 break;
             case R.id.ll_later:
                 //  找后期的按钮
-                Intent laterintent = new Intent(getContext(), LaterActivity.class);
+                Intent laterintent = new Intent(getContext(), PhotoActivity.class);
                 if (mProvince != null) {
                     laterintent.putExtra("location", mProvince);
                 }
+                    laterintent.putExtra("typeid", 7);
 
                 startActivity(laterintent);
 

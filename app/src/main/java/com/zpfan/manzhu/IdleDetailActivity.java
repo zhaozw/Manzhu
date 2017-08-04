@@ -276,6 +276,28 @@ public class IdleDetailActivity extends AppCompatActivity {
     TextView mTvXiaoliang;
     @BindView(R.id.tv_dingjin)
     TextView mTvDingjin;
+    @BindView(R.id.tv_serverunit)
+    TextView mTvServerunit;
+    @BindView(R.id.iv_start1)
+    ImageView mIvStart1;
+    @BindView(R.id.iv_start2)
+    ImageView mIvStart2;
+    @BindView(R.id.iv_start3)
+    ImageView mIvStart3;
+    @BindView(R.id.iv_start4)
+    ImageView mIvStart4;
+    @BindView(R.id.iv_start5)
+    ImageView mIvStart5;
+    @BindView(R.id.tv_startnumber)
+    TextView mTvStartnumber;
+    @BindView(R.id.tv_salenumber)
+    TextView mTvSalenumber;
+    @BindView(R.id.ll_leve)
+    LinearLayout mLlLeve;
+    @BindView(R.id.ll_serverstart)
+    LinearLayout mLlServerstart;
+    @BindView(R.id.tv_kuaidi)
+    TextView mTvKuaidi;
 
 
     private boolean isshowbabyparame = false;
@@ -451,7 +473,8 @@ public class IdleDetailActivity extends AppCompatActivity {
                 mLlNewxiaoliang.setVisibility(View.GONE);
                 mLlFineness.setVisibility(View.VISIBLE);
             } else if (mType.equals("new")) {
-                //把标题换了
+
+                //把标题换了  是新商品
                 mTvPagetitle.setText("新商品");
                 mTvIcontopText.setText("新商品");
                 //设置新商品的品牌名 和总销量 别的都一样
@@ -467,6 +490,108 @@ public class IdleDetailActivity extends AppCompatActivity {
                 if (mbussness.isG_IsDepositDeal()) {
                     mTvDingjin.setVisibility(View.VISIBLE);
                     mTvDingjin.setText("（包含定金:¥ " + mbussness.getG_DepositPrice() + "）");
+                }
+
+
+            } else if (mType.equals("server")) {
+                //进来展示服务的内容
+                mTvFan.setVisibility(View.GONE);
+                mTvServerunit.setVisibility(View.VISIBLE);
+                mTvServerunit.setText("/" + mbussness.getServer_unit_string());
+                mLlNewxiaoliang.setVisibility(View.GONE);
+                mTvExpress.setVisibility(View.GONE);
+                //把标题换了  是新商品
+                mTvPagetitle.setText("约单/服务");
+                mTvIcontopText.setText("约单/服务");
+
+                mTvKuaidi.setText(mbussness.getG_Province() + " - " + mbussness.getG_City());
+
+                if (mbussness.isG_IsServiceBook()) {
+                    mTvMakeorder.setText("立即预约");
+                }
+
+                //展示评级的条目
+                mLlServerstart.setVisibility(View.VISIBLE);
+                String value = mbussness.getProfessionaldegree_value();
+                mTvStartnumber.setText(value);
+                mTvSalenumber.setText(mbussness.getG_SaleNum() + "");
+
+
+                if (value.equals("0.5")) {
+                    mIvStart1.setImageResource(R.mipmap.com_icon_star_half);
+                    mIvStart2.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart3.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart4.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart5.setImageResource(R.mipmap.com_icon_star_off);
+                } else if (value.equals("1.0")) {
+                    mIvStart1.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart2.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart3.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart4.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart5.setImageResource(R.mipmap.com_icon_star_off);
+                } else if (value.equals("0.0")) {
+                    mIvStart1.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart2.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart3.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart4.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart5.setImageResource(R.mipmap.com_icon_star_off);
+                } else if (value.equals("1.5")) {
+                    mIvStart1.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart2.setImageResource(R.mipmap.com_icon_star_half);
+                    mIvStart3.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart4.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart5.setImageResource(R.mipmap.com_icon_star_off);
+                } else if (value.equals("2")) {
+                    mIvStart1.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart2.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart3.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart4.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart5.setImageResource(R.mipmap.com_icon_star_off);
+                } else if (value.equals("2.5")) {
+
+                    mIvStart1.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart2.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart3.setImageResource(R.mipmap.com_icon_star_half);
+                    mIvStart4.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart5.setImageResource(R.mipmap.com_icon_star_off);
+
+                } else if (value.equals("3.0")) {
+
+                    mIvStart1.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart2.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart3.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart4.setImageResource(R.mipmap.com_icon_star_off);
+                    mIvStart5.setImageResource(R.mipmap.com_icon_star_off);
+
+                } else if (value.equals("3.5")) {
+
+                    mIvStart1.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart2.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart3.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart4.setImageResource(R.mipmap.com_icon_star_half);
+                    mIvStart5.setImageResource(R.mipmap.com_icon_star_off);
+
+
+                } else if (value.equals("4.0")) {
+                    mIvStart1.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart2.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart3.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart4.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart5.setImageResource(R.mipmap.com_icon_star_off);
+                } else if (value.equals("4.5")) {
+
+                    mIvStart1.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart2.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart3.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart4.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart5.setImageResource(R.mipmap.com_icon_star_half);
+
+                } else if (value.equals("5.0")) {
+                    mIvStart1.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart2.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart3.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart4.setImageResource(R.mipmap.com_icon_star_on);
+                    mIvStart5.setImageResource(R.mipmap.com_icon_star_on);
                 }
 
 
@@ -1178,100 +1303,116 @@ public class IdleDetailActivity extends AppCompatActivity {
 
             case R.id.tv_makeorder:
                 //点击了 立即下单  展示出来一个 popwindow
+                String s = mTvMakeorder.getText().toString();
                 if (Utils.isUserLogin()) {
-                    PopupWindow bootomwindow = new PopupWindow(IdleDetailActivity.this);
-                    final View inflate = View.inflate(IdleDetailActivity.this, R.layout.detail_bootom_popwindow, null);
-                    ImageView change = (ImageView) inflate.findViewById(R.id.iv_change);
-                    ImageView rent = (ImageView) inflate.findViewById(R.id.iv_rent);
+                    if (!s.equals("立即预约")) {
+                        PopupWindow bootomwindow = new PopupWindow(IdleDetailActivity.this);
+                        final View inflate = View.inflate(IdleDetailActivity.this, R.layout.detail_bootom_popwindow, null);
+                        ImageView change = (ImageView) inflate.findViewById(R.id.iv_change);
+                        ImageView rent = (ImageView) inflate.findViewById(R.id.iv_rent);
 
-                    LinearLayout llchange = (LinearLayout) inflate.findViewById(R.id.ll_change);
-                    LinearLayout llrent = (LinearLayout) inflate.findViewById(R.id.ll_rent);
-                    LinearLayout llbuy = (LinearLayout) inflate.findViewById(R.id.ll_buy);
+                        LinearLayout llchange = (LinearLayout) inflate.findViewById(R.id.ll_change);
+                        LinearLayout llrent = (LinearLayout) inflate.findViewById(R.id.ll_rent);
+                        LinearLayout llbuy = (LinearLayout) inflate.findViewById(R.id.ll_buy);
 
-                    TextView tvchange = (TextView) inflate.findViewById(R.id.tv_change);
-                    TextView tvchange1 = (TextView) inflate.findViewById(R.id.tv_change1);
-                    TextView tvrent = (TextView) inflate.findViewById(R.id.tv_rent);
-                    TextView tvrent1 = (TextView) inflate.findViewById(R.id.tv_rent1);
+                        TextView tvchange = (TextView) inflate.findViewById(R.id.tv_change);
+                        TextView tvchange1 = (TextView) inflate.findViewById(R.id.tv_change1);
+                        TextView tvrent = (TextView) inflate.findViewById(R.id.tv_rent);
+                        TextView tvrent1 = (TextView) inflate.findViewById(R.id.tv_rent1);
 
-                    //是否能租赁
-                    if (mbussness.isG_IsChange()) {
-                        change.setImageResource(R.mipmap.com_icon_excha);
-                        tvchange.setTextColor(getResources().getColor(R.color.maintextcolor));
-                        tvchange1.setText("正好有卖家想换的宝贝，通知TA");
-                        llchange.setEnabled(true);
+                        //是否能租赁
+                        if (mbussness.isG_IsChange()) {
+                            change.setImageResource(R.mipmap.com_icon_excha);
+                            tvchange.setTextColor(getResources().getColor(R.color.maintextcolor));
+                            tvchange1.setText("正好有卖家想换的宝贝，通知TA");
+                            llchange.setEnabled(true);
+                        } else {
+                            change.setImageResource(R.mipmap.com_icon_excha_ept);
+                            tvchange.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                            tvchange1.setText("本宝贝暂不支持交换");
+                            llchange.setEnabled(false);
+                        }
+
+                        if (mbussness.isG_IsRent()) {
+                            rent.setImageResource(R.mipmap.com_icon_rent);
+                            tvrent.setTextColor(getResources().getColor(R.color.maintextcolor));
+                            tvrent1.setText("只需支付租金，用完后还给卖家就行啦");
+                            llrent.setEnabled(true);
+                        } else {
+                            rent.setImageResource(R.mipmap.com_icon_rent_ept);
+                            tvrent.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                            tvrent1.setText("本宝贝暂不支持租赁");
+                            llrent.setEnabled(false);
+                        }
+
+
+                        WindowManager.LayoutParams lp = IdleDetailActivity.this.getWindow()
+                                .getAttributes();
+                        lp.alpha = 0.4f;
+                        IdleDetailActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                        IdleDetailActivity.this.getWindow().setAttributes(lp);
+                        bootomwindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_bootompop_bg));
+                        bootomwindow.setTouchable(true);
+                        bootomwindow.setContentView(inflate);
+                        bootomwindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                        int i = Utils.dp2px(75);
+                        bootomwindow.setHeight(i);
+                        bootomwindow.setOutsideTouchable(true);
+                        bootomwindow.update();
+                        bootomwindow.showAtLocation(mRvTopline, Gravity.BOTTOM, 0, 0);
+                        bootomwindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                            @Override
+                            public void onDismiss() {
+                                WindowManager.LayoutParams lp = IdleDetailActivity.this.getWindow()
+                                        .getAttributes();
+                                lp.alpha = 1f;
+                                IdleDetailActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                IdleDetailActivity.this.getWindow().setAttributes(lp);
+
+                            }
+                        });
+
+                        llbuy.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //点击跳转到下单的界面
+                                Intent intent = new Intent(IdleDetailActivity.this, OrderImmediatelyActivity.class);
+
+                                intent.putExtra("detail", mbussness);
+                                intent.putExtra("type", "buy");
+                                intent.putExtra("frome", mType); //在这里区分东西
+                                //aa
+                                startActivity(intent);
+
+                            }
+                        });
+
+                        llrent.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //点击到租的订单的界面
+                                Intent intent = new Intent(IdleDetailActivity.this, OrderImmediatelyActivity.class);
+
+                                intent.putExtra("detail", mbussness);
+                                intent.putExtra("type", "rent");
+                                startActivity(intent);
+
+                            }
+                        });
                     } else {
-                        change.setImageResource(R.mipmap.com_icon_excha_ept);
-                        tvchange.setTextColor(getResources().getColor(R.color.secondtextcolor));
-                        tvchange1.setText("本宝贝暂不支持交换");
-                        llchange.setEnabled(false);
+                        //立即预约的操作
+                        Intent intent = new Intent(IdleDetailActivity.this, OrderImmediatelyActivity.class);
+
+                        intent.putExtra("detail", mbussness);
+                        intent.putExtra("type", "server");
+                        startActivity(intent);
+
+
+
+
+
+
                     }
-
-                    if (mbussness.isG_IsRent()) {
-                        rent.setImageResource(R.mipmap.com_icon_rent);
-                        tvrent.setTextColor(getResources().getColor(R.color.maintextcolor));
-                        tvrent1.setText("只需支付租金，用完后还给卖家就行啦");
-                        llrent.setEnabled(true);
-                    } else {
-                        rent.setImageResource(R.mipmap.com_icon_rent_ept);
-                        tvrent.setTextColor(getResources().getColor(R.color.secondtextcolor));
-                        tvrent1.setText("本宝贝暂不支持租赁");
-                        llrent.setEnabled(false);
-                    }
-
-
-                    WindowManager.LayoutParams lp = IdleDetailActivity.this.getWindow()
-                            .getAttributes();
-                    lp.alpha = 0.4f;
-                    IdleDetailActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                    IdleDetailActivity.this.getWindow().setAttributes(lp);
-                    bootomwindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_bootompop_bg));
-                    bootomwindow.setTouchable(true);
-                    bootomwindow.setContentView(inflate);
-                    bootomwindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-                    int i = Utils.dp2px(75);
-                    bootomwindow.setHeight(i);
-                    bootomwindow.setOutsideTouchable(true);
-                    bootomwindow.update();
-                    bootomwindow.showAtLocation(mRvTopline, Gravity.BOTTOM, 0, 0);
-                    bootomwindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                        @Override
-                        public void onDismiss() {
-                            WindowManager.LayoutParams lp = IdleDetailActivity.this.getWindow()
-                                    .getAttributes();
-                            lp.alpha = 1f;
-                            IdleDetailActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                            IdleDetailActivity.this.getWindow().setAttributes(lp);
-
-                        }
-                    });
-
-                    llbuy.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //点击跳转到下单的界面
-                            Intent intent = new Intent(IdleDetailActivity.this, OrderImmediatelyActivity.class);
-
-                            intent.putExtra("detail", mbussness);
-                            intent.putExtra("type", "buy");
-                            intent.putExtra("frome", mType);
-                            startActivity(intent);
-
-                        }
-                    });
-
-                    llrent.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //点击到租的订单的界面
-
-                            Intent intent = new Intent(IdleDetailActivity.this, OrderImmediatelyActivity.class);
-
-                            intent.putExtra("detail", mbussness);
-                            intent.putExtra("type", "rent");
-                            startActivity(intent);
-
-                        }
-                    });
                 } else {
                     startActivity(new Intent(IdleDetailActivity.this, LoginActivity.class));
                 }

@@ -1,6 +1,7 @@
 package com.zpfan.manzhu.adapter;
 
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -68,19 +69,56 @@ public class PhotoAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> 
         final LinearLayout llprice = helper.getView(R.id.ll_price);
         final LinearLayout llcollect = helper.getView(R.id.ll_photocoll);
 
+        //设置点击事件  跳转到详情界面
+        helper.addOnClickListener(R.id.iv_photo)
+                .addOnClickListener(R.id.tv_idle)
+                .addOnClickListener(R.id.tv_phototitle)
+                .addOnClickListener(R.id.ll_price)
+                .addOnClickListener(R.id.tv_provice);
+
+        llcollect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //收藏的按钮
+
+
+
+            }
+        });
+
+
+        //设置单位
+        helper.setText(R.id.tv_danwei, "/" +item.getServer_unit_string());
+
+        //设置忙还是闲
+        TextView idle = helper.getView(R.id.tv_idle);
+
+        boolean deal = item.isG_IsOfflineDeal();
+        if (deal) {
+            idle.setText("忙");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                idle.setBackground(mContext.getResources().getDrawable(R.drawable.item_photo_txt1));
+            }
+        } else {
+            idle.setText("闲");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                idle.setBackground(mContext.getResources().getDrawable(R.drawable.item_photo_txt));
+            }
+        }
+
 
         //设置商品的封面
         if (item.getG_Cover() != null && ivphoto!= null) {
             Glide.with(mContext).load(item.getG_Cover()).into(ivphoto);
         }
 
-        if (item.isG_IsFreeShip()) {
+        /*if (item.isG_IsFreeShip()) {
             tvidle.setVisibility(View.VISIBLE);
         } else {
             tvidle.setWidth(0);
             //tvidle.setVisibility(View.GONE);
 
-        }
+        }*/
         helper.setText(R.id.tv_phototitle, item.getG_Title());
 
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -111,9 +112,20 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
         int typeid = intent.getIntExtra("typeid", 6);
         String type = intent.getStringExtra("type");
 
+
+        if (typeid == 8) {
+            mIcontoplin.settopContext("找妆娘");
+            mIcontoplin.setIcon(R.mipmap.menu_icon_05);
+
+        } else if (typeid == 7) {
+            mIcontoplin.settopContext("找后期");
+            mIcontoplin.setIcon(R.mipmap.menu_icon_04);
+        }
+
         //决定显示什么布局 和用什么参数去访问
 
         if (type != null) {
+
             mSearchtoplin.setVisibility(View.VISIBLE);
             mIcontoplin.setVisibility(View.GONE);
             issearch = true;
@@ -145,7 +157,7 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
             issearch = false;
             mMap.put("page", "1");
             mMap.put("G_TYPE", "服务");
-            mMap.put("TYPE_ID", "6");
+            mMap.put("TYPE_ID", typeid + "");
             mMap.put("TYPE_CHILD_ID", "");
             mMap.put("KEYWORD", "");
             mMap.put("BRANDID", "");
@@ -243,6 +255,29 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
 
                                 if (mBussnessBeen != null) {
                                     mAdapter = new PhotoAdapter(R.layout.item_photo, mBussnessBeen);
+                                    mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                                        @Override
+                                        public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                                            switch (view.getId()) {
+                                                case R.id.iv_photo:
+                                                case R.id.tv_idle:
+                                                case R.id.tv_phototitle:
+                                                case R.id.ll_price:
+                                                case R.id.tv_provice:
+                                                    //跳转到服务详情的界面
+                                                    Intent intent = new Intent(PhotoActivity.this, IdleDetailActivity.class);
+                                                    intent.putExtra("id", mBussnessBeen.get(position));
+                                                    intent.putExtra("type", "server");
+                                                    startActivity(intent);
+                                                    Log.i("zc", "onItemChildClick:  看看我点击的是什么uid" + mBussnessBeen.get(position).getId());
+                                                    break;
+
+
+                                            }
+
+
+                                        }
+                                    });
                                     mHeadView = View.inflate(PhotoActivity.this, R.layout.photo_head, null);
                                     if (!issearch) {
                                         mAdapter.addHeaderView(mHeadView);

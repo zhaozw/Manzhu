@@ -93,6 +93,10 @@ public class OrderGenerationActivity extends AppCompatActivity {
     LinearLayout mLlGood;
     @BindView(R.id.ll_rentmoney)
     LinearLayout mLlRentmoney;
+    @BindView(R.id.tv_retime)
+    TextView mTvRetime;
+    @BindView(R.id.tv_redetime)
+    TextView mTvRedetime;
     private DecimalFormat mDf;
     private OrderGenerationBean mBean1;
 
@@ -111,24 +115,7 @@ public class OrderGenerationActivity extends AppCompatActivity {
 
         AvatorBean avator = intent.getParcelableExtra("avator");
         String type = intent.getStringExtra("type");
-        if (type.equals("idle")) {
-            //闲置的界面
-        } else if (type.equals("new")) {
-            //新商品的界面
-            mTvDetil.setText("在完成支付前，您和卖家均可在【个人中心 - 我买到的（我卖出的）】中修改本订单信息。");
 
-        } else if (type.equals("server")) {
-            //服务的界面
-
-        } else if (type.equals("rent")) {
-            //租赁的界面
-            mTvDetil.setText("租赁订单的押金支付请在和出租人确认实物后再继续进行。“线上交易”订单租期在租赁人确认收货后开始计算；“线下交易”订单租期在押金支付后即开始计算。完成支付前，您和出租人均可在【个人中心 - 我租到的（我租出的）】中修改本订单信息。");
-            mTvYajin.setVisibility(View.VISIBLE);
-            ViewGroup.LayoutParams params = mLlGood.getLayoutParams();
-            params.height = Utils.dp2px(80);
-            mLlGood.setLayoutParams(params);
-            mLlRentmoney.setVisibility(View.VISIBLE);
-        }
 
 
         //发送请求去获取订单的详情
@@ -143,6 +130,37 @@ public class OrderGenerationActivity extends AppCompatActivity {
 
         }
 
+        if (type.equals("idle")) {
+            //闲置的界面
+        } else if (type.equals("new")) {
+            //新商品的界面
+            mTvDetil.setText("在完成支付前，您和卖家均可在【个人中心 - 我买到的（我卖出的）】中修改本订单信息。");
+
+        } else if (type.equals("server")) {
+            //服务的界面
+            mTvDetil.setText("由于您当前拍下的是服务，服务商需要先确认是否接单后，您才可进行支付操作（如服务商一周内未确认的，订单会自动取消）。在完成支付前，您和服务商均可在【个人中心 - 我买到的（我卖出的）】中修改本订单信息");
+
+        } else if (type.equals("rent")) {
+            //租赁的界面
+            mTvDetil.setText("租赁订单的押金支付请在和出租人确认实物后再继续进行。“线上交易”订单租期在租赁人确认收货后开始计算；“线下交易”订单租期在押金支付后即开始计算。完成支付前，您和出租人均可在【个人中心 - 我租到的（我租出的）】中修改本订单信息。");
+            mTvYajin.setVisibility(View.VISIBLE);
+            ViewGroup.LayoutParams params = mLlGood.getLayoutParams();
+            params.height = Utils.dp2px(80);
+            mLlGood.setLayoutParams(params);
+            mLlRentmoney.setVisibility(View.VISIBLE);
+        } else if (type.equals("yuyue")) {
+            mTvDetil.setText("由于您当前拍下的是服务，服务商需要先确认是否接单后，您才可进行支付操作（如服务商一周内未确认的，订单会自动取消）。在完成支付前，您和服务商均可在【个人中心 - 我买到的（我卖出的）】中修改本订单信息");
+            mTvRedetime.setVisibility(View.VISIBLE);
+            mTvGoodformat.setVisibility(View.GONE);
+            mTvRetime.setVisibility(View.VISIBLE);
+            if (mBean1 != null) {
+                mTvRetime.setText("预约时间："+ mBean1.getO_ReturnDate().substring(0,10).replace("-"," - "));
+                mTvRedetime.setText(mBean1.getO_ExtendLeaseMessage().replace(",","，"));
+            }
+        }
+
+
+
 
     }
 
@@ -153,7 +171,7 @@ public class OrderGenerationActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("zc", "onResponse:   看看订单详情的数据"  + call.request().toString());
+                Log.i("zc", "onResponse:   看看订单详情的数据" + call.request().toString());
                 String body = response.body();
 
                 if (body != null) {
@@ -174,7 +192,8 @@ public class OrderGenerationActivity extends AppCompatActivity {
 
                             ArrayList<OrderGenerationBean> generationBeen = Utils.gson.fromJson(substring, type1);
                             mBean1 = generationBeen.get(0);
-
+                            mTvRetime.setText("预约时间："+ mBean1.getO_ReturnDate().substring(0,10).replace("-"," - "));
+                            mTvRedetime.setText(mBean1.getO_ExtendLeaseMessage().replace(",","，"));
                             mTvOrdernumber.setText(mBean1.getO_UID());
                             String pattern = mBean1.getO_TradingPattern();
                             mTvBuystyle.setText(pattern);

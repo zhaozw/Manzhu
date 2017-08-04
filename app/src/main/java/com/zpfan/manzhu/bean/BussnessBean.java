@@ -198,8 +198,18 @@ public class BussnessBean implements Parcelable {
     private GoodsSpecificationsBean msp = null;
     private int buyCount = 1;
     private String PP_Lease_period_proportion;
+    private String server_unit_string;
 
 
+
+
+    public String getServer_unit_string() {
+        return server_unit_string;
+    }
+
+    public void setServer_unit_string(String server_unit_string) {
+        this.server_unit_string = server_unit_string;
+    }
 
     public String getPP_Lease_period_proportion() {
         return PP_Lease_period_proportion;
@@ -2323,6 +2333,7 @@ public class BussnessBean implements Parcelable {
         dest.writeParcelable(this.msp, flags);
         dest.writeInt(this.buyCount);
         dest.writeString(this.PP_Lease_period_proportion);
+        dest.writeString(this.server_unit_string);
     }
 
     protected BussnessBean(Parcel in) {
@@ -2420,6 +2431,7 @@ public class BussnessBean implements Parcelable {
         this.msp = in.readParcelable(GoodsSpecificationsBean.class.getClassLoader());
         this.buyCount = in.readInt();
         this.PP_Lease_period_proportion = in.readString();
+        this.server_unit_string = in.readString();
     }
 
     public static final Creator<BussnessBean> CREATOR = new Creator<BussnessBean>() {

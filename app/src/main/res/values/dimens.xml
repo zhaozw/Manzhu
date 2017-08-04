@@ -703,6 +703,9 @@
     <!--  确认订单的底部菜单栏的高度 90px-->
     <dimen name="order_bottommenuh"> 45dp </dimen>
 
+    <!--  预约时段中的价格说明的栏高-->
+    <dimen name="reservation_priceh"> 40dp </dimen>
+
 
 
 </resources>

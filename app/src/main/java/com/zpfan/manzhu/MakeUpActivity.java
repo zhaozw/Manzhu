@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -191,6 +190,7 @@ public class MakeUpActivity extends AppCompatActivity implements View.OnClickLis
 
                                 if (mBussnessBeen != null) {
                                     mAdapter = new PhotoAdapter(R.layout.item_photo, mBussnessBeen);
+
                                     mHeadView = View.inflate(MakeUpActivity.this, R.layout.makeup_head, null);
                                     mAdapter.addHeaderView(mHeadView);
                                     mRvIdel.setAdapter(mAdapter);

@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import com.zpfan.manzhu.bean.AddressBean;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.BussnessBean;
 import com.zpfan.manzhu.bean.OrderCouponBean;
+import com.zpfan.manzhu.bean.ReservationTimeBean;
 import com.zpfan.manzhu.bean.ShopBean;
 import com.zpfan.manzhu.myui.EaseActivity;
 import com.zpfan.manzhu.myui.MyToast;
@@ -38,6 +40,7 @@ import com.zpfan.manzhu.utils.Utils;
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +56,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
     private static final int REQUESY_LOCATINO = 5;
     private static final int REQUEST_LEAVEMESSAGE = 10;
+    private static final int REQUEST_DATETIME = 15;
     @BindView(R.id.tl_ordersure)
     TopLin mTlOrdersure;
     @BindView(R.id.line1)
@@ -210,6 +214,28 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
     EditText mEtRentdate;
     @BindView(R.id.ll_editrent)
     LinearLayout mLlEditrent;
+    @BindView(R.id.ll_count)
+    LinearLayout mLlCount;
+    @BindView(R.id.tv_reyear)
+    TextView mTvReyear;
+    @BindView(R.id.ll_reyear)
+    LinearLayout mLlReyear;
+    @BindView(R.id.tv_remonth)
+    TextView mTvRemonth;
+    @BindView(R.id.ll_remonth)
+    LinearLayout mLlRemonth;
+    @BindView(R.id.tv_reday)
+    TextView mTvReday;
+    @BindView(R.id.ll_reday)
+    LinearLayout mLlReday;
+    @BindView(R.id.ll_reservationday)
+    LinearLayout mLlReservationday;
+    @BindView(R.id.tv_retime)
+    TextView mTvRetime;
+    @BindView(R.id.iv_retime)
+    ImageView mIvRetime;
+    @BindView(R.id.ll_reservationtime)
+    LinearLayout mLlReservationtime;
     private ArrayList<AddressBean> mAddressBeen;
     private BussnessBean mDetail;
     private ShopBean mShopBean = new ShopBean();
@@ -229,8 +255,11 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
     private int maxday = 0;
     private String mFrome;
     private String rentDay = "1";
-
-
+    private Calendar mNow;
+    private int today;
+    private ArrayList<ReservationTimeBean> mTimeData;
+    private ArrayList<String> checkid = new ArrayList<>();
+    private ArrayList<ReservationTimeBean> mChecktimedata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -243,6 +272,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
     private void initView() {
         mDf = new DecimalFormat("0.00");
+        mNow = Calendar.getInstance();
 
         Intent intent = getIntent();
 
@@ -270,8 +300,6 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
             //设置为租赁数量
             mTvNumbertype.setText("租赁数量");
-
-
             //查看商品的规格 获取租赁的价格
             if (mSpecifications.size() > 0) {
                 //商品有规格 但是不知道有没有 具体的规格
@@ -291,7 +319,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                     mTvZudate.setText("租期\n" + bean.getPS_BasicLease() + "天"); //默认租期是起租的日期
                     Double yajin = Double.valueOf(price);
                     Double zujin = Double.valueOf(rennewal);
-                                                       //违约租期是押金/续租租金
+                    //违约租期是押金/续租租金
 
                     baseday = bean.getPS_BasicLease();
                     maxday = (int) (yajin / zujin);
@@ -305,7 +333,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                     } else {
                         max = inventory;
                     }
-                    calculationMoney();
+                    calculationMoney(false);
                 } else {
                     //商品有具体的规格
                     BussnessBean.GoodsSpecificationsBean msp = mDetail.getMsp();
@@ -326,7 +354,6 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                     Double zujin = Double.valueOf(rennewal);
 
 
-
                     baseday = msp.getPS_BasicLease();
                     maxday = (int) (yajin / zujin);
 
@@ -340,7 +367,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                         max = inventory;
 
                     }
-                    calculationMoney();
+                    calculationMoney(false);
 
                 }
             } else {
@@ -362,7 +389,6 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                 Double zujin = Double.valueOf(rennewal);
 
 
-
                 baseday = mDetail.getG_BasicLease();
                 maxday = (int) (yajin / zujin);
 
@@ -372,10 +398,46 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                 if (num != 0) {
                     max = num;
                 }
-                calculationMoney();
+                calculationMoney(false);
             }
 
 
+        } else if (type.equals("server")) {
+            //预约的商品
+            mLlRenttime.setVisibility(View.GONE);
+            mLlRentday.setVisibility(View.GONE);
+            mLlRentde.setVisibility(View.GONE);
+            mTvYajin.setVisibility(View.VISIBLE);
+            mLlLocation.setVisibility(View.GONE);
+            mIvEdit.setVisibility(View.GONE);
+            mTvFormat.setVisibility(View.GONE);
+            mLine1.setVisibility(View.GONE);
+            mLlCount.setVisibility(View.GONE);
+            mLlReservationday.setVisibility(View.VISIBLE);
+            mLlReservationtime.setVisibility(View.VISIBLE);
+            mDashline4.setVisibility(View.VISIBLE);
+
+            //对价格的设置
+            String fixedPrice = mDetail.getG_FixedPrice();
+            mTvGoodprice.setText(fixedPrice);
+            //对单位的设置
+            mTvYajin.setText("/" +mDetail.getServer_unit_string());
+
+            //对数量的设置
+            int count = mDetail.getBuyCount();
+            mTvCarcount.setText(count + "");
+            mTvCount.setText(count + "");
+            mTvRemonth.setText((mNow.get(Calendar.MONTH) + 1) + "月");
+            mTvReyear.setText(mNow.get(Calendar.YEAR) + "年");
+            mTvReday.setText(mNow.get(Calendar.DATE) + "日");
+            today = mNow.get(Calendar.DATE);
+            //把提交订单改为提交预约
+            mTvSubmit.setText("提交预约");
+
+
+
+
+        calculationMoney(false);
         } else {
             isRent = false;
             mTvYajin.setVisibility(View.INVISIBLE);
@@ -401,7 +463,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                     if (inventory != 0) {
                         max = inventory;
                     }
-                    calculationMoney();
+                    calculationMoney(false);
                 } else {
                     //商品有具体的规格
                     BussnessBean.GoodsSpecificationsBean msp = mDetail.getMsp();
@@ -415,7 +477,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                     if (inventory != 0) {
                         max = inventory;
                     }
-                    calculationMoney();
+                    calculationMoney(false);
 
                 }
             } else {
@@ -428,7 +490,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                 if (num != 0) {
                     max = num;
                 }
-                calculationMoney();
+                calculationMoney(false);
             }
         }
 
@@ -502,7 +564,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                 }
 
 
-                calculationMoney();
+                calculationMoney(false);
             }
 
             @Override
@@ -519,7 +581,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
         double allweight = wei * count;
         getbuyStyle(usesheng, mDf.format(allweight), mDetail.getG_UID());
-        calculationMoney();
+        calculationMoney(false);
 
     }
 
@@ -738,7 +800,8 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
 
     @OnClick({R.id.ll_location, R.id.ll_message, R.id.iv_edit, R.id.ll_editfinish, R.id.bt_up, R.id.bt_down, R.id.ll_checkformate, R.id.tv_online, R.id.other, R.id.tv_leavemessage
-            , R.id.iv_leavemessage, R.id.iv_online, R.id.tv_coupon, R.id.iv_coupon, R.id.tv_submit, R.id.tv_rentday})
+            , R.id.iv_leavemessage, R.id.iv_online, R.id.tv_coupon, R.id.iv_coupon, R.id.tv_submit, R.id.tv_rentday,R.id.ll_reyear,R.id.ll_remonth,R.id.ll_reday
+            ,R.id.ll_reservationtime})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_location:
@@ -806,9 +869,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                                 mTvRentrewal.setText(mDf.format(bDouble));
                                 //重新计算能够租的时间
                                 double v = singleprice / bDouble;
-                             maxday = (int) v;
-
-
+                                maxday = (int) v;
 
 
                             }
@@ -817,7 +878,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                     String price = msp.getPS_FixedPrice();
                     Double aDouble = Double.valueOf(price);
                     mTvGoodprice.setText(mDf.format(aDouble));
-                    calculationMoney();
+                    calculationMoney(false);
                 } else {
                     //没有规格
                     String s = mEtGoodmoney.getText().toString();
@@ -838,7 +899,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                     }
 
 
-                    calculationMoney();
+                    calculationMoney(false);
 
                 }
 
@@ -870,7 +931,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                 }
                 mTvCount.setText(integer + "");
                 mTvCarcount.setText("x" + integer);
-                calculationMoney();
+                calculationMoney(false);
 
                 break;
 
@@ -889,7 +950,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
                 mTvCount.setText(integer1 + "");
                 mTvCarcount.setText("x" + integer1);
-                calculationMoney();
+                calculationMoney(false);
 
                 break;
             case R.id.ll_checkformate:
@@ -928,7 +989,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
                         max = inventory;
 
-                        calculationMoney();
+                        calculationMoney(false);
                         popupWindow.dismiss();
                     }
                 });
@@ -982,7 +1043,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                                 mTvYunfei.setText(df.format(zongyunfei));
                                 mTvZongyunfei.setText(df.format(zongyunfei));
                             }
-                            calculationMoney();
+                            calculationMoney(false);
                             onlineWindow.dismiss();
                         }
                     });
@@ -1057,7 +1118,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                         mTvYouhuijuan.setText(mDf.format(aDouble));
                         mTvCouponmoney.setText(mDf.format(aDouble));
                         couponWindow.dismiss();
-                        calculationMoney();
+                        calculationMoney(false);
                     }
                 });
 
@@ -1077,157 +1138,272 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
             case R.id.tv_submit:
                 //提交订单
-                if (!isRent) {
-                    mTvSubmit.setEnabled(false);
-                    mTvSubmit.setClickable(false);
-                    mTvSubmit.setOnClickListener(null);
-                    Map<String, String> map = new LinkedHashMap<>();
+                String s5 = mTvSubmit.getText().toString();
+                if (s5.equals("提交订单")) {
+                    if (!isRent) {
+                        mTvSubmit.setEnabled(false);
+                        mTvSubmit.setClickable(false);
+                        mTvSubmit.setOnClickListener(null);
+                        Map<String, String> map = new LinkedHashMap<>();
 
-                    map.put("member_uid", Utils.getloginuid());
-                    String cunt = mTvCount.getText().toString();
-                    map.put("Count", cunt);
-                    map.put("goods_uid", mDetail.getG_UID());
-                    String id = "";
-                    if (mDetail.getMsp() != null) {
-                        id = mDetail.getMsp().getPS_UniqueID();
-                    }
-                    map.put("goods_ps_uid", id);
-                    map.put("goods_id_btn", "");
-                    map.put("Finally_Address_ID", addruid);
-                    String liuyan = mTvLeavemessage.getText().toString();
-                    map.put("liuyan_m", liuyan);
-                    map.put("CarOrBuy", "Buy");
-                    map.put("OrderCate", "购物订单");
-                    map.put("shopcoupon_bymemberlist", couponid);
-                    String jifen = mEtJifen.getText().toString();
-                    map.put("deduction_buy_score_number", jifen);
-                    map.put("see_sell_my_data_mm", "");
-                    map.put("share_uid", "");
-                    map.put("appointment_date", "2017-07-31");
-                    map.put("appointment_time", "");
-                    map.put("yunfei_value_model", "");
-                    String trading = mTvOnline.getText().toString();
-                    map.put("trading_value_model", trading);
-                    String editgoodmoney = mEtGoodmoney.getText().toString();
-                    map.put("edit_goods_single_price_model", editgoodmoney);
-
-                    Call<String> orderSubmit = Aplication.mIinterface.orderSubmit(map);
-
-                    orderSubmit.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-
-
-                            String body = response.body();
-
-                            if (body != null) {
-
-                                Type type = new TypeToken<ArrayList<AvatorBean>>() {
-                                }.getType();
-
-                                ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
-
-                                if (avatorBeen != null && avatorBeen.size() > 0) {
-                                    AvatorBean bean = avatorBeen.get(0);
-                                    Intent orderIntent = new Intent(OrderImmediatelyActivity.this, OrderGenerationActivity.class);
-                                    orderIntent.putExtra("avator", bean);
-                                    orderIntent.putExtra("type", mFrome);
-                                    startActivity(orderIntent);
-
-                                    finish();
-                                }
-
-                            }
-
-
+                        map.put("member_uid", Utils.getloginuid());
+                        String cunt = mTvCount.getText().toString();
+                        map.put("Count", cunt);
+                        map.put("goods_uid", mDetail.getG_UID());
+                        String id = "";
+                        if (mDetail.getMsp() != null) {
+                            id = mDetail.getMsp().getPS_UniqueID();
                         }
+                        map.put("goods_ps_uid", id);
+                        map.put("goods_id_btn", "");
+                        map.put("Finally_Address_ID", addruid);
+                        String liuyan = mTvLeavemessage.getText().toString();
+                        map.put("liuyan_m", liuyan);
+                        map.put("CarOrBuy", "Buy");
+                        map.put("OrderCate", "购物订单");
+                        map.put("shopcoupon_bymemberlist", couponid);
+                        String jifen = mEtJifen.getText().toString();
+                        map.put("deduction_buy_score_number", jifen);
+                        map.put("see_sell_my_data_mm", "");
+                        map.put("share_uid", "");
+                        map.put("appointment_date", "2017-07-31");
+                        map.put("appointment_time", "");
+                        map.put("yunfei_value_model", "");
+                        String trading = mTvOnline.getText().toString();
+                        map.put("trading_value_model", trading);
+                        String editgoodmoney = mEtGoodmoney.getText().toString();
+                        map.put("edit_goods_single_price_model", editgoodmoney);
 
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
+                        Call<String> orderSubmit = Aplication.mIinterface.orderSubmit(map);
 
-                        }
-                    });
-                } else {
-                    //租赁订单的发起
-                    Map<String, String> map = new LinkedHashMap<>();
-
-                    map.put("member_uid", Utils.getloginuid());
-                    String count = mTvCount.getText().toString();
-                    map.put("rent_count",count); //租赁的数量
-                    map.put("goods_uid", mDetail.getG_UID()); //商品的唯一编号
-                    String psuid = "";
-                    BussnessBean.GoodsSpecificationsBean msp = mDetail.getMsp();
-                    if (msp != null) {
-                        psuid = msp.getPS_UniqueID();
-                    }
-
-                    map.put("goods_ps_uid", psuid);
-                    String liuyan  = mTvLeavemessage.getText().toString();
-                    map.put("liuyan_m", liuyan);
-                    map.put("CarOrBuy", "Buy");
-                    map.put("OrderCate","租赁订单");
-                    map.put("shopcoupon_bymemberlist", couponid);
-                    String jifen = mEtJifen.getText().toString();
-                    if (jifen.length() == 0) {
-                        jifen = "0";
-                    }
-                    map.put("deduction_buy_score_number", jifen);
-                    map.put("change_rent_day_model_v", rentDay);
-
-                    map.put("Finally_Address_ID", addruid);
-                    String trading = mTvOnline.getText().toString();
-                    map.put("trading_pattern", trading);
-                    String goodprice = mTvGoodprice.getText().toString();
-                    map.put("edit_goods_single_price", goodprice);
-                    String rentprice = mTvRentprice.getText().toString();
-                    map.put("edit_rentfirst_price", rentprice);
-                    String rentrewal = mTvRentrewal.getText().toString();
-                    map.put("edit_rentxuzu_price", rentrewal);
+                        orderSubmit.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
 
 
-                    Call<String> call = Aplication.mIinterface.submitRentOrder(map);
+                                String body = response.body();
 
-                    call.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
+                                if (body != null) {
 
+                                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                                    }.getType();
 
-                            String body = response.body();
+                                    ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
 
-                            if (body != null) {
+                                    if (avatorBeen != null && avatorBeen.size() > 0) {
+                                        AvatorBean bean = avatorBeen.get(0);
+                                        Intent orderIntent = new Intent(OrderImmediatelyActivity.this, OrderGenerationActivity.class);
+                                        orderIntent.putExtra("avator", bean);
+                                        orderIntent.putExtra("type", mFrome);
+                                        startActivity(orderIntent);
 
-                                Type type = new TypeToken<ArrayList<AvatorBean>>() {
-                                }.getType();
-
-                                ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
-                                if (avatorBeen != null && avatorBeen.size() > 0) {
-                                    AvatorBean bean = avatorBeen.get(0);
-                                    String retmsg = bean.getRetmsg();
-
-                                    Intent orderIntent = new Intent(OrderImmediatelyActivity.this, OrderGenerationActivity.class);
-                                    orderIntent.putExtra("avator", bean);
-                                    orderIntent.putExtra("type", "rent");
-                                    startActivity(orderIntent);
-
-                                    finish();
+                                        finish();
+                                    }
 
                                 }
 
 
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                            }
+                        });
+                    } else {
+                        //租赁订单的发起
+                        Map<String, String> map = new LinkedHashMap<>();
+
+                        map.put("member_uid", Utils.getloginuid());
+                        String count = mTvCount.getText().toString();
+                        map.put("rent_count", count); //租赁的数量
+                        map.put("goods_uid", mDetail.getG_UID()); //商品的唯一编号
+                        String psuid = "";
+                        BussnessBean.GoodsSpecificationsBean msp = mDetail.getMsp();
+                        if (msp != null) {
+                            psuid = msp.getPS_UniqueID();
+                        }
+
+                        map.put("goods_ps_uid", psuid);
+                        String liuyan = mTvLeavemessage.getText().toString();
+                        map.put("liuyan_m", liuyan);
+                        map.put("CarOrBuy", "Buy");
+                        map.put("OrderCate", "租赁订单");
+                        map.put("shopcoupon_bymemberlist", couponid);
+                        String jifen = mEtJifen.getText().toString();
+                        if (jifen.length() == 0) {
+                            jifen = "0";
+                        }
+                        map.put("deduction_buy_score_number", jifen);
+                        map.put("change_rent_day_model_v", rentDay);
+
+                        map.put("Finally_Address_ID", addruid);
+                        String trading = mTvOnline.getText().toString();
+                        map.put("trading_pattern", trading);
+                        String goodprice = mTvGoodprice.getText().toString();
+                        map.put("edit_goods_single_price", goodprice);
+                        String rentprice = mTvRentprice.getText().toString();
+                        map.put("edit_rentfirst_price", rentprice);
+                        String rentrewal = mTvRentrewal.getText().toString();
+                        map.put("edit_rentxuzu_price", rentrewal);
+
+
+                        Call<String> call = Aplication.mIinterface.submitRentOrder(map);
+
+                        call.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+
+
+                                String body = response.body();
+
+                                if (body != null) {
+
+                                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                                    }.getType();
+
+                                    ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                                    if (avatorBeen != null && avatorBeen.size() > 0) {
+                                        AvatorBean bean = avatorBeen.get(0);
+                                        String retmsg = bean.getRetmsg();
+
+                                        Intent orderIntent = new Intent(OrderImmediatelyActivity.this, OrderGenerationActivity.class);
+                                        orderIntent.putExtra("avator", bean);
+                                        orderIntent.putExtra("type", "rent");
+                                        startActivity(orderIntent);
+
+                                        finish();
+
+                                    }
+
+
+                                }
+
 
                             }
 
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                            }
+                        });
 
 
+                    }
+                } else if (s5.equals("提交预约")) {
+                    //提交预约的方法
+                    String retime = mTvRetime.getText().toString();
+                    if (!retime.equals("请选择预约时段")) {
+
+                        Map<String, String> map = new LinkedHashMap<>();
+                        map.put("member_uid", Utils.getloginuid());
+                        String cunt = mTvCount.getText().toString();
+                        map.put("Count", cunt);
+                        map.put("goods_uid", mDetail.getG_UID());
+                        String id = "";
+                        if (mDetail.getMsp() != null) {
+                            id = mDetail.getMsp().getPS_UniqueID();
+                        }
+                        map.put("goods_ps_uid", id);
+                        map.put("goods_id_btn", "");
+                        map.put("Finally_Address_ID", addruid);
+                        String liuyan = mTvLeavemessage.getText().toString();
+                        if (liuyan.equals("给卖家的补充说明都可以写在这里")) {
+                            liuyan = "  ";
+                        }
+                        map.put("liuyan_m", liuyan);
+                        map.put("CarOrBuy", "Buy");
+                        map.put("OrderCate", "购物订单");
+                        map.put("shopcoupon_bymemberlist", couponid);
+                        String jifen = mEtJifen.getText().toString();
+                        map.put("deduction_buy_score_number", jifen);
+                        map.put("see_sell_my_data_mm", "");
+                        map.put("share_uid", "");
+                        final String toreyear = mTvReyear.getText().toString().replace("年", "");
+                        String toremonth = mTvRemonth.getText().toString().replace("月", "");
+                        String toreday = mTvReday.getText().toString().replace("日", "");
+
+                        final String date = toreyear + "-" + toremonth + "-" + toreday;
+                        map.put("appointment_date", date);
+
+                        Map<String, String> time = new LinkedHashMap<>();
+                        time.put("time", "");
+                        for (ReservationTimeBean bean : mChecktimedata) {
+                            String time1 = time.get("time");
+
+                            if (time1.isEmpty()) {
+                                time.put("time", bean.getTime());
+                            } else {
+                                time.put("time", time1 + "," + bean.getTime());
+
+                            }
 
                         }
 
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
+                        map.put("appointment_time", time.get("time"));
+                        map.put("yunfei_value_model", "");
+                        String trading = mTvOnline.getText().toString();
+                        map.put("trading_value_model", trading);
+                        String editgoodmoney = mEtGoodmoney.getText().toString();
+                        String s4 = mTvAllprice.getText().toString();
+                        map.put("edit_goods_single_price_model", s4);
 
-                        }
-                    });
+                        Log.i("zc", "onViewClicked:  看看数据" + map.toString());
 
+
+                        Call<String> orderSubmit = Aplication.mIinterface.orderSubmit(map);
+
+                        orderSubmit.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                Log.i("zc", "onResponse:  看看发送的请求是什么返回" + call.request().toString());
+                                String body = response.body();
+                                if (body != null) {
+                                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                                    }.getType();
+
+                                    ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+
+                                    if (avatorBeen != null && avatorBeen.size() > 0) {
+                                        AvatorBean bean = avatorBeen.get(0);
+                                        Log.i("zc", "onResponse:  看看数据" + bean.getRetmsg());
+
+                                        Intent orderIntent = new Intent(OrderImmediatelyActivity.this, OrderGenerationActivity.class);
+                                        orderIntent.putExtra("avator", bean);
+                                        orderIntent.putExtra("type", "yuyue");
+                                        startActivity(orderIntent);
+
+                                        finish();
+
+                                    }
+
+
+
+                                }
+
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                            }
+                        });
+
+
+
+
+
+
+
+
+
+
+                    } else {
+                        MyToast.show("请先选择了预约时段再下单",R.mipmap.com_icon_cross_w);
+                        mTvSubmit.setClickable(false);
+                        mTvSubmit.setEnabled(false);
+                    }
 
 
                 }
@@ -1275,9 +1451,221 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
 
                 break;
+            case R.id.ll_reyear:
+                //预约的年份
+
+
+                int year = mNow.get(Calendar.YEAR);
+
+                final ArrayList<String> reyear = new ArrayList<>();
+                for (int i1 = year; i1 < year + 3; i1++) {
+                    reyear.add(i1 + "年");
+                }
+
+                final PopupWindow reYearWindow = new PopupWindow(OrderImmediatelyActivity.this);
+                final View reYearpop = View.inflate(OrderImmediatelyActivity.this, R.layout.format_popwindow, null);
+                RecyclerView rvReYear = (RecyclerView) reYearpop.findViewById(R.id.rv_format);
+                rvReYear.setLayoutManager(new LinearLayoutManager(OrderImmediatelyActivity.this));
+                FormartAdapter rvReYeardapter = new FormartAdapter(R.layout.item_location_popr, reyear);
+                rvReYeardapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        String s4 = reyear.get(position);
+                        mTvReyear.setText(s4);
+                        reYearWindow.dismiss();
+                    }
+                });
+                rvReYear.setAdapter(rvReYeardapter);
+                reYearWindow.setContentView(reYearpop);
+
+                reYearWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+                int i2 = Utils.dp2px(100);
+                reYearWindow.setWidth(i2);
+                reYearWindow.setTouchable(true);
+                reYearWindow.setOutsideTouchable(true);
+
+                reYearWindow.setBackgroundDrawable(OrderImmediatelyActivity.this.getResources().getDrawable(R.drawable.home_toppop_bg));
+                reYearWindow.showAsDropDown(mLlReyear);
+
+
+                break;
+            case R.id.ll_remonth:
+                //预约的月份
+
+
+                int start = 0;
+                int month = mNow.get(Calendar.MONTH);
+                int year1 = mNow.get(Calendar.YEAR);
+                String s4 = mTvReyear.getText().toString().replace("年","");
+                int myyear = Integer.valueOf(s4);
+                if (myyear == year1) {
+                    start =  month;
+                } else {
+                    start = 1;
+                }
+                mTvRemonth.setText(start + "月");
+
+                final ArrayList<String> remonth = new ArrayList<>();
+                for (int i1 = start; i1 < 13; i1++) {
+                    remonth.add(i1 + "月");
+                }
+
+                final PopupWindow reMonthWindow = new PopupWindow(OrderImmediatelyActivity.this);
+                final View reMonthpop = View.inflate(OrderImmediatelyActivity.this, R.layout.format_popwindow, null);
+                RecyclerView rvReMoonth = (RecyclerView) reMonthpop.findViewById(R.id.rv_format);
+                rvReMoonth.setLayoutManager(new LinearLayoutManager(OrderImmediatelyActivity.this));
+                FormartAdapter rvReMonthdapter = new FormartAdapter(R.layout.item_location_popr, remonth);
+                rvReMonthdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        String s4 = remonth.get(position);
+                        mTvRemonth.setText(s4);
+                        reMonthWindow.dismiss();
+                    }
+                });
+                rvReMoonth.setAdapter(rvReMonthdapter);
+                reMonthWindow.setContentView(reMonthpop);
+
+                reMonthWindow.setHeight(Utils.dp2px(300));
+
+                reMonthWindow.setWidth(Utils.dp2px(100));
+                reMonthWindow.setTouchable(true);
+                reMonthWindow.setOutsideTouchable(true);
+
+                reMonthWindow.setBackgroundDrawable(OrderImmediatelyActivity.this.getResources().getDrawable(R.drawable.home_toppop_bg));
+                reMonthWindow.showAsDropDown(mLlRemonth);
+
+
+
+
+                break;
+            case R.id.ll_reday:
+                //预约的天数
+
+                // 先根据年月 获取当月的天数是最大的天数
+                String year2 = mTvReyear.getText().toString().replace("年", "");
+                String month2 = mTvRemonth.getText().toString().replace("月", "");
+                Integer yer = Integer.valueOf(year2);
+                Integer mon = Integer.valueOf(month2);
+                int toyer = mNow.get(Calendar.YEAR);
+                int tomon = mNow.get(Calendar.MONTH) + 1;
+                int day = getMonthDay(yer, mon);
+                int startday = 1;
+                final ArrayList<String> reday = new ArrayList<>();
+
+                //获取到当月的最大天数 然后判断是不是当月  如果是 就从当前的日往后选择 如果不是 就显示整个月的日期
+                if (toyer == yer &&  tomon == mon) {
+                    //说明是今年的这个月
+                    startday = today;
+
+                }
+
+                for (int iday = startday; iday <= day; iday++) {
+                    reday.add(iday + "日");
+
+                }
+
+                final PopupWindow reDayWindow = new PopupWindow(OrderImmediatelyActivity.this);
+                final View reDaythpop = View.inflate(OrderImmediatelyActivity.this, R.layout.format_popwindow, null);
+                RecyclerView rvReDay = (RecyclerView) reDaythpop.findViewById(R.id.rv_format);
+                rvReDay.setLayoutManager(new LinearLayoutManager(OrderImmediatelyActivity.this));
+                FormartAdapter rvReDayapter = new FormartAdapter(R.layout.item_location_popr, reday);
+                rvReDayapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        String s4 = reday.get(position);
+                        mTvReday.setText(s4);
+                        reDayWindow.dismiss();
+                    }
+                });
+                rvReDay.setAdapter(rvReDayapter);
+                reDayWindow.setContentView(reDaythpop);
+
+                reDayWindow.setHeight(Utils.dp2px(300));
+
+                reDayWindow.setWidth(Utils.dp2px(100));
+                reDayWindow.setTouchable(true);
+                reDayWindow.setOutsideTouchable(true);
+
+                reDayWindow.setBackgroundDrawable(OrderImmediatelyActivity.this.getResources().getDrawable(R.drawable.home_toppop_bg));
+                reDayWindow.showAsDropDown(mLlReday);
+
+                break;
+            case R.id.ll_reservationtime:
+                mTvSubmit.setClickable(true);
+                mTvSubmit.setEnabled(true);
+                //获取当前选中的时间
+                final String toreyear = mTvReyear.getText().toString().replace("年", "");
+                String toremonth = mTvRemonth.getText().toString().replace("月", "");
+                String toreday = mTvReday.getText().toString().replace("日", "");
+
+                final String date = toreyear + "-" + toremonth + "-" + toreday;
+                mTimeData = new ArrayList<>();
+                Call<String> serverTimeLis = Aplication.mIinterface.getSercerTimeList(mDetail.getG_UID(), date);
+
+                serverTimeLis.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Log.i("zc", "onResponse:   看看发送的书u" + call.request().toString());
+
+                        String body = response.body();
+                        if (body != null) {
+                            Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                            }.getType();
+
+                            ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                            if (avatorBeen != null && avatorBeen.size() > 0) {
+                                AvatorBean bean = avatorBeen.get(0);
+                                String retmsg = bean.getRetmsg();
+
+                                String[] split = retmsg.split("\\|");
+                                for (String s : split) {
+                                    //得到显示的时间 价格 是否已预约 时间点值
+                                    String[] split1 = s.split(",");
+                                    mTimeData.add(new ReservationTimeBean(split1[0], split1[1], split1[2], split1[3]));
+                                }
+                                if (mTimeData.size() > 0) {
+                                    Intent reservationintent = new Intent(OrderImmediatelyActivity.this,ReservationTimeActivity.class);
+                                    reservationintent.putExtra("buss", mDetail);
+                                    reservationintent.putParcelableArrayListExtra("data", mTimeData);
+                                    reservationintent.putExtra("date", date);
+                                    reservationintent.putStringArrayListExtra("checkid", checkid);
+                                    startActivityForResult(reservationintent,REQUEST_DATETIME);
+                                }
+
+
+                            }
+
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+
+
+
+
+                break;
+
 
 
         }
+    }
+
+    private int getMonthDay(int integer, int p0) {
+        mNow.set(Calendar.YEAR, integer);
+        mNow.set(Calendar.MONTH, p0 - 1);
+        mNow.set(Calendar.DATE, 1);
+        mNow.roll(Calendar.DATE, -1);
+        int maxDate = mNow.get(Calendar.DATE);
+        mNow.clear();
+        return maxDate;
     }
 
     private void getbuyStyle(String usesheng, String format, String uid) {
@@ -1318,16 +1706,18 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
     }
 
-    private void calculationMoney() {
+    private void calculationMoney(boolean isDate) {
         DecimalFormat df = new DecimalFormat("0.00");
-        String s = mTvGoodprice.getText().toString();
-        Double price = Double.valueOf(s);
-        String s1 = mTvCount.getText().toString();
-        Integer count = Integer.valueOf(s1);
-        singleprice = price;
-        allprice = price * count;
-        mTvAllprice.setText(df.format(allprice));
+        if (!isDate) {
+            String s = mTvGoodprice.getText().toString();
+            Double price = Double.valueOf(s);
+            String s1 = mTvCount.getText().toString();
+            Integer count = Integer.valueOf(s1);
+            singleprice = price;
+            allprice = price * count;
+        }
 
+        mTvAllprice.setText(df.format(allprice));
         String zongyunfei = mTvZongyunfei.getText().toString();
         Double yunfei = Double.valueOf(zongyunfei);
 
@@ -1341,7 +1731,6 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
         double pay = allprice + yunfei - jifen - youhui;
 
         mTvPayprice.setText(df.format(pay));
-
         mTvPay.setText(df.format(pay));
 
 
@@ -1371,13 +1760,53 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_LEAVEMESSAGE && resultCode == 1) {
             //卖家l留言
-
             String message = data.getStringExtra("message");
-
             mTvLeavemessage.setText(message);
 
+        }
+
+
+        if (requestCode == REQUEST_DATETIME && resultCode == 2) {
+            checkid.clear();
+
+            //获取到了预约的信息
+            Double price = 0.00;
+            Map<String, String> map = new LinkedHashMap<>();
+             map.put("time", "");
+            mChecktimedata = data.getParcelableArrayListExtra("checkdata");
+            mTvCount.setText(mChecktimedata.size() + "");
+            mTvCarcount.setText("x" + mChecktimedata.size());
+
+            for (ReservationTimeBean bean : mChecktimedata) {
+                for (ReservationTimeBean timeBean : mTimeData) {
+                    timeBean.setIscheck(false);
+                    if (timeBean.getTimeid().equals(bean.getTimeid()) ) {
+                        timeBean.setIscheck(true);
+                        checkid.add(bean.getTimeid());
+                    }
+
+                }
+
+
+                Double aDouble = Double.valueOf(bean.getPrice());
+                price = price + aDouble;
+                String time = map.get("time");
+                if (time.isEmpty()) {
+                    map.put("time", bean.getTime());
+                } else {
+                    map.put("time", time + "，" + bean.getTime());
+                }
+
+            }
+
+            mTvRetime.setText(map.get("time"));
+
+            allprice = price;
+            calculationMoney(true);
 
         }
+
+
 
 
     }

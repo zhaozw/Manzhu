@@ -436,6 +436,25 @@ public interface APIinterface {
     Call<String> submitRentOrder(@QueryMap Map<String, String> map);
 
 
+    /***
+     * 获取预约商品能够预约的时间段
+     * @param goods_uid
+     * @param date_value
+     * @return
+     */
+    @GET("get_server_appointment_timelist_function")
+    Call<String> getSercerTimeList(@Query("goods_uid") String goods_uid, @Query("date_value") String date_value);
+
+
+    /**
+     * 检查要预约的时段　　是否被别人占用
+     * @param goods_uid
+     * @param date_value
+     * @param time_value
+     * @return
+     */
+    @GET("get_checkservertimeExitOrder_function")
+    Call<String> checkSercerTimeExit(@Query("goods_uid") String goods_uid, @Query("date_value") String date_value, @Query("time_value") String time_value);
 
 
 
