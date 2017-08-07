@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/threebackground"
+    android:orientation="vertical"
+    tools:context="com.zpfan.manzhu.EditPassWordActivity">
+
+    <com.zpfan.manzhu.myui.TopLin
+        app:toptext="管理密码"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:background="@color/bootmbc"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <LinearLayout
+            android:id="@+id/ll_loginpw"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_loginpw"
+            android:src="@mipmap/com_icon_pw_login"
+            android:layout_width="17.5dp"
+            android:layout_height="17.5dp"/>
+
+        <TextView
+            android:id="@+id/tv_loginpw"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/maintextcolor"
+            android:textSize="12sp"
+            android:text="登陆密码"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+        <View
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/stronglin"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:id="@+id/ll_tradpw"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_tradpw"
+                android:layout_width="17.5dp"
+                android:layout_height="17.5dp"
+                android:src="@mipmap/com_icon_pw_trade_ept"/>
+
+            <TextView
+                android:id="@+id/tv_tradpw"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="12sp"
+                android:text="交易密码"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/ll_nowpw"
+        android:visibility="visible"
+        android:layout_marginTop="7.5dp"
+        android:background="@color/bootmbc"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/tv_pwtype"
+            android:textColor="@color/maintextcolor"
+            android:text="当前登陆密码"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_nowpw"
+            android:text="1*********7"
+            android:textSize="14sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+        
+        <LinearLayout
+            android:id="@+id/ll_editpw"
+            android:gravity="center_vertical"
+            android:background="@drawable/location_button_bg2"
+            android:layout_width="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:orientation="horizontal"
+            android:layout_height="25dp">
+            
+            <ImageView
+                android:src="@mipmap/com_icon_edit_w"
+                android:layout_width="15dp"
+                android:layout_height="15dp"/>
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/buttontext"
+                android:text="修改"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            
+        </LinearLayout>
+        
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_changepw"
+        android:orientation="vertical"
+        android:background="@color/bootmbc"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginTop="7.5dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/ll_oldpw"
+            android:background="@drawable/order_edit_money"
+            android:layout_width="230dp"
+            android:layout_height="40dp">
+
+            <EditText
+                android:id="@+id/ed_oldpw"
+                android:textSize="14sp"
+                android:paddingLeft="7.5dp"
+                android:paddingRight="7.5dp"
+                android:hint="请输入旧密码"
+                android:textColorHint="@color/secondtextcolor"
+                android:background="@null"
+                android:textCursorDrawable="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_newpw"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/order_edit_money"
+            android:layout_width="230dp"
+            android:layout_height="40dp">
+
+            <EditText
+                android:id="@+id/et_newpw"
+                android:textSize="14sp"
+                android:paddingLeft="7.5dp"
+                android:paddingRight="7.5dp"
+                android:hint="请输入新密码（第一次）"
+                android:textColorHint="@color/secondtextcolor"
+                android:background="@null"
+                android:textCursorDrawable="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_newpw2"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/order_edit_money"
+            android:layout_width="230dp"
+            android:layout_height="40dp">
+
+            <EditText
+                android:id="@+id/et_newpw2"
+                android:textSize="14sp"
+                android:paddingLeft="7.5dp"
+                android:paddingRight="7.5dp"
+                android:hint="请输入新密码（第二次）"
+                android:textColorHint="@color/secondtextcolor"
+                android:background="@null"
+                android:textCursorDrawable="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="15dp"
+            android:background="@color/stronglin"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:text="当前绑定手机"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_marginLeft="12.5dp"
+                android:text="136******48"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+            
+            <TextView
+                android:id="@+id/bt_sendcode"
+                android:textColor="@color/buttontext"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:gravity="center"
+                android:text="发送验证码"
+                android:background="@drawable/location_button_bg2"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"/>
+            
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="15dp"
+            android:background="@color/stronglin"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:background="@drawable/order_edit_money"
+            android:layout_width="155dp"
+            android:layout_height="40dp">
+
+            <EditText
+                android:id="@+id/et_verification"
+                android:textSize="14sp"
+                android:paddingLeft="7.5dp"
+                android:paddingRight="7.5dp"
+                android:hint="填写收到的验证码"
+                android:textColorHint="@color/secondtextcolor"
+                android:background="@null"
+                android:textCursorDrawable="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_kefu"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="*如忘记旧密码或修改遇到问题，请立即"
+            android:textColor="@color/maintextcolor"
+            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_kefu"
+            android:layout_marginLeft="5dp"
+            android:text="@string/kefu"
+            android:textColor="@color/duojiage"
+            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+    <Button
+
+        android:visibility="gone"
+        android:id="@+id/bt_import"
+        android:textSize="15sp"
+        android:text="提 交"
+        android:textColor="@color/buttontext"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/message_leve_bg"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"/>
+
+
+
+
+
+</LinearLayout>

@@ -457,5 +457,27 @@ public interface APIinterface {
     Call<String> checkSercerTimeExit(@Query("goods_uid") String goods_uid, @Query("date_value") String date_value, @Query("time_value") String time_value);
 
 
+    /**
+     * 订单余额支付
+     * @param pay_uid
+     * @param pay_cate
+     * @param m_password
+     * @param member_uid
+     * @return
+     */
+    @GET("opera_balancepay_function")
+    Call<String> operabalancepay(@Query("pay_uid") String pay_uid, @Query("pay_cate") String pay_cate, @Query("m_password") String m_password, @Query("member_uid") String member_uid);
+
+
+    /**
+     * 获取用户是否设置了支付密码
+     * @param m_uid
+     * @return
+     */
+    @GET("get_memberset_paypassword")
+    Call<String> getmemberoaypassword(@Query("m_uid") String m_uid);
+
+
+
 
 }

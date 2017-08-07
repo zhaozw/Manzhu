@@ -1407,11 +1407,6 @@ public class IdleDetailActivity extends AppCompatActivity {
                         intent.putExtra("type", "server");
                         startActivity(intent);
 
-
-
-
-
-
                     }
                 } else {
                     startActivity(new Intent(IdleDetailActivity.this, LoginActivity.class));

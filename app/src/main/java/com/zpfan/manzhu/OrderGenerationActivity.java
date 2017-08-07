@@ -5,11 +5,23 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -20,6 +32,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.OrderGenerationBean;
 import com.zpfan.manzhu.myui.EaseActivity;
+import com.zpfan.manzhu.myui.MyToast;
 import com.zpfan.manzhu.utils.Utils;
 
 import java.lang.reflect.Type;
@@ -97,8 +110,26 @@ public class OrderGenerationActivity extends AppCompatActivity {
     TextView mTvRetime;
     @BindView(R.id.tv_redetime)
     TextView mTvRedetime;
+    @BindView(R.id.ll_allpay)
+    LinearLayout mLlAllpay;
     private DecimalFormat mDf;
     private OrderGenerationBean mBean1;
+    private PopupWindow mPaywindow;
+    private TextView mGoodprice;
+    private TextView mTvgoodname;
+    private TextView mTvallgoodprice;
+    private TextView mTvyue;
+    private TextView mTvalipay;
+    private TextView mTvyueprice;
+    private Button mBtimport;
+    private ImageView mIvyue;
+    private ImageView mIvalipay;
+    private Double mYueprice;
+    private boolean isalipay = false;
+    private String payuid = "";
+    private boolean issetpw = true;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,11 +147,14 @@ public class OrderGenerationActivity extends AppCompatActivity {
         AvatorBean avator = intent.getParcelableExtra("avator");
         String type = intent.getStringExtra("type");
 
-
+        initPop();
 
         //发送请求去获取订单的详情
         if (avator.isRet()) {
             getorderDetil(avator.getRetmsg());
+            //发送请求去获取用户的余额
+            getuserYue();
+
         } else {
             //下单失败的界面
             mSvIsret.setVisibility(View.GONE);
@@ -135,6 +169,8 @@ public class OrderGenerationActivity extends AppCompatActivity {
         } else if (type.equals("new")) {
             //新商品的界面
             mTvDetil.setText("在完成支付前，您和卖家均可在【个人中心 - 我买到的（我卖出的）】中修改本订单信息。");
+            //最后一个按钮 变成立即支付的按钮  点击以后 执行立即支付的方法
+            mBtUsercenter.setText("立即付款");
 
         } else if (type.equals("server")) {
             //服务的界面
@@ -154,11 +190,129 @@ public class OrderGenerationActivity extends AppCompatActivity {
             mTvGoodformat.setVisibility(View.GONE);
             mTvRetime.setVisibility(View.VISIBLE);
             if (mBean1 != null) {
-                mTvRetime.setText("预约时间："+ mBean1.getO_ReturnDate().substring(0,10).replace("-"," - "));
-                mTvRedetime.setText(mBean1.getO_ExtendLeaseMessage().replace(",","，"));
+                mTvRetime.setText("预约时间：" + mBean1.getO_ReturnDate().substring(0, 10).replace("-", " - "));
+                mTvRedetime.setText(mBean1.getO_ExtendLeaseMessage().replace(",", "，"));
             }
         }
 
+        isUserSetTrapw();
+
+
+
+
+
+
+    }
+
+    /**
+     * 获取用户是否设置了交易密码
+     */
+    private void isUserSetTrapw() {
+        Call<String> getmemberoaypassword = Aplication.mIinterface.getmemberoaypassword(Utils.getloginuid());
+        getmemberoaypassword.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.i("zc", "onResponse:   看看数据" + call.request().toString());
+                String body = response.body();
+
+                if (body != null) {
+                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                    }.getType();
+
+                    ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+
+                    if (avatorBeen != null && avatorBeen.size() > 0) {
+                        AvatorBean bean = avatorBeen.get(0);
+                        if (bean.getRetmsg().equals("False")) {
+                            //没有设置交易密码
+                            issetpw = false;
+                        } else {
+                            //有设置交易密码
+                            issetpw = true;
+
+                        }
+
+
+                    }
+
+
+
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
+
+
+    }
+
+    private void getuserYue() {
+
+        Call<String> getmembermoneyintegral = Aplication.mIinterface.getmembermoneyintegral(Utils.getloginuid(), "余额");
+
+        getmembermoneyintegral.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.i("zc", "onResponse:   看看请求" + call.request().toString());
+                String body = response.body();
+
+                if (body != null) {
+                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                    }.getType();
+
+                    ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                    if (avatorBeen != null && avatorBeen.size() > 0) {
+
+                        AvatorBean bean = avatorBeen.get(0);
+                        String retmsg = bean.getRetmsg();
+
+                        if (bean.isRet()) {
+                            //显示余额  如果余额大于要支付的价钱，那么就默认用余额支付， 如果余额小
+                            SpannableString yue = new SpannableString("（您当前的余额为：¥ " + retmsg + "）");
+
+                            yue.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.pricetextcolor)), 9, yue.length()-1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                            mTvyueprice.setText(yue);
+                            mYueprice = Double.valueOf(retmsg);
+
+
+
+
+
+                        } else {
+                            //设置余额为0
+
+
+
+                        }
+
+
+                    }
+
+
+
+
+
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
 
 
 
@@ -192,8 +346,8 @@ public class OrderGenerationActivity extends AppCompatActivity {
 
                             ArrayList<OrderGenerationBean> generationBeen = Utils.gson.fromJson(substring, type1);
                             mBean1 = generationBeen.get(0);
-                            mTvRetime.setText("预约时间："+ mBean1.getO_ReturnDate().substring(0,10).replace("-"," - "));
-                            mTvRedetime.setText(mBean1.getO_ExtendLeaseMessage().replace(",","，"));
+                            mTvRetime.setText("预约时间：" + mBean1.getO_ReturnDate().substring(0, 10).replace("-", " - "));
+                            mTvRedetime.setText(mBean1.getO_ExtendLeaseMessage().replace(",", "，"));
                             mTvOrdernumber.setText(mBean1.getO_UID());
                             String pattern = mBean1.getO_TradingPattern();
                             mTvBuystyle.setText(pattern);
@@ -201,8 +355,11 @@ public class OrderGenerationActivity extends AppCompatActivity {
                                 mTvStyle.setText("（买家付款后卖家即得到货款）");
                             }
 
+                            payuid = mBean1.getO_UID();
+
                             mTvOrdertime.setText(mBean1.getO_OrderTime().replace("-", " -  "));
                             mTvShopname.setText(mBean1.getStore_CN());
+                            mTvgoodname.setText(mBean1.getGoodslist_arry().get(0).getGoods_title());
                             mTvUserlv.setText("Lv." + mBean1.getStore_Level());
                             OrderGenerationBean.GoodslistArryBean goodslistArryBean = mBean1.getGoodslist_arry().get(0);
                             mTvGoodtitle.setText(goodslistArryBean.getGoods_title());
@@ -227,8 +384,30 @@ public class OrderGenerationActivity extends AppCompatActivity {
 
                             String all = mBean1.getO_PayMoney() + "";
                             Double allmoney = Double.valueOf(all);
+                            mGoodprice.setText(mDf.format(allmoney));
+                            mTvallgoodprice.setText(mDf.format(allmoney));
+                            mBtimport.setText("确认支付¥ " + mDf.format(allmoney));
+
+                            if (mYueprice >= allmoney) {
+                                //余额大于要支付的金额， 就用余额支付
+
+                                mIvyue.setImageResource(R.mipmap.com_icon_baln);
+                                mTvyue.setTextColor(getResources().getColor(R.color.maintextcolor));
+                                mIvalipay.setImageResource(R.mipmap.com_icon_alipay_ept);
+                                mTvalipay.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                            } else {
+
+                                mIvyue.setImageResource(R.mipmap.com_icon_baln_ept);
+                                mTvyue.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                                mIvalipay.setImageResource(R.mipmap.com_icon_alipay);
+                                mTvalipay.setTextColor(getResources().getColor(R.color.maintextcolor));
+
+
+                            }
+
 
                             mTvAllpay.setText(mDf.format(allmoney));
+
 
                         }
 
@@ -259,7 +438,18 @@ public class OrderGenerationActivity extends AppCompatActivity {
                 startActivity(new Intent(OrderGenerationActivity.this, IdleActivity.class));
                 break;
             case R.id.bt_usercenter:
-                startActivity(new Intent(OrderGenerationActivity.this, UserCenterActivity.class));
+                String s = mBtUsercenter.getText().toString();
+                if (s.equals("个人中心")) {
+                    //当上面显示的字是个人中心的时候 去个人中心
+
+                    startActivity(new Intent(OrderGenerationActivity.this, UserCenterActivity.class));
+                } else if (s.equals("立即付款")) {
+                    //当字是立即支付的时候  执行立即支付的操作
+
+                    getuserYue();
+                    payNow();
+                }
+
 
                 break;
             case R.id.ll_message:
@@ -276,5 +466,217 @@ public class OrderGenerationActivity extends AppCompatActivity {
 
                 break;
         }
+    }
+
+    private void payNow() {
+        WindowManager.LayoutParams lp = OrderGenerationActivity.this.getWindow()
+                .getAttributes();
+        lp.alpha = 0.4f;
+        OrderGenerationActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        OrderGenerationActivity.this.getWindow().setAttributes(lp);
+
+        mPaywindow.showAtLocation(mBtUsercenter,Gravity.BOTTOM,0,0 );
+
+    }
+
+    private void initPop() {
+        mPaywindow = new PopupWindow(OrderGenerationActivity.this);
+        View inflate = View.inflate(OrderGenerationActivity.this, R.layout.checkout_counter_pop, null);
+        mGoodprice = (TextView) inflate.findViewById(R.id.tv_goodprice);
+        mTvgoodname = (TextView) inflate.findViewById(R.id.tv_goodname);
+        mTvallgoodprice = (TextView) inflate.findViewById(R.id.tv_allgoodprice);
+        mTvyue = (TextView) inflate.findViewById(R.id.tv_yue);
+        mTvalipay = (TextView) inflate.findViewById(R.id.tv_alipay);
+        mTvyueprice = (TextView) inflate.findViewById(R.id.tv_yueprice);
+
+        mBtimport = (Button) inflate.findViewById(R.id.bt_import);
+        final Button  btcancelpay = (Button) inflate.findViewById(R.id.bt_cancelpay);
+        final Button btsurepay = (Button) inflate.findViewById(R.id.bt_surepay);
+
+
+        mIvyue = (ImageView) inflate.findViewById(R.id.iv_yue);
+        mIvalipay = (ImageView) inflate.findViewById(R.id.iv_alipay);
+        ImageView  ivclean = (ImageView) inflate.findViewById(R.id.iv_clean);
+
+        final LinearLayout llyuepayh = (LinearLayout) inflate.findViewById(R.id.ll_yuepay);
+        final LinearLayout llalipay = (LinearLayout) inflate.findViewById(R.id.ll_alipay);
+        final LinearLayout llpay = (LinearLayout) inflate.findViewById(R.id.ll_pay);
+
+        final EditText etpassword = (EditText) inflate.findViewById(R.id.rt_password);
+        final View strongline = inflate.findViewById(R.id.strongline);
+        final TextView tvsetpaypw = (TextView) inflate.findViewById(R.id.tv_setpaypw);
+        String source = "您还未设置交易密码，去设置>";
+        SpannableString string = new SpannableString(source);
+        string.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                //去密码设置的界面
+                Log.i("zc", "onClick:  去设置交易密码");
+                
+
+
+
+            }
+        },10,source.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        string.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.secondtextcolor)), 10, source.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        string.setSpan(new BackgroundColorSpan(getResources().getColor(R.color.transparent)), 10, source.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvsetpaypw.setText(string);
+        tvsetpaypw.setMovementMethod(LinkMovementMethod.getInstance());
+
+        llyuepayh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isalipay = false;
+                mIvyue.setImageResource(R.mipmap.com_icon_baln);
+                mTvyue.setTextColor(getResources().getColor(R.color.maintextcolor));
+                mIvalipay.setImageResource(R.mipmap.com_icon_alipay_ept);
+                mTvalipay.setTextColor(getResources().getColor(R.color.secondtextcolor));
+            }
+        });
+
+        llalipay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isalipay = true;
+                mIvyue.setImageResource(R.mipmap.com_icon_baln_ept);
+                mTvyue.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                mIvalipay.setImageResource(R.mipmap.com_icon_alipay);
+                mTvalipay.setTextColor(getResources().getColor(R.color.maintextcolor));
+
+            }
+        });
+
+
+        mBtimport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isalipay) {
+                    //走支付宝支付的逻辑
+
+
+
+
+                } else {
+                    if (issetpw) {
+                        //走余额的逻辑
+                        llalipay.setVisibility(View.GONE);
+                        llyuepayh.setVisibility(View.GONE);
+                        //然后展示出密码
+                        llpay.setVisibility(View.VISIBLE);
+                        mBtimport.setVisibility(View.GONE);
+                        btcancelpay.setVisibility(View.VISIBLE);
+                        btsurepay.setVisibility(View.VISIBLE);
+                    } else {
+                        //让用户去设置交易密码
+                        llalipay.setVisibility(View.GONE);
+                        llyuepayh.setVisibility(View.GONE);
+
+                        tvsetpaypw.setVisibility(View.VISIBLE);
+                        strongline.setVisibility(View.GONE);
+                    }
+
+                }
+
+
+
+
+            }
+        });
+
+        btcancelpay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //取消以后 把之前的信息  展示回来
+                llalipay.setVisibility(View.VISIBLE);
+                llyuepayh.setVisibility(View.VISIBLE);
+                //然后展示出密码
+                llpay.setVisibility(View.GONE);
+                mBtimport.setVisibility(View.VISIBLE);
+                btcancelpay.setVisibility(View.GONE);
+                btsurepay.setVisibility(View.GONE);
+            }
+        });
+
+        btsurepay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                String s = etpassword.getText().toString();
+                //执行用余额支付的方法
+                Call<String> operabalancepay = Aplication.mIinterface.operabalancepay(payuid, "购物订单", s, Utils.getloginuid());
+
+                operabalancepay.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Log.i("zc", "onResponse:   看看发送的访问" + call.request().toString());
+
+                        String body = response.body();
+                        if (body != null) {
+                            Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                            }.getType();
+
+                            ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+
+                            if (avatorBeen != null && avatorBeen.size() > 0) {
+                                AvatorBean bean = avatorBeen.get(0);
+                                String retmsg = bean.getRetmsg();
+                                if (retmsg.equals("True")) {
+                                    MyToast.show("恭喜你，付款成功",R.mipmap.com_icon_check_w);
+                                    mPaywindow.dismiss();
+                                } else if (retmsg.equals("还未设置支付密码")) {
+                                    //界面变化为 去设置交易密码的界面
+                                    strongline.setVisibility(View.GONE);
+                                    tvsetpaypw.setVisibility(View.VISIBLE);
+
+                                }
+
+                            }
+
+
+
+
+                        }
+
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+
+
+
+            }
+        });
+
+
+
+
+
+
+
+
+        mPaywindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.detail_toppop_bg));
+        mPaywindow.setTouchable(true);
+        mPaywindow.setContentView(inflate);
+        mPaywindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        mPaywindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        mPaywindow.setOutsideTouchable(true);
+        mPaywindow.setFocusable(true);
+        mPaywindow.update();
+
+        mPaywindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = OrderGenerationActivity.this.getWindow()
+                        .getAttributes();
+                lp.alpha = 1f;
+                OrderGenerationActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                OrderGenerationActivity.this.getWindow().setAttributes(lp);
+
+            }
+        });
     }
 }

@@ -707,5 +707,8 @@
     <dimen name="reservation_priceh"> 40dp </dimen>
 
 
+    <!--  收银台图片的高度  147px-->
+    <dimen name="checkout_counterh"> 74dp </dimen>
+
 
 </resources>

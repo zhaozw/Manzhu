@@ -684,6 +684,7 @@
             android:layout_width="match_parent"
             android:layout_height="2.5dp"/>
         <LinearLayout
+            android:id="@+id/ll_allpay"
             android:gravity="center_vertical"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"

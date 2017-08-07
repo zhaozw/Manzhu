@@ -214,7 +214,7 @@ public class ReservationTimeActivity extends AppCompatActivity {
                     if (avatorBeen != null && avatorBeen.size() > 0) {
 
                         AvatorBean bean = avatorBeen.get(0);
-                        Log.i("zc", "onResponse:   Kk shuju " + bean.getRetmsg());
+
                         if (bean.getRetmsg().equals("yes,成功")) {
                             Intent intent = new Intent();
                             intent.putParcelableArrayListExtra("checkdata", checkData);
