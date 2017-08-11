@@ -520,11 +520,6 @@ public class ShopDetialActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
     }
 
     private void getshopGoodList() {
@@ -553,18 +548,48 @@ public class ShopDetialActivity extends AppCompatActivity {
 
                                 Type type1 = new TypeToken<ArrayList<BussnessBean>>() {
                                 }.getType();
-                                ArrayList<BussnessBean> bussnessBeen = Utils.gson.fromJson(substring, type1);
+                                final ArrayList<BussnessBean> bussnessBeen = Utils.gson.fromJson(substring, type1);
                                 if (mGtype.equals("二手商品")) {
                                     IdelAdapter adapter = new IdelAdapter(R.layout.item_idel, bussnessBeen);
+                                    adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                                        @Override
+                                        public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                                            Intent intent = new Intent(ShopDetialActivity.this, IdleDetailActivity.class);
+                                            intent.putExtra("id", bussnessBeen.get(position));
+                                            intent.putExtra("type", "idle");
+                                            startActivity(intent);
+                                        }
+                                    });
                                     mRvGoods.setAdapter(adapter);
 
 
                                 } else if (mGtype.equals("新商品")) {
                                     NewAdapter adapter = new NewAdapter(R.layout.item_new, bussnessBeen);
+                                    adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                                        @Override
+                                        public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                                            Intent intent = new Intent(ShopDetialActivity.this, IdleDetailActivity.class);
+                                            intent.putExtra("id", bussnessBeen.get(position));
+                                            intent.putExtra("type", "new");
+                                            startActivity(intent);
+
+
+                                        }
+                                    });
                                     mRvGoods.setAdapter(adapter);
 
                                 } else if (mGtype.equals("服务")) {
                                     PhotoAdapter adapter = new PhotoAdapter(R.layout.item_photo, bussnessBeen);
+                                    adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                                        @Override
+                                        public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+
+                                            Intent intent = new Intent(ShopDetialActivity.this, IdleDetailActivity.class);
+                                            intent.putExtra("id", bussnessBeen.get(position));
+                                            intent.putExtra("type", "server");
+                                            startActivity(intent);
+                                        }
+                                    });
                                     mRvGoods.setAdapter(adapter);
 
                                 }

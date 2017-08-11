@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -173,14 +172,34 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
                                     // 去加载二手商品
 
                                     mIdleAdapter = new IdelAdapter(R.layout.item_idel, mBussnessBeen);
+                                    mIdleAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                                        @Override
+                                        public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+
+                                            Intent intent = new Intent(SearchResultsActivity.this, IdleDetailActivity.class);
+                                            intent.putExtra("id", mBussnessBeen.get(position));
+                                            intent.putExtra("type", "idle");
+                                            startActivity(intent);
+
+
+                                        }
+                                    });
                                     mRvProduct.setAdapter(mIdleAdapter);
 
 
                                 } else if (mMap.get("G_TYPE").equals("新商品")) {
                                     //就去加载新商品
 
-
                                     mNewAdapter = new NewAdapter(R.layout.item_new, mBussnessBeen);
+                                    mNewAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                                        @Override
+                                        public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                                            Intent intent = new Intent(SearchResultsActivity.this, IdleDetailActivity.class);
+                                            intent.putExtra("id", mBussnessBeen.get(position));
+                                            intent.putExtra("type", "new");
+                                            startActivity(intent);
+                                        }
+                                    });
                                     mRvProduct.setAdapter(mNewAdapter);
 
                                 }
