@@ -88,9 +88,6 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
                 .addOnClickListener(R.id.ll_huan);
 
 
-
-
-
         //设置商品的封面
         Glide.with(mContext).load(item.getG_Cover()).into(mBussnessphoto);
 
@@ -111,19 +108,25 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
             //设置要换的东西
             String fk = item.getDemand_FK();
             String[] split = fk.split(",");
+
             if (split.length == 1) {
                 //就显示一个
                 if (split[0].length() > 0) {
-                    helper.setText(R.id.tv_change1, split[0].substring(1)).setText(R.id.tv_more,"");
+                    String[] split1 = split[0].split("\\|");
+                    helper.setText(R.id.tv_change1, split1[2].substring(1) + " | " + split1[3] ).setText(R.id.tv_more,"");
                 }
                 change2.setVisibility(View.GONE);
             } else if (split.length == 2){
                 //就显示两个
-                helper.setText(R.id.tv_change1, split[0]).setText(R.id.tv_change2,split[1].substring(1)).setText(R.id.tv_more,"");
+                String[] split1 = split[0].split("\\|");
+                String[] split2 = split[1].split("\\|");
+                helper.setText(R.id.tv_change1, split1[2].substring(1) + " | " + split1[3]).setText(R.id.tv_change2,split2[2].substring(1) + " | " + split2[3]).setText(R.id.tv_more,"");
 
             } else if (split.length > 2) {
                 //还是显示两个  和等
-                helper.setText(R.id.tv_change1, split[0]).setText(R.id.tv_change2,split[1].substring(1)).setText(R.id.tv_more,"等");
+                String[] split1 = split[0].split("\\|");
+                String[] split2 = split[1].split("\\|");
+                helper.setText(R.id.tv_change1, split1[2].substring(1) + " | " + split1[3]).setText(R.id.tv_change2,split2[2].substring(1) + " | " + split2[3]).setText(R.id.tv_more,"等");
 
             }
 

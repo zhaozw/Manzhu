@@ -198,6 +198,14 @@
         </activity>
         <activity android:name=".EditPassWordActivity">
         </activity>
+        <activity android:name=".PayCompleteActivity">
+        </activity>
+        <activity android:name=".ChangActivity">
+        </activity>
+        <activity android:name=".ShopListActivity">
+        </activity>
+        <activity android:name=".ShopDetialActivity">
+        </activity>
     </application>
 
 </manifest>

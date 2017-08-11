@@ -1,10 +1,15 @@
 package com.zpfan.manzhu.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrator on 2017/7/31 0031.
  */
 
-public class OrderCouponBean {
+public class OrderCouponBean implements Parcelable {
+
+
     /**
      * MC_Cate : 仅购物
      * MC_IsLock : false
@@ -128,4 +133,55 @@ public class OrderCouponBean {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.MC_Cate);
+        dest.writeByte(this.MC_IsLock ? (byte) 1 : (byte) 0);
+        dest.writeString(this.MC_MeetMoney);
+        dest.writeString(this.MC_Number);
+        dest.writeString(this.MC_OverdueTime);
+        dest.writeString(this.MC_PreferentialMoney);
+        dest.writeString(this.MC_Remarks);
+        dest.writeInt(this.MC_ShortestRentDay);
+        dest.writeString(this.MC_Status);
+        dest.writeString(this.MC_StoreUID);
+        dest.writeString(this.Member_UID);
+        dest.writeInt(this.id);
+    }
+
+    public OrderCouponBean() {
+    }
+
+    protected OrderCouponBean(Parcel in) {
+        this.MC_Cate = in.readString();
+        this.MC_IsLock = in.readByte() != 0;
+        this.MC_MeetMoney = in.readString();
+        this.MC_Number = in.readString();
+        this.MC_OverdueTime = in.readString();
+        this.MC_PreferentialMoney = in.readString();
+        this.MC_Remarks = in.readString();
+        this.MC_ShortestRentDay = in.readInt();
+        this.MC_Status = in.readString();
+        this.MC_StoreUID = in.readString();
+        this.Member_UID = in.readString();
+        this.id = in.readInt();
+    }
+
+    public static final Parcelable.Creator<OrderCouponBean> CREATOR = new Parcelable.Creator<OrderCouponBean>() {
+        @Override
+        public OrderCouponBean createFromParcel(Parcel source) {
+            return new OrderCouponBean(source);
+        }
+
+        @Override
+        public OrderCouponBean[] newArray(int size) {
+            return new OrderCouponBean[size];
+        }
+    };
 }

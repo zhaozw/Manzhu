@@ -478,6 +478,79 @@ public interface APIinterface {
     Call<String> getmemberoaypassword(@Query("m_uid") String m_uid);
 
 
+    /**
+     * 更改设置用户的交易密码 或者登陆 密码
+     * @param m_uid
+     * @param updatecate
+     * @param oldpwd
+     * @param newpwd
+     * @param newpwdagain
+     * @param codevalue
+     * @return
+     */
+    @GET("opera_memberupdate_password")
+    Call<String> operaupdatepassword(@Query("m_uid") String m_uid, @Query("updatecate") String updatecate, @Query("oldpwd") String oldpwd, @Query("newpwd") String newpwd, @Query("newpwdagain") String newpwdagain, @Query("codevalue") String codevalue);
+
+
+    /**
+     * 获取支付宝的支付串
+     * @param order_uid
+     * @param pay_cate
+     * @param use_balance_moeny
+     * @param member_uid
+     * @return
+     */
+    @GET("get_orderStr_by_Pay")
+    Call<String> getOrderalipayStr(@Query("order_uid") String order_uid, @Query("pay_cate") String pay_cate, @Query("use_balance_moeny") String use_balance_moeny, @Query("member_uid") String member_uid);
+
+
+    /**
+     * 获取卖家发货天数
+     * @param obj_typevalue
+     * @return
+     */
+    @GET("get_systemrelated_value")
+    Call<String> getShipDay(@Query("obj_typevalue") String obj_typevalue);
+
+    /**
+     * 交换订单的发起
+     * @param member_uid
+     * @param goods_uid
+     * @param to_seller_message
+     * @param me_want_have_thisgoods
+     * @param use_thisgoods_change
+     * @return
+     */
+    @GET("SubmitOrder_Change")
+    Call<String> submitorderChange(@Query("member_uid") String member_uid, @Query("goods_uid") String goods_uid, @Query("to_seller_message") String to_seller_message, @Query("me_want_have_thisgoods") String me_want_have_thisgoods, @Query("use_thisgoods_change")String use_thisgoods_change);
+
+
+    /**
+     * 获取店铺列表
+     * @param Page
+     * @param busniess_cate
+     * @param busniess_shoptype
+     * @param keyword
+     * @param this_lochost_cer
+     * @param this_cashdeposit_cer
+     * @param this_blueV_cer
+     * @return
+     */
+    @GET("getshoplist")
+    Call<String> getshoplist(@Query("Page")String Page, @Query("busniess_cate") String busniess_cate, @Query("busniess_shoptype") String busniess_shoptype
+            , @Query("keyword") String keyword, @Query("this_lochost_cer") String this_lochost_cer, @Query("this_cashdeposit_cer") String this_cashdeposit_cer
+            , @Query("this_blueV_cer") String this_blueV_cer,@Query("sort_type") String sort_type);
+
+
+    /**
+     * 获取店铺的商品
+     * @param Page
+     * @param member_uid
+     * @param G_Type
+     * @return
+     */
+    @GET("getgoodslist_byshopmodel")
+    Call<String> getgoodlistbyshop(@Query("Page") String Page, @Query("member_uid") String member_uid, @Query("G_Type") String G_Type);
 
 
 }

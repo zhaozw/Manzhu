@@ -67,6 +67,7 @@ public class OrderSureActivity extends AppCompatActivity {
     private String locationid = "";
     private EditText mEtjifen;
     private String mBuystyle;
+    private String mType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,15 +87,12 @@ public class OrderSureActivity extends AppCompatActivity {
         View headview = View.inflate(this, R.layout.rv_order_sure_head, null);
         mRvOrdersure.setLayoutManager(new LinearLayoutManager(this));
         Intent intent = getIntent();
-        String type = intent.getStringExtra("type");
+        mType = intent.getStringExtra("type");
 
 
+        mMorderlist = intent.getParcelableArrayListExtra("shopcat");
 
-
-
-        if (type.equals("sopcart")) {
-            mMorderlist = intent.getParcelableArrayListExtra("shopcat");
-
+        if (mMorderlist != null) {
             for (ShopCartbean.CarshoplistBean bean : mMorderlist) {
                 double allweight = 0;
                 String uid = "";
@@ -110,9 +108,10 @@ public class OrderSureActivity extends AppCompatActivity {
 
 
             }
+        }
 
 
-            mAdapter = new OrderSureAdapter(R.layout.item_ordersure, mMorderlist, new EditListener() {
+        mAdapter = new OrderSureAdapter(R.layout.item_ordersure, mMorderlist, new EditListener() {
                 @Override
                 public void edit(ArrayList<ShopCartbean.CarshoplistBean.CargoodslistBean> checeGood) {
                     initFootView();
@@ -243,7 +242,7 @@ public class OrderSureActivity extends AppCompatActivity {
 
                                     Intent orderIntent = new Intent(OrderSureActivity.this,ShopCartOrderGeneraActivity.class);
                                     orderIntent.putExtra("avator", bean);
-                                    orderIntent.putExtra("type", "idle");
+                                    orderIntent.putExtra("type", mType);
                                     startActivity(orderIntent);
                                     finish();
                                 }
@@ -264,7 +263,7 @@ public class OrderSureActivity extends AppCompatActivity {
 
                 }
             });
-        }
+
 
     }
 

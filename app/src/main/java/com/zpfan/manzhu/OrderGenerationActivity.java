@@ -3,6 +3,8 @@ package com.zpfan.manzhu;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
@@ -24,7 +26,9 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alipay.sdk.app.PayTask;
 import com.bumptech.glide.Glide;
 import com.google.gson.reflect.TypeToken;
 import com.hyphenate.chat.EMMessage;
@@ -32,12 +36,13 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.OrderGenerationBean;
 import com.zpfan.manzhu.myui.EaseActivity;
-import com.zpfan.manzhu.myui.MyToast;
+import com.zpfan.manzhu.utils.PayResult;
 import com.zpfan.manzhu.utils.Utils;
 
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +53,7 @@ import retrofit2.Response;
 
 public class OrderGenerationActivity extends AppCompatActivity {
 
+    private static final int SDK_PAY_FLAG = 30;
     @BindView(R.id.bt_backhome)
     TextView mBtBackhome;
     @BindView(R.id.bt_backgood)
@@ -128,6 +134,31 @@ public class OrderGenerationActivity extends AppCompatActivity {
     private boolean isalipay = false;
     private String payuid = "";
     private boolean issetpw = true;
+    private String paystr = "";
+    private String mfromType;
+    private Handler mHandler =  new Handler() {
+        public void handleMessage(Message msg) {
+            PayResult result = new PayResult((Map<String, String>) msg.obj);
+
+            if (result.getResultStatus().equals("9000")) {
+                //说明支付成功
+                Intent intent = new Intent(OrderGenerationActivity.this, PayCompleteActivity.class);
+                intent.putExtra("orderd", mBean1);
+                intent.putExtra("type", mfromType);
+
+                startActivity(intent);
+                mPaywindow.dismiss();
+                finish();
+
+
+
+            }
+
+
+            Toast.makeText(OrderGenerationActivity.this, result.getMemo(),
+                    Toast.LENGTH_LONG).show();
+        };
+    };
 
 
 
@@ -145,12 +176,12 @@ public class OrderGenerationActivity extends AppCompatActivity {
         mDf = new DecimalFormat("0.00");
 
         AvatorBean avator = intent.getParcelableExtra("avator");
-        String type = intent.getStringExtra("type");
-
+        mfromType = intent.getStringExtra("type");
         initPop();
 
         //发送请求去获取订单的详情
         if (avator.isRet()) {
+         payuid = avator.getRetmsg();
             getorderDetil(avator.getRetmsg());
             //发送请求去获取用户的余额
             getuserYue();
@@ -164,19 +195,19 @@ public class OrderGenerationActivity extends AppCompatActivity {
 
         }
 
-        if (type.equals("idle")) {
+        if (mfromType.equals("idle")) {
             //闲置的界面
-        } else if (type.equals("new")) {
+        } else if (mfromType.equals("new")) {
             //新商品的界面
             mTvDetil.setText("在完成支付前，您和卖家均可在【个人中心 - 我买到的（我卖出的）】中修改本订单信息。");
             //最后一个按钮 变成立即支付的按钮  点击以后 执行立即支付的方法
-            mBtUsercenter.setText("立即付款");
+            mBtUsercenter.setText("立即支付");
 
-        } else if (type.equals("server")) {
+        } else if (mfromType.equals("server")) {
             //服务的界面
             mTvDetil.setText("由于您当前拍下的是服务，服务商需要先确认是否接单后，您才可进行支付操作（如服务商一周内未确认的，订单会自动取消）。在完成支付前，您和服务商均可在【个人中心 - 我买到的（我卖出的）】中修改本订单信息");
 
-        } else if (type.equals("rent")) {
+        } else if (mfromType.equals("rent")) {
             //租赁的界面
             mTvDetil.setText("租赁订单的押金支付请在和出租人确认实物后再继续进行。“线上交易”订单租期在租赁人确认收货后开始计算；“线下交易”订单租期在押金支付后即开始计算。完成支付前，您和出租人均可在【个人中心 - 我租到的（我租出的）】中修改本订单信息。");
             mTvYajin.setVisibility(View.VISIBLE);
@@ -184,7 +215,8 @@ public class OrderGenerationActivity extends AppCompatActivity {
             params.height = Utils.dp2px(80);
             mLlGood.setLayoutParams(params);
             mLlRentmoney.setVisibility(View.VISIBLE);
-        } else if (type.equals("yuyue")) {
+            mBtUsercenter.setText("支付押金");
+        } else if (mfromType.equals("yuyue")) {
             mTvDetil.setText("由于您当前拍下的是服务，服务商需要先确认是否接单后，您才可进行支付操作（如服务商一周内未确认的，订单会自动取消）。在完成支付前，您和服务商均可在【个人中心 - 我买到的（我卖出的）】中修改本订单信息");
             mTvRedetime.setVisibility(View.VISIBLE);
             mTvGoodformat.setVisibility(View.GONE);
@@ -196,8 +228,53 @@ public class OrderGenerationActivity extends AppCompatActivity {
         }
 
         isUserSetTrapw();
+        getPayStr();
 
 
+
+
+
+    }
+
+    private void getPayStr() {
+
+        Call<String> str = Aplication.mIinterface.getOrderalipayStr(payuid, "购物订单", "true", Utils.getloginuid());
+
+        str.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.i("zc", "onResponse:   看看发送的请求" + call.request().toString());
+                String body = response.body();
+
+                if (body != null) {
+                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                    }.getType();
+
+                    ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                    if (avatorBeen != null && avatorBeen.size() > 0) {
+                        AvatorBean bean = avatorBeen.get(0);
+
+                        Log.i("zc", "onResponse:   看看得到的支付串"+ bean.getRetmsg());
+                        paystr = bean.getRetmsg();
+
+
+                    }
+
+
+
+
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
 
 
 
@@ -355,7 +432,6 @@ public class OrderGenerationActivity extends AppCompatActivity {
                                 mTvStyle.setText("（买家付款后卖家即得到货款）");
                             }
 
-                            payuid = mBean1.getO_UID();
 
                             mTvOrdertime.setText(mBean1.getO_OrderTime().replace("-", " -  "));
                             mTvShopname.setText(mBean1.getStore_CN());
@@ -388,21 +464,23 @@ public class OrderGenerationActivity extends AppCompatActivity {
                             mTvallgoodprice.setText(mDf.format(allmoney));
                             mBtimport.setText("确认支付¥ " + mDf.format(allmoney));
 
-                            if (mYueprice >= allmoney) {
-                                //余额大于要支付的金额， 就用余额支付
+                            if (mYueprice != null) {
+                                if (mYueprice >= allmoney) {
+                                    //余额大于要支付的金额， 就用余额支付
 
-                                mIvyue.setImageResource(R.mipmap.com_icon_baln);
-                                mTvyue.setTextColor(getResources().getColor(R.color.maintextcolor));
-                                mIvalipay.setImageResource(R.mipmap.com_icon_alipay_ept);
-                                mTvalipay.setTextColor(getResources().getColor(R.color.secondtextcolor));
-                            } else {
+                                    mIvyue.setImageResource(R.mipmap.com_icon_baln);
+                                    mTvyue.setTextColor(getResources().getColor(R.color.maintextcolor));
+                                    mIvalipay.setImageResource(R.mipmap.com_icon_alipay_ept);
+                                    mTvalipay.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                                } else {
+                                    //余额不够的话  用支付宝 支付超过余额的部分
+                                    mIvyue.setImageResource(R.mipmap.com_icon_baln_ept);
+                                    mTvyue.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                                    mIvalipay.setImageResource(R.mipmap.com_icon_alipay);
+                                    mTvalipay.setTextColor(getResources().getColor(R.color.maintextcolor));
+                                    mBtimport.setText(mDf.format(allmoney - mYueprice));
 
-                                mIvyue.setImageResource(R.mipmap.com_icon_baln_ept);
-                                mTvyue.setTextColor(getResources().getColor(R.color.secondtextcolor));
-                                mIvalipay.setImageResource(R.mipmap.com_icon_alipay);
-                                mTvalipay.setTextColor(getResources().getColor(R.color.maintextcolor));
-
-
+                                }
                             }
 
 
@@ -443,7 +521,7 @@ public class OrderGenerationActivity extends AppCompatActivity {
                     //当上面显示的字是个人中心的时候 去个人中心
 
                     startActivity(new Intent(OrderGenerationActivity.this, UserCenterActivity.class));
-                } else if (s.equals("立即付款")) {
+                } else if (s.equals("立即支付") || s.equals("支付押金")) {
                     //当字是立即支付的时候  执行立即支付的操作
 
                     getuserYue();
@@ -512,9 +590,7 @@ public class OrderGenerationActivity extends AppCompatActivity {
             public void onClick(View widget) {
                 //去密码设置的界面
                 Log.i("zc", "onClick:  去设置交易密码");
-                
-
-
+                startActivity(new Intent(OrderGenerationActivity.this,EditPassWordActivity.class));
 
             }
         },10,source.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -551,9 +627,28 @@ public class OrderGenerationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isalipay) {
-                    //走支付宝支付的逻辑
+                    //走支付宝支付的逻辑  先获取支付的字符串
+                    Runnable payRunnable = new Runnable() {
+
+                        @Override
+                        public void run() {
+                            PayTask alipay = new PayTask(OrderGenerationActivity.this);
+                            Log.i("zc", "run:  看看有没有值" + paystr);
+                            Map<String,String> result = alipay.payV2(paystr,true);
 
 
+                            Log.i("zc", "run:  看看发送的数据" +  alipay.toString());
+
+                            Message msg = new Message();
+                            msg.what = SDK_PAY_FLAG;
+                            msg.obj = result;
+                            mHandler.sendMessage(msg);
+
+                        }
+                    };
+                    // 必须异步调用
+                    Thread payThread = new Thread(payRunnable);
+                    payThread.start();
 
 
                 } else {
@@ -620,7 +715,15 @@ public class OrderGenerationActivity extends AppCompatActivity {
                                 AvatorBean bean = avatorBeen.get(0);
                                 String retmsg = bean.getRetmsg();
                                 if (retmsg.equals("True")) {
-                                    MyToast.show("恭喜你，付款成功",R.mipmap.com_icon_check_w);
+                                    // 跳转到付款成功的界面 ， 然后关掉
+                                    Intent intent = new Intent(OrderGenerationActivity.this, PayCompleteActivity.class);
+                                    intent.putExtra("orderd", mBean1);
+                                    intent.putExtra("type", mfromType);
+
+                                    startActivity(intent);
+                                    mPaywindow.dismiss();
+                                    finish();
+
                                     mPaywindow.dismiss();
                                 } else if (retmsg.equals("还未设置支付密码")) {
                                     //界面变化为 去设置交易密码的界面
@@ -628,15 +731,8 @@ public class OrderGenerationActivity extends AppCompatActivity {
                                     tvsetpaypw.setVisibility(View.VISIBLE);
 
                                 }
-
                             }
-
-
-
-
                         }
-
-
 
                     }
 

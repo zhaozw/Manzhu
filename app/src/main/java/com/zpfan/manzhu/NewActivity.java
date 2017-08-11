@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -175,14 +174,14 @@ public class NewActivity extends AppCompatActivity implements View.OnClickListen
 
                                 mBussnessBeen = Utils.gson.fromJson(substring, type1);
                                 mAdapter = new NewAdapter(R.layout.item_new, mBussnessBeen);
-                                mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+
+                                mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
                                     @Override
-                                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                                         Intent intent = new Intent(NewActivity.this, IdleDetailActivity.class);
                                         intent.putExtra("id", mBussnessBeen.get(position));
                                         intent.putExtra("type", "new");
                                         startActivity(intent);
-
                                     }
                                 });
                                 mHeadView = View.inflate(NewActivity.this, R.layout.new_head, null);

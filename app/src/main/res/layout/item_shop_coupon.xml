@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:gravity="center"
+              android:background="@color/bootmbc"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/ll_coupon"
+       android:layout_toLeftOf="@+id/iv_ques"
+        android:orientation="horizontal"
+       android:gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@mipmap/coupon_bg_rent"
+        android:layout_width="192.5dp"
+        android:layout_height="60dp">
+        <LinearLayout
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" ¥ "
+                android:textColor="@color/maintextcolor"
+                android:textSize="14sp"/>
+
+            <TextView
+            android:id="@+id/tv_price"
+            android:textColor="@color/maintextcolor"
+            android:textSize="24sp"
+            android:text="99"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_xiaoshu"
+            android:textColor="@color/maintextcolor"
+            android:text=".00"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="30dp"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="9sp"
+                android:gravity="center"
+                android:text="优惠劵"
+                android:background="@drawable/baoyou_shape"
+                android:layout_width="41.5dp"
+                android:layout_height="17.5dp"/>
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="9sp"
+                    android:layout_width="wrap_content"
+                    android:text="满"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_meetmoney"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:text="100元"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="9sp"
+                    android:layout_width="wrap_content"
+                    android:text="可用"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/dashline1"
+        android:background="@drawable/dash_line_shape"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+
+</RelativeLayout>

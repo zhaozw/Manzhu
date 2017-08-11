@@ -175,7 +175,10 @@ public class MainActivity extends AppCompatActivity implements EaseConversationL
                // setTabSelection(3);
                 //先进行登陆的操作
                 if (mUserlogin) {
-                    MyToast.show("该模块还在开发中", R.mipmap.com_icon_cross_w);
+                    //MyToast.show("该模块还在开发中", R.mipmap.com_icon_cross_w);
+                    startActivity(new Intent(MainActivity.this,EditPassWordActivity.class));
+
+
                 } else {
                 startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 }

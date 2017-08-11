@@ -101,7 +101,7 @@
 
         <TextView
             android:id="@+id/tv_nowpw"
-            android:text="1*********7"
+            android:text="*********"
             android:textSize="14sp"
             android:textColor="@color/maintextcolor"
             android:layout_marginLeft="15dp"
@@ -152,13 +152,14 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_marginTop="7.5dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 
         <LinearLayout
+            android:layout_marginTop="15dp"
             android:id="@+id/ll_oldpw"
             android:background="@drawable/order_edit_money"
             android:layout_width="230dp"
@@ -280,6 +281,7 @@
 
 
         <LinearLayout
+            android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/order_edit_money"
             android:layout_width="155dp"

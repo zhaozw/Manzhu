@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zpfan.manzhu.ShopListActivity">
+
+    <LinearLayout
+        android:visibility="visible"
+        android:id="@+id/ll_topmenu"
+        android:background="@color/bootmbc"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <!-- 返回的箭头-->
+        <LinearLayout
+            android:id="@+id/ll_topback"
+            android:layout_weight="0.125"
+            android:gravity="center_vertical|center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            
+            <ImageView
+
+                android:src="@drawable/com_icon_back"
+                android:layout_width="12.5dp"
+                android:layout_height="20dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_allshop"
+            android:layout_weight="0.35"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_allshop"
+                android:src="@mipmap/type_icon_shop_2"
+                android:layout_width="17.5dp"
+                android:layout_height="17.5dp"/>
+
+            <TextView
+                android:id="@+id/tv_allshop"
+                android:layout_marginLeft="7.5dp"
+                android:text="全部店铺"
+                android:textSize="12sp"
+                android:textColor="@color/maintextcolor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/stronglin"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:id="@+id/ll_brandshop"
+            android:layout_weight="0.35"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_brandshop"
+                android:src="@mipmap/type_icon_shop_2_elt_ept"
+                android:layout_width="17.5dp"
+                android:layout_height="17.5dp"/>
+
+            <TextView
+                android:id="@+id/tv_brandshop"
+                android:layout_marginLeft="7.5dp"
+                android:text="品牌店铺"
+                android:textSize="12sp"
+                android:textColor="@color/secondtextcolor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+        <View
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/stronglin"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:id="@+id/ll_filter"
+            android:layout_weight="0.175"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_filter"
+                android:src="@mipmap/com_icon_order_ept"
+                android:layout_width="17.5dp"
+                android:layout_height="17.5dp"/>
+
+            <TextView
+                android:id="@+id/tv_filter"
+                android:gravity="center"
+                android:layout_marginLeft="7.5dp"
+                android:text="筛选\n排序"
+                android:textSize="12sp"
+                android:textColor="@color/secondtextcolor"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/ll_topmenu"
+        android:visibility="visible"
+        android:id="@+id/rv_shoplist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_noshop"
+        android:text="未查询到相关店铺信息！"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+
+
+</RelativeLayout>

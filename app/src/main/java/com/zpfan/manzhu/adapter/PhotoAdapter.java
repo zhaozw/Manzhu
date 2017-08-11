@@ -29,7 +29,7 @@ import java.util.List;
 public class PhotoAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
 
 
-    private boolean isshowgood = true;
+    private boolean isshowphotogood = true;
 
     public PhotoAdapter(@LayoutRes int layoutResId, @Nullable List<BussnessBean> data) {
         super(layoutResId, data);
@@ -283,7 +283,7 @@ public class PhotoAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> 
             @Override
             public void onClick(View v) {
                 //点击了以后隐藏信息 或者  展示信息
-                if (isshowgood) {
+                if (isshowphotogood) {
                    // showBussnessinfo();
                     llleve.setVisibility(View.VISIBLE);
                     llshop.setVisibility(View.VISIBLE);
@@ -325,7 +325,7 @@ public class PhotoAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> 
                     ivmore.setImageResource(R.mipmap.com_icon_pro_list_corn);
                 }
 
-                isshowgood = !isshowgood;
+                isshowphotogood = !isshowphotogood;
 
             }
         });

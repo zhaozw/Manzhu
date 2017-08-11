@@ -63,6 +63,11 @@ public class NewAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
         final LinearLayout mbrand = helper.getView(R.id.ll_brand);
         TextView brandid = helper.getView(R.id.tv_brandname);
 
+        helper.addOnClickListener(R.id.iv_bussness_photo)
+                .addOnClickListener(R.id.tv_bussnesstag)
+                .addOnClickListener(R.id.ll_baoyou)
+                .addOnClickListener(R.id.ll_fanmai)
+                .addOnClickListener(R.id.ll_brand);
 
 
 

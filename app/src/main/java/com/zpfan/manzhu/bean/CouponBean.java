@@ -1,10 +1,16 @@
 package com.zpfan.manzhu.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrator on 2017/7/31 0031.
  */
 
-public class CouponBean {
+public class CouponBean implements Parcelable {
+
+
+
 
     @Override
     public String toString() {
@@ -180,4 +186,61 @@ public class CouponBean {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.DC_Cate);
+        dest.writeString(this.DC_CouconStatus);
+        dest.writeString(this.DC_FailureTime);
+        dest.writeByte(this.DC_IsLock ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.DC_MeetMoney);
+        dest.writeInt(this.DC_Number);
+        dest.writeInt(this.DC_OverdueDays);
+        dest.writeString(this.DC_PreferentialMoney);
+        dest.writeInt(this.DC_RemainingNumber);
+        dest.writeString(this.DC_Remarks);
+        dest.writeInt(this.DC_ShortestRentDay);
+        dest.writeString(this.DC_Time);
+        dest.writeString(this.Member_UID);
+        dest.writeInt(this.id);
+        dest.writeString(this.member_use_get_status);
+    }
+
+    public CouponBean() {
+    }
+
+    protected CouponBean(Parcel in) {
+        this.DC_Cate = in.readString();
+        this.DC_CouconStatus = in.readString();
+        this.DC_FailureTime = in.readString();
+        this.DC_IsLock = in.readByte() != 0;
+        this.DC_MeetMoney = in.readInt();
+        this.DC_Number = in.readInt();
+        this.DC_OverdueDays = in.readInt();
+        this.DC_PreferentialMoney = in.readString();
+        this.DC_RemainingNumber = in.readInt();
+        this.DC_Remarks = in.readString();
+        this.DC_ShortestRentDay = in.readInt();
+        this.DC_Time = in.readString();
+        this.Member_UID = in.readString();
+        this.id = in.readInt();
+        this.member_use_get_status = in.readString();
+    }
+
+    public static final Parcelable.Creator<CouponBean> CREATOR = new Parcelable.Creator<CouponBean>() {
+        @Override
+        public CouponBean createFromParcel(Parcel source) {
+            return new CouponBean(source);
+        }
+
+        @Override
+        public CouponBean[] newArray(int size) {
+            return new CouponBean[size];
+        }
+    };
 }

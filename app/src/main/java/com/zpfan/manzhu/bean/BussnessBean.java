@@ -3,13 +3,15 @@ package com.zpfan.manzhu.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/7/13 0013.
  */
 
-public class BussnessBean implements Parcelable {
+public class BussnessBean implements Parcelable,MultiItemEntity {
 
 
 
@@ -199,9 +201,19 @@ public class BussnessBean implements Parcelable {
     private int buyCount = 1;
     private String PP_Lease_period_proportion;
     private String server_unit_string;
+    public static final int NEW = 1;
+    public static final int IDLE = 2;
+    public static final int SERVER = 3;
+    private int itemType;
 
 
+    public BussnessBean(int itemType) {
+        this.itemType = itemType;
+    }
 
+    public void setItemType(int itemType) {
+        this.itemType = itemType;
+    }
 
     public String getServer_unit_string() {
         return server_unit_string;
@@ -961,6 +973,11 @@ public class BussnessBean implements Parcelable {
 
     public void setOrder_sellerfigure(List<OrderReviewListBean> order_sellerfigure) {
         this.order_sellerfigure = order_sellerfigure;
+    }
+
+    @Override
+    public int getItemType() {
+        return itemType;
     }
 
     public static class GMemberOBJBean implements Parcelable {
@@ -2334,6 +2351,7 @@ public class BussnessBean implements Parcelable {
         dest.writeInt(this.buyCount);
         dest.writeString(this.PP_Lease_period_proportion);
         dest.writeString(this.server_unit_string);
+        dest.writeInt(this.itemType);
     }
 
     protected BussnessBean(Parcel in) {
@@ -2432,6 +2450,7 @@ public class BussnessBean implements Parcelable {
         this.buyCount = in.readInt();
         this.PP_Lease_period_proportion = in.readString();
         this.server_unit_string = in.readString();
+        this.itemType = in.readInt();
     }
 
     public static final Creator<BussnessBean> CREATOR = new Creator<BussnessBean>() {

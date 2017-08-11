@@ -429,11 +429,24 @@ public class IdleDetailActivity extends AppCompatActivity {
                 String fk = mbussness.getDemand_FK();
                 String[] changes = fk.split(",");
 
-                for (String change : changes) {
-                    if (change.length() > 1) {
+                for (int i = 0; i < changes.length; i++) {
+                    if (changes[i].length() > 1) {
+
+                        String[] split = changes[i].split("\\|");
+
+                        String chang = split[2] + " | " + split[3];
                         final TextView inflate = (TextView) IdleDetailActivity.this.getLayoutInflater().inflate(R.layout.change_tv, null);
-                        inflate.setText(change.substring(1));
-                        final int i = Utils.dp2px(20);
+                        inflate.setText(chang.substring(1));
+
+                        LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        if (i == 0) {
+                            params1.setMargins(0, 0, 0, 0);
+                        } else {
+                            params1.setMargins(Utils.dp2px(10), 0, 0, 0);
+                        }
+                        inflate.setLayoutParams(params1);
+
                         // TODO: 2017/7/20 0020   动态修改宽高
                         ViewTreeObserver observer = mTvHuan.getViewTreeObserver();
                         observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -789,8 +802,14 @@ public class IdleDetailActivity extends AppCompatActivity {
                 mBtMorecomment.setVisibility(View.GONE);
             }
         }
-        mTvCommentnumber.setText("（" + mbussness.getOrder_review_list().size() + "）");
-        mTvImpressionnumber.setText("（" + mbussness.getOrder_sellerfigure().size() + "）");
+        if (mbussness.getOrder_review_list() != null ) {
+            mTvCommentnumber.setText("（" + mbussness.getOrder_review_list().size() + "）");
+        }
+
+
+        if (mbussness.getOrder_sellerfigure() !=null) {
+            mTvImpressionnumber.setText("（" + mbussness.getOrder_sellerfigure().size() + "）");
+        }
         //展示相关cos作品  要发送网络请求 需要字段
         String cosworks = mbussness.getGoods_cosworks();
         setCosWork(cosworks);
@@ -1177,9 +1196,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                 if (Utils.isUserLogin()) {
 
                     Intent intent = new Intent(mContext, EaseActivity.class);
-             /*   intent.putExtra("userphone", item.getM_Phone());
 
-                intent.putExtra("chatType", EMMessage.ChatType.Chat);*/
                     intent.putExtra("userId", mbussness.getG_ContactPhone());
                     intent.putExtra("usercn", mShopBeen.get(0).getS_Name());
                     intent.putExtra("chatType", EMMessage.ChatType.Chat);
@@ -1306,7 +1323,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                 String s = mTvMakeorder.getText().toString();
                 if (Utils.isUserLogin()) {
                     if (!s.equals("立即预约")) {
-                        PopupWindow bootomwindow = new PopupWindow(IdleDetailActivity.this);
+                        final PopupWindow bootomwindow = new PopupWindow(IdleDetailActivity.this);
                         final View inflate = View.inflate(IdleDetailActivity.this, R.layout.detail_bootom_popwindow, null);
                         ImageView change = (ImageView) inflate.findViewById(R.id.iv_change);
                         ImageView rent = (ImageView) inflate.findViewById(R.id.iv_rent);
@@ -1372,6 +1389,8 @@ public class IdleDetailActivity extends AppCompatActivity {
                             }
                         });
 
+
+                        //下单的界面
                         llbuy.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -1383,10 +1402,12 @@ public class IdleDetailActivity extends AppCompatActivity {
                                 intent.putExtra("frome", mType); //在这里区分东西
                                 //aa
                                 startActivity(intent);
+                                bootomwindow.dismiss();
 
                             }
                         });
 
+                        //租赁的界面
                         llrent.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -1396,9 +1417,27 @@ public class IdleDetailActivity extends AppCompatActivity {
                                 intent.putExtra("detail", mbussness);
                                 intent.putExtra("type", "rent");
                                 startActivity(intent);
+                                bootomwindow.dismiss();
+                            }
+                        });
+                        //交换的界面
+                        llchange.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                Intent intent = new Intent(IdleDetailActivity.this, ChangActivity.class);
+
+                                intent.putExtra("detail", mbussness);
+                                intent.putExtra("shop", mShopBean);
+                                startActivity(intent);
+                                bootomwindow.dismiss();
+
 
                             }
                         });
+
+
+
                     } else {
                         //立即预约的操作
                         Intent intent = new Intent(IdleDetailActivity.this, OrderImmediatelyActivity.class);
@@ -1406,6 +1445,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                         intent.putExtra("detail", mbussness);
                         intent.putExtra("type", "server");
                         startActivity(intent);
+
 
                     }
                 } else {
@@ -1499,7 +1539,12 @@ public class IdleDetailActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(mContext, EaseActivity.class);
                     intent.putExtra("userId", mbussness.getG_ContactPhone());
-                    intent.putExtra("usercn", mShopBeen.get(0).getS_Name());
+
+                    if (mShopBeen != null) {
+                        intent.putExtra("usercn", mShopBeen.get(0).getS_Name());
+                    } else {
+                        intent.putExtra("usercn", mbussness.getG_Member_OBJ().getM_UserName());
+                    }
                     intent.putExtra("chatType", EMMessage.ChatType.Chat);
                     startActivity(intent);
                     window.dismiss();
@@ -1511,6 +1556,29 @@ public class IdleDetailActivity extends AppCompatActivity {
 
             }
         });
+
+        ivusercenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Utils.isUserLogin()) {
+                    startActivity(new Intent(IdleDetailActivity.this, UserCenterActivity.class));
+                } else {
+                    startActivity(new Intent(IdleDetailActivity.this, LoginActivity.class));
+                }
+
+
+
+            }
+        });
+        ivhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(IdleDetailActivity.this,MainActivity.class));
+
+            }
+        });
+
 
         TextView tvname = (TextView) inflate.findViewById(R.id.tv_name);
         TextView tvdizhi = (TextView) inflate.findViewById(R.id.tv_dizhi);

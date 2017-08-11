@@ -7,7 +7,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -97,6 +96,7 @@ public class ShopCarActivity extends AppCompatActivity {
     private ArrayList<ShopCartbean.CarshoplistBean.CargoodslistBean> morderlist = new ArrayList<>();
     private ArrayList<ShopCartbean.CarshoplistBean>  mcheckshoplist  = new ArrayList<>();
     private String mleixin = "闲置" ;
+    private String mType  = "idle";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -344,7 +344,7 @@ public class ShopCarActivity extends AppCompatActivity {
                     }
 
                     intent.putParcelableArrayListExtra("shopcat", mcheckshoplist);
-                    intent.putExtra("type","sopcart");
+                    intent.putExtra("type",mType);
                     //发送请求去查看购物车里的物品是否失效
                     Call<String> guid = Aplication.mIinterface.checkGoodnormalSattus(map.get("guid"));
                     guid.enqueue(new Callback<String>() {
@@ -408,6 +408,7 @@ public class ShopCarActivity extends AppCompatActivity {
                 mTvSearchshaixuan.setTextColor(getResources().getColor(R.color.secondtextcolor));
 
                 mleixin = "闲置";
+                mType = "idle";
                 getshopcartlist(mGetloginuid,"闲置");
                 mIvCheckall.setImageResource(R.mipmap.com_icon_multcheck_ept);
                 ischeckall = false;
@@ -423,6 +424,7 @@ public class ShopCarActivity extends AppCompatActivity {
                 mTvSearchshaixuan.setTextColor(getResources().getColor(R.color.secondtextcolor));
 
                 mleixin = "新品";
+                mType = "new";
                 getshopcartlist(mGetloginuid, "新品");
                 mIvCheckall.setImageResource(R.mipmap.com_icon_multcheck_ept);
                 ischeckall = false;
@@ -439,6 +441,7 @@ public class ShopCarActivity extends AppCompatActivity {
                 mTvSearchshaixuan.setTextColor(getResources().getColor(R.color.maintextcolor));
 
                 mleixin = "服务";
+                mType = "server";
                 getshopcartlist(mGetloginuid,"服务");
                 mIvCheckall.setImageResource(R.mipmap.com_icon_multcheck_ept);
                 ischeckall = false;

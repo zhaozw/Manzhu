@@ -31,6 +31,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_detile"
         android:textColor="@color/secondtextcolor"
         android:textSize="10sp"
         android:text="由于您当前拍下的是闲置物品，卖家需要先确认当前是否有货后，您才可进行支付操作（如卖家24小时内未确认的，订单会自动取消）。在完成支付前，您和卖家均可在【个人中心 - 我买到的（我卖出的）】中修改本订单信息。"

@@ -269,7 +269,7 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
                                                     intent.putExtra("id", mBussnessBeen.get(position));
                                                     intent.putExtra("type", "server");
                                                     startActivity(intent);
-                                                    Log.i("zc", "onItemChildClick:  看看我点击的是什么uid" + mBussnessBeen.get(position).getId());
+
                                                     break;
 
 

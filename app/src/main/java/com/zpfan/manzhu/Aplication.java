@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Build;
 import android.os.StrictMode;
 
-import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.domain.EaseUser;
@@ -63,7 +62,7 @@ public class Aplication extends Application {
     //初始化
       //  EMClient.getInstance().init(mContext, initOptions());
     //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
-        EMClient.getInstance().setDebugMode(true);
+        //EMClient.getInstance().setDebugMode(true);
         CrashReport.initCrashReport(getApplicationContext(), "5395a802aa", true);
 
 

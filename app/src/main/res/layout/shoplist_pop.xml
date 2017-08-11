@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+
+              android:background="#f777"
+
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <!--  上面的选项标签 -->
+    <LinearLayout
+        android:background="@color/bootmbc"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <LinearLayout
+            android:id="@+id/ll_order"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_order"
+            android:src="@mipmap/com_icon_order"
+            android:layout_width="17.5dp"
+            android:layout_height="17.5dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_order"
+            android:textColor="@color/maintextcolor"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:text="结果排序"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/stronglin"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
+
+
+
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/stronglin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:background="@color/bootmbc"
+        android:id="@+id/tv_paixu"
+        android:gravity="left|center_vertical"
+        android:textSize="14sp"
+        android:textColor="@color/maintextcolor"
+        android:text="当前排序: 默认"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_idlepop"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/bootmbc"
+        android:visibility="visible"/>
+
+    <View
+        android:background="@color/stronglin"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+
+</LinearLayout>

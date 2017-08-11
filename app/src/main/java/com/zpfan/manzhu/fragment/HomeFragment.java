@@ -43,6 +43,7 @@ import com.zpfan.manzhu.R;
 import com.zpfan.manzhu.SearchCnResultActivity;
 import com.zpfan.manzhu.SearchResultsActivity;
 import com.zpfan.manzhu.ShopCarActivity;
+import com.zpfan.manzhu.ShopListActivity;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.SearchBean;
 import com.zpfan.manzhu.bean.ShopCartbean;
@@ -799,30 +800,43 @@ public class HomeFragment extends Fragment implements BDLocationListener {
             case R.id.tv_allbussness:
                 //所有精选商家的按钮
 
+                Intent shoplistintent = new Intent(getContext(), ShopListActivity.class);
+                shoplistintent.putExtra("busniess_cate", "");
+                startActivity(shoplistintent);
+
 
                 break;
             case R.id.ll_cloth:
-                //服装的按钮
-
+                //服装商家的按钮
+                Intent shoplistintent1 = new Intent(getContext(), ShopListActivity.class);
+                shoplistintent1.putExtra("busniess_cate", "服装工作室");
+                startActivity(shoplistintent1);
 
                 break;
             case R.id.ll_props:
-                //道具的按钮
-
+                //道具商家的按钮
+                Intent djshoplistintent = new Intent(getContext(), ShopListActivity.class);
+                djshoplistintent.putExtra("busniess_cate", "道具工作室");
+                startActivity(djshoplistintent);
 
                 break;
             case R.id.ll_wig:
-                //假发的按钮
-
+                //假发商家的按钮
+                Intent jfshoplistintent = new Intent(getContext(), ShopListActivity.class);
+                jfshoplistintent.putExtra("busniess_cate", "假发代理");
+                startActivity(jfshoplistintent);
                 break;
             case R.id.ll_other:
-                //其它的按钮
-
+                //其它商家的按钮
+                Intent othershoplistintent = new Intent(getContext(), ShopListActivity.class);
+                othershoplistintent.putExtra("busniess_cate", "动漫周边");
+                startActivity(othershoplistintent);
                 break;
             case R.id.ll_studio:
-                //摄影工作室的按钮
-
-
+                //摄影工作室商家的按钮
+                Intent syshoplistintent = new Intent(getContext(), ShopListActivity.class);
+                syshoplistintent.putExtra("busniess_cate", "摄影工作室");
+                startActivity(syshoplistintent);
                 break;
 
             case R.id.tv_keyword:

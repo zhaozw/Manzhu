@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:paddingLeft="10dp"
+              android:paddingRight="10dp"
+              android:minHeight="50dp"
+              android:layout_height="wrap_content">
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv_shopcover"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/u583"
+        app:riv_corner_radius="5dip"
+        />
+
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_marginLeft="7.5dp"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+
+                android:id="@+id/tv_type"
+                android:gravity="center"
+                android:textSize="9sp"
+                android:textColor="@color/buttontext"
+                android:text="服装"
+                android:background="@drawable/fanmai_shape"
+                android:layout_width="32.5dp"
+                android:layout_height="15dp"/>
+            <TextView
+                android:id="@+id/tv_changename"
+                android:text="角色名 - 《动画名》"
+                android:textColor="#333333"
+                android:textSize="12sp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            
+
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_introduction"
+            android:text="说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明"
+            android:textSize="10sp"
+            android:singleLine="true"
+            android:layout_marginTop="7.5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_check"
+        android:layout_marginLeft="7.5dp"
+        android:layout_gravity="center_vertical"
+        android:src="@mipmap/com_icon_multcheck_ept"
+        android:layout_width="17.5dp"
+        android:layout_height="17.5dp"/>
+    
+    
+    
+</LinearLayout>

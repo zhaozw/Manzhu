@@ -111,7 +111,7 @@
         android:id="@+id/tv_used"
         android:textSize="9sp"
         android:layout_marginTop="13dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="15dp"
         android:paddingRight="15dp"
         android:paddingLeft="15dp"
         android:gravity="center"

@@ -1,12 +1,18 @@
 package com.zpfan.manzhu.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/1 0001.
  */
 
-public class OrderGenerationBean {
+public class OrderGenerationBean implements Parcelable {
+
+
     /**
      * A : null
      * B : null
@@ -90,11 +96,11 @@ public class OrderGenerationBean {
      * goodslist_arry : [{"goods_count":1,"goods_images":"http:\\/\\/www.anipiggy.com\\/UploadFolder\\/image\\/201612\\/2016121240584669465.jpg","goods_money":"3400.00","goods_specification":"","goods_title":"蒙奇·D·路飞 - 是大法官是的公司是大法官是的公司是大法官是的公司是大法官是的公司是大法官是的公司是大法官是的公司是的公司是大法官是的公司是大法官是的公司是的公司是大法官是的公司是大法官是的公司是大法官是的公司是大法官是的公司是大法官是的公司","goods_uid":"2016121241885703949"}]
      */
 
-    private Object A;
-    private Object B;
-    private Object C;
-    private Object D;
-    private Object E;
+    private String A;
+    private String B;
+    private String C;
+    private String D;
+    private String E;
     private String Member_UID;
     private String O_ApplyExtendLeaseOperatTime;
     private String O_ApplyExtendLeaseReturnTime;
@@ -182,43 +188,43 @@ public class OrderGenerationBean {
         Store_Phone = store_Phone;
     }
 
-    public Object getA() {
+    public String getA() {
         return A;
     }
 
-    public void setA(Object A) {
+    public void setA(String A) {
         this.A = A;
     }
 
-    public Object getB() {
+    public String getB() {
         return B;
     }
 
-    public void setB(Object B) {
+    public void setB(String B) {
         this.B = B;
     }
 
-    public Object getC() {
+    public String getC() {
         return C;
     }
 
-    public void setC(Object C) {
+    public void setC(String C) {
         this.C = C;
     }
 
-    public Object getD() {
+    public String getD() {
         return D;
     }
 
-    public void setD(Object D) {
+    public void setD(String D) {
         this.D = D;
     }
 
-    public Object getE() {
+    public String getE() {
         return E;
     }
 
-    public void setE(Object E) {
+    public void setE(String E) {
         this.E = E;
     }
 
@@ -822,7 +828,8 @@ public class OrderGenerationBean {
         this.goodslist_arry = goodslist_arry;
     }
 
-    public static class GoodslistArryBean {
+    public static class GoodslistArryBean implements Parcelable {
+
         /**
          * goods_count : 1
          * goods_images : http:\/\/www.anipiggy.com\/UploadFolder\/image\/201612\/2016121240584669465.jpg
@@ -886,5 +893,234 @@ public class OrderGenerationBean {
         public void setGoods_uid(String goods_uid) {
             this.goods_uid = goods_uid;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(this.goods_count);
+            dest.writeString(this.goods_images);
+            dest.writeString(this.goods_money);
+            dest.writeString(this.goods_specification);
+            dest.writeString(this.goods_title);
+            dest.writeString(this.goods_uid);
+        }
+
+        public GoodslistArryBean() {
+        }
+
+        protected GoodslistArryBean(Parcel in) {
+            this.goods_count = in.readInt();
+            this.goods_images = in.readString();
+            this.goods_money = in.readString();
+            this.goods_specification = in.readString();
+            this.goods_title = in.readString();
+            this.goods_uid = in.readString();
+        }
+
+        public static final Creator<GoodslistArryBean> CREATOR = new Creator<GoodslistArryBean>() {
+            @Override
+            public GoodslistArryBean createFromParcel(Parcel source) {
+                return new GoodslistArryBean(source);
+            }
+
+            @Override
+            public GoodslistArryBean[] newArray(int size) {
+                return new GoodslistArryBean[size];
+            }
+        };
     }
+
+    public OrderGenerationBean() {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.A);
+        dest.writeString(this.B);
+        dest.writeString(this.C);
+        dest.writeString(this.D);
+        dest.writeString(this.E);
+        dest.writeString(this.Member_UID);
+        dest.writeString(this.O_ApplyExtendLeaseOperatTime);
+        dest.writeString(this.O_ApplyExtendLeaseReturnTime);
+        dest.writeString(this.O_ApplyRentToSellTime);
+        dest.writeString(this.O_ApplySendersTime);
+        dest.writeString(this.O_Applyreturnproducttime);
+        dest.writeInt(this.O_BuyerLatecomfirmDay);
+        dest.writeString(this.O_BuyerLatecomfirmTime);
+        dest.writeString(this.O_BuyerRemark);
+        dest.writeString(this.O_CouponLogID);
+        dest.writeInt(this.O_CouponMoney);
+        dest.writeInt(this.O_DeductionIntegral);
+        dest.writeString(this.O_DeductionIntegralMoney);
+        dest.writeString(this.O_DeliveryTime);
+        dest.writeString(this.O_DepositDealString);
+        dest.writeString(this.O_DistributionStyle);
+        dest.writeString(this.O_EnternetBankValue);
+        dest.writeString(this.O_ExtendLeaseMessage);
+        dest.writeInt(this.O_ExtendLeaseNumber);
+        dest.writeInt(this.O_Final_Deal_Money);
+        dest.writeInt(this.O_GoodsAllCount);
+        dest.writeString(this.O_GoodsAllMoney);
+        dest.writeString(this.O_GoodsFreight);
+        dest.writeString(this.O_InvoicesCate);
+        dest.writeString(this.O_InvoicesName);
+        dest.writeByte(this.O_IsApplyExtendLease ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.O_IsApplyRentToSell ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.O_IsApplyreturnproduct ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.O_IsDelivery ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.O_IsEvaluation ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.O_IsEvaluationSeller ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.O_IsHavesendersdealwith ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.O_IsOnekeyResell ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.O_IsStoreApplydelayreturn ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.O_LateDeliveryDay);
+        dest.writeString(this.O_LatedeliveryTime);
+        dest.writeString(this.O_LogisticsCompany);
+        dest.writeString(this.O_LogisticsNumber);
+        dest.writeByte(this.O_MemberIsUpload ? (byte) 1 : (byte) 0);
+        dest.writeString(this.O_MemberUpload_pic);
+        dest.writeString(this.O_MemberUpload_text);
+        dest.writeString(this.O_OrderAllMoney);
+        dest.writeString(this.O_OrderCate);
+        dest.writeString(this.O_OrderTime);
+        dest.writeString(this.O_Order_Example_Pic);
+        dest.writeString(this.O_PayMoney);
+        dest.writeString(this.O_ReceiptArea);
+        dest.writeString(this.O_ReceiptCity);
+        dest.writeString(this.O_ReceiptDetail);
+        dest.writeString(this.O_ReceiptName);
+        dest.writeString(this.O_ReceiptPhone);
+        dest.writeString(this.O_ReceiptProvince);
+        dest.writeString(this.O_Relation_UID);
+        dest.writeString(this.O_RemainingAmountPayMoney);
+        dest.writeString(this.O_RentToSellMessage);
+        dest.writeString(this.O_ReturnDate);
+        dest.writeInt(this.O_SendPoints);
+        dest.writeInt(this.O_SendersMoney);
+        dest.writeInt(this.O_Share_GetMoney);
+        dest.writeInt(this.O_Share_Member_ID);
+        dest.writeString(this.O_Status);
+        dest.writeByte(this.O_StoreIsUpload ? (byte) 1 : (byte) 0);
+        dest.writeString(this.O_StoreUpload_pic);
+        dest.writeString(this.O_StoreUpload_text);
+        dest.writeString(this.O_StoreapplydelayreturnTime);
+        dest.writeString(this.O_StorerRemark);
+        dest.writeString(this.O_SystemResults);
+        dest.writeString(this.O_SystemResultsTime);
+        dest.writeString(this.O_TradingPattern);
+        dest.writeString(this.O_UID);
+        dest.writeString(this.O_UpdateOrderRemark);
+        dest.writeString(this.Store_CN);
+        dest.writeInt(this.Store_Level);
+        dest.writeString(this.Store_UID);
+        dest.writeString(this.Store_Phone);
+        dest.writeList(this.goodslist_arry);
+    }
+
+    protected OrderGenerationBean(Parcel in) {
+        this.A = in.readString();
+        this.B = in.readString();
+        this.C = in.readString();
+        this.D = in.readString();
+        this.E = in.readString();
+        this.Member_UID = in.readString();
+        this.O_ApplyExtendLeaseOperatTime = in.readString();
+        this.O_ApplyExtendLeaseReturnTime = in.readString();
+        this.O_ApplyRentToSellTime = in.readString();
+        this.O_ApplySendersTime = in.readString();
+        this.O_Applyreturnproducttime = in.readString();
+        this.O_BuyerLatecomfirmDay = in.readInt();
+        this.O_BuyerLatecomfirmTime = in.readString();
+        this.O_BuyerRemark = in.readString();
+        this.O_CouponLogID = in.readString();
+        this.O_CouponMoney = in.readInt();
+        this.O_DeductionIntegral = in.readInt();
+        this.O_DeductionIntegralMoney = in.readString();
+        this.O_DeliveryTime = in.readString();
+        this.O_DepositDealString = in.readString();
+        this.O_DistributionStyle = in.readString();
+        this.O_EnternetBankValue = in.readString();
+        this.O_ExtendLeaseMessage = in.readString();
+        this.O_ExtendLeaseNumber = in.readInt();
+        this.O_Final_Deal_Money = in.readInt();
+        this.O_GoodsAllCount = in.readInt();
+        this.O_GoodsAllMoney = in.readString();
+        this.O_GoodsFreight = in.readString();
+        this.O_InvoicesCate = in.readString();
+        this.O_InvoicesName = in.readString();
+        this.O_IsApplyExtendLease = in.readByte() != 0;
+        this.O_IsApplyRentToSell = in.readByte() != 0;
+        this.O_IsApplyreturnproduct = in.readByte() != 0;
+        this.O_IsDelivery = in.readByte() != 0;
+        this.O_IsEvaluation = in.readByte() != 0;
+        this.O_IsEvaluationSeller = in.readByte() != 0;
+        this.O_IsHavesendersdealwith = in.readByte() != 0;
+        this.O_IsOnekeyResell = in.readByte() != 0;
+        this.O_IsStoreApplydelayreturn = in.readByte() != 0;
+        this.O_LateDeliveryDay = in.readInt();
+        this.O_LatedeliveryTime = in.readString();
+        this.O_LogisticsCompany = in.readString();
+        this.O_LogisticsNumber = in.readString();
+        this.O_MemberIsUpload = in.readByte() != 0;
+        this.O_MemberUpload_pic = in.readString();
+        this.O_MemberUpload_text = in.readString();
+        this.O_OrderAllMoney = in.readString();
+        this.O_OrderCate = in.readString();
+        this.O_OrderTime = in.readString();
+        this.O_Order_Example_Pic = in.readString();
+        this.O_PayMoney = in.readString();
+        this.O_ReceiptArea = in.readString();
+        this.O_ReceiptCity = in.readString();
+        this.O_ReceiptDetail = in.readString();
+        this.O_ReceiptName = in.readString();
+        this.O_ReceiptPhone = in.readString();
+        this.O_ReceiptProvince = in.readString();
+        this.O_Relation_UID = in.readString();
+        this.O_RemainingAmountPayMoney = in.readString();
+        this.O_RentToSellMessage = in.readString();
+        this.O_ReturnDate = in.readString();
+        this.O_SendPoints = in.readInt();
+        this.O_SendersMoney = in.readInt();
+        this.O_Share_GetMoney = in.readInt();
+        this.O_Share_Member_ID = in.readInt();
+        this.O_Status = in.readString();
+        this.O_StoreIsUpload = in.readByte() != 0;
+        this.O_StoreUpload_pic = in.readString();
+        this.O_StoreUpload_text = in.readString();
+        this.O_StoreapplydelayreturnTime = in.readString();
+        this.O_StorerRemark = in.readString();
+        this.O_SystemResults = in.readString();
+        this.O_SystemResultsTime = in.readString();
+        this.O_TradingPattern = in.readString();
+        this.O_UID = in.readString();
+        this.O_UpdateOrderRemark = in.readString();
+        this.Store_CN = in.readString();
+        this.Store_Level = in.readInt();
+        this.Store_UID = in.readString();
+        this.Store_Phone = in.readString();
+        this.goodslist_arry = new ArrayList<GoodslistArryBean>();
+        in.readList(this.goodslist_arry, GoodslistArryBean.class.getClassLoader());
+    }
+
+    public static final Creator<OrderGenerationBean> CREATOR = new Creator<OrderGenerationBean>() {
+        @Override
+        public OrderGenerationBean createFromParcel(Parcel source) {
+            return new OrderGenerationBean(source);
+        }
+
+        @Override
+        public OrderGenerationBean[] newArray(int size) {
+            return new OrderGenerationBean[size];
+        }
+    };
 }
