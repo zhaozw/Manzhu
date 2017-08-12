@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/ll_shareshop"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_shopcover"
+        android:src="@mipmap/u583"
+        android:layout_weight="0.5"
+        android:layout_width="187.5dp"
+        android:layout_height="187.5dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_goodtitle"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="商品标题"
+            android:layout_marginTop="7.5dp"
+            android:textSize="14sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <LinearLayout
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="7.5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_goodprice"
+                android:text="售价 ¥ 0.00"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+
+            <TextView
+                android:id="@+id/tv_sharenumber"
+                android:text="已有 0 人分享"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginBottom="5dp"
+            android:gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_gravity="center"
+                android:id="@+id/tv_fan"
+                android:gravity="center"
+                android:textSize="10sp"
+                android:text="佣金"
+                android:textColor="@color/buttontext"
+                android:background="@drawable/fanmai_shape"
+                android:layout_width="32.5dp"
+                android:layout_height="@dimen/idle_item_txtwh"/>
+
+            <TextView
+                android:textColor="@color/numbertextcolor"
+                android:textSize="10sp"
+                android:text="¥"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_shareprice"
+                android:textColor="@color/numbertextcolor"
+                android:textSize="10sp"
+                android:text="120"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_sharepricexs"
+                android:textColor="@color/numbertextcolor"
+                android:textSize="10sp"
+                android:text=".00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_share"
+        android:layout_alignRight="@+id/ll_shareshop"
+        android:layout_alignBottom="@+id/ll_shareshop"
+        android:gravity="center"
+        android:background="@drawable/sharecomm_bg"
+        android:layout_width="62.5dp"
+        android:layout_height="22.5dp">
+
+
+        <ImageView
+            android:src="@mipmap/com_icon_share_2_w"
+            android:layout_width="12.5dp"
+            android:layout_height="12.5dp"/>
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:textSize="12sp"
+            android:textColor="@color/buttontext"
+            android:text="分享"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

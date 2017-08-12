@@ -553,4 +553,18 @@ public interface APIinterface {
     Call<String> getgoodlistbyshop(@Query("Page") String Page, @Query("member_uid") String member_uid, @Query("G_Type") String G_Type);
 
 
+    /**
+     * 获取分享提佣商品列表
+     * @param Page
+     * @param type_value
+     * @param goods_cate_ID
+     * @param KEYWORD
+     * @param sort_type
+     * @return
+     */
+    @GET("getgoodslist_bysharecommission")
+    Call<String> getgoodlistbySharecomm(@Query("Page") String Page, @Query("type_value") String type_value, @Query("goods_cate_ID") String goods_cate_ID, @Query("KEYWORD") String KEYWORD, @Query("sort_type") String sort_type);
+
+
+
 }

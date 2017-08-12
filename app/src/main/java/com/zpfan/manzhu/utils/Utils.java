@@ -73,10 +73,22 @@ public class Utils {
      * @return
      */
     public  static String getloginuid() {
-        String userid = SPUtils.getInstance().getString("userid", "");
+        String userid = SPUtils.getInstance().getString("useruid", "");
 
         return userid;
 
+
+    }
+
+
+    /**
+     * 获取到登陆用户的id
+     * @return
+     */
+    public  static String getloginid() {
+        String userid = SPUtils.getInstance().getString("userid", "");
+
+        return userid;
 
     }
 
@@ -139,16 +151,7 @@ public class Utils {
     }
 
 
-    public static String[] getchangedata(String data) {
-        //首先 将字符串根据，号 切割出来
-        String[] split = data.split(",");
 
-
-
-
-        return split;
-
-    }
 
 
 

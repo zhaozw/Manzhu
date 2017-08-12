@@ -93,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
     private String mIntegral;
     private String mAvailableMoney;
     private String mProvince;
+    private int mId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -312,6 +313,7 @@ public class LoginActivity extends AppCompatActivity {
                                     mUserPhone = user.getM_Phone();
                                     mCn = user.getM_UserName();
                                     mUid = user.getM_UID();
+                                    mId = user.getCoser_figure_data().getId();
                                     mIntegral = user.getMember_AvailableIntegral();
                                     mAvailableMoney = user.getMember_AvailableMoney();
                                     mProvince = user.getM_Province();
@@ -335,6 +337,7 @@ public class LoginActivity extends AppCompatActivity {
                                             SPUtils.getInstance().put("usericon", mUserAvator);
                                             SPUtils.getInstance().put("userinfo", message);
                                             SPUtils.getInstance().put("userlogin", true);
+                                            SPUtils.getInstance().put("useruid", mUid);
                                             SPUtils.getInstance().put("userid", mUid);
                                             SPUtils.getInstance().put("userjifen",mIntegral);
                                             SPUtils.getInstance().put("useryue",mAvailableMoney);

@@ -9,6 +9,7 @@ import android.os.StrictMode;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.domain.EaseUser;
+import com.mob.MobSDK;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zpfan.manzhu.utils.APIinterface;
 import com.zpfan.manzhu.utils.FontUtils;
@@ -76,7 +77,7 @@ public class Aplication extends Application {
         }
 
 
-
+        MobSDK.init(mContext);
 
     }
 

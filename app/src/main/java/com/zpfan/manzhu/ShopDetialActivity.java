@@ -1,6 +1,8 @@
 package com.zpfan.manzhu;
 
 import android.content.Intent;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,8 +33,11 @@ import com.zpfan.manzhu.adapter.ShopTuiJianAdapter;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.BussnessBean;
 import com.zpfan.manzhu.bean.ShopBean;
+import com.zpfan.manzhu.myui.CustomProgressView;
 import com.zpfan.manzhu.myui.EaseActivity;
 import com.zpfan.manzhu.myui.GlideImageLoader;
+import com.zpfan.manzhu.utils.MyScrollView;
+import com.zpfan.manzhu.utils.ScrollViewListener;
 import com.zpfan.manzhu.utils.Utils;
 
 import java.lang.reflect.Type;
@@ -115,6 +120,42 @@ public class ShopDetialActivity extends AppCompatActivity {
     RecyclerView mRvGoods;
     @BindView(R.id.rl_top)
     RelativeLayout mRlTop;
+    @BindView(R.id.myscroll)
+    MyScrollView mMyscroll;
+    @BindView(R.id.iv_topmenuback)
+    ImageView mIvTopmenuback;
+    @BindView(R.id.tv_topshopname)
+    TextView mTvTopshopname;
+    @BindView(R.id.iv_topmenu1)
+    ImageView mIvTopmenu1;
+    @BindView(R.id.ll_toppmenu)
+    LinearLayout mLlToppmenu;
+    @BindView(R.id.iv_shophome1)
+    ImageView mIvShophome1;
+    @BindView(R.id.tv_shophome1)
+    TextView mTvShophome1;
+    @BindView(R.id.ll_shophome1)
+    LinearLayout mLlShophome1;
+    @BindView(R.id.iv_shopnew1)
+    ImageView mIvShopnew1;
+    @BindView(R.id.tv_shopnew1)
+    TextView mTvShopnew1;
+    @BindView(R.id.ll_shopnew1)
+    LinearLayout mLlShopnew1;
+    @BindView(R.id.iv_shopserver1)
+    ImageView mIvShopserver1;
+    @BindView(R.id.tv_shopserver1)
+    TextView mTvShopserver1;
+    @BindView(R.id.ll_shopnserver1)
+    LinearLayout mLlShopnserver1;
+    @BindView(R.id.iv_shopidle1)
+    ImageView mIvShopidle1;
+    @BindView(R.id.tv_shopidle1)
+    TextView mTvShopidle1;
+    @BindView(R.id.ll_shopidle1)
+    LinearLayout mLlShopidle1;
+    @BindView(R.id.ll_tt)
+    LinearLayout mLlTt;
     private ShopBean mShopbean;
     private boolean isCollection = false;
     private String mGtype = "二手商品";
@@ -140,6 +181,7 @@ public class ShopDetialActivity extends AppCompatActivity {
         mTvShopname.setText(mShopbean.getS_Name());
         mTvUserlv.setText("Lv." + mShopbean.getS_LevelNumber());
         mTvShopcity.setText("（" + mShopbean.getS_Com_City() + "）");
+        mTvTopshopname.setText(mShopbean.getS_Name());
         String category = mShopbean.getShop_category();
 
         if (category.contains("|")) {
@@ -152,6 +194,26 @@ public class ShopDetialActivity extends AppCompatActivity {
             mTvShoptype2.setVisibility(View.GONE);
             mTvShoptype1.setText(category);
         }
+
+        //设置头布局不可见的监听事件
+        ScrollViewListener listener = new ScrollViewListener() {
+            @Override
+            public void onScrollChanged(MyScrollView scrollView, int x, int y, int oldx, int oldy) {
+                Rect rect = new Rect();
+                boolean rect1 = mRlTop.getGlobalVisibleRect(rect);
+
+                if (rect1) {
+                    hideTopBottom();
+                } else {
+
+                    showTopBottom();
+                }
+
+            }
+        };
+
+        mMyscroll.setListener(listener);
+
 
         ArrayList<Integer> images = new ArrayList<>();
         images.add(R.mipmap.u583);
@@ -293,44 +355,65 @@ public class ShopDetialActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.iv_topback, R.id.iv_topmenu, R.id.ll_shophome, R.id.ll_shopnew, R.id.ll_shopnserver, R.id.ll_shopidle, R.id.ll_contactshop, R.id.ll_introduction, R.id.ll_collection})
+    private void hideTopBottom() {
+        mLlToppmenu.setVisibility(View.GONE);
+        mLlTt.setVisibility(View.VISIBLE);
+    }
+
+    private void showTopBottom() {
+        mLlToppmenu.setVisibility(View.VISIBLE);
+        mLlTt.setVisibility(View.GONE);
+
+    }
+
+    @OnClick({R.id.iv_topback, R.id.iv_topmenu, R.id.ll_shophome, R.id.ll_shopnew, R.id.ll_shopnserver, R.id.ll_shopidle, R.id.ll_contactshop, R.id.ll_introduction, R.id.ll_collection,
+            R.id.iv_topmenuback, R.id.iv_topmenu1, R.id.ll_shophome1, R.id.ll_shopnew1, R.id.ll_shopnserver1, R.id.ll_shopidle1})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.iv_topmenuback:
             case R.id.iv_topback:
                 finish();
                 break;
+            case R.id.iv_topmenu1:
             case R.id.iv_topmenu:
                 //和详情的操作一样 都是打开上面的布局
             case R.id.ll_introduction:
                 showTopWindow();
 
-
                 break;
+            case R.id.ll_shophome1:
             case R.id.ll_shophome:
                 selectTag(0);
                 showHome();
+                hideTopBottom();
 
                 break;
+            case R.id.ll_shopnew1:
             case R.id.ll_shopnew:
                 //展示店铺的新商品列表
                 selectTag(1);
                 hideHome();
                 mGtype = "新商品";
                 getshopGoodList();
+                hideTopBottom();
 
 
                 break;
+            case R.id.ll_shopnserver1:
             case R.id.ll_shopnserver:
                 selectTag(2);
                 hideHome();
                 mGtype = "服务";
                 getshopGoodList();
+                hideTopBottom();
                 break;
+            case R.id.ll_shopidle1:
             case R.id.ll_shopidle:
                 selectTag(3);
                 hideHome();
                 mGtype = "二手商品";
                 getshopGoodList();
+                hideTopBottom();
                 break;
             case R.id.ll_contactshop:
                 //联系店铺的操作
@@ -449,14 +532,33 @@ public class ShopDetialActivity extends AppCompatActivity {
         TextView tvallsel = (TextView) inflate.findViewById(R.id.tv_allsel);
         TextView tvjfbl = (TextView) inflate.findViewById(R.id.tv_jfbl);
 
+        CustomProgressView cpfhsd = (CustomProgressView) inflate.findViewById(R.id.cp_fhsd);
+        CustomProgressView cpfwtd = (CustomProgressView) inflate.findViewById(R.id.cp_fwtd);
+        CustomProgressView cpmsxf = (CustomProgressView) inflate.findViewById(R.id.cp_msxf);
+
         //初始化一些数据上去
         tvshopname.setText(mShopbean.getS_Name());
         tvuserlv.setText("Lv." + mShopbean.getS_LevelNumber());
-        tvshopcity.setText("（" +mShopbean.getS_Com_Province() + "-" + mShopbean.getS_Com_City() + "）");
+        tvshopcity.setText("（" + mShopbean.getS_Com_Province() + "-" + mShopbean.getS_Com_City() + "）");
         Glide.with(this).load(mShopbean.getS_Logo()).into(ivcover);
         tvjianjie.setText(mShopbean.getS_ShopIntroduce());
         tvallsel.setText(mShopbean.getS_AllSellNumber() + "");
         tvjfbl.setText(mShopbean.getS_DisputeProportion() + "%");
+
+        //设置服务态度  等数据
+        String number = mShopbean.getBbmsxfd_number();
+        Float aFloat = Float.valueOf(number);
+        String number1 = mShopbean.getMjfhsd_number();
+        Float aFloat1 = Float.valueOf(number1);
+        String number2 = mShopbean.getMjfwtd_number();
+        Float aFloat2 = Float.valueOf(number2);
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            cpmsxf.setPercent(aFloat);
+            cpfhsd.setPercent(aFloat1);
+            cpfwtd.setPercent(aFloat2);
+        }
 
 
         ivshopcart.setOnClickListener(new View.OnClickListener() {
@@ -505,7 +607,6 @@ public class ShopDetialActivity extends AppCompatActivity {
                 }
 
 
-
             }
         });
 
@@ -514,7 +615,7 @@ public class ShopDetialActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(ShopDetialActivity.this,MainActivity.class));
+                startActivity(new Intent(ShopDetialActivity.this, MainActivity.class));
 
             }
         });
@@ -654,6 +755,18 @@ public class ShopDetialActivity extends AppCompatActivity {
                 mTvShopidle.setTextColor(getResources().getColor(R.color.secondtextcolor));
                 mIvShopserver.setImageResource(R.mipmap.com_icon_serv_ept);
                 mTvShopserver.setTextColor(getResources().getColor(R.color.secondtextcolor));
+
+
+                mIvShophome1.setImageResource(R.mipmap.type_icon_shop_2);
+                mTvShophome1.setTextColor(getResources().getColor(R.color.maintextcolor));
+                mIvShopnew1.setImageResource(R.mipmap.com_icon_new_prd_ept);
+                mTvShopnew1.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                mIvShopidle1.setImageResource(R.mipmap.com_icon_sh_ept);
+                mTvShopidle1.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                mIvShopserver1.setImageResource(R.mipmap.com_icon_serv_ept);
+                mTvShopserver1.setTextColor(getResources().getColor(R.color.secondtextcolor));
+
+
                 break;
 
             case 1:
@@ -665,6 +778,17 @@ public class ShopDetialActivity extends AppCompatActivity {
                 mTvShopidle.setTextColor(getResources().getColor(R.color.secondtextcolor));
                 mIvShopserver.setImageResource(R.mipmap.com_icon_serv_ept);
                 mTvShopserver.setTextColor(getResources().getColor(R.color.secondtextcolor));
+
+
+                mIvShophome1.setImageResource(R.mipmap.type_icon_shop_2_ept);
+                mTvShophome1.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                mIvShopnew1.setImageResource(R.mipmap.com_icon_new_prd);
+                mTvShopnew1.setTextColor(getResources().getColor(R.color.maintextcolor));
+                mIvShopidle1.setImageResource(R.mipmap.com_icon_sh_ept);
+                mTvShopidle1.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                mIvShopserver1.setImageResource(R.mipmap.com_icon_serv_ept);
+                mTvShopserver1.setTextColor(getResources().getColor(R.color.secondtextcolor));
+
 
                 break;
 
@@ -680,6 +804,16 @@ public class ShopDetialActivity extends AppCompatActivity {
                 mTvShopserver.setTextColor(getResources().getColor(R.color.maintextcolor));
 
 
+                mIvShophome1.setImageResource(R.mipmap.type_icon_shop_2_ept);
+                mTvShophome1.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                mIvShopnew1.setImageResource(R.mipmap.com_icon_new_prd_ept);
+                mTvShopnew1.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                mIvShopidle1.setImageResource(R.mipmap.com_icon_sh_ept);
+                mTvShopidle1.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                mIvShopserver1.setImageResource(R.mipmap.com_icon_serv);
+                mTvShopserver1.setTextColor(getResources().getColor(R.color.maintextcolor));
+
+
                 break;
 
             case 3:
@@ -692,6 +826,16 @@ public class ShopDetialActivity extends AppCompatActivity {
                 mTvShopidle.setTextColor(getResources().getColor(R.color.maintextcolor));
                 mIvShopserver.setImageResource(R.mipmap.com_icon_serv_ept);
                 mTvShopserver.setTextColor(getResources().getColor(R.color.secondtextcolor));
+
+
+                mIvShophome1.setImageResource(R.mipmap.type_icon_shop_2_ept);
+                mTvShophome1.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                mIvShopnew1.setImageResource(R.mipmap.com_icon_new_prd_ept);
+                mTvShopnew1.setTextColor(getResources().getColor(R.color.secondtextcolor));
+                mIvShopidle1.setImageResource(R.mipmap.com_icon_sh);
+                mTvShopidle1.setTextColor(getResources().getColor(R.color.maintextcolor));
+                mIvShopserver1.setImageResource(R.mipmap.com_icon_serv_ept);
+                mTvShopserver1.setTextColor(getResources().getColor(R.color.secondtextcolor));
 
 
                 break;

@@ -30,6 +30,8 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.google.gson.reflect.TypeToken;
 import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.listener.OnBannerListener;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -42,12 +44,14 @@ import com.zpfan.manzhu.PhotoActivity;
 import com.zpfan.manzhu.R;
 import com.zpfan.manzhu.SearchCnResultActivity;
 import com.zpfan.manzhu.SearchResultsActivity;
+import com.zpfan.manzhu.ShareCommActivity;
 import com.zpfan.manzhu.ShopCarActivity;
 import com.zpfan.manzhu.ShopListActivity;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.SearchBean;
 import com.zpfan.manzhu.bean.ShopCartbean;
 import com.zpfan.manzhu.bean.TypeBean;
+import com.zpfan.manzhu.myui.GlideImageLoader;
 import com.zpfan.manzhu.utils.MyScrollView;
 import com.zpfan.manzhu.utils.ScrollViewListener;
 import com.zpfan.manzhu.utils.Utils;
@@ -624,6 +628,38 @@ public class HomeFragment extends Fragment implements BDLocationListener {
         };
 
         mMyscroll.setListener(listener);
+        ArrayList<Integer> images = new ArrayList<>();
+        images.add(R.mipmap.share_bg);
+        images.add(R.mipmap.share_icon_pyq);
+
+
+
+        //设置图片加载器
+        mBanner.setImageLoader(new GlideImageLoader());
+        //设置图片集合
+        mBanner.setImages(images);
+        mBanner.setIndicatorGravity(BannerConfig.RIGHT);
+        //banner设置方法全部调用完毕时最后调用
+        mBanner.isAutoPlay(true);
+        mBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                if (position == 0) {
+                    //去分享提佣的界面
+                    startActivity(new Intent(getContext(), ShareCommActivity.class));
+
+
+                }
+
+
+            }
+        });
+        mBanner.start();
+
+
+
+
+
 
 
     }

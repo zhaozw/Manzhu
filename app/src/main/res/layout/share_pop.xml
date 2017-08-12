@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+                android:background="@color/transparent"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+
+    
+
+
+
+    <ImageView
+        android:layout_marginRight="22.5dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/iv_sharepig"
+        android:src="@mipmap/share_pic_zpz"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"/>
+
+    <LinearLayout
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:gravity="center"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="7.5dp"
+        android:layout_alignBottom="@+id/iv_sharepig"
+        android:layout_toLeftOf="@+id/iv_sharepig"
+        android:background="@drawable/bb_r_w"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp">
+
+        <TextView
+            android:id="@+id/tv_share"
+            android:gravity="center"
+            android:text="求分享，求扩散~~~"
+            android:textColor="#333333"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:background="@color/background"
+        android:layout_below="@+id/iv_sharepig"
+        android:id="@+id/rv_share"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"/>
+
+    <View
+        android:id="@+id/line"
+        android:layout_below="@+id/rv_share"
+        android:background="@color/stronglin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    
+    <TextView
+        android:id="@+id/tv_cancle"
+        android:background="@color/bootmbc"
+        android:textColor="@color/maintextcolor"
+        android:gravity="center"
+        android:text="取 消"
+        android:textSize="15sp"
+        android:layout_below="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"/>
+
+    <View
+        android:background="@color/threebackground"
+        android:layout_below="@+id/tv_cancle"
+        android:layout_width="match_parent"
+        android:layout_height="2.5dp"/>
+
+
+    
+
+</RelativeLayout>
