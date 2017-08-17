@@ -63,10 +63,10 @@
             <TextView
                 android:textSize="9sp"
                 android:gravity="center"
-                android:text="优惠劵"
+                android:text="优惠券"
                 android:background="@drawable/baoyou_shape"
-                android:layout_width="41.5dp"
-                android:layout_height="17.5dp"/>
+                android:layout_width="47dp"
+                android:layout_height="20dp"/>
 
             <LinearLayout
                 android:layout_marginTop="5dp"

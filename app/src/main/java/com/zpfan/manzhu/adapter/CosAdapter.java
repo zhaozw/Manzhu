@@ -79,6 +79,7 @@ public class CosAdapter extends BaseQuickAdapter<CosBean,BaseViewHolder> {
                 params.setMargins(Utils.dp2px(0),0,Utils.dp2px(10),Utils.dp2px(10));
 
                 inflate.setLayoutParams(params);
+                inflate.setTextSize(9);
                 lltag.addView(inflate);
                 ViewGroup.LayoutParams params1 = lltag.getLayoutParams();
                 params1.height = ViewGroup.LayoutParams.WRAP_CONTENT;

@@ -41,19 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-        <TextView
-            android:visibility="visible"
-            android:id="@+id/tv_baoyou"
-            android:layout_toRightOf="@+id/iv_bussness_photo"
-            android:background="@drawable/baoyou_shape"
-            android:gravity="center"
-            android:layout_gravity="center_vertical"
-            android:textSize="10sp"
-            android:textColor="@color/buttontext"
-            android:text="包邮"
-            android:layout_marginRight="5dp"
-            android:layout_width="30dp"
-            android:layout_height="15dp"/>
+
         <TextView
             android:id="@+id/tv_title"
             android:visibility="visible"
@@ -66,6 +54,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         </LinearLayout>
+
+    <TextView
+        android:visibility="visible"
+        android:id="@+id/tv_baoyou"
+        android:layout_alignTop="@+id/ll_baoyou"
+        android:layout_alignLeft="@+id/ll_baoyou"
+        android:background="@drawable/baoyou_shape"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:textSize="10sp"
+        android:textColor="@color/buttontext"
+        android:text="包邮"
+        android:layout_marginRight="5dp"
+        android:layout_width="30dp"
+        android:layout_height="15dp"/>
+
 
         <!--贩卖的条目-->
         <LinearLayout
@@ -119,7 +123,7 @@
             android:layout_marginLeft="5dp"
             android:textColor="@color/secondtextcolor"
             android:textSize="10sp"
-            android:text="（包含定金：¥ 999.99）"
+            android:text="（含定金：¥ 999.99）"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

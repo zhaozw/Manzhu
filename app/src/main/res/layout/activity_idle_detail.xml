@@ -16,7 +16,6 @@
     <com.zpfan.manzhu.utils.MyScrollView
         android:id="@+id/myscrollview"
         android:layout_centerInParent="true"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
@@ -28,8 +27,6 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
 
 
             <!--  顶部的图片-->
@@ -76,8 +73,6 @@
                     android:layout_width="@dimen/detail_top_iconrwh"
                     android:layout_height="@dimen/detail_top_iconrwh"/>
 
-
-
             </RelativeLayout>
 
         <!-- 包邮的一栏  和分享按钮-->
@@ -91,11 +86,11 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/detail_llbaoyou_h">
-
             <TextView
                 android:visibility="visible"
                 android:id="@+id/tv_baoyou"
-                android:layout_toRightOf="@+id/iv_bussness_photo"
+                android:layout_alignLeft="@+id/ll_freepostage"
+                android:layout_alignTop="@+id/ll_freepostage"
                 android:background="@drawable/baoyou_shape"
                 android:gravity="center"
                 android:textSize="10sp"
@@ -104,7 +99,22 @@
                 android:layout_marginRight="7.5dp"
                 android:layout_width="32.5dp"
                 android:layout_height="17.5dp"/>
+
             <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_idle"
+                android:gravity="center"
+                android:layout_marginRight="3dp"
+                android:text="闲"
+                android:textSize="10sp"
+                android:textColor="@color/buttontext"
+                android:background="@drawable/item_photo_txt"
+                android:layout_width="@dimen/photo_itemtxtwh"
+                android:layout_height="@dimen/photo_itemtxtwh"/>
+
+
+
+            <com.zpfan.manzhu.myui.AlignTextView
                 android:layout_marginRight="7.5dp"
                 android:id="@+id/tv_title"
                 android:visibility="visible"
@@ -209,7 +219,7 @@
                 android:textColor="@color/secondtextcolor"
                 android:textSize="10sp"
                 android:layout_marginLeft="7.5dp"
-                android:text="(包含定金：999.99)"
+                android:text="(含定金：999.99)"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -300,7 +310,7 @@
                 android:gravity="center"
                 android:textSize="14sp"
                 android:textColor="@color/pricetextcolor"
-                android:text="¥ "
+                android:text=" ¥ "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -330,7 +340,7 @@
 
             <TextView
                 android:layout_gravity="bottom"
-                android:text="/天"
+                android:text=" / 天"
                 android:textColor="@color/secondtextcolor"
                 android:textSize="14sp"
                 android:layout_marginLeft="1dp"
@@ -602,7 +612,7 @@
             android:id="@+id/tv_kuaidi"
             android:textSize="10sp"
             android:textColor="@color/secondtextcolor"
-            android:text="快递:¥ "
+            android:text="快递：¥ "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -651,10 +661,19 @@
 
         </LinearLayout>
 
+        <View
+            android:id="@+id/line5"
+            android:background="@color/weaklin"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/ll_express"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        
         <!-- 宝贝参数的条目-->
         <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/ll_express"
+            android:layout_below="@+id/line5"
             android:id="@+id/ll_babayparame"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
@@ -687,6 +706,8 @@
         <View
             android:id="@+id/dashline"
             android:layout_below="@+id/ll_babayparame"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/dash_line_shape"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
@@ -699,12 +720,13 @@
             android:layout_below="@+id/ll_babayparame"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/detail_babayouth">
+            android:layout_height="wrap_content">
 
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_marginTop="12.5dp"
+                android:layout_marginBottom="12.5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 
@@ -758,6 +780,7 @@
 
             <LinearLayout
                 android:orientation="vertical"
+                android:layout_marginBottom="12.5dp"
                 android:layout_marginTop="12.5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
@@ -820,6 +843,7 @@
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
+                android:layout_marginBottom="12.5dp"
                 android:layout_marginTop="12.5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -891,7 +915,7 @@
             android:layout_height="@dimen/detail_couponhwh"/>
 
         <TextView
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="12.5dp"
             android:textColor="@color/maintextcolor"
             android:textSize="14sp"
             android:text="本店铺有"
@@ -910,7 +934,7 @@
         <TextView
             android:textColor="@color/maintextcolor"
             android:textSize="14sp"
-            android:text="张优惠劵可领用"
+            android:text="张优惠券可领用"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -1180,6 +1204,14 @@
 
 
             </LinearLayout>
+
+            <View
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/weaklin"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            
             <!--  下面显示的数据 -->
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_comment"
@@ -1324,8 +1356,8 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:src="@mipmap/com_icon_bmenu"
-                android:layout_width="20dp"
-                android:layout_height="20dp"/>
+                android:layout_width="17.5dp"
+                android:layout_height="17.5dp"/>
 
 
 
@@ -1449,7 +1481,7 @@
                 <TextView
                     android:id="@+id/tv_shaixuan"
                     android:text="相关COS"
-                    android:layout_marginLeft="7.5dp"
+                    android:layout_marginLeft="5dp"
                     android:textColor="@color/secondtextcolor"
                     android:textSize="12sp"
                     android:layout_width="wrap_content"

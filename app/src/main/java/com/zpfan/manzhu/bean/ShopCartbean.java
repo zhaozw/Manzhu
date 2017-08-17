@@ -214,6 +214,7 @@ public class ShopCartbean implements Parcelable {
 
         public static class CargoodslistBean implements Parcelable {
 
+
             @Override
             public String toString() {
                 return "CargoodslistBean{" +
@@ -646,6 +647,17 @@ public class ShopCartbean implements Parcelable {
                 private String yunfei;
                 private String youhuijuan;
                 private String jifen;
+                private String server_unit_string;
+
+
+
+                public String getServer_unit_string() {
+                    return server_unit_string;
+                }
+
+                public void setServer_unit_string(String server_unit_string) {
+                    this.server_unit_string = server_unit_string;
+                }
 
                 public String getYouhuijuan() {
                     return youhuijuan;

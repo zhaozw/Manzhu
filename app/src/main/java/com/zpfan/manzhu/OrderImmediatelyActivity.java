@@ -305,7 +305,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                 //商品有规格 但是不知道有没有 具体的规格
                 if (mDetail.getMsp() == null) {
                     BussnessBean.GoodsSpecificationsBean bean = mSpecifications.get(0);
-                    String values = bean.getPS_AttributeValues();
+                    String values = bean.getPS_AttributeValues().replace(",","，");
                     mTvFormat.setText(values);
                     mTvCheckformate.setText(values);
                     String price = bean.getPS_FixedPrice();
@@ -337,7 +337,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                 } else {
                     //商品有具体的规格
                     BussnessBean.GoodsSpecificationsBean msp = mDetail.getMsp();
-                    String values = msp.getPS_AttributeValues();
+                    String values = msp.getPS_AttributeValues().replace(",","，");
                     mTvFormat.setText(values);
                     mTvCheckformate.setText(values);
                     String price = msp.getPS_FixedPrice();
@@ -453,7 +453,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                 //商品有规格 但是不知道有没有 具体的规格
                 if (mDetail.getMsp() == null) {
                     BussnessBean.GoodsSpecificationsBean bean = mSpecifications.get(0);
-                    String values = bean.getPS_AttributeValues();
+                    String values = bean.getPS_AttributeValues().replace(",","，");
                     mTvFormat.setText(values);
                     mTvCheckformate.setText(values);
                     mTvGoodprice.setText(bean.getPS_FixedPrice());
@@ -467,7 +467,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                 } else {
                     //商品有具体的规格
                     BussnessBean.GoodsSpecificationsBean msp = mDetail.getMsp();
-                    String values = msp.getPS_AttributeValues();
+                    String values = msp.getPS_AttributeValues().replace(",","，");
                     mTvFormat.setText(values);
                     mTvCheckformate.setText(values);
                     mTvGoodprice.setText(msp.getPS_FixedPrice());
@@ -519,7 +519,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
         //设置数量
         mTvCount.setText(mDetail.getBuyCount() + "");
-        mTvCarcount.setText("x" + mDetail.getBuyCount());
+        mTvCarcount.setText("x " + mDetail.getBuyCount());
 
         //设置优惠劵
         mTvYouhuijuan.setText("0.00");
@@ -842,7 +842,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
 
                 //数量也改为1
                 mTvCount.setText("1");
-                mTvCarcount.setText("x" + 1);
+                mTvCarcount.setText("x " + 1);
 
                 //在完成编辑后  把价格修改了  如果有规格 要修改 规格的价格
                 String s3 = mEtGoodmoney.getText().toString();
@@ -930,7 +930,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                     mBtUp.setClickable(true);
                 }
                 mTvCount.setText(integer + "");
-                mTvCarcount.setText("x" + integer);
+                mTvCarcount.setText("x " + integer);
                 calculationMoney(false);
 
                 break;
@@ -949,7 +949,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                 }
 
                 mTvCount.setText(integer1 + "");
-                mTvCarcount.setText("x" + integer1);
+                mTvCarcount.setText("x " + integer1);
                 calculationMoney(false);
 
                 break;
@@ -964,7 +964,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                         BussnessBean.GoodsSpecificationsBean bean = mSpecifications.get(position);
-                        String values = bean.getPS_AttributeValues();
+                        String values = bean.getPS_AttributeValues().replace(",","，");
                         mTvCheckformate.setText(values);
                         mTvFormat.setText(values);
                         String price1 = bean.getPS_FixedPrice();
@@ -1775,7 +1775,7 @@ public class OrderImmediatelyActivity extends AppCompatActivity {
              map.put("time", "");
             mChecktimedata = data.getParcelableArrayListExtra("checkdata");
             mTvCount.setText(mChecktimedata.size() + "");
-            mTvCarcount.setText("x" + mChecktimedata.size());
+            mTvCarcount.setText("x " + mChecktimedata.size());
 
             for (ReservationTimeBean bean : mChecktimedata) {
                 for (ReservationTimeBean timeBean : mTimeData) {

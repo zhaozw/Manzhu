@@ -9,6 +9,7 @@
     tools:context="com.zpfan.manzhu.SplashActivity">
 
     <ImageView
+         android:id="@+id/iv_cover"
         android:layout_alignParentTop="true"
         android:src="@mipmap/sc_1"
         android:scaleType="fitXY"
@@ -44,7 +45,27 @@
 
 
 
+    <LinearLayout
+        android:layout_alignParentRight="true"
+        android:id="@+id/ll_skip"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/splsh_skip_selector"
+        android:clickable="true"
+        android:layout_width="75dp"
+        android:layout_height="25dp">
+        
+        <TextView
+            android:id="@+id/tv_time"
+            android:textColor="@drawable/orde_generation_textcolor_selector1"
+            android:text="5s 跳过"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
+
+
+    </LinearLayout>
 
 
 </RelativeLayout>

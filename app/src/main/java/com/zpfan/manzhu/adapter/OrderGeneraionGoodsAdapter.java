@@ -26,7 +26,7 @@ public class OrderGeneraionGoodsAdapter extends BaseQuickAdapter<OrderGeneration
     protected void convert(BaseViewHolder helper, OrderGenerationBean.GoodslistArryBean item) {
         helper.setText(R.id.tv_goodtitle, item.getGoods_title())
                 .setText(R.id.tv_goodformat, item.getGoods_specification())
-                .setText(R.id.tv_goodcount, "x" + item.getGoods_count())
+                .setText(R.id.tv_goodcount, "x " + item.getGoods_count())
                 .setText(R.id.tv_goodprice, item.getGoods_money());
 
         RoundedImageView ivcover = helper.getView(R.id.iv_shopcover);

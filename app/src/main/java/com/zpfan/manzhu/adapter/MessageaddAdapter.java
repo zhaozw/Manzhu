@@ -2,16 +2,13 @@ package com.zpfan.manzhu.adapter;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -57,6 +54,12 @@ public class MessageaddAdapter extends BaseQuickAdapter<UserBean,BaseViewHolder>
         helper.setText(R.id.tv_dizhi, item.getM_Province() + " -  " + item.getM_City());
         helper.setText(R.id.tv_userlv, "Lv." +item.getN_AllLevel());
 
+        helper.addOnClickListener(R.id.iv_avator)
+                .addOnClickListener(R.id.ll_userinfo)
+                .addOnClickListener(R.id.tv_userlv);
+
+
+
 
         ImageView view = helper.getView(R.id.iv_manor);
         if (item.getM_Sex().equals("男")) {
@@ -91,7 +94,7 @@ public class MessageaddAdapter extends BaseQuickAdapter<UserBean,BaseViewHolder>
 
         final LinearLayout llsend = helper.getView(R.id.ll_sendmessage);
 
-                final TextView id = (TextView) llsend.findViewById(R.id.tv_sendmessage);
+               /* final TextView id = (TextView) llsend.findViewById(R.id.tv_sendmessage);
                 final ImageView icon = (ImageView) llsend.findViewById(R.id.iv_sendicon);
 
         llsend.setOnTouchListener(new View.OnTouchListener() {
@@ -122,7 +125,7 @@ public class MessageaddAdapter extends BaseQuickAdapter<UserBean,BaseViewHolder>
                 }
                 return false;
             }
-        });
+        });*/
 
 
         llsend.setOnClickListener(new View.OnClickListener() {

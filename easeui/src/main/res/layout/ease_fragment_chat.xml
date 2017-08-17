@@ -23,16 +23,17 @@
 
         <ImageView
             android:id="@+id/iv_top_back"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/com_icon_back"
+            android:layout_centerVertical="true"
             android:scaleType="centerInside"
             android:layout_width="@dimen/topmenuwh"
-            android:layout_height="match_parent"/>
+            android:layout_height="@dimen/topmenuwh"/>
 
 
         <TextView
             android:id="@+id/tv_top_text"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:layout_centerInParent="true"
             android:textColor="@color/maintextcolor"
             android:text="聊天对象cn"

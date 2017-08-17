@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-
               android:background="#f777"
-
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
     <!--  上面的选项标签 -->
     <LinearLayout
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:background="@color/bootmbc"
         android:orientation="horizontal"
         android:gravity="center"
@@ -78,11 +78,17 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:background="@color/bootmbc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <View
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:background="@color/stronglin"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
-
+    </LinearLayout>
     <TextView
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
@@ -91,7 +97,7 @@
         android:gravity="left|center_vertical"
         android:textSize="14sp"
         android:textColor="@color/maintextcolor"
-        android:text="当前排序: 全部"
+        android:text="当前排序: "
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
     <View
@@ -116,7 +122,7 @@
         android:background="@color/bootmbc"
         android:visibility="gone"
         android:paddingTop="20dp"
-        android:paddingBottom="20dp"
+        android:paddingBottom="15dp"
         android:id="@+id/ll_button"
         android:gravity="center"
         android:orientation="horizontal"
@@ -124,6 +130,7 @@
         android:layout_height="80dp">
 
         <Button
+            android:textSize="15sp"
             android:id="@+id/bt_cancel"
             android:background="@drawable/pop_button_cancle_selector"
             android:text="取 消"
@@ -131,10 +138,11 @@
             android:layout_width="115dp"
             android:layout_height="37dp"/>
         <Button
+            android:textSize="15sp"
             android:id="@+id/bt_import"
             android:textColor="@color/maintextcolor"
             android:background="@drawable/pop_button_import_selector"
-            android:text="提交"
+            android:text="提 交"
             android:layout_marginLeft="20dp"
             android:layout_width="115dp"
             android:layout_height="37dp"/>

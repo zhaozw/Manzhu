@@ -5,10 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.zpfan.manzhu.adapter.MessageaddAdapter;
 import com.zpfan.manzhu.bean.AvatorBean;
@@ -75,9 +76,18 @@ public class SearchCnResultActivity extends AppCompatActivity {
                     Type type1 = new TypeToken<ArrayList<UserBean>>() {
                     }.getType();
 
-                    ArrayList<UserBean> userBeen = Utils.gson.fromJson(json, type1);
+                    final ArrayList<UserBean> userBeen = Utils.gson.fromJson(json, type1);
 
-                    MessageaddAdapter messageaddAdapter = new MessageaddAdapter(R.layout.message_add_item, userBeen);
+                    MessageaddAdapter messageaddAdapter = new MessageaddAdapter(R.layout.search_cn_item, userBeen);
+                    messageaddAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                        @Override
+                        public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                            Intent intent = new Intent(SearchCnResultActivity.this,UserSpaceActivity.class);
+                            intent.putExtra("m_uid",userBeen.get(position).getM_UID());
+                            startActivity(intent);
+
+                        }
+                    });
                     mRvCn.setAdapter(messageaddAdapter);
                 } else {
 

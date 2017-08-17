@@ -12,6 +12,7 @@
         android:layout_height="2.5dp"/>
     <ImageView
         android:visibility="visible"
+        android:background="@color/background"
         android:id="@+id/iv_photo"
         android:layout_below="@+id/line"
         android:src="@mipmap/u684"
@@ -61,18 +62,25 @@
 
     </LinearLayout>
 
-
+    <LinearLayout
+        android:visibility="visible"
+        android:id="@+id/ll_xian"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/iv_photo"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <TextView
         android:visibility="visible"
         android:id="@+id/tv_idle"
         android:gravity="center"
         android:layout_marginRight="3dp"
         android:text="闲"
-        android:textSize="10sp"
+        android:textSize="11sp"
         android:textColor="@color/buttontext"
         android:background="@drawable/item_photo_txt"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+
         android:layout_below="@+id/iv_photo"
         android:layout_width="@dimen/photo_itemtxtwh"
         android:layout_height="@dimen/photo_itemtxtwh"/>
@@ -88,14 +96,15 @@
         android:layout_alignTop="@+id/tv_idle"
         android:layout_toRightOf="@+id/tv_idle"
         android:layout_toEndOf="@+id/tv_idle"/>
+    </LinearLayout>
 
     <LinearLayout
         android:visibility="visible"
         android:id="@+id/ll_price"
-        android:layout_alignLeft="@+id/tv_idle"
+        android:layout_alignLeft="@+id/ll_xian"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/tv_idle"
+        android:layout_below="@+id/ll_xian"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
@@ -105,7 +114,7 @@
             android:textSize="10sp"
             android:textColor="@color/pricetextcolor"
             android:text="¥ "
-            android:layout_width="6dp"
+            android:layout_width="wrap_content"
             android:layout_height="14dp"/>
 
         <TextView
@@ -159,7 +168,7 @@
         android:visibility="visible"
         android:gravity="center"
         android:layout_alignBottom="@+id/ll_price"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="15dp"
         android:layout_alignTop="@+id/iv_more"
         android:layout_toLeftOf="@+id/iv_more"
         android:id="@+id/tv_provice"
@@ -178,7 +187,7 @@
         android:src="@drawable/ic_launcher"
         android:id="@+id/iv_avator"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_width="@dimen/idle_item_avatorwh"
         android:layout_height="@dimen/idle_item_avatorwh"/>
 
@@ -187,13 +196,16 @@
         android:id="@+id/tv_userlv"
         android:gravity="center"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:layout_alignRight="@+id/iv_avator"
+        android:layout_alignTop="@+id/iv_avator"
         android:background="@drawable/message_leve_bg"
         android:textColor="@color/buttontext"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:text="Lv.9"
         android:textSize="8sp"
-        android:layout_width="35dp"
+        android:layout_width="wrap_content"
         android:layout_height="15dp"/>
 
 
@@ -205,23 +217,23 @@
         android:layout_toRightOf="@id/iv_avator"
         android:layout_marginLeft="12.5dp"
         android:orientation="horizontal"
-        android:layout_alignTop="@+id/iv_avator"
+        android:layout_marginTop="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/iv_shop"
             android:src="@mipmap/type_icon_shop"
             android:layout_width="@dimen/idle_item_shopwh"
             android:layout_height="@dimen/idle_item_shopwh"/>
 
         <TextView
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/tv_name"
-            android:layout_marginLeft="@dimen/itemshopiconr"
+            android:layout_marginLeft="5dp"
             android:gravity="center_vertical"
-            android:textSize="17sp"
+            android:textSize="18sp"
             android:maxWidth="100dp"
             android:textColor="@color/maintextcolor"
             android:text="店铺名"
@@ -230,7 +242,7 @@
             android:layout_height="25dp"/>
 
         <ImageView
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/iv_manor"
             android:layout_marginLeft="5dp"
             android:src="@mipmap/com_icon_male"
@@ -244,6 +256,7 @@
     <TextView
         android:visibility="gone"
         android:id="@+id/tv_dizhi"
+        android:layout_marginTop="7.5dp"
         android:textSize="14sp"
         android:textColor="@color/secondtextcolor"
         android:text="四川-成都"
@@ -257,7 +270,7 @@
         android:visibility="gone"
         android:id="@+id/ll_leve"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="22.5dp"
         android:layout_below="@+id/iv_avator"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -314,13 +327,13 @@
             android:text="4.5"
             android:textColor="@color/stronglin"
             android:textSize="12sp"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="7.5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
             android:textSize="12sp"
             android:textColor="@color/secondtextcolor"
-            android:layout_marginLeft="12.5dp"
+            android:layout_marginLeft="10dp"
             android:text="总销量"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -328,7 +341,7 @@
             android:id="@+id/tv_salenumber"
             android:textSize="12sp"
             android:textColor="@color/secondtextcolor"
-            android:layout_marginLeft="12.5dp"
+            android:layout_marginLeft="10dp"
             android:text="234"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -374,8 +387,8 @@
 
         </LinearLayout>
         <View
-            android:layout_weight="1"
-            android:layout_width="0dp"
+
+            android:layout_width="55dp"
             android:layout_height="0dp"/>
         <LinearLayout
             android:layout_marginRight="15dp"
@@ -407,7 +420,7 @@
         android:visibility="gone"
         android:id="@+id/ll_score"
         android:gravity="center"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="40dp"
         android:layout_below="@+id/ll_shop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

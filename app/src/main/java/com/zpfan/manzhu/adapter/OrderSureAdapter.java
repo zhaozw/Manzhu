@@ -120,6 +120,13 @@ public class OrderSureAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                             }
                         });
 
+                        dialog.setonCloseClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+
                         dialog.setonsureClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

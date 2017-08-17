@@ -20,8 +20,6 @@
         android:layout_height="45dp"/>
 
     <LinearLayout
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
         android:gravity="center"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="7.5dp"
@@ -33,16 +31,12 @@
 
         <TextView
             android:id="@+id/tv_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="求分享，求扩散~~~"
             android:textColor="#333333"
-            android:textSize="12sp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
-
-
-
-
+            android:textSize="12sp"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -50,13 +44,13 @@
         android:paddingBottom="20dp"
         android:background="@color/background"
         android:layout_below="@+id/iv_sharepig"
-        android:id="@+id/rv_share"
+        android:id="@+id/rv_popshare"
         android:layout_width="match_parent"
         android:layout_height="115dp"/>
 
     <View
         android:id="@+id/line"
-        android:layout_below="@+id/rv_share"
+        android:layout_below="@+id/rv_popshare"
         android:background="@color/stronglin"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>

@@ -39,6 +39,8 @@
         <TextView
             android:id="@+id/tv_change1"
             android:maxWidth="75dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/secondtextcolor"
             android:textSize="8sp"
             android:layout_marginTop="7.5dp"
             android:text="正好有卖家想换的宝贝，通知TA"
@@ -91,6 +93,8 @@
             android:id="@+id/tv_rent1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/secondtextcolor"
+            android:gravity="center_horizontal"
             android:layout_marginTop="7.5dp"
             android:maxWidth="75dp"
             android:text="只需支付租金，用完后还给卖家就行啦"
@@ -138,7 +142,9 @@
         <TextView
             android:maxWidth="75dp"
             android:textSize="8sp"
+            android:textColor="@color/secondtextcolor"
             android:layout_marginTop="7.5dp"
+            android:gravity="center_horizontal"
             android:text="付款后，本宝贝就归我啦"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

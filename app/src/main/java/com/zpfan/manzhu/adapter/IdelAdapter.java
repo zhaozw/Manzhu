@@ -24,6 +24,7 @@ import com.zpfan.manzhu.LoginActivity;
 import com.zpfan.manzhu.R;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.BussnessBean;
+import com.zpfan.manzhu.myui.AlignTextView;
 import com.zpfan.manzhu.myui.MyToast;
 import com.zpfan.manzhu.utils.Utils;
 
@@ -70,7 +71,7 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
         final ImageView  mBussnessphoto = helper.getView(R.id.iv_bussness_photo);
         final TextView  mBussnesstag = helper.getView(R.id.tv_bussnesstag);
         final TextView mBaoyou = helper.getView(R.id.tv_baoyou);
-        final TextView  mTitle = helper.getView(R.id.tv_title);
+        final AlignTextView mTitle = helper.getView(R.id.tv_title);
         final LinearLayout mFanmai = helper.getView(R.id.ll_fanmai);
         final LinearLayout mZu = helper.getView(R.id.ll_zu);
         final LinearLayout mHuan = helper.getView(R.id.ll_huan);
@@ -91,14 +92,15 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
         //设置商品的封面
         Glide.with(mContext).load(item.getG_Cover()).into(mBussnessphoto);
 
+        //设置是否包邮
         if (item.isG_IsFreeShip()) {
             mBaoyou.setVisibility(View.VISIBLE);
-           // mBaoyou.getLayoutParams()
 
+            mTitle.setText("         " + item.getG_Title());
         } else {
             mBaoyou.setVisibility(View.GONE);
+            mTitle.setText( item.getG_Title());
         }
-        helper.setText(R.id.tv_title, item.getG_Title());
 
         //是不是要换的商品
         if (item.isG_IsChange()) {
@@ -113,20 +115,97 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
                 //就显示一个
                 if (split[0].length() > 0) {
                     String[] split1 = split[0].split("\\|");
-                    helper.setText(R.id.tv_change1, split1[2].substring(1) + " | " + split1[3] ).setText(R.id.tv_more,"");
+                    String type = "";
+                    if (split1[2].contains("服装")) {
+                        type = "服";
+                    } else if (split1[2].contains("道具")) {
+                        type = "具";
+                    }else if (split1[2].contains("假毛")) {
+                        type = "毛";
+                    }else if (split1[2].contains("鞋靴")) {
+                        type = "鞋";
+                    }else if (split1[2].contains("周边")) {
+                        type = "其";
+                    }else {
+                        type = split1[2].substring(1);
+                    }
+
+
+                    helper.setText(R.id.tv_change1, type + " | " + split1[3] ).setText(R.id.tv_more,"");
                 }
                 change2.setVisibility(View.GONE);
             } else if (split.length == 2){
                 //就显示两个
                 String[] split1 = split[0].split("\\|");
                 String[] split2 = split[1].split("\\|");
-                helper.setText(R.id.tv_change1, split1[2].substring(1) + " | " + split1[3]).setText(R.id.tv_change2,split2[2].substring(1) + " | " + split2[3]).setText(R.id.tv_more,"");
+
+                String type = "";
+                if (split1[2].contains("服装")) {
+                    type = "服";
+                } else if (split1[2].contains("道具")) {
+                    type = "具";
+                }else if (split1[2].contains("假毛")) {
+                    type = "毛";
+                }else if (split1[2].contains("鞋靴")) {
+                    type = "鞋";
+                }else if (split1[2].contains("周边")) {
+                    type = "其";
+                } else {
+                    type = split1[2].substring(1);
+                }
+
+                String type1 = "";
+                if (split2[2].contains("服装")) {
+                    type1 = "服";
+                } else if (split1[2].contains("道具")) {
+                    type1 = "具";
+                }else if (split1[2].contains("假毛")) {
+                    type1 = "毛";
+                }else if (split1[2].contains("鞋靴")) {
+                    type1 = "鞋";
+                }else if (split1[2].contains("周边")) {
+                    type1 = "其";
+                }else {
+                    type1 = split2[2].substring(1);
+                }
+
+
+                helper.setText(R.id.tv_change1, type + " | " + split1[3]).setText(R.id.tv_change2,type1 + " | " + split2[3]).setText(R.id.tv_more,"");
 
             } else if (split.length > 2) {
                 //还是显示两个  和等
                 String[] split1 = split[0].split("\\|");
                 String[] split2 = split[1].split("\\|");
-                helper.setText(R.id.tv_change1, split1[2].substring(1) + " | " + split1[3]).setText(R.id.tv_change2,split2[2].substring(1) + " | " + split2[3]).setText(R.id.tv_more,"等");
+                String type = "";
+                if (split1[2].contains("服装")) {
+                    type = "服";
+                } else if (split1[2].contains("道具")) {
+                    type = "具";
+                }else if (split1[2].contains("假毛")) {
+                    type = "毛";
+                }else if (split1[2].contains("鞋靴")) {
+                    type = "鞋";
+                } else if (split1[2].contains("周边")) {
+                    type = "其";
+                } else {
+                    type = split1[2].substring(1);
+                }
+
+                String type1 = "";
+                if (split2[2].contains("服装")) {
+                    type1 = "服";
+                } else if (split1[2].contains("道具")) {
+                    type1 = "具";
+                }else if (split1[2].contains("假毛")) {
+                    type1 = "毛";
+                }else if (split1[2].contains("鞋靴")) {
+                    type1 = "鞋";
+                } else if (split1[2].contains("周边")) {
+                    type1 = "其";
+                } else {
+                    type1 = split2[2].substring(1);
+                }
+                helper.setText(R.id.tv_change1, type + " | " + split1[3]).setText(R.id.tv_change2,type1 + " | " + split2[3]).setText(R.id.tv_more,"等");
 
             }
 

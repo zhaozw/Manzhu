@@ -13,7 +13,7 @@
     <com.zpfan.manzhu.myui.TopLin
 
         android:background="@color/bootmbc"
-        app:toptext = "店铺优惠劵"
+        app:toptext = "店铺优惠券"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

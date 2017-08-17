@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-
+                android:background="@color/bootmbc"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
@@ -13,6 +13,7 @@
 
     <LinearLayout
         android:paddingLeft="10dp"
+        android:background="@color/bootmbc"
         android:paddingRight="10dp"
         android:gravity="center_vertical"
         android:layout_width="match_parent"
@@ -50,7 +51,7 @@
             android:text="Lv.9"
             android:textSize="8sp"
             android:layout_width="wrap_content"
-            android:layout_height="15dp"/>
+            android:layout_height="12dp"/>
 
         <View
             android:layout_weight="1"
@@ -87,7 +88,7 @@
             android:orientation="horizontal"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
-            android:layout_width="wrap_content"
+            android:layout_width="82.5dp"
             android:layout_height="25dp">
         
             <ImageView
@@ -112,6 +113,7 @@
 
 
     <android.support.v7.widget.RecyclerView
+        android:background="@color/bootmbc"
         android:visibility="visible"
         android:id="@+id/rv_shopcartitem"
         android:layout_width="match_parent"

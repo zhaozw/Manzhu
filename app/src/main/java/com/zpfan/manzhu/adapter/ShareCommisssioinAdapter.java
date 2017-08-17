@@ -18,8 +18,11 @@ import java.util.List;
 
 public class ShareCommisssioinAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
 
+    private final List<BussnessBean> data;
+
     public ShareCommisssioinAdapter(@LayoutRes int layoutResId, @Nullable List<BussnessBean> data) {
         super(layoutResId, data);
+        this.data = data;
     }
 
     @Override

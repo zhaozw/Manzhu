@@ -2,7 +2,7 @@
 <!-- 720 * 1280 尺寸的dimens配置文件 -->
 <resources>
     <!-- 底部导航栏的高度 -->
-    <dimen name="bootm_heigh"> 55dp </dimen>
+    <dimen name="bootm_heigh"> 50dp </dimen>
     <dimen name="bootm_img_heighandweigh"> 25dp </dimen>
     <dimen name="bootm_img_margintop"> 5dp </dimen>
     <!-- 底部导航栏 距离底部的距离-->
@@ -22,7 +22,8 @@
     <!-- 分隔栏的高度  15px-->
     <dimen name="separatedline"> 7.5dp </dimen>
 
-
+    <!--   提示文字的高度  12dp-->
+    <dimen name="prompttexth"> 12dp </dimen>
 
 
     <!--                  登陆界面                    -->
@@ -229,7 +230,7 @@
     <dimen name="itemiconmarr">   10dp </dimen>
 
     <!--   条目的高度  120px -->
-    <dimen name="itemh">   65dp  </dimen>
+    <dimen name="itemh">   60dp  </dimen>
 
     <!--   未读消息的宽高   35px-->
     <dimen name="itemunredicon">  18dp </dimen>
@@ -253,8 +254,8 @@
     <!--   搜索框距离左边  和右边的距离  20px -->
     <dimen name="addmarglr">  10dp  </dimen>
 
-    <!--     搜索图标的宽高   40px -->
-    <dimen name="addseachimg">  20dp </dimen>
+    <!--     搜索图标的宽高   35px -->
+    <dimen name="addseachimg">  17.5dp </dimen>
 
     <!--    距离顶部的高度  50px -->
     <dimen name="addseachmagt">  20dp  </dimen>
@@ -276,7 +277,7 @@
 
 
     <!--   发送消息按钮上的 图标的宽高  25px  -->
-    <dimen name="addsendmessageicon">   13dp  </dimen>
+    <dimen name="addsendmessageicon">   12.5dp  </dimen>
 
 
     <!--      ******    聊天界面 ******* -->
@@ -367,7 +368,7 @@
 
 
     <!--   八个常用布局 显示高度 120px -->
-    <dimen name="home_hotllh"> 60dp </dimen>
+    <dimen name="home_hotllh"> 85dp </dimen>
     
     <!--    八个模块距离 顶部的高度  45px-->
     <dimen name="home_hotmt"> 23dp </dimen>
@@ -441,8 +442,8 @@
     <!--  购物车悬浮模块   直径90-->
     <dimen name="home_bottom_shopcartwh"> 45dp </dimen>
 
-    <!--    购物车 图标60* 60-->
-    <dimen name="home_bottom_shopcaticon"> 30dp  </dimen>
+    <!--    购物车 图标45* 45-->
+    <dimen name="home_bottom_shopcaticon"> 22.5dp  </dimen>
 
     <!--  滑动到最上面距离底部的距离   220px-->
     <dimen name="home_scrolltopmb">  110dp </dimen>

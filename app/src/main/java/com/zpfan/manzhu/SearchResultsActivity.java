@@ -102,7 +102,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         mTvsearchtop1 = (TextView) mStProduct.findViewById(R.id.tv_searchtop1);
         mTvsearchtop2 = (TextView) mStProduct.findViewById(R.id.tv_searchtop2);
         mTvsearchkey = (TextView) mStProduct.findViewById(R.id.tv_searchkeyword);
-        mTvsearchkey.setText(mKey);
+        mTvsearchkey.setText(" | " +mKey);
 
         mRvProduct.setLayoutManager(new LinearLayoutManager(SearchResultsActivity.this));
         llsearchtop1.setOnClickListener(this);

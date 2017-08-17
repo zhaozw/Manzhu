@@ -36,17 +36,19 @@
         android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="25dp"
-        android:layout_alignLeft="@+id/iv_avator"
+       android:layout_alignRight="@+id/iv_avator"
         android:background="@drawable/message_leve_bg"
         android:textColor="@color/buttontext"
         android:text="Lv.9"
         android:layout_marginTop="3dp"
-        android:textSize="10sp"
-        android:layout_width="35dp"
-        android:layout_height="15dp"/>
+        android:textSize="8sp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="12dp"/>
     </RelativeLayout>
     <LinearLayout
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="10dp"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -86,7 +88,7 @@
         android:textColor="@color/secondtextcolor"
         android:layout_marginTop="3dp"
         android:layout_below="@+id/ll_info"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:layout_alignLeft="@+id/ll_info"
         android:text="最后一条聊天记录"
         android:maxWidth="200dp"

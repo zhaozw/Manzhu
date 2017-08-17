@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zpfan.manzhu.R;
@@ -27,6 +28,7 @@ public class MyButtonDialog extends AlertDialog {
 
     private TextView mBtcancel;
     private TextView mBtsure;
+    private LinearLayout mLlclose;
 
     public MyButtonDialog(@NonNull Context context, @StyleRes int themeResId, String mytitle, String mycontent) {
         super(context, themeResId);
@@ -79,6 +81,11 @@ public class MyButtonDialog extends AlertDialog {
     }
 
 
+    public void setonCloseClickListener(View.OnClickListener listener) {
+        mLlclose.setOnClickListener(listener);
+    }
+
+
 
 
     private void init() {
@@ -90,18 +97,23 @@ public class MyButtonDialog extends AlertDialog {
         TextView tvcontent = (TextView) view.findViewById(R.id.tv_dialogcontent);
         mBtcancel = (TextView) view.findViewById(R.id.bt_cancel);
         mBtsure = (TextView) view.findViewById(R.id.bt_sure);
+        mLlclose = (LinearLayout) findViewById(R.id.ll_close);
+
 
         tvtitle.setText(mytitle);
         tvcontent.setText(mycontent);
 
         //设置dialog大小，这里是一个小赠送，模块好的控件大小设置
-        Window dialogWindow = getWindow();
+        final Window dialogWindow = getWindow();
         WindowManager manager = ((Activity) context).getWindowManager();
         WindowManager.LayoutParams params = dialogWindow.getAttributes(); // 获取对话框当前的参数值
         dialogWindow.setGravity(Gravity.CENTER);//设置对话框位置
         Display d = manager.getDefaultDisplay(); // 获取屏幕宽、高度
         params.width = (int) (d.getWidth() * 0.8); // 宽度设置为屏幕的0.65，根据实际情况调整
         dialogWindow.setAttributes(params);
+
+
+
 
     }
 

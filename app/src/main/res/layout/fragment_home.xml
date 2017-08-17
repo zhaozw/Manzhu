@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/rl_homefragmnet"
               android:orientation="vertical"
               android:background="@color/bootmbc"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+
+    <!--  顶部的搜索栏-->
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
     <LinearLayout
         android:visibility="gone"
         android:id="@+id/ll_topsearch"
@@ -110,6 +117,7 @@
                         android:src="@mipmap/com_icon_loca_w"/>
 
                     <TextView
+                        android:textSize="16sp"
                         android:id="@+id/tv_location"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/home_locationwh"
@@ -140,11 +148,13 @@
 
                 <TextView
                     android:id="@+id/tv_shopcart"
-                    android:layout_width="20dp"
-                    android:layout_height="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/prompttexth"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="6dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
                     android:background="@drawable/unred_bg"
                     android:gravity="center"
                     android:text="99+"
@@ -239,10 +249,9 @@
             </RelativeLayout>
             <!--   第一排常用的按钮-->
             <LinearLayout
-
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/home_hotllh"
-                android:layout_marginTop="@dimen/home_hotmt"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -347,11 +356,10 @@
             </LinearLayout>
             <!--   第二排常用的按钮-->
             <LinearLayout
-
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/home_hotllh"
-                android:layout_marginBottom="@dimen/home_hotmt"
-                android:layout_marginTop="@dimen/home_hotmt"
+
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -497,10 +505,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="7.5dp"
                         android:text="优选商家"
                         android:textColor="@color/maintextcolor"
-                        android:textSize="16sp"/>
+                        android:textSize="14sp"/>
 
                     <View
                         android:layout_width="0dp"
@@ -514,7 +522,7 @@
                         android:layout_height="wrap_content"
                         android:text="全部商家 >"
                         android:textColor="@color/weaklin"
-                        android:textSize="12sp"/>
+                        android:textSize="10sp"/>
 
 
                 </LinearLayout>
@@ -535,7 +543,7 @@
                     <LinearLayout
                         android:id="@+id/ll_cloth"
                         android:gravity="center"
-                        android:layout_margin="10dp"
+                        android:layout_margin="7.5dp"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -553,7 +561,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="服装"
                                 android:textColor="@color/maintextcolor"
-                                android:textSize="16sp"/>
+                                android:textSize="14sp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -566,8 +574,9 @@
 
                         </LinearLayout>
 
-                        <ImageView
+                        <com.makeramen.roundedimageview.RoundedImageView
                             android:layout_width="@dimen/home_bussnessmoudimgwh"
+                            app:riv_corner_radius="2.5dip"
                             android:layout_height="@dimen/home_bussnessmoudimgwh"
                             android:src="@mipmap/menu_icon_clsd"/>
 
@@ -582,7 +591,7 @@
                     <LinearLayout
                         android:id="@+id/ll_props"
                         android:gravity="center"
-                        android:layout_margin="10dp"
+                        android:layout_margin="7.5dp"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -600,7 +609,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="道具"
                                 android:textColor="@color/maintextcolor"
-                                android:textSize="16sp"/>
+                                android:textSize="14sp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -613,8 +622,9 @@
 
                         </LinearLayout>
 
-                        <ImageView
+                        <com.makeramen.roundedimageview.RoundedImageView
                             android:layout_width="@dimen/home_bussnessmoudimgwh"
+                            app:riv_corner_radius="2.5dip"
                             android:layout_height="@dimen/home_bussnessmoudimgwh"
                             android:src="@mipmap/menu_icon_tlsd"/>
 
@@ -637,7 +647,7 @@
                     <LinearLayout
                         android:id="@+id/ll_wig"
                         android:gravity="center"
-                        android:layout_margin="10dp"
+                        android:layout_margin="7.5dp"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -655,7 +665,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="假发"
                                 android:textColor="@color/maintextcolor"
-                                android:textSize="16sp"/>
+                                android:textSize="14sp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -668,8 +678,9 @@
 
                         </LinearLayout>
 
-                        <ImageView
+                        <com.makeramen.roundedimageview.RoundedImageView
                             android:layout_width="@dimen/home_bussnessmoudimgwh"
+                            app:riv_corner_radius="2.5dip"
                             android:layout_height="@dimen/home_bussnessmoudimgwh"
                             android:src="@mipmap/menu_icon_wigsd"/>
 
@@ -684,7 +695,7 @@
                     <LinearLayout
                         android:id="@+id/ll_other"
                         android:gravity="center"
-                        android:layout_margin="10dp"
+                        android:layout_margin="7.5dp"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -702,7 +713,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="其它"
                                 android:textColor="@color/maintextcolor"
-                                android:textSize="16sp"/>
+                                android:textSize="14sp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -715,8 +726,9 @@
 
                         </LinearLayout>
 
-                        <ImageView
+                        <com.makeramen.roundedimageview.RoundedImageView
                             android:layout_width="@dimen/home_bussnessmoudimgwh"
+                            app:riv_corner_radius="2.5dip"
                             android:layout_height="@dimen/home_bussnessmoudimgwh"
                             android:src="@mipmap/menu_icon_other"/>
 
@@ -732,8 +744,8 @@
                 <!--  优选商家 独占模块-->
                 <LinearLayout
                     android:gravity="center"
-                   android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                   android:layout_marginLeft="7.5dp"
+                    android:layout_marginRight="7.5dp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/home_bussnessmoudh"
                     android:orientation="horizontal">
@@ -758,7 +770,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="摄影工作室/内景棚子"
                                 android:textColor="@color/maintextcolor"
-                                android:textSize="16sp"/>
+                                android:textSize="14sp"/>
 
                             <TextView
                                 android:layout_marginTop="5dp"
@@ -771,8 +783,9 @@
 
                         </LinearLayout>
 
-                        <ImageView
+                        <com.makeramen.roundedimageview.RoundedImageView
                             android:layout_width="@dimen/home_bussnessonlyw"
+                            app:riv_corner_radius="2.5dip"
                             android:layout_height="@dimen/home_bussnessmoudimgwh"
                             android:src="@mipmap/menu_icon_phosd"/>
 
@@ -814,8 +827,8 @@
                     android:layout_height="@dimen/home_recommendicon"/>
 
                 <TextView
-                    android:layout_marginLeft="10dp"
-                    android:textSize="16sp"
+                    android:layout_marginLeft="7.5dp"
+                    android:textSize="14sp"
                     android:textColor="@color/maintextcolor"
                     android:text="漫猪推荐"
                     android:layout_width="wrap_content"
@@ -861,9 +874,11 @@
             android:layout_height="@dimen/home_bottom_shopcaticon"/>
 
         <TextView
+            android:paddingRight="3dp"
+            android:paddingLeft="3dp"
             android:id="@+id/tv_btshopcart"
-            android:layout_width="20dp"
-            android:layout_height="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="12dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="7.5dp"
             android:layout_marginRight="3dp"

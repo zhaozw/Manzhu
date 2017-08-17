@@ -151,10 +151,15 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
 
     private void getData() {
 
+
+        Log.i("zc", "getData:  看看去获取数据了吗");
+
         Call<String> getgoodslist = Aplication.mIinterface.getgoodslist(mMap);
+
         getgoodslist.enqueue(new Callback<String>() {
             @Override
             public void onResponse(final Call<String> call, Response<String> response) {
+                Log.i("zc", "onResponse:  看看发送请求了吗" + call.request().toString());
                 String body = response.body();
 
                 if (body != null) {
@@ -205,15 +210,6 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-
-
-
-
-
-
-
-
-
                                 mHeadView = View.inflate(IdleActivity.this, R.layout.idle_head, null);
                                 mAdapter.addHeaderView(mHeadView);
                                 mRvIdel.setAdapter(mAdapter);
@@ -239,7 +235,7 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                Log.i("zc", "onResponse:  看看发送请求了吗" + call.request().toString());
             }
         });
     }
@@ -316,7 +312,7 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
                 mShaixuan = SPUtils.getInstance().getString("paixu","全部");
                 mOrde.setOnClickListener(this);
                 mFilter.setOnClickListener(this);
-                mTvpaixu.setText("当前排序：" + mShaixuan);
+                mTvpaixu.setText("当前排序：" );
                 mPopupWindow.setContentView(inflate);
                 mPopupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_toppop_bg));
                 mPopupWindow.setTouchable(true);
@@ -351,7 +347,7 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
                 mTvorder.setTextColor(getResources().getColor(R.color.maintextcolor));
                 mIvfilter.setImageResource(R.mipmap.com_icon_screen_ept);
                 mTvfilter.setTextColor(getResources().getColor(R.color.secondtextcolor));
-                mTvpaixu.setText("当前排序：" + mShaixuan);
+                mTvpaixu.setText("当前排序：" );
                 mRvpop.setVisibility(View.VISIBLE);
                 mRvfilter.setVisibility(View.GONE);
                 mLlbutton.setVisibility(View.GONE);
@@ -535,7 +531,7 @@ public class IdleActivity extends AppCompatActivity implements View.OnClickListe
                 popadapter.cleanCheck();
                 popadapter.setCheck(position);
                 SPUtils.getInstance().put("check",position);
-                mTvpaixu.setText("当前排序：" + strings.get(position));
+
                 SPUtils.getInstance().put("paixu",strings.get(position));
                 //发送请求
                 mMap.put("sort_type", types.get(position));

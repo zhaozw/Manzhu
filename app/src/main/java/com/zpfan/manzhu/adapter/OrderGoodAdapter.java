@@ -110,7 +110,7 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
 
        }
 
-        helper.setText(R.id.tv_carcount, "x" +item.getCarCount())
+        helper.setText(R.id.tv_carcount, "x " +item.getCarCount())
         .setText(R.id.tv_count,item.getCarCount() + "");
 
         final TextView tvcount = helper.getView(R.id.tv_count);
@@ -184,13 +184,13 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                 if (integer > kycun) {
 
                     integer = kycun;
-                    tvcarcount.setText("x" + integer);
+                    tvcarcount.setText("x " + integer);
                     tvcount.setText(integer + "");
                     item.setCarCount(integer);
                     MyToast.show("数量不能超过库存", R.mipmap.com_icon_cross_w);
 
                 } else {
-                    tvcarcount.setText("x" + integer);
+                    tvcarcount.setText("x " + integer);
                     tvcount.setText(integer + "");
                     item.setCarCount(integer);
 
@@ -209,12 +209,12 @@ public class OrderGoodAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistB
                 if (integer < 1) {
                     integer = 1;
 
-                    tvcarcount.setText("x" + integer);
+                    tvcarcount.setText("x " + integer);
                     tvcount.setText(integer + "");
                     item.setCarCount(integer);
 
                 } else {
-                    tvcarcount.setText("x" + integer);
+                    tvcarcount.setText("x " + integer);
                     tvcount.setText(integer + "");
                     item.setCarCount(integer);
                 }

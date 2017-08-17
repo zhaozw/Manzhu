@@ -35,15 +35,29 @@
             android:layout_toRightOf="@+id/iv_usericon"
             android:text="猪排子"
             android:textColor="@color/maintextcolor"
-            android:textSize="18sp"/>
+            android:textSize="14sp"/>
 
         <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_shopname"
+            android:textColor="@color/maintextcolor"
+            android:text="（店铺名）"
+            android:gravity="center"
+            android:layout_alignTop="@+id/tv_username"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
             android:id="@+id/tv_shengfen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tv_username"
             android:layout_below="@+id/tv_username"
-            android:layout_alignParentBottom="true"
+            android:layout_marginTop="5dp"
+            android:textSize="10sp"
             android:text="四川-成都"
             android:textColor="@color/maintextcolor"/>
 

@@ -132,7 +132,7 @@ public class ShopListAdapter extends BaseQuickAdapter<ShopBean,BaseViewHolder> {
                                     if (retmsg.equals("true")) {
                                       notifyDataSetChanged();
                                     } else {
-                                        MyToast.show("由于未知原因，收藏失败",R.mipmap.com_icon_cross_w);
+                                        MyToast.show(retmsg,R.mipmap.com_icon_cross_w);
                                         ivcollect.setImageResource(R.mipmap.com_icon_fav_2_w);
                                         tvcollect.setText("收藏店铺");
                                     }
@@ -156,7 +156,7 @@ public class ShopListAdapter extends BaseQuickAdapter<ShopBean,BaseViewHolder> {
 
 
                 } else {
-                    mContext.sendBroadcast(new Intent(mContext, LoginActivity.class));
+                    mContext.startActivity(new Intent(mContext, LoginActivity.class));
                 }
 
             }

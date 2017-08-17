@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="182dp"
               android:orientation="vertical"
-              android:layout_width="match_parent"
+              android:background="@color/bootmbc"
               android:layout_height="wrap_content">
 
+    <View
+        android:background="@color/threebackground"
+        android:layout_width="match_parent"
+        android:layout_height="2.5dp"/>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/ll_shareshop"
         android:orientation="vertical"
@@ -15,8 +27,8 @@
         android:id="@+id/iv_shopcover"
         android:src="@mipmap/u583"
         android:layout_weight="0.5"
-        android:layout_width="187.5dp"
-        android:layout_height="187.5dp"/>
+        android:layout_width="178.5dp"
+        android:layout_height="178.5dp"/>
 
 
         <TextView
@@ -24,6 +36,8 @@
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:text="商品标题"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:layout_marginTop="7.5dp"
             android:textSize="14sp"
             android:textColor="@color/maintextcolor"
@@ -151,6 +165,13 @@
     </LinearLayout>
 
 
+    </RelativeLayout>
 
+    <View
+        android:background="@color/threebackground"
+        android:layout_width="2.5dp"
+        android:layout_height="match_parent"/>
 
-</RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -54,7 +54,7 @@ public class SearchTopLin extends LinearLayout {
 
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.SearchTopLin);
-        type.setText(array.getString(R.styleable.SearchTopLin_searchtype));
+        type.setText(array.getString( R.styleable.SearchTopLin_searchtype));
         title.setText(array.getString(R.styleable.SearchTopLin_searchcontext));
         int id = array.getResourceId(R.styleable.SearchTopLin_searchtop1iv, 1);
         int id1 = array.getResourceId(R.styleable.SearchTopLin_searchtop2iv, 2);

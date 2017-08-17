@@ -31,7 +31,7 @@ public class ShopGoodListAdapter extends BaseQuickAdapter<BussnessBean,BaseViewH
                 .setText(R.id.tv_price, "¥ " +item.getG_FixedPrice());
 
         if (item.getG_Type().equals("服务")) {
-            helper.setText(R.id.tv_price, "¥ " + item.getG_FixedPrice() + "/" + item.getServer_unit_string());
+            helper.setText(R.id.tv_price, "¥ " + item.getG_FixedPrice() + " / " + item.getServer_unit_string());
             helper.setText(R.id.tv_bussnesstag, "约单");
         } else if (item.getG_Type().equals("新商品")) {
             helper.setText(R.id.tv_bussnesstag, "新品");

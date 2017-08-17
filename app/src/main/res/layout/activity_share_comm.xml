@@ -9,19 +9,22 @@
     tools:context="com.zpfan.manzhu.ShareCommActivity">
     
     <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_topmenu"
        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="45dp">
 
        <ImageView
+           android:id="@+id/iv_topback"
            android:layout_marginLeft="10dp"
            android:src="@drawable/com_icon_back"
            android:layout_width="13dp"
            android:layout_height="20dp"/>
 
         <LinearLayout
-           
+            android:id="@+id/ll_moneyhight"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -29,11 +32,13 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/iv_moneyhight"
                 android:layout_width="17.5dp"
                 android:layout_height="17.5dp"
                 android:src="@mipmap/com_icon_order"/>
 
             <TextView
+                android:id="@+id/tv_moneyhight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="7.5dp"
@@ -52,7 +57,7 @@
             android:layout_height="match_parent"/>
 
         <LinearLayout
-           
+           android:id="@+id/ll_sharenumber"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -60,11 +65,13 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/iv_sharenumber"
                 android:layout_width="17.5dp"
                 android:layout_height="17.5dp"
                 android:src="@mipmap/com_icon_order_ept"/>
 
             <TextView
+                android:id="@+id/tv_sharenumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="7.5dp"
@@ -83,10 +90,6 @@
 
 
 
-    <View
-        android:background="@color/threebackground"
-        android:layout_width="match_parent"
-        android:layout_height="2.5dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_share"

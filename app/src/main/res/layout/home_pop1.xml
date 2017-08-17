@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-
               android:layout_width="@dimen/home_top_popw"
-              android:layout_height="@dimen/home_top_poph">
+              android:layout_height="wrap_content">
 
-    
-    
+
+    <View
+        android:id="@+id/san"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/triangle"
+        android:layout_width="20dp"
+        android:layout_height="15dp"/>
+
+    <LinearLayout
+        android:layout_below="@+id/san"
+        android:background="@drawable/home_toppop_bg"
+        android:id="@+id/ll_list"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/ll_baobei"
         android:gravity="center"
@@ -126,6 +139,7 @@
 
 
     </LinearLayout>
+    </LinearLayout>
 
 
 
@@ -138,4 +152,4 @@
 
 
 
-</LinearLayout>
+</RelativeLayout>

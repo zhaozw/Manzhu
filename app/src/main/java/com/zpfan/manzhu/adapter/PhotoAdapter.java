@@ -88,7 +88,7 @@ public class PhotoAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> 
 
 
         //设置单位
-        helper.setText(R.id.tv_danwei, "/" +item.getServer_unit_string());
+        helper.setText(R.id.tv_danwei, " / " +item.getServer_unit_string());
 
         //设置忙还是闲
         TextView idle = helper.getView(R.id.tv_idle);

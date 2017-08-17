@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
+
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
@@ -9,22 +10,18 @@
 
     <com.zhy.view.flowlayout.TagFlowLayout
         android:id="@+id/flowlayout"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:background="@drawable/home_toppop_bg"
         app:max_select="1"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"/>
+       />
     
 
-    <ImageView
-        android:id="@+id/iv_close"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="15dp"
-        android:layout_alignParentRight="true"
-        android:src="@mipmap/com_icon_close_3"
-        android:layout_width="15dp"
-        android:layout_height="15dp"/>
+
 
 
 </RelativeLayout>

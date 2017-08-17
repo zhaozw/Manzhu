@@ -4,7 +4,6 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -61,8 +60,9 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
 
          final ArrayList<String> format = new ArrayList<>();
          final ArrayList<String> formatid = new ArrayList<>();
-        helper.setText(R.id.tv_goodname, item.getGoods_model().getG_Title())
-        .setText(R.id.tv_carcount,"x"+item.getCarCount());
+        final ShopCartbean.CarshoplistBean.CargoodslistBean.GoodsModelBean model = item.getGoods_model();
+        helper.setText(R.id.tv_goodname, model.getG_Title())
+        .setText(R.id.tv_carcount,"x "+item.getCarCount());
         ImageView  mIvcheck = helper.getView(R.id.iv_check);
         TextView tvgoodname = helper.getView(R.id.tv_goodname);
         TextView tvformat = helper.getView(R.id.tv_format);
@@ -76,7 +76,7 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
         TextView tvcheckformate = helper.getView(R.id.tv_checkformate);
         final TextView carcount = helper.getView(R.id.tv_carcount);
         final LinearLayout llformat = helper.getView(R.id.ll_checkformate);
-            List<FormatBean> specifications = item.getGoods_model().getGoods_specifications();
+            List<FormatBean> specifications = model.getGoods_specifications();
         if (specifications.size() == 0) {
             llformat.setVisibility(View.GONE);
         } else {
@@ -87,8 +87,21 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
         tvcount.setText(item.getCarCount() + "");
         mCount = item.getCarCount();
 
+        if (model.getG_Type().equals("新商品")) {
+            if (model.isG_IsDepositDeal()) {
+                //是定金的商品
+                helper.setText(R.id.tv_other, "（含定金：" + model.getG_DepositPrice() + "）");
+            }
+
+        } else if (model.getG_Type().equals("服务")){
+            helper.setText(R.id.tv_other, " / " +model.getServer_unit_string());
+        }
+
+
+
+
         //初始化规格的显示  先查看该商品是否有规格  如果有规格的话就显示选中的规格  如果没有规格 就选中默认的规格
-        List<FormatBean> specifications1 = item.getGoods_model().getGoods_specifications();
+        List<FormatBean> specifications1 = model.getGoods_specifications();
             final String uid = item.getGoods_Spcification_UID();
         if (specifications1 != null && specifications1.size() > 0) {
             if (!uid.equals("")) {
@@ -98,10 +111,11 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
                     formatid.add(specification.getPS_UniqueID());
 
                     if (specification.getPS_UniqueID().equals(uid)) {
-                        helper.setText(R.id.tv_format, specification.getPS_AttributeValues());
+                        helper.setText(R.id.tv_format, specification.getPS_AttributeValues().replace(",","，"));
                         helper.setText(R.id.tv_goodprice, specification.getPS_FixedPrice());
                         helper.setText(R.id.tv_checkformate, specification.getPS_AttributeValues());
                         max = specification.getPS_Inventory();
+
                     }
 
 
@@ -111,7 +125,7 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
                 //没有选中的规格  选中默认的规格
                 for (FormatBean specification : specifications) {
                     if (specification.isPS_IsDefaultSelected()) {
-                        helper.setText(R.id.tv_format, specification.getPS_AttributeValues());
+                        helper.setText(R.id.tv_format, specification.getPS_AttributeValues().replace(",","，"));
                         helper.setText(R.id.tv_goodprice, specification.getPS_FixedPrice());
                         helper.setText(R.id.tv_checkformate, specification.getPS_AttributeValues());
                         max = specification.getPS_Inventory();
@@ -119,15 +133,13 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
                     }
                 }
 
-              /*  format.clear();
-                formatid.clear();
-                helper.setText(R.id.tv_goodprice, item.getGoods_model().getG_FixedPrice());*/
+
             }
 
         } else {
             format.clear();
             formatid.clear();
-            helper.setText(R.id.tv_goodprice, item.getGoods_model().getG_FixedPrice());
+            helper.setText(R.id.tv_goodprice, model.getG_FixedPrice());
         }
 
 
@@ -138,7 +150,7 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
             public void onClick(View v) {
                 //数量增加  但是最大不能超过max
                 if (uid.equals("")) {
-                    max = item.getGoods_model().getG_StockNum();
+                    max = model.getG_StockNum();
                 }
 
                 String s = tvcount.getText().toString();
@@ -238,7 +250,7 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
             mIvcheck.setImageResource(R.mipmap.com_icon_multcheck_ept);
         }
 
-        Glide.with(mContext).load(item.getGoods_model().getG_Cover()).into(ivcover);
+        Glide.with(mContext).load(model.getG_Cover()).into(ivcover);
 
 
 

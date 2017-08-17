@@ -25,41 +25,12 @@ public class EaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ease);
         permissions = new ArrayList<>();
-        requewstPermission();
+
         // 这里直接使用EaseUI封装好的聊天界面
         chatFragment = new EaseChatFragment();
         // 将参数传递给聊天界面
         chatFragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().add(R.id.ed_content, chatFragment).commit();
-
-    }
-
-    private void requewstPermission() {
-      /*  //动态申请权限
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED  ) {
-
-           ActivityCompat.requestPermissions(EaseActivity.this,new String[]{Manifest.permission.RECORD_AUDIO},REQUEST_AUDIO);
-            permissions.add(Manifest.permission.RECORD_AUDIO);
-        }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED  ) {
-
-           ActivityCompat.requestPermissions(EaseActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_AUDIO);
-            permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED  ) {
-
-            ActivityCompat.requestPermissions(EaseActivity.this,new String[]{Manifest.permission.CAMERA},REQUEST_AUDIO);
-            permissions.add(Manifest.permission.CAMERA);
-        }*/
-
-
-
-
-
-
-
-
-
 
     }
 

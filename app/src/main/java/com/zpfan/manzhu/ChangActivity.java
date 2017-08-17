@@ -101,7 +101,7 @@ public class ChangActivity extends AppCompatActivity {
             }
             mTvGoodtitle.setText(mDetail.getG_Title());
 
-            mTvGoodcount.setText("x" + mDetail.getBuyCount());
+            mTvGoodcount.setText("x " + mDetail.getBuyCount());
 
 
             List<BussnessBean.GoodsSpecificationsBean> specifications = mDetail.getGoods_specifications();

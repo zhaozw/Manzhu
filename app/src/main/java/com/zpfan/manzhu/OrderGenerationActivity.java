@@ -439,7 +439,7 @@ public class OrderGenerationActivity extends AppCompatActivity {
                             mTvUserlv.setText("Lv." + mBean1.getStore_Level());
                             OrderGenerationBean.GoodslistArryBean goodslistArryBean = mBean1.getGoodslist_arry().get(0);
                             mTvGoodtitle.setText(goodslistArryBean.getGoods_title());
-                            mTvGoodformat.setText(goodslistArryBean.getGoods_specification());
+                            mTvGoodformat.setText(goodslistArryBean.getGoods_specification().replace(",","，"));
                             mTvGoodcount.setText(goodslistArryBean.getGoods_count() + "");
                             mTvGoodprice.setText(goodslistArryBean.getGoods_money());
                             Glide.with(OrderGenerationActivity.this).load(goodslistArryBean.getGoods_images()).into(mIvShopcover);

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="@dimen/idle_itemh">
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/idle_itemh"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <View
         android:id="@+id/line"
@@ -24,7 +25,7 @@
             android:id="@+id/tv_bussnesstag"
             android:visibility="visible"
             android:gravity="center"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:text="闲置"
             android:textColor="@color/maintextcolor"
             android:background="@drawable/idel_item_bg"
@@ -33,7 +34,8 @@
             android:layout_width="@dimen/idle_itemleftw"
             android:layout_height="@dimen/idle_itemlefttagh"/>
 
-        <LinearLayout
+        <RelativeLayout
+            android:visibility="visible"
             android:id="@+id/ll_baoyou"
             android:layout_marginLeft="@dimen/idle_itemtxtml"
             android:layout_marginTop="7.5dp"
@@ -42,40 +44,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-        <TextView
-            android:visibility="visible"
-            android:id="@+id/tv_baoyou"
-            android:layout_toRightOf="@+id/iv_bussness_photo"
-            android:background="@drawable/baoyou_shape"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textSize="10sp"
-            android:textColor="@color/buttontext"
-            android:text="包邮"
-            android:layout_marginRight="5dp"
-            android:layout_width="30dp"
-            android:layout_height="15dp"/>
-        <TextView
+        <com.zpfan.manzhu.myui.AlignTextView
             android:paddingRight="10dp"
             android:id="@+id/tv_title"
             android:visibility="visible"
             android:textColor="@color/maintextcolor"
-            android:text="商品的标题"
+            android:text="商品的标题商品的标题商品的标题商品的标题商品的标题"
             android:textSize="14sp"
             android:maxLines="2"
-            android:layout_alignTop="@+id/tv_baoyou"
-            android:layout_toRightOf="@+id/iv_bussness_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        </LinearLayout>
+
+        </RelativeLayout>
+    <TextView
+        android:layout_alignTop="@+id/ll_baoyou"
+        android:layout_alignLeft="@+id/ll_baoyou"
+        android:visibility="visible"
+        android:id="@+id/tv_baoyou"
+        android:background="@drawable/baoyou_shape"
+        android:gravity="center"
+        android:textSize="10sp"
+        android:textColor="@color/buttontext"
+        android:text="包邮"
+        android:layout_width="30dp"
+        android:layout_height="15dp"/>
 
         <!--贩卖的条目-->
         <LinearLayout
-
         android:id="@+id/ll_fanmai"
         android:visibility="visible"
         android:layout_below="@+id/ll_baoyou"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_alignLeft="@+id/ll_baoyou"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -98,7 +97,7 @@
             android:textSize="10sp"
             android:textColor="@color/pricetextcolor"
             android:text="¥ "
-            android:layout_width="6dp"
+            android:layout_width="wrap_content"
             android:layout_height="14dp"/>
 
         <TextView
@@ -156,7 +155,7 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="6dp"
+                android:layout_width="wrap_content"
                 android:layout_height="14dp"
                 android:layout_alignBottom="@+id/tv_fan"
                 android:layout_gravity="bottom"
@@ -208,7 +207,7 @@
                 android:textSize="10sp"
                 android:textColor="@color/pricetextcolor"
                 android:text="¥ "
-                android:layout_width="6dp"
+                android:layout_width="wrap_content"
                 android:layout_height="14dp"/>
 
             <TextView
@@ -322,7 +321,7 @@
             android:src="@drawable/ic_launcher"
             android:id="@+id/iv_avator"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+        android:layout_alignTop="@+id/rl_collect"
             android:layout_width="@dimen/idle_item_avatorwh"
             android:layout_height="@dimen/idle_item_avatorwh"/>
 
@@ -332,7 +331,7 @@
         android:id="@+id/tv_userlv"
         android:gravity="center"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:layout_alignRight="@+id/iv_avator"
         android:background="@drawable/message_leve_bg"
         android:textColor="@color/buttontext"
@@ -350,25 +349,26 @@
         android:layout_height="@dimen/idle_item_righth"/>
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_gravity="center_vertical"
         android:id="@+id/ll_info"
         android:gravity="center_vertical"
         android:layout_toRightOf="@id/iv_avator"
         android:layout_marginLeft="12.5dp"
         android:orientation="horizontal"
-        android:layout_alignTop="@+id/iv_avator"
+        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/iv_shop"
             android:src="@mipmap/type_icon_shop"
             android:layout_width="@dimen/idle_item_shopwh"
             android:layout_height="@dimen/idle_item_shopwh"/>
 
         <TextView
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/tv_name"
             android:layout_marginLeft="@dimen/itemshopiconr"
             android:gravity="center_vertical"
@@ -381,7 +381,7 @@
             android:layout_height="25dp"/>
 
         <ImageView
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/iv_manor"
             android:layout_marginLeft="5dp"
             android:src="@mipmap/com_icon_male"
@@ -398,6 +398,7 @@
         android:textSize="14sp"
         android:textColor="@color/secondtextcolor"
         android:text="四川-成都"
+        android:layout_marginTop="7.5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_info"
@@ -445,15 +446,22 @@
 
     </RelativeLayout>
 
-
     <LinearLayout
         android:visibility="gone"
-        android:id="@+id/ll_kaopu"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/iv_avator"
+        android:orientation="horizontal"
         android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:visibility="visible"
+        android:id="@+id/ll_kaopu"
         android:orientation="vertical"
         android:layout_alignLeft="@+id/iv_avator"
         android:layout_below="@+id/iv_avator"
-        android:layout_width="105dp"
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content">
 
         <TextView
@@ -474,18 +482,24 @@
             android:layout_width="wrap_content"
             android:textSize="18sp"
             android:layout_height="wrap_content"/>
-        
+
     </LinearLayout>
+
+        <View
+            android:background="@color/stronglin"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
 
 
     <LinearLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/ll_maikaopu"
-        android:layout_marginTop="15dp"
+
         android:orientation="vertical"
       android:layout_alignBottom="@+id/ll_kaopu"
         android:layout_toRightOf="@+id/ll_kaopu"
-        android:layout_width="105dp"
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content">
 
         <TextView
@@ -509,25 +523,28 @@
 
     </LinearLayout>
 
-
-
+        <View
+            android:background="@color/stronglin"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
     <LinearLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/ll_zukaopu"
-        android:layout_marginTop="15dp"
         android:orientation="vertical"
         android:layout_alignBottom="@+id/ll_kaopu"
         android:layout_toRightOf="@+id/ll_maikaopu"
-        android:layout_width="105dp"
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_gravity="center"
-            android:textColor="@color/secondtextcolor"
-            android:textSize="10sp"
-            android:text="出租人靠谱度"
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="出租人靠谱度"
+            android:textColor="@color/secondtextcolor"
+            android:textSize="10sp"/>
 
         <TextView
             android:layout_marginTop="5dp"
@@ -542,7 +559,7 @@
 
     </LinearLayout>
 
-
+    </LinearLayout>
 
 
 

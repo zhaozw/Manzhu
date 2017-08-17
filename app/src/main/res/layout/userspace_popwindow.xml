@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll_popcontent"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:background="@color/bootmbc"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+    <!--  搜索和首页一栏-->
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_toplinh">
+
+        <ImageView
+            android:id="@+id/iv_home"
+            android:src="@mipmap/com_icon_home_ept"
+            android:layout_width="@dimen/detail_topliniconwh"
+            android:layout_height="@dimen/detail_topliniconwh"/>
+        
+        <LinearLayout
+            android:id="@+id/ll_search"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/pop_search_bg"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:layout_marginLeft="7.5dp"
+                android:src="@mipmap/com_icon_sch_gra"
+                android:layout_width="15dp"
+                android:layout_height="15dp"/>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:text="搜宝贝/角色/CN/约单"
+                android:textColor="@color/secondtextcolor"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_shopcart"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/com_icon_shct_gra"
+            android:layout_width="@dimen/detail_topliniconwh"
+            android:layout_height="@dimen/detail_topliniconwh"/>
+        <ImageView
+            android:id="@+id/iv_message"
+            android:layout_marginLeft="17.5dp"
+            android:src="@mipmap/com_icon_msg_ept"
+            android:layout_width="@dimen/detail_topliniconwh"
+            android:layout_height="@dimen/detail_topliniconwh"/>
+
+        <ImageView
+            android:id="@+id/iv_usercenter"
+            android:layout_marginLeft="17.5dp"
+            android:src="@mipmap/com_icon_uc_ept"
+            android:layout_width="@dimen/detail_topliniconwh"
+            android:layout_height="@dimen/detail_topliniconwh"/>
+
+
+
+
+    </LinearLayout>
+    <!-- 分割线-->
+    <View
+        android:layout_marginTop="10dp"
+        android:background="@color/stronglin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <!-- 头像一栏-->
+    <RelativeLayout
+        android:id="@+id/rv_avator"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_topiconh">
+
+        <ImageView
+            android:visibility="visible"
+            android:id="@+id/iv_avator"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_launcher"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+        
+        <TextView
+            android:id="@+id/tv_leav"
+            android:layout_marginTop="10dp"
+            android:layout_alignRight="@+id/iv_avator"
+            android:gravity="center"
+            android:textSize="8sp"
+            android:textColor="@color/buttontext"
+            android:background="@drawable/message_leve_bg"
+            android:text="lv.9"
+            android:layout_width="25dp"
+            android:layout_height="12dp"/>
+        
+        <ImageView
+            android:id="@+id/iv_idcer"
+            android:layout_alignRight="@+id/iv_avator"
+            android:layout_alignBottom="@+id/iv_avator"
+            android:src="@mipmap/com_icon_idcer"
+            android:layout_width="20dp"
+            android:layout_height="15dp"/>
+        
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/iv_avator"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/ll_info"
+                android:gravity="center_vertical"
+                android:layout_toRightOf="@id/iv_avator"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_shop"
+                    android:src="@mipmap/type_icon_user"
+                    android:layout_width="@dimen/itemshopicon"
+                    android:layout_height="@dimen/itemshopicon"/>
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:maxWidth="100dp"
+                    android:textColor="@color/maintextcolor"
+                    android:text="店铺名"
+                    android:singleLine="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:id="@+id/iv_manor"
+                    android:layout_marginLeft="5dp"
+                    android:src="@mipmap/com_icon_male"
+                    android:scaleType="centerCrop"
+                    android:padding="3dp"
+                    android:background="@drawable/sex_bg"
+                    android:layout_width="@dimen/addsexicon"
+                    android:layout_height="@dimen/addsexicon"/>
+
+
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/tv_dizhi"
+                    android:gravity="center_vertical"
+                    android:textSize="10sp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/secondtextcolor"
+                    android:text="（四川-成都）"
+                    android:ellipsize="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+               <TextView
+                   android:id="@+id/tv_uid"
+                   android:textSize="10sp"
+                   android:text="UID 23 | 喜欢 256 | 粉丝 456 "
+                   android:textColor="@color/secondtextcolor"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_popaddation"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:background="@drawable/fanmai_shape"
+            android:layout_width="50dp"
+            android:gravity="center"
+            android:layout_height="50dp">
+            
+            <ImageView
+                android:id="@+id/iv_popaddation"
+                android:src="@mipmap/com_icon_plus_w"
+                android:layout_width="10dp"
+                android:layout_height="10dp"/>
+            
+            <TextView
+                android:id="@+id/tv_popaddation"
+                android:layout_marginTop="5dp"
+                android:text="关注"
+                android:textSize="10sp"
+                android:textColor="@color/buttontext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            
+        </LinearLayout>
+        
+
+
+    </RelativeLayout>
+
+    <!--  虚线-->
+    <View
+        android:id="@+id/dashline"
+        android:background="@drawable/dash_line_shape"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/rv_userspace_pop"
+      android:layout_marginBottom="15dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_botoom"
+        android:layout_marginRight="10dp"
+        android:src="@mipmap/com_icon_bmenu"
+        android:layout_alignBottom="@+id/ll_popcontent"
+        android:layout_alignParentRight="true"
+        android:layout_width="17.5dp"
+        android:layout_height="17.5dp"/>
+
+    <View
+        android:id="@+id/close"
+       android:layout_alignParentRight="true"
+        android:layout_below="@+id/iv_botoom"
+        android:background="@drawable/detail_more"
+        android:layout_width="37.5dp"
+        android:layout_height="12dp"/>
+
+
+</RelativeLayout>

@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements EaseConversationL
     @BindView(R.id.tv_message)
     TextView mTvMessage;
     @BindView(R.id.ll_message)
-    LinearLayout mLlMessage;
+    RelativeLayout mLlMessage;
     @BindView(R.id.iv_my)
     ImageView mIvMy;
     @BindView(R.id.tv_my)
@@ -176,8 +177,9 @@ public class MainActivity extends AppCompatActivity implements EaseConversationL
                 //先进行登陆的操作
                 if (mUserlogin) {
                     //MyToast.show("该模块还在开发中", R.mipmap.com_icon_cross_w);
-                    startActivity(new Intent(MainActivity.this,EditPassWordActivity.class));
-
+                    Intent intent = new Intent(MainActivity.this, UserSpaceActivity.class);
+                    intent.putExtra("m_uid", Utils.getloginuid());
+                    startActivity(intent);
 
                 } else {
                 startActivity(new Intent(MainActivity.this,LoginActivity.class));

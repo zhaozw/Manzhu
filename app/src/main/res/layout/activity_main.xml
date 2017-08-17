@@ -99,16 +99,18 @@
         </LinearLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/ll_message"
             android:gravity="center"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent">
-
-
-
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
             <ImageView
                 android:layout_gravity="center_horizontal"
@@ -120,18 +122,35 @@
                 android:layout_height="@dimen/bootm_img_heighandweigh"/>
 
             <TextView
-
                 android:id="@+id/tv_message"
-               android:layout_gravity="bottom"
+                android:layout_gravity="bottom"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="@dimen/bootm_margint"
                 android:text="消息"
                 android:textSize="8sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_msgprompt"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/prompttexth"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="6dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:background="@drawable/unred_bg"
+                android:gravity="center"
+                android:text="99+"
+                android:textColor="@color/buttontext"
+                android:textSize="7sp"/>
 
 
-        </LinearLayout>
+
+        </RelativeLayout>
+
         <LinearLayout
             android:id="@+id/ll_my"
             android:gravity="center"
@@ -171,7 +190,7 @@
     <LinearLayout
         android:id="@+id/ll_bootm"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="70dp"
         android:background="@android:color/transparent"
         android:gravity="center|top"
         android:orientation="horizontal"

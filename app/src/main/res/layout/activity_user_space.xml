@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.zpfan.manzhu.UserSpaceActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_topmen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/iv_icontop_back"
+                android:layout_width="@dimen/topmenuwh"
+                android:layout_height="@dimen/topmenuwh"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/toastmarglr"
+                android:src="@mipmap/com_icon_back"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/tv_icontop_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:text="用户cn"
+                    android:textColor="@color/maintextcolor"
+                    android:textSize="15sp"/>
+
+                <LinearLayout
+                    android:layout_width="12.5dp"
+                    android:layout_height="12.5dp"
+                    android:background="@drawable/sex_bg"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/iv_topsex"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:src="@mipmap/com_icon_female"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_icontop_menu"
+                android:layout_width="@dimen/topmenuwh"
+                android:layout_height="@dimen/topmenuwh"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/com_icon_bmenu"/>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_topmenu"
+
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/ll_top1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.27"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_top1"
+                    android:layout_width="@dimen/idle_topiconwh"
+                    android:layout_height="@dimen/idle_topiconwh"
+                    android:src="@mipmap/com_icon_cos_elt"/>
+
+                <TextView
+                    android:id="@+id/tv_top1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7.5dp"
+                    android:text="TA的COS"
+                    android:textColor="@color/maintextcolor"
+                    android:textSize="12sp"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/stronglin"/>
+
+            <LinearLayout
+                android:id="@+id/ll_top2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.27"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_top2"
+                    android:layout_width="@dimen/idle_topiconwh"
+                    android:layout_height="@dimen/idle_topiconwh"
+                    android:src="@mipmap/com_icon_sh_ept"/>
+
+                <TextView
+                    android:id="@+id/tv_top2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7.5dp"
+                    android:text="TA的宝贝"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="12sp"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/stronglin"/>
+
+            <LinearLayout
+                android:id="@+id/ll_top3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.27"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_top3"
+                    android:layout_width="@dimen/idle_topiconwh"
+                    android:layout_height="@dimen/idle_topiconwh"
+                    android:src="@mipmap/com_icon_serv_ept"/>
+
+                <TextView
+                    android:id="@+id/tv_top3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7.5dp"
+                    android:text="TA的接单"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="12sp"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/stronglin"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:visibility="visible"
+        android:id="@+id/rv_uspace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_empty"
+        android:text="该用户暂时还没有该类物品"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+
+
+
+
+
+
+</LinearLayout>

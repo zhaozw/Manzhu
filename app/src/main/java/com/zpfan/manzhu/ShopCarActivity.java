@@ -291,6 +291,16 @@ public class ShopCarActivity extends AppCompatActivity {
                     }
                 });
 
+                dialog.setonCloseClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+
+
+
 
                 break;
 

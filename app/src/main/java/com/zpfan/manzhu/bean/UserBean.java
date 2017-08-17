@@ -76,7 +76,7 @@ public class UserBean {
     private String M_UID;
     private String M_UserName;
     private int N_AllLevel;
-    private int S_DisputeProportion;
+    private String S_DisputeProportion;
     private String cer_bindemail;
     private String cer_bindphone;
     private CoserFigureDataBean coser_figure_data;
@@ -98,6 +98,15 @@ public class UserBean {
     private  int unredCount = 0;
     private long lasttime;
     private  String lastStringtime;
+    private String follow_see_count;
+
+    public String getFollow_see_count() {
+        return follow_see_count;
+    }
+
+    public void setFollow_see_count(String follow_see_count) {
+        this.follow_see_count = follow_see_count;
+    }
 
     public String getLastMessage() {
         return lastMessage;
@@ -323,11 +332,11 @@ public class UserBean {
         this.N_AllLevel = N_AllLevel;
     }
 
-    public int getS_DisputeProportion() {
+    public String getS_DisputeProportion() {
         return S_DisputeProportion;
     }
 
-    public void setS_DisputeProportion(int S_DisputeProportion) {
+    public void setS_DisputeProportion(String S_DisputeProportion) {
         this.S_DisputeProportion = S_DisputeProportion;
     }
 

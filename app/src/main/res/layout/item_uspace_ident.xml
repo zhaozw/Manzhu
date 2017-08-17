@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_marginTop="10dp"
+              android:paddingLeft="10dp"
+              android:paddingRight="10dp"
+              android:gravity="center_vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/tv_shenfen"
+        android:gravity="center"
+        android:textColor="@color/maintextcolor"
+        android:textSize="12sp"
+        android:text="身份"
+        android:layout_marginRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/iv_start1"
+        android:src="@mipmap/com_icon_star_on"
+        android:layout_marginLeft="5dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="@dimen/photo_itemlevewh"
+        android:layout_height="@dimen/photo_itemlevewh"/>
+    <ImageView
+        android:id="@+id/iv_start2"
+        android:src="@mipmap/com_icon_star_on"
+        android:layout_marginLeft="5dp"
+        android:layout_gravity="center"
+        android:layout_width="@dimen/photo_itemlevewh"
+        android:layout_height="@dimen/photo_itemlevewh"/>
+    <ImageView
+        android:id="@+id/iv_start3"
+        android:src="@mipmap/com_icon_star_on"
+        android:layout_marginLeft="5dp"
+        android:layout_gravity="center"
+        android:layout_width="@dimen/photo_itemlevewh"
+        android:layout_height="@dimen/photo_itemlevewh"/>
+    <ImageView
+        android:id="@+id/iv_start4"
+        android:src="@mipmap/com_icon_star_on"
+        android:layout_marginLeft="5dp"
+        android:layout_gravity="center"
+        android:layout_width="@dimen/photo_itemlevewh"
+        android:layout_height="@dimen/photo_itemlevewh"/>
+    <ImageView
+        android:id="@+id/iv_start5"
+        android:src="@mipmap/com_icon_star_on"
+        android:layout_marginLeft="5dp"
+        android:layout_gravity="center"
+        android:layout_width="@dimen/photo_itemlevewh"
+        android:layout_height="@dimen/photo_itemlevewh"/>
+
+    <TextView
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:text="专业："
+        android:textSize="11sp"
+        android:textColor="@color/maintextcolor"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/tv_zhuanye"
+        android:textStyle="bold"
+        android:textColor="@color/numbertextcolor"
+        android:textSize="11sp"
+        android:text="3.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:gravity="center"
+
+        android:text=" / 速度："
+        android:textSize="11sp"
+        android:textColor="@color/maintextcolor"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/tv_sudu"
+        android:textStyle="bold"
+        android:textColor="@color/numbertextcolor"
+        android:textSize="11sp"
+        android:text="3.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:gravity="center"
+
+        android:text=" / 态度："
+        android:textSize="11sp"
+        android:textColor="@color/maintextcolor"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/tv_taidu"
+        android:textStyle="bold"
+        android:textColor="@color/numbertextcolor"
+        android:textSize="11sp"
+        android:text="3.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
+</LinearLayout>

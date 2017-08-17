@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -160,6 +161,8 @@ public class HomeFragment extends Fragment implements BDLocationListener {
     RelativeLayout mRlUp;
     @BindView(R.id.ll_homeseach)
     LinearLayout mLlHomeseach;
+    @BindView(R.id.rl_homefragmnet)
+    RelativeLayout mRlHomefragmnet;
     private View mView;
     public LocationClient mLocationClient = null;
     private LocationClientOption locationClientOption;
@@ -176,7 +179,6 @@ public class HomeFragment extends Fragment implements BDLocationListener {
 
     private String typenumber = "2";
     private int typeid = REQUEST_PRODUCT;
-
 
 
     @Nullable
@@ -269,7 +271,6 @@ public class HomeFragment extends Fragment implements BDLocationListener {
         });
 
 
-
         showShopCartNumber();
 
         super.onResume();
@@ -324,31 +325,16 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                                     mTvBtshopcart.setVisibility(View.GONE);
                                 }
 
-                                mTvShopcart.setText(count+"");
-                                mTvBtshopcart.setText(count+"");
-
-
-
+                                mTvShopcart.setText(count + "");
+                                mTvBtshopcart.setText(count + "");
 
                                 // }
 
-
-
-
-
-
-
                             }
-
-
-
 
                         }
 
-
-
                     }
-
 
 
                 }
@@ -358,7 +344,6 @@ public class HomeFragment extends Fragment implements BDLocationListener {
 
                 }
             });
-
 
 
         } else {
@@ -373,15 +358,10 @@ public class HomeFragment extends Fragment implements BDLocationListener {
         if (mSearchwindow == null) {
             mSearchwindow = new PopupWindow(getContext());
             mContentView = View.inflate(getContext(), R.layout.home_seach_pop, null);
-            mIvclose = (ImageView) mContentView.findViewById(R.id.iv_close);
+
             mTagFlowLayout = (TagFlowLayout) mContentView.findViewById(R.id.flowlayout);
         }
-        mIvclose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSearchwindow.dismiss();
-            }
-        });
+
         mSearchwindow.setContentView(mContentView);
         mSearchwindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_toppop_bg));
         mSearchwindow.setTouchable(true);
@@ -411,7 +391,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                             if (been1 != null) {
                                 for (TypeBean bean : been1) {
                                     typelist.add(bean.getPT_Title());
-                                    typeidlist.add(bean.getId()+"");
+                                    typeidlist.add(bean.getId() + "");
                                 }
 
 
@@ -455,9 +435,6 @@ public class HomeFragment extends Fragment implements BDLocationListener {
         });
 
 
-
-
-
     }
 
     private void realtimesearch(CharSequence s) {
@@ -465,15 +442,9 @@ public class HomeFragment extends Fragment implements BDLocationListener {
 
             mSearchwindow = new PopupWindow(getContext());
             mContentView = View.inflate(getContext(), R.layout.home_seach_pop, null);
-            mIvclose = (ImageView) mContentView.findViewById(R.id.iv_close);
+
             mTagFlowLayout = (TagFlowLayout) mContentView.findViewById(R.id.flowlayout);
         }
-        mIvclose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSearchwindow.dismiss();
-            }
-        });
 
         mSearchwindow.setContentView(mContentView);
         mSearchwindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_toppop_bg));
@@ -482,8 +453,6 @@ public class HomeFragment extends Fragment implements BDLocationListener {
         mSearchwindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         mSearchwindow.setOutsideTouchable(true);
         mSearchwindow.update();
-
-
 
 
         Call<String> searchkeyword = Aplication.mIinterface.searchkeyword(typenumber, s.toString(), "");
@@ -499,7 +468,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                     AvatorBean bean = avatorBeen.get(0);
                     if (bean != null) {
                         String retmsg = bean.getRetmsg();
-                        if (retmsg.contains("[") && retmsg.length() >2) {
+                        if (retmsg.contains("[") && retmsg.length() > 2) {
                             //去解析
                             Type type1 = new TypeToken<ArrayList<SearchBean>>() {
                             }.getType();
@@ -513,16 +482,16 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                                 taglist.add(s1);
 
                             }
-                                mTagAdapter = new TagAdapter(taglist) {
-                                    @Override
-                                    public View getView(FlowLayout parent, int position, Object o) {
-                                        TextView tv = (TextView) mInflater.inflate(R.layout.home_search_tv, mTagFlowLayout, false);
-                                        tv.setText(taglist.get(position));
-                                        return tv;
-                                    }
-                                };
+                            mTagAdapter = new TagAdapter(taglist) {
+                                @Override
+                                public View getView(FlowLayout parent, int position, Object o) {
+                                    TextView tv = (TextView) mInflater.inflate(R.layout.home_search_tv, mTagFlowLayout, false);
+                                    tv.setText(taglist.get(position));
+                                    return tv;
+                                }
+                            };
 
-                                mTagFlowLayout.setAdapter(mTagAdapter);
+                            mTagFlowLayout.setAdapter(mTagAdapter);
                             mTagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
                                 @Override
                                 public boolean onTagClick(View view, int position, FlowLayout parent) {
@@ -530,7 +499,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                                     if (typenumber.equals("7")) {
                                         //说明是点击了搜索cn的按钮
                                         searchCn(keyword);
-                                    }else if (typenumber.equals("2")) {
+                                    } else if (typenumber.equals("2")) {
                                         //说明是点击了宝贝和角色的按钮
                                         String[] split = null;
                                         if (keyword.contains("-")) {
@@ -543,12 +512,11 @@ public class HomeFragment extends Fragment implements BDLocationListener {
 
 
                                     }
-
+                                    mSearchwindow.dismiss();
 
                                     return false;
                                 }
                             });
-
 
 
                             mSearchwindow.showAsDropDown(mLlHomeseach);
@@ -575,7 +543,8 @@ public class HomeFragment extends Fragment implements BDLocationListener {
     }
 
     /**
-     *  搜索商品的方法 宝贝 和 角色
+     * 搜索商品的方法 宝贝 和 角色
+     *
      * @param s
      */
     private void searchProduct(String s) {
@@ -591,7 +560,6 @@ public class HomeFragment extends Fragment implements BDLocationListener {
         Intent cnintent = new Intent(getContext(), SearchCnResultActivity.class);
         cnintent.putExtra("key", s);
         startActivity(cnintent);
-
 
 
     }
@@ -633,7 +601,6 @@ public class HomeFragment extends Fragment implements BDLocationListener {
         images.add(R.mipmap.share_icon_pyq);
 
 
-
         //设置图片加载器
         mBanner.setImageLoader(new GlideImageLoader());
         //设置图片集合
@@ -656,9 +623,17 @@ public class HomeFragment extends Fragment implements BDLocationListener {
         });
         mBanner.start();
 
+        mMyscroll.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mMyscroll.setFocusable(true);
+                mMyscroll.setFocusableInTouchMode(true);
+                mMyscroll.requestFocus();
 
 
-
+                return false;
+            }
+        });
 
 
 
@@ -700,7 +675,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                 if (Utils.isUserLogin()) {
                     startActivity(new Intent(getContext(), ShopCarActivity.class));
                 } else {
-                    startActivity(new Intent(getContext(),LoginActivity.class));
+                    startActivity(new Intent(getContext(), LoginActivity.class));
                 }
 
                 break;
@@ -764,13 +739,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                     //搜约单的界面
 
 
-
                 }
-
-
-
-
-
 
 
                 break;
@@ -796,7 +765,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                 if (mProvince != null) {
                     makeupintent.putExtra("location", mProvince);
                 }
-                    makeupintent.putExtra("typeid", 8);
+                makeupintent.putExtra("typeid", 8);
 
                 startActivity(makeupintent);
 
@@ -807,7 +776,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                 if (mProvince != null) {
                     laterintent.putExtra("location", mProvince);
                 }
-                    laterintent.putExtra("typeid", 7);
+                laterintent.putExtra("typeid", 7);
 
                 startActivity(laterintent);
 
@@ -916,14 +885,13 @@ public class HomeFragment extends Fragment implements BDLocationListener {
 
                 popupWindow.setContentView(pop);
                 int width = dp2px(85);
-                int height = Utils.dp2px(140);
-                popupWindow.setHeight(height);
+                popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
                 popupWindow.setWidth(width);
                 popupWindow.setTouchable(true);
                 popupWindow.setOutsideTouchable(true);
 
-                popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_toppop_bg));
-                popupWindow.showAsDropDown(mTvKeyword);
+                popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.detail_toppop_bg));
+                popupWindow.showAsDropDown(mLlTopsearch,Utils.dp2px(10),-Utils.dp2px(15));
 
 
                 break;
@@ -939,7 +907,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                 if (Utils.isUserLogin()) {
                     startActivity(new Intent(getContext(), ShopCarActivity.class));
                 } else {
-                    startActivity(new Intent(getContext(),LoginActivity.class));
+                    startActivity(new Intent(getContext(), LoginActivity.class));
                 }
 
                 break;

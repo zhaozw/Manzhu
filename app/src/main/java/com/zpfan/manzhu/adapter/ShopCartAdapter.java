@@ -213,6 +213,15 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
                                 }
                             });
 
+                            dialog.setonCloseClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+
+                                }
+                            });
+
+
 
                             break;
 

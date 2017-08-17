@@ -566,5 +566,50 @@ public interface APIinterface {
     Call<String> getgoodlistbySharecomm(@Query("Page") String Page, @Query("type_value") String type_value, @Query("goods_cate_ID") String goods_cate_ID, @Query("KEYWORD") String KEYWORD, @Query("sort_type") String sort_type);
 
 
+    /**
+     * 获取会员的基本信息
+     * @param m_uid
+     * @return
+     */
+    @GET("MemberIndex")
+    Call<String> getuspace(@Query("m_uid") String m_uid);
+
+    /**
+     * 获取个人空间的cos作品
+     * @param member_uid
+     * @return
+     */
+    @GET("get_uspace_cosworklist")
+    Call<String> getUspaceCos(@Query("member_uid") String member_uid);
+
+
+    /**
+     * 获取个人空间的商品和服务列表
+     * @param member_uid
+     * @param g_type
+     * @return
+     */
+    @GET("get_uspace_product_server_list")
+    Call<String> getUspaceGood(@Query("member_uid") String member_uid,@Query("g_type") String  g_type);
+
+
+    /**
+     * 关注或者取消关注用户
+     * @param login_member_uid
+     * @param follow_member_uid
+     * @return
+     */
+    @GET("opera_followmember_function")
+    Call<String> operafollowmember(@Query("login_member_uid") String login_member_uid, @Query("follow_member_uid") String follow_member_uid);
+
+    /**
+     * 判断用户是否被关注
+     * @param login_member_uid
+     * @param follow_member_uid
+     * @return
+     */
+    @GET("opera_Judge_isfollow_function")
+    Call<String> operaJudgeIsfollow(@Query("login_member_uid") String login_member_uid, @Query("follow_member_uid") String follow_member_uid);
+
 
 }
