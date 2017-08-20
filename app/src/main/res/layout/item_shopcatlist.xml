@@ -26,6 +26,7 @@
             android:layout_height="17.5dp"/>
 
         <ImageView
+            android:id="@+id/tv_typeicon"
             android:layout_marginLeft="15dp"
             android:src="@mipmap/type_icon_shop"
             android:layout_width="12dp"
@@ -119,7 +120,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-
+    <View
+        android:id="@+id/bootm"
+        android:visibility="gone"
+        android:background="@color/threebackground"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
 
 
 

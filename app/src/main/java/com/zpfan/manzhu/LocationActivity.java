@@ -28,9 +28,8 @@ import com.zpfan.manzhu.adapter.LocationpoprAdapter;
 import com.zpfan.manzhu.adapter.LocationpopshiAdapter;
 import com.zpfan.manzhu.bean.TestBean;
 import com.zpfan.manzhu.myui.MyToast;
+import com.zpfan.manzhu.utils.SPUtils;
 import com.zpfan.manzhu.utils.Utils;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -261,11 +260,11 @@ public class LocationActivity extends AppCompatActivity implements BDLocationLis
                     String event = mTvCity.getText().toString();
                 String   location = mTvMylocation.getText().toString();
                 if (!event.equals("选择市")) {
-                    EventBus.getDefault().post(event);
+                    SPUtils.getInstance().put("Usercity",event);
                 } else {
                     if (location != null) {
                        String shi =  location.substring(location.indexOf("-") + 1);
-                        EventBus.getDefault().post(shi);
+                        SPUtils.getInstance().put("Usercity",shi);
                     } else {
                         MyToast.show("定位出现问题，请稍后再试",R.mipmap.com_icon_cross_w);
                     }

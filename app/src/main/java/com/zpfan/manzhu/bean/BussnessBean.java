@@ -205,7 +205,17 @@ public class BussnessBean implements Parcelable,MultiItemEntity {
     public static final int IDLE = 2;
     public static final int SERVER = 3;
     private int itemType;
+    private boolean isShowuser = false;  //是展示商品还是个人信息
 
+
+
+    public boolean isShowuser() {
+        return isShowuser;
+    }
+
+    public void setShowuser(boolean showuser) {
+        isShowuser = showuser;
+    }
 
     public BussnessBean(int itemType) {
         this.itemType = itemType;
@@ -2352,6 +2362,7 @@ public class BussnessBean implements Parcelable,MultiItemEntity {
         dest.writeString(this.PP_Lease_period_proportion);
         dest.writeString(this.server_unit_string);
         dest.writeInt(this.itemType);
+        dest.writeByte(this.isShowuser ? (byte) 1 : (byte) 0);
     }
 
     protected BussnessBean(Parcel in) {
@@ -2451,6 +2462,7 @@ public class BussnessBean implements Parcelable,MultiItemEntity {
         this.PP_Lease_period_proportion = in.readString();
         this.server_unit_string = in.readString();
         this.itemType = in.readInt();
+        this.isShowuser = in.readByte() != 0;
     }
 
     public static final Creator<BussnessBean> CREATOR = new Creator<BussnessBean>() {

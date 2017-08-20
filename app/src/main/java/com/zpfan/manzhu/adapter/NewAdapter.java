@@ -1,5 +1,6 @@
 package com.zpfan.manzhu.adapter;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -17,11 +18,22 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.gson.reflect.TypeToken;
+import com.zpfan.manzhu.Aplication;
+import com.zpfan.manzhu.LoginActivity;
 import com.zpfan.manzhu.R;
+import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.BussnessBean;
+import com.zpfan.manzhu.myui.MyToast;
 import com.zpfan.manzhu.utils.Utils;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2017/7/12 0012.
@@ -30,37 +42,40 @@ import java.util.List;
 public class NewAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
 
 
-    private boolean isshowgood = true;
+
 
     public NewAdapter(@LayoutRes int layoutResId, @Nullable List<BussnessBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, BussnessBean item) {
+    protected void convert(BaseViewHolder helper, final BussnessBean item) {
+        final boolean[] isshowgood = {true};
             //点击按钮以后要显示的界面
-        final ImageView  mAvator = helper.getView(R.id.iv_avator);
-        final ImageView  mRenzheng = helper.getView(R.id.iv_renzheng);
-        final ImageView  mShop = helper.getView(R.id.iv_shop);
-        final ImageView mManor = helper.getView(R.id.iv_manor);
-        final ImageView   mMore = helper.getView(R.id.iv_more);
-        final TextView  mName = helper.getView(R.id.tv_name);
-        final TextView mDizhi = helper.getView(R.id.tv_dizhi);
+         final ImageView  mAvator = helper.getView(R.id.iv_avator);
+         ImageView  mRenzheng = helper.getView(R.id.iv_renzheng);
+         final ImageView  mShop = helper.getView(R.id.iv_shop);
+         final ImageView mManor = helper.getView(R.id.iv_manor);
+         final ImageView   mMore = helper.getView(R.id.iv_more);
+         final ImageView   ivcollect = helper.getView(R.id.iv_collect);
+         ImageView   ivshopcar = helper.getView(R.id.iv_shopcar);
+         final TextView  mName = helper.getView(R.id.tv_name);
+         final TextView mDizhi = helper.getView(R.id.tv_dizhi);
         TextView mBaobeikaopu = helper.getView(R.id.tv_baobeikaopu);
         TextView mMaikaopu = helper.getView(R.id.tv_maikaopu);
-        final TextView  mUserlv = helper.getView(R.id.tv_userlv);
+         final TextView  mUserlv = helper.getView(R.id.tv_userlv);
         TextView  mZukaopu = helper.getView(R.id.tv_zukaopu);
-        final RelativeLayout mShopcar = helper.getView(R.id.rl_shopcar);
-        final RelativeLayout mCollect = helper.getView(R.id.rl_collect);
-        final LinearLayout    mKaopu = helper.getView(R.id.ll_kaopu);
-        final LinearLayout  mLlmaikaopu = helper.getView(R.id.ll_maikaopu);
-        final LinearLayout mLlzukaopu = helper.getView(R.id.ll_zukaopu);
-        final ImageView  mBussnessphoto = helper.getView(R.id.iv_bussness_photo);
-        final TextView  mBussnesstag = helper.getView(R.id.tv_bussnesstag);
-        final TextView mBaoyou = helper.getView(R.id.tv_baoyou);
-        final TextView  mTitle = helper.getView(R.id.tv_title);
-        final LinearLayout mFanmai = helper.getView(R.id.ll_fanmai);
-        final LinearLayout mbrand = helper.getView(R.id.ll_brand);
+         final RelativeLayout mShopcar = helper.getView(R.id.rl_shopcar);
+         final RelativeLayout mCollect = helper.getView(R.id.rl_collect);
+         final LinearLayout    mKaopu = helper.getView(R.id.ll_kaopu);
+         final LinearLayout  mLlmaikaopu = helper.getView(R.id.ll_maikaopu);
+         final LinearLayout mLlzukaopu = helper.getView(R.id.ll_zukaopu);
+         final ImageView  mBussnessphoto = helper.getView(R.id.iv_bussness_photo);
+         final TextView  mBussnesstag = helper.getView(R.id.tv_bussnesstag);
+         final TextView mBaoyou = helper.getView(R.id.tv_baoyou);
+         final TextView  mTitle = helper.getView(R.id.tv_title);
+         final LinearLayout mFanmai = helper.getView(R.id.ll_fanmai);
+         final LinearLayout mbrand = helper.getView(R.id.ll_brand);
         TextView brandid = helper.getView(R.id.tv_brandname);
 
         helper.addOnClickListener(R.id.iv_bussness_photo)
@@ -178,8 +193,196 @@ public class NewAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
         }
 
 
+        //检查是否收藏过该商品
+        Call<String> iscollection = Aplication.mIinterface.operaisCollection("商品", item.getId() + "", Utils.getloginuid());
+
+        iscollection.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                String body = response.body();
+
+                if (body != null) {
+                    Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                    }.getType();
+
+                    ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                    if (avatorBeen != null && avatorBeen.size() > 0) {
+                        AvatorBean bean = avatorBeen.get(0);
+                        String retmsg = bean.getRetmsg();
+                        if (retmsg.equals("true")) {
+                            ivcollect.setImageResource(R.mipmap.com_icon_fav_w);
+                        } else if (retmsg.equals("false")) {
+                            ivcollect.setImageResource(R.mipmap.com_icon_share_ept_w);
+                        }
+                    }
+
+                }
 
 
+
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                ivcollect.setImageResource(R.mipmap.com_icon_share_ept_w);
+            }
+        });
+
+        final boolean showuser = item.isShowuser();
+        if (showuser) {
+            // showBussnessinfo();
+            mAvator.setVisibility(View.VISIBLE);
+            mShop.setVisibility(View.VISIBLE);
+            mManor.setVisibility(View.VISIBLE);
+            mName.setVisibility(View.VISIBLE);
+            mDizhi.setVisibility(View.VISIBLE);
+            mKaopu.setVisibility(View.VISIBLE);
+            mLlmaikaopu.setVisibility(View.VISIBLE);
+            mLlzukaopu.setVisibility(View.VISIBLE);
+            mCollect.setVisibility(View.VISIBLE);
+            mShopcar.setVisibility(View.VISIBLE);
+            mUserlv.setVisibility(View.VISIBLE);
+
+
+
+            mBussnessphoto.setVisibility(View.GONE);
+            mBussnesstag.setVisibility(View.GONE);
+            mBaoyou.setVisibility(View.GONE);
+            mTitle.setVisibility(View.GONE);
+            mFanmai.setVisibility(View.GONE);
+            mbrand.setVisibility(View.GONE);
+
+            mMore.setImageResource(R.mipmap.com_icon_pro_list_corn_x);
+        } else {
+            //showGoodinfo();
+            mAvator.setVisibility(View.GONE);
+            mShop.setVisibility(View.GONE);
+            mManor.setVisibility(View.GONE);
+            mName.setVisibility(View.GONE);
+            mDizhi.setVisibility(View.GONE);
+            mKaopu.setVisibility(View.GONE);
+            mLlmaikaopu.setVisibility(View.GONE);
+            mLlzukaopu.setVisibility(View.GONE);
+            mCollect.setVisibility(View.GONE);
+            mShopcar.setVisibility(View.GONE);
+            mUserlv.setVisibility(View.GONE);
+
+
+            mBussnessphoto.setVisibility(View.VISIBLE);
+            mBussnesstag.setVisibility(View.VISIBLE);
+            mBaoyou.setVisibility(View.VISIBLE);
+            mTitle.setVisibility(View.VISIBLE);
+            mFanmai.setVisibility(View.VISIBLE);
+            mbrand.setVisibility(View.VISIBLE);
+            mMore.setImageResource(R.mipmap.com_icon_pro_list_corn);
+        }
+
+
+
+
+        //收藏的按钮
+        mCollect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (Utils.isUserLogin()) {
+                    Call<String> operacollectionfunction = Aplication.mIinterface.operacollectionfunction("商品", item.getId() + "", Utils.getloginuid());
+
+                    operacollectionfunction.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+
+                            String body1 = response.body();
+                            if (body1 != null) {
+                                Type type2 = new TypeToken<ArrayList<AvatorBean>>() {
+                                }.getType();
+
+                                ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body1, type2);
+                                if (avatorBeen != null && avatorBeen.size() > 0) {
+                                    AvatorBean bean1 = avatorBeen.get(0);
+                                    String retmsg1 = bean1.getRetmsg();
+                                    notifyDataSetChanged();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+
+
+                } else {
+                    mContext.startActivity(new Intent(mContext,LoginActivity.class));
+                }
+
+
+            }
+        });
+
+
+
+        //购物车按钮
+        mShopcar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //加入购物车的方法
+
+                if (Utils.isUserLogin()) {
+
+                    Call<String> operaaddupdateshopcart = Aplication.mIinterface.operaaddupdateshopcart("", Utils.getloginuid(), item.getG_UID(),"", item.getMember_UID(), "1");
+
+                    operaaddupdateshopcart.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+
+
+                            String body = response.body();
+                            if (body != null) {
+                                Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                                }.getType();
+
+                                ArrayList<AvatorBean> been = Utils.gson.fromJson(body, type);
+                                if (been != null) {
+                                    AvatorBean bean = been.get(0);
+
+                                    if (bean.getRetmsg().equals("true")) {
+
+                                        MyToast.show("添加到购物车成功", R.mipmap.com_icon_check_w);
+
+                                    } else {
+                                        MyToast.show("添加到购物车失败", R.mipmap.com_icon_cross_w);
+                                    }
+
+
+                                }
+                            } else {
+
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+
+
+
+
+
+                } else {
+                    mContext.startActivity(new Intent(mContext,LoginActivity.class));
+                }
+
+
+            }
+        });
 
 
 
@@ -188,7 +391,7 @@ public class NewAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
             @Override
             public void onClick(View v) {
                 //点击了以后隐藏信息 或者  展示信息
-                if (isshowgood) {
+                if (showuser) {
                    // showBussnessinfo();
                     mAvator.setVisibility(View.VISIBLE);
                     mShop.setVisibility(View.VISIBLE);
@@ -236,8 +439,8 @@ public class NewAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
                     mMore.setImageResource(R.mipmap.com_icon_pro_list_corn);
                 }
 
-                isshowgood = !isshowgood;
-
+               item.setShowuser(!showuser);
+                notifyDataSetChanged();
             }
         });
 

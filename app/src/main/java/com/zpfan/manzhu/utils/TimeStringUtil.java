@@ -44,10 +44,17 @@ public class    TimeStringUtil {
                 } else {
                     return "Yesterday, " + new SimpleDateFormat("HH:mm").format(date);
                 }
+            } else if (dayNow - dayMsg == 2) {  //前天
+                if (isChinese) {
+                    return "前天 " + new SimpleDateFormat("HH:mm").format(date);
+                } else {
+                    return "The day before yesterday, " + new SimpleDateFormat("HH:mm").format(date);
+                }
+
             } else {//前天 以及 以前 同一年,10月30日 15:23  , October 30, 15:23
-                if (isChinese){//是中文
+                if (isChinese) {//是中文
                     return new SimpleDateFormat("M月d日 HH:mm").format(date);
-                }else {
+                } else {
                     String englishMonth = getEnglishMonth(monthMsg);
                     return englishMonth + " " + new SimpleDateFormat("dd, HH:mm").format(date);
                 }

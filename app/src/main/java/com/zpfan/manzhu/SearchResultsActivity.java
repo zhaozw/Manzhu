@@ -97,6 +97,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         LinearLayout llsearchtop1 = (LinearLayout) mStProduct.findViewById(R.id.ll_searchtop1);
         LinearLayout llsearchtop2 = (LinearLayout) mStProduct.findViewById(R.id.ll_searchtop2);
         LinearLayout llsearchtop3 = (LinearLayout) mStProduct.findViewById(R.id.ll_searchtop3);
+        LinearLayout llsearch = (LinearLayout) mStProduct.findViewById(R.id.ll_search);
         mIvsearchtop1 = (ImageView) mStProduct.findViewById(R.id.iv_searchtop1);
         mIvsearchtop2 = (ImageView) mStProduct.findViewById(R.id.iv_searchtop2);
         mTvsearchtop1 = (TextView) mStProduct.findViewById(R.id.tv_searchtop1);
@@ -136,6 +137,24 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         mMap.put("is_deposit", "");
 
         getProductData();
+
+        mRvProduct.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    mStProduct.hidemenu();
+
+                } else {
+                    mStProduct.showmenu();
+
+                }
+
+
+
+            }
+        });
+
 
 
     }
@@ -325,6 +344,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
                 mLlbutton.setVisibility(View.VISIBLE);
 
                 break;
+
 
 
         }

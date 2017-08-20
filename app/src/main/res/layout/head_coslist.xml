@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.bingoogolapple.bgabanner.BGABanner xmlns:android="http://schemas.android.com/apk/res/android"
+                                       android:layout_width="match_parent"
+                                       xmlns:app="http://schemas.android.com/apk/res-auto"
+                                       android:layout_height="216dp"
+                                       app:banner_pointAutoPlayAble="true"
+                                       app:banner_pointContainerBackground="@android:color/transparent"
+                                       app:banner_pointDrawable="@drawable/banner_selector"
+                                       android:id="@+id/bp_coslist"
+                                       app:banner_pointLeftRightMargin="7.5dp"
+                                       android:orientation="vertical"
+                                       android:scaleType="fitCenter">
+
+</cn.bingoogolapple.bgabanner.BGABanner>

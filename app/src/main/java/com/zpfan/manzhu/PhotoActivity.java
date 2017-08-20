@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -102,7 +103,6 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initRV() {
-
         final ArrayList<String> strings = new ArrayList<>();
         mMap = new HashMap<>();
         Intent intent = getIntent();
@@ -125,7 +125,6 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
         //决定显示什么布局 和用什么参数去访问
 
         if (type != null) {
-
             mSearchtoplin.setVisibility(View.VISIBLE);
             mIcontoplin.setVisibility(View.GONE);
             issearch = true;
@@ -154,6 +153,7 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
         } else {
             mSearchtoplin.setVisibility(View.GONE);
             mIcontoplin.setVisibility(View.VISIBLE);
+            Log.i("zc", "initRV:  正常的进来显示" );
             issearch = false;
             mMap.put("page", "1");
             mMap.put("G_TYPE", "服务");
@@ -188,11 +188,40 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
         mRvIdel.setLayoutManager(new LinearLayoutManager(PhotoActivity.this));
         mTopmenu = (LinearLayout) mIcontoplin.findViewById(R.id.ll_topmenu);
         mEmptyview = View.inflate(PhotoActivity.this, R.layout.rv_emptyview, null);
+        mAdapter = new PhotoAdapter(R.layout.item_photo, mBussnessBeen);
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()) {
+                    case R.id.iv_photo:
+                    case R.id.tv_idle:
+                    case R.id.tv_phototitle:
+                    case R.id.ll_price:
+                    case R.id.tv_provice:
+                        //跳转到服务详情的界面
+                        Intent intent = new Intent(PhotoActivity.this, IdleDetailActivity.class);
+                        intent.putExtra("id", mBussnessBeen.get(position));
+                        intent.putExtra("type", "server");
+                        startActivity(intent);
+
+                        break;
 
 
+                }
 
 
+            }
+        });
+        mHeadView = View.inflate(PhotoActivity.this, R.layout.photo_head, null);
+        if (!issearch) {
+            mAdapter.addHeaderView(mHeadView);
+        }
 
+        mRvIdel.setAdapter(mAdapter);
+        mAdapter.setHeaderAndEmpty(true);
+        mAdapter.bindToRecyclerView(mRvIdel);
+        mAdapter.setEmptyView(R.layout.rv_emptyview);
+        mAdapter.isUseEmpty(false);
         getData();
 
         mRvIdel.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -217,6 +246,19 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
                     mTopmenu.setLayoutParams(params);
                 }
 
+                if (issearch) {
+                    if (dy > 0) {
+                        //是下滑
+                        mSearchtoplin.hidemenu();
+
+
+                    } else {
+                        // 是上滑
+
+                        mSearchtoplin.showmenu();
+                    }
+                }
+
 
             }
         });
@@ -228,12 +270,12 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void getData() {
-
+        Log.i("zc", "getData:  进来获取数据");
         Call<String> getgoodslist = Aplication.mIinterface.getgoodslist(mMap);
         getgoodslist.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-
+                Log.i("zc", "onResponse:   看看去获取数据了吗成功" +call.request().toString());
                 String body = response.body();
                 if (body != null) {
 
@@ -254,41 +296,16 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
                                 mBussnessBeen = Utils.gson.fromJson(substring, type1);
 
                                 if (mBussnessBeen != null) {
-                                    mAdapter = new PhotoAdapter(R.layout.item_photo, mBussnessBeen);
-                                    mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-                                        @Override
-                                        public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                                            switch (view.getId()) {
-                                                case R.id.iv_photo:
-                                                case R.id.tv_idle:
-                                                case R.id.tv_phototitle:
-                                                case R.id.ll_price:
-                                                case R.id.tv_provice:
-                                                    //跳转到服务详情的界面
-                                                    Intent intent = new Intent(PhotoActivity.this, IdleDetailActivity.class);
-                                                    intent.putExtra("id", mBussnessBeen.get(position));
-                                                    intent.putExtra("type", "server");
-                                                    startActivity(intent);
 
-                                                    break;
+                                    mAdapter.setNewData(mBussnessBeen);
 
 
-                                            }
-
-
-                                        }
-                                    });
-                                    mHeadView = View.inflate(PhotoActivity.this, R.layout.photo_head, null);
-                                    if (!issearch) {
-                                        mAdapter.addHeaderView(mHeadView);
-                                    }
-                                    mRvIdel.setAdapter(mAdapter);
-                                    mAdapter.bindToRecyclerView(mRvIdel);
-                                    mAdapter.setEmptyView(R.layout.rv_emptyview);
                                 }
 
 
                             }
+                        } else {
+                            mAdapter.isUseEmpty(true);
                         }
 
 
@@ -301,7 +318,7 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                Log.i("zc", "onResponse:   看看去获取数据了吗失败" +call.request().toString());
             }
         });
     }
@@ -397,7 +414,7 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
                 mTvorder.setTextColor(getResources().getColor(R.color.maintextcolor));
                 mIvfilter.setImageResource(R.mipmap.com_icon_screen_ept);
                 mTvfilter.setTextColor(getResources().getColor(R.color.secondtextcolor));
-                mTvpaixu.setText("当前排序：" + mShaixuan);
+                mTvpaixu.setText("当前排序：" );
                 mRvpop.setVisibility(View.VISIBLE);
                 mRvfilter.setVisibility(View.GONE);
                 mLlbutton.setVisibility(View.GONE);
@@ -468,7 +485,7 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
         mShaixuan = SPUtils.getInstance().getString("paixu", "全部");
         mOrde.setOnClickListener(this);
         mFilter.setOnClickListener(this);
-        mTvpaixu.setText("当前排序：" + mShaixuan);
+        mTvpaixu.setText("当前排序：");
         mPopupWindow.setContentView(inflate);
         mPopupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_toppop_bg));
         mPopupWindow.setTouchable(true);
@@ -495,6 +512,20 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
     private void initFilterRv(final PopupWindow window) {
         mRvfilter.setLayoutManager(new LinearLayoutManager(PhotoActivity.this));
         ArrayList<FilterBean> filters = new ArrayList<>();
+        //增加类型一栏
+        LinkedHashMap<String, String> typeMap = new LinkedHashMap<>();
+        typeMap.put("全部", "");
+        typeMap.put("仅摄影", "6");
+        typeMap.put("仅化妆", "8");
+        typeMap.put("仅后期", "7");
+        typeMap.put("仅摄影棚", "14");
+        typeMap.put("仅舞蹈/武术指导", "9");
+        typeMap.put("仅插画", "10");
+        typeMap.put("其他", "12");
+        filters.add(new FilterBean("类型", typeMap, "TYPE_ID"));
+
+
+
         LinkedHashMap<String, String> brandMap = new LinkedHashMap<>();
         brandMap.put("全部", "");
         brandMap.put("仅五星", "5");
@@ -540,6 +571,7 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
                 SPUtils.getInstance().put("品牌", 0);
                 SPUtils.getInstance().put("价格", 0);
                 SPUtils.getInstance().put("发布时间", 0);
+                SPUtils.getInstance().put("类型",0);
                 window.dismiss();
             }
         });
@@ -551,17 +583,27 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
                 String pricefilter = SPUtils.getInstance().getString("BRANDID", "");
                 String newfilter = SPUtils.getInstance().getString("price_filter", "");
                 String timefilter = SPUtils.getInstance().getString("time_filter", "");
+                String typeid = SPUtils.getInstance().getString("TYPE_ID", "");
+
 
                 mMap.put("professionaldegree_filter", brandid);
                 mMap.put("BRANDID", pricefilter);
                 mMap.put("price_filter", newfilter);
+                mMap.put("TYPE_ID", typeid);
                 mMap.put("time_filter", timefilter);
+                Set<String> strings = mMap.keySet();
+                for (String string : strings) {
+                    mMap.get(string);
+                    Log.i("zc", "onClick:  看看发送访问的数据" + string+" -------" + mMap.get(string));
+                }
+
+
                 Call<String> getgoodslist = Aplication.mIinterface.getgoodslist(mMap);
                 getgoodslist.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
 
-
+                        Log.i("zc", "onResponse:  看看筛选以后 发送的请求" + call.request().toString());
                         String body = response.body();
                         if (body != null) {
                             Type type = new TypeToken<ArrayList<AvatorBean>>() {
@@ -648,7 +690,7 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
                 popadapter.cleanCheck();
                 popadapter.setCheck(position);
                 SPUtils.getInstance().put("check", position);
-                mTvpaixu.setText("当前排序：" + strings.get(position));
+                mTvpaixu.setText("当前排序：");
                 SPUtils.getInstance().put("paixu", strings.get(position));
                 //发送请求
                 mMap.put("sort_type", types.get(position));
@@ -785,5 +827,14 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
         SPUtils.getInstance().put("品牌", 0);
         SPUtils.getInstance().put("价格", 0);
         SPUtils.getInstance().put("发布时间", 0);
+        SPUtils.getInstance().put("类型",0);
+
+         SPUtils.getInstance().put("professionaldegree_filter", "");
+         SPUtils.getInstance().put("BRANDID", "");
+         SPUtils.getInstance().put("price_filter", "");
+         SPUtils.getInstance().put("time_filter", "");
+         SPUtils.getInstance().put("TYPE_ID", "");
+
+
     }
 }

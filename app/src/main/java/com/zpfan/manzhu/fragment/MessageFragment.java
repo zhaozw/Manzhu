@@ -166,7 +166,9 @@ public class MessageFragment extends Fragment implements EMConnectionListener, E
 
                                     }
                                 });
-                                mRvMessage.setAdapter(mMessageListAdapter);
+                                if (mRvMessage != null) {
+                                    mRvMessage.setAdapter(mMessageListAdapter);
+                                }
                                 EventBus.getDefault().post("");
 
 

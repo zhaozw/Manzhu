@@ -36,17 +36,17 @@
         android:layout_height="35dp"/>
 
     <TextView
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/tv_userlv"
         android:gravity="center"
         android:layout_alignRight="@+id/iv_avator"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="5dp"
-        android:layout_alignLeft="@+id/iv_avator"
+        android:layout_alignTop="@+id/iv_avator"
         android:background="@drawable/message_leve_bg"
         android:textColor="@color/buttontext"
         android:text="Lv.9"
         android:textSize="8sp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:layout_width="wrap_content"
         android:layout_height="12dp"/>
     </RelativeLayout>

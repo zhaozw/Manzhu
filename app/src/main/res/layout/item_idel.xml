@@ -48,6 +48,7 @@
             android:paddingRight="10dp"
             android:id="@+id/tv_title"
             android:visibility="visible"
+            android:paddingBottom="2dp"
             android:textColor="@color/maintextcolor"
             android:text="商品的标题商品的标题商品的标题商品的标题商品的标题"
             android:textSize="14sp"
@@ -59,9 +60,10 @@
     <TextView
         android:layout_alignTop="@+id/ll_baoyou"
         android:layout_alignLeft="@+id/ll_baoyou"
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/tv_baoyou"
         android:background="@drawable/baoyou_shape"
+        android:layout_marginTop="3dp"
         android:gravity="center"
         android:textSize="10sp"
         android:textColor="@color/buttontext"
@@ -326,7 +328,6 @@
             android:layout_height="@dimen/idle_item_avatorwh"/>
 
     <TextView
-
         android:visibility="gone"
         android:id="@+id/tv_userlv"
         android:gravity="center"
@@ -381,7 +382,7 @@
             android:layout_height="25dp"/>
 
         <ImageView
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/iv_manor"
             android:layout_marginLeft="5dp"
             android:src="@mipmap/com_icon_male"
@@ -419,6 +420,7 @@
         android:layout_alignParentEnd="true">
 
         <ImageView
+            android:visibility="visible"
             android:id="@+id/iv_collect"
             android:src="@mipmap/com_icon_share_ept_w"
             android:layout_centerInParent="true"
@@ -448,6 +450,7 @@
 
     <LinearLayout
         android:visibility="gone"
+        android:id="@+id/ll_pinfen"
         android:gravity="center_vertical"
         android:layout_below="@+id/iv_avator"
         android:orientation="horizontal"

@@ -611,5 +611,12 @@ public interface APIinterface {
     @GET("opera_Judge_isfollow_function")
     Call<String> operaJudgeIsfollow(@Query("login_member_uid") String login_member_uid, @Query("follow_member_uid") String follow_member_uid);
 
+    /**
+     *  获取外景地列表
+     * @return
+     */
+    @GET("get_shootlocations_list")
+    Call<String> getCoslocationList(@QueryMap Map<String,String> map);
+
 
 }

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:background="@color/bootmbc"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:background="@drawable/search_popbg"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/secondtextcolor"
+            android:text="宝贝"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/com_icon_arr_down_gra"
+            android:layout_width="@dimen/home_toparrwh"
+            android:layout_height="@dimen/home_toparrwh"/>
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:background="@color/secondtextcolor"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+
+        <EditText
+            android:id="@+id/ed_topsearch"
+            android:layout_marginLeft="6dp"
+            android:textColor="@color/maintextcolor"
+            android:paddingLeft="5dp"
+            android:layout_weight="1"
+            android:hint="输入您想查找的角色名、商品名"
+            android:textColorHint="@color/secondtextcolor"
+            android:textSize="12sp"
+            android:layout_width="0dp"
+            android:background="@null"
+            android:textCursorDrawable="@null"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/iv_topsearch"
+            android:src="@mipmap/com_icon_sch_gra"
+            android:layout_gravity="center_vertical"
+            android:layout_width="17.5dp"
+            android:layout_height="17.5dp"/>
+
+
+    </LinearLayout>
+
+    <com.zhy.view.flowlayout.TagFlowLayout
+        android:id="@+id/flowlayout"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:background="@drawable/home_toppop_bg"
+        app:max_select="1"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+
+</LinearLayout>

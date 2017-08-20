@@ -104,8 +104,7 @@ public class MessageListAdapter extends BaseQuickAdapter<UserBean, BaseViewHolde
         }
 
 
-
-
+        Log.i("message", "convert:   看看获取到的时间" + item.getLasttime());
         //设置消息发送的时间
         if (item.getLasttime() == 0) {
             helper.setText(R.id.tv_lasttime, item.getLastStringtime());

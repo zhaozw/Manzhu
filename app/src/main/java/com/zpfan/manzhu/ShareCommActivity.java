@@ -1,16 +1,13 @@
 package com.zpfan.manzhu;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -26,18 +23,15 @@ import com.zpfan.manzhu.adapter.ShareCommisssioinAdapter;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.BussnessBean;
 import com.zpfan.manzhu.bean.ShareBean;
+import com.zpfan.manzhu.myui.ShareActivity;
 import com.zpfan.manzhu.utils.Utils;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
-import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
 import cn.sharesdk.tencent.qzone.QZone;
@@ -78,7 +72,6 @@ public class ShareCommActivity extends AppCompatActivity {
     private View mHeadView;
     private ShareCommisssioinAdapter mAdapter;
     private ArrayList<BussnessBean> mBussnessBeen;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().hide();
@@ -89,6 +82,7 @@ public class ShareCommActivity extends AppCompatActivity {
     }
 
     private void initView() {
+
         mHeadView = View.inflate(ShareCommActivity.this, R.layout.head_sharecomm, null);
         LinearLayout llback = (LinearLayout) mHeadView.findViewById(R.id.ll_back);
         llback.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +107,7 @@ public class ShareCommActivity extends AppCompatActivity {
         mShare.add(new ShareBean(R.mipmap.share_icon_pyq, "微信朋友圈", WechatMoments.NAME));
         mShare.add(new ShareBean(R.mipmap.share_icon_haoyou, "发给好友"));
         mShare.add(new ShareBean(R.mipmap.share_icon_lianjie, "复制链接"));
-        initPop();
+       // initPop();
 
 
         //对头布局消失的的监听
@@ -141,7 +135,7 @@ public class ShareCommActivity extends AppCompatActivity {
 
     }
 
-    private void initPop() {
+   private void initPop() {
 
         mPaywindow = new PopupWindow(ShareCommActivity.this);
         View inflate = View.inflate(ShareCommActivity.this, R.layout.share_pop, null);
@@ -217,9 +211,13 @@ public class ShareCommActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                                     //分享提佣的功能
-
-                                    showShare(mBussnessBeen.get(position));
+                                    Intent intent = new Intent(ShareCommActivity.this, ShareActivity.class);
+                                    intent.putExtra("bussnessbean", mBussnessBeen.get(position));
+                                    startActivity(intent);
                                 }
+
+
+
                             });
                             mRvShare.setAdapter(mAdapter);
 
@@ -244,89 +242,7 @@ public class ShareCommActivity extends AppCompatActivity {
 
     }
 
-    private void showShare(final BussnessBean bussnessBean) {
-        WindowManager.LayoutParams lp = ShareCommActivity.this.getWindow()
-                .getAttributes();
-        lp.alpha = 0.4f;
-        ShareCommActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        ShareCommActivity.this.getWindow().setAttributes(lp);
 
-        mPaywindow.showAtLocation(mRvShare, Gravity.BOTTOM, 0, 0);
-
-        String text = "分享本宝贝可得 " + bussnessBean.getG_CommissionMoney() + " 元 佣金哦~";
-        SpannableString string = new SpannableString(text);
-        string.setSpan(new ForegroundColorSpan(this.getResources().getColor(R.color.pricetextcolor)), 7, 13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        mTvshare.setText(string);
-
-        mpopAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ShareBean bean = mShare.get(position);
-                if (bean.getParpamName() != null) {
-
-
-                    Platform.ShareParams sp = new Platform.ShareParams();
-
-
-                    String type = bussnessBean.getG_Type();
-                    if (type.equals("二手商品")) {
-                        sp.setTitle("【猪排贩】COS闲置贩售");
-                    } else if (type.equals("新商品")) {
-                        sp.setTitle("【猪排贩】COS新品定做");
-                    } else if (type.equals("服务")) {
-                        sp.setTitle("【猪排贩】COS服务接单");
-                    }
-
-                    String url = "http://www.anipiggy.com/Home/productdetail.htm?" + "id=" + bussnessBean.getId() + "&share_member=" + Utils.getloginid();
-                    sp.setTitleUrl(url); // 标题的超链接
-                    sp.setText(bussnessBean.getG_Title());
-                    sp.setImageUrl(bussnessBean.getG_Cover());
-                    sp.setSite("猪排贩");
-                    sp.setSiteUrl("www.zpfan.com");
-
-                    if (bean.getParpamName().equals(Wechat.NAME)) {
-                        if (type.equals("二手商品")) {
-                            sp.setTitle("【猪排贩】COS闲置贩售");
-                        } else if (type.equals("新商品")) {
-                            sp.setTitle("【猪排贩】COS新品定做");
-                        } else if (type.equals("服务")) {
-                            sp.setTitle("【猪排贩】COS服务接单");
-                        }
-                        sp.setImageUrl(bussnessBean.getG_Cover());
-                        sp.setText(bussnessBean.getG_Title());
-                        sp.setShareType(Platform.SHARE_WEBPAGE);
-                    }
-                    if (bean.getParpamName().equals(SinaWeibo.NAME)) {
-                        sp.setText(bussnessBean.getG_Title() + url);
-                    }
-
-
-                    Platform platform = ShareSDK.getPlatform(bean.getParpamName());
-
-                    platform.setPlatformActionListener(new PlatformActionListener() {
-                        public void onError(Platform arg0, int arg1, Throwable arg2) {
-                            //失败的回调，arg:平台对象，arg1:表示当前的动作，arg2:异常信息
-                            Log.i("zc", "onError:  分享失败");
-                        }
-
-                        public void onComplete(Platform arg0, int arg1, HashMap<String, Object> arg2) {
-                            //分享成功的回调
-                            Log.i("zc", "onError:  分享成功");
-                        }
-
-                        public void onCancel(Platform arg0, int arg1) {
-                            //取消分享的回调
-                            Log.i("zc", "onError:  分享取消" + arg0 + "----" + arg1);
-                        }
-                    });
-                    platform.share(sp);
-                    mPaywindow.dismiss();
-
-                }
-            }
-        });
-    }
 
 
     @OnClick({R.id.iv_topback, R.id.ll_moneyhight, R.id.ll_sharenumber})
@@ -355,5 +271,28 @@ public class ShareCommActivity extends AppCompatActivity {
 
                 break;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        WindowManager.LayoutParams lp = ShareCommActivity.this.getWindow()
+                .getAttributes();
+        lp.alpha = 0.4f;
+        ShareCommActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        ShareCommActivity.this.getWindow().setAttributes(lp);
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        WindowManager.LayoutParams lp = ShareCommActivity.this.getWindow()
+                .getAttributes();
+        lp.alpha = 1f;
+        ShareCommActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        ShareCommActivity.this.getWindow().setAttributes(lp);
+
     }
 }

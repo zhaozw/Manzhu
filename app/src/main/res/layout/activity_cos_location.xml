@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zpfan.manzhu.CosLocationActivity">
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_below="@+id/icontoplin"
+        android:background="@color/threebackground"
+        android:layout_width="match_parent"
+        android:layout_height="2.5dp"/>
+    
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="47.5dp"
+        android:id="@+id/rv_coslocation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    
+    <com.zpfan.manzhu.myui.IconTopLin
+        android:id="@+id/icontoplin"
+        app:topicontext="COS拍摄地"
+        app:top1iv ="@mipmap/com_icon_all"
+        app:top1tv ="全部"
+        app:top2tv ="本地"
+        app:top3tv ="免费"
+        app:top2iv ="@mipmap/com_icon_loca_gra"
+        app:top3iv ="@mipmap/com_icon_free_ept"
+        app:topicon = "@mipmap/menu_icon_07"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+</RelativeLayout>

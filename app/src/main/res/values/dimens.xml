@@ -712,4 +712,9 @@
     <dimen name="checkout_counterh"> 74dp </dimen>
 
 
+    <!-- 拍摄地的顶部图片的高度  480px  240dp-->
+    <dimen name="coslocation_topimgh"> 240dp </dimen>
+
+
+
 </resources>

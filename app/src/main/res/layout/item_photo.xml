@@ -31,29 +31,31 @@
         android:layout_below="@+id/line"
         android:layout_width="@dimen/idle_itemleftw"
         android:layout_height="@dimen/idle_itemlefttagh"/>
-    
     <LinearLayout
         android:id="@+id/ll_photocoll"
+        android:gravity="center"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/ll_xian"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+    <LinearLayout
         android:visibility="visible"
         android:gravity="center"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
         android:orientation="horizontal"
-        android:layout_alignRight="@+id/iv_photo"
-        android:layout_alignBottom="@+id/iv_photo"
         android:layout_width="@dimen/photo_itemcollectw"
         android:background="@drawable/photo_item_coll_bg"
         android:layout_height="@dimen/photo_itemcollecth">
 
         <ImageView
             android:id="@+id/iv_collect"
-            android:src="@mipmap/com_icon_share_ept_w"
+            android:src="@mipmap/com_icon_fav_2_lb"
             android:layout_width="@dimen/photo_itemcolliconwh"
             android:layout_height="@dimen/photo_itemcolliconwh"/>
 
         <TextView
             android:id="@+id/tv_collect"
-            android:layout_marginLeft="3dp"
+            android:layout_marginLeft="5dp"
             android:text="45"
             android:textColor="@color/buttontext"
             android:textSize="10sp"
@@ -61,7 +63,7 @@
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
-
+    </LinearLayout>
     <LinearLayout
         android:visibility="visible"
         android:id="@+id/ll_xian"
@@ -80,7 +82,6 @@
         android:textSize="11sp"
         android:textColor="@color/buttontext"
         android:background="@drawable/item_photo_txt"
-
         android:layout_below="@+id/iv_photo"
         android:layout_width="@dimen/photo_itemtxtwh"
         android:layout_height="@dimen/photo_itemtxtwh"/>
@@ -362,33 +363,9 @@
         android:layout_marginTop="@dimen/photo_shopcartmt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <View
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="0dp"/>
-
-        <LinearLayout
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:visibility="visible"
-            android:id="@+id/rl_collect"
-            android:layout_width="@dimen/idle_item_avatorwh"
-            android:background="@drawable/idle_bottom_shop"
-            android:layout_height="@dimen/idle_item_avatorwh"
-           >
-
-            <ImageView
-                android:id="@+id/iv_photocollect"
-                android:src="@mipmap/com_icon_shct_w"
-                android:layout_centerInParent="true"
-                android:layout_width="@dimen/home_bottom_shopcaticon"
-                android:layout_height="@dimen/home_bottom_shopcaticon"/>
-
-        </LinearLayout>
-        <View
-
-            android:layout_width="55dp"
             android:layout_height="0dp"/>
         <LinearLayout
             android:layout_marginRight="15dp"
@@ -402,11 +379,37 @@
             <ImageView
                 android:layout_gravity="center"
                 android:id="@+id/iv_shopcar"
-                android:src="@mipmap/com_icon_share_ept_w"
+                android:src="@mipmap/com_icon_shct_w"
                 android:layout_width="@dimen/home_bottom_shopcaticon"
                 android:layout_height="@dimen/home_bottom_shopcaticon"/>
 
         </LinearLayout>
+
+
+        <View
+
+            android:layout_width="55dp"
+            android:layout_height="0dp"/>
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:visibility="visible"
+            android:id="@+id/rl_collect"
+            android:layout_width="@dimen/idle_item_avatorwh"
+            android:background="@drawable/idle_bottom_shop"
+            android:layout_height="@dimen/idle_item_avatorwh"
+           >
+
+            <ImageView
+                android:id="@+id/iv_photocollect"
+                android:src="@mipmap/com_icon_fav_2_w"
+                android:layout_centerInParent="true"
+                android:layout_width="@dimen/home_bottom_shopcaticon"
+                android:layout_height="@dimen/home_bottom_shopcaticon"/>
+
+        </LinearLayout>
+
+
         <View
             android:layout_weight="1"
             android:layout_width="0dp"

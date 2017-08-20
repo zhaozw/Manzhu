@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+
+
+
+    <!-- 上面的照片-->
+    <ImageView
+        android:id="@+id/iv_cosloation"
+        android:scaleType="fitCenter"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/coslocation_topimgh"/>
+
+    <!-- 标签-->
+    <TextView
+        android:id="@+id/tv_bussnesstag"
+        android:visibility="visible"
+        android:gravity="center"
+        android:textSize="10sp"
+        android:text="拍摄地"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/maintextcolor"
+        android:background="@drawable/idel_item_bg"
+        android:layout_marginLeft="@dimen/idle_itemlefttagml"
+        android:layout_below="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/idle_itemlefttagh"/>
+
+    <!-- 喜欢的按钮-->
+    <LinearLayout
+        android:visibility="visible"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:layout_width="@dimen/photo_itemcollectw"
+        android:background="@drawable/photo_item_coll_bg"
+        android:layout_height="@dimen/photo_itemcollecth">
+
+        <ImageView
+            android:id="@+id/iv_like"
+            android:src="@mipmap/com_icon_like_2_w"
+            android:layout_width="@dimen/photo_itemcolliconwh"
+            android:layout_height="@dimen/photo_itemcolliconwh"/>
+
+        <TextView
+            android:id="@+id/tv_like"
+            android:layout_marginLeft="5dp"
+            android:text="45"
+            android:textColor="@color/buttontext"
+            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <!--底部的色块-->
+    <View
+        android:id="@+id/bootm_line"
+        android:layout_below="@+id/iv_cosloation"
+        android:background="@color/threebackground"
+        android:layout_width="match_parent"
+        android:layout_height="77.5dp"/>
+
+    <LinearLayout
+        android:layout_alignBottom="@+id/bootm_line"
+        android:layout_marginBottom="12.5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:background="@drawable/coslocation_bg"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="97.5dp">
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:background="@drawable/strongline_bg"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="外景地"
+            android:textColor="@color/buttontext"
+            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="17.5dp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:singleLine="true"
+            android:id="@+id/tv_locationname"
+            android:gravity="bottom"
+            android:text="名称名称名称名称名称"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:textSize="14sp"
+            android:textColor="@color/maintextcolor"
+            android:layout_height="match_parent"/>
+
+
+        <TextView
+            android:gravity="center"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:text="200/tian"
+            android:textSize="8sp"
+            android:background="@drawable/duojiage"
+            android:textColor="@color/duojiage"
+            android:layout_width="wrap_content"
+            android:layout_height="17.5dp"/>
+
+
+    </LinearLayout>
+
+    <com.zhy.view.flowlayout.TagFlowLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="5dp"
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
+
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

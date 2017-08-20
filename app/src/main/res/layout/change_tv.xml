@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
           android:text="asdasda "
+          android:id="@+id/tv_costag"
           android:layout_marginLeft="10dp"
              style="@style/changeText" >
 

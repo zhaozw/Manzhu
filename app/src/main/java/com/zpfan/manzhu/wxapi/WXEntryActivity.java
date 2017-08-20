@@ -9,13 +9,22 @@
 package com.zpfan.manzhu.wxapi;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.tencent.mm.opensdk.modelbase.BaseReq;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
+import com.zpfan.manzhu.myui.ShareActivity;
+
 import cn.sharesdk.wechat.utils.WXAppExtendObject;
 import cn.sharesdk.wechat.utils.WXMediaMessage;
 import cn.sharesdk.wechat.utils.WechatHandlerActivity;
 
 /** 微信客户端回调activity示例 */
-public class WXEntryActivity extends WechatHandlerActivity {
+public class WXEntryActivity extends WechatHandlerActivity implements IWXAPIEventHandler {
 
 	/**
 	 * 处理微信发出的向第三方应用请求app message
@@ -29,6 +38,25 @@ public class WXEntryActivity extends WechatHandlerActivity {
 			Intent iLaunchMyself = getPackageManager().getLaunchIntentForPackage(getPackageName());
 			startActivity(iLaunchMyself);
 		}
+	}
+
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		IWXAPI api = ShareActivity.api;
+		if (api != null) {
+			api.handleIntent(getIntent(), this);
+		}
+
+
+	}
+
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		setIntent(intent);
 	}
 
 	/**
@@ -49,4 +77,23 @@ public class WXEntryActivity extends WechatHandlerActivity {
 		}
 	}
 
+	@Override
+	public void onReq(BaseReq req) {
+		Log.i("zc", "onResp:  看看数据" + req);
+	}
+
+	@Override
+	public void onResp(BaseResp resp) {
+		String result = null;
+		switch (resp.errCode) {
+			case BaseResp.ErrCode.ERR_OK:
+				Log.i("zc", "onResp: 分享成功");
+				result = "分享成";
+				break;
+
+		}
+
+
+
+	}
 }

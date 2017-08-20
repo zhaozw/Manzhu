@@ -61,17 +61,41 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
     @Override
     protected void convert(final BaseViewHolder helper, final ShopCartbean.CarshoplistBean item) {
 
+        View view = helper.getView(R.id.bootm);
+        int position = helper.getPosition();
+        if (position == data.size() - 1) {
+            view.setVisibility(View.VISIBLE);
+        }
+
 
         if (item.getCargoodslist().size() > 0) {
             helper.setText(R.id.tv_shopname, item.getMember_Name())
                     .setText(R.id.tv_userlv, "Lv." + item.getMember_Level());
-
+            ImageView typeicon = helper.getView(R.id.tv_typeicon);
             RecyclerView rv_shop = helper.getView(R.id.rv_shopcartitem);
             final ImageView ivcheckall = helper.getView(R.id.iv_checkall);
 
 
             rv_shop.setLayoutManager(new LinearLayoutManager(mContext));
             final List<ShopCartbean.CarshoplistBean.CargoodslistBean> cargoodslist = item.getCargoodslist();
+            for (ShopCartbean.CarshoplistBean.CargoodslistBean bean : cargoodslist) {
+                int showtype = bean.getGoods_model().getShowtype();
+                if (showtype == 2) {
+                   item.setShowtype(2);
+                }
+            }
+
+
+            if (item.getShowtype() == 2) {
+                typeicon.setImageResource(R.mipmap.type_icon_shop);
+            } else {
+                typeicon.setImageResource(R.mipmap.type_icon_user);
+            }
+
+
+
+
+
             //发送请求 我能拿到的数据有 uid
             GoodChangeListener listener = new GoodChangeListener() {
                 @Override

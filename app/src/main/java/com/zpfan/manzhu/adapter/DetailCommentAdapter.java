@@ -38,17 +38,21 @@ public class DetailCommentAdapter extends BaseQuickAdapter<BussnessBean.OrderRev
 
     @Override
     protected void convert(BaseViewHolder helper, BussnessBean.OrderReviewListBean item) {
-        helper.setText(R.id.tv_title, bean.getG_Title());
         if (i == 0) {
+            helper.setText(R.id.tv_title, bean.getG_Title());
             helper.setText(R.id.tv_comment, item.getOR_GoodsComment());
         } else {
             helper.setText(R.id.tv_comment, item.getOR_Sellerimpression());
+            String cate = item.getOrderCate();
+            String substring = cate.substring(0, 2) +" " + "|";
+
+
+            helper.setText(R.id.tv_title, substring +" " + bean.getG_Title());
         }
         helper.setText(R.id.tv_format, item.getGoods_spcification_name());
 
         helper.setText(R.id.tv_userlv, "Lv." + item.getReivewmember_level() );
         ImageView view = helper.getView(R.id.iv_avator);
-
 
         RequestOptions options = new RequestOptions().centerCrop();
 

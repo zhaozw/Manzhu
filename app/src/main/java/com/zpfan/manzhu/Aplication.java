@@ -11,6 +11,8 @@ import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.mob.MobSDK;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zpfan.manzhu.utils.APIinterface;
 import com.zpfan.manzhu.utils.FontUtils;
 import com.zpfan.manzhu.utils.Utils;
@@ -30,6 +32,7 @@ public class Aplication extends Application {
 
     public static Context mContext ;
     public static APIinterface mIinterface;
+
 
 
     @Override
@@ -119,6 +122,8 @@ public class Aplication extends Application {
 
 
     }
+
+
 
 
 

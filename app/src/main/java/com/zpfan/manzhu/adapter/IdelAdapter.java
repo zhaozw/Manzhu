@@ -24,6 +24,7 @@ import com.zpfan.manzhu.LoginActivity;
 import com.zpfan.manzhu.R;
 import com.zpfan.manzhu.bean.AvatorBean;
 import com.zpfan.manzhu.bean.BussnessBean;
+import com.zpfan.manzhu.bean.ShopBean;
 import com.zpfan.manzhu.myui.AlignTextView;
 import com.zpfan.manzhu.myui.MyToast;
 import com.zpfan.manzhu.utils.Utils;
@@ -43,14 +44,14 @@ import retrofit2.Response;
 public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
 
 
-    private boolean isshowgood = true;
+
 
     public IdelAdapter(@LayoutRes int layoutResId, @Nullable List<BussnessBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, final BussnessBean item) {
+    protected void convert(final BaseViewHolder helper, final BussnessBean item) {
             //点击按钮以后要显示的界面
         final ImageView  mAvator = helper.getView(R.id.iv_avator);
         final ImageView  mRenzheng = helper.getView(R.id.iv_renzheng);
@@ -75,6 +76,8 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
         final LinearLayout mFanmai = helper.getView(R.id.ll_fanmai);
         final LinearLayout mZu = helper.getView(R.id.ll_zu);
         final LinearLayout mHuan = helper.getView(R.id.ll_huan);
+        final LinearLayout llpinfen = helper.getView(R.id.ll_pinfen);
+        final LinearLayout llinfo = helper.getView(R.id.ll_info);
         TextView moreprice = helper.getView(R.id.tv_moreprice);
         TextView change2 = helper.getView(R.id.tv_change2);
 
@@ -307,23 +310,66 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
         });
 
         //设置店铺的名字
-        helper.setText(R.id.tv_name, obj.getM_Name()).setText(R.id.tv_dizhi,obj.getM_Province() + " - " + obj.getM_City());
-        //设置性别
-        if (obj.getM_Sex().equals("男")) {
-            mManor.setImageResource(R.mipmap.com_icon_male);
-        } else {
-            mManor.setImageResource(R.mipmap.com_icon_female);
-        }
+        helper.setText(R.id.tv_dizhi,obj.getM_Province() + " - " + obj.getM_City());
+
 
         //设置是否是商家
-        if (obj.isM_IsBusiness()) {
+        if (item.getShowtype() == 2) {
             //是商家
+            mManor.setVisibility(View.GONE);
             mShop.setImageResource(R.mipmap.type_icon_shop);
-            helper.setText(R.id.tv_name, obj.getM_UserName());
+            Call<String> getshopdetail = Aplication.mIinterface.getshopdetail(obj.getM_UID());
+            getshopdetail.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    String body = response.body();
+                    if (body != null) {
+                        Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                        }.getType();
+
+                        ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                        AvatorBean bean = avatorBeen.get(0);
+                        if (bean != null) {
+                            String retmsg = bean.getRetmsg();
+                            if (retmsg.contains("[") && retmsg != null) {
+
+                                Type type1 = new TypeToken<ArrayList<ShopBean>>() {
+                                }.getType();
+
+                                ArrayList<ShopBean> mShopBeen = Utils.gson.fromJson(retmsg, type1);
+                                ShopBean bean1 = mShopBeen.get(0);
+                                helper.setText(R.id.tv_name, bean1.getS_Name());
+
+
+                            }
+
+
+                        }
+
+
+
+                    }
+
+
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+
+                }
+            });
+
         } else {
             //是个人用户
             mShop.setImageResource(R.mipmap.type_icon_user);
             helper.setText(R.id.tv_name, obj.getM_UserName());
+            mManor.setVisibility(View.VISIBLE);
+            //设置性别
+            if (obj.getM_Sex().equals("男")) {
+                mManor.setImageResource(R.mipmap.com_icon_male);
+            } else {
+                mManor.setImageResource(R.mipmap.com_icon_female);
+            }
         }
 
         //评价星级
@@ -369,18 +415,72 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
             }
         });
 
+        final boolean showuser = item.isShowuser();
+        if (showuser) {
+            // showBussnessinfo();
+            mAvator.setVisibility(View.VISIBLE);
+            mRenzheng.setVisibility(View.VISIBLE);
+            mShop.setVisibility(View.VISIBLE);
+
+            mName.setVisibility(View.VISIBLE);
+            mDizhi.setVisibility(View.VISIBLE);
+            mKaopu.setVisibility(View.VISIBLE);
+            mLlmaikaopu.setVisibility(View.VISIBLE);
+            mLlzukaopu.setVisibility(View.VISIBLE);
+            mCollect.setVisibility(View.VISIBLE);
+            mShopcar.setVisibility(View.VISIBLE);
+            mUserlv.setVisibility(View.VISIBLE);
+            llpinfen.setVisibility(View.VISIBLE);
+            llinfo.setVisibility(View.VISIBLE);
+
+            mBussnessphoto.setVisibility(View.GONE);
+            mBussnesstag.setVisibility(View.GONE);
+
+            mTitle.setVisibility(View.GONE);
+            mFanmai.setVisibility(View.GONE);
+            mZu.setVisibility(View.GONE);
+            mHuan.setVisibility(View.GONE);
+            mMore.setImageResource(R.mipmap.com_icon_pro_list_corn_x);
+        } else {
+            //showGoodinfo();
+            mAvator.setVisibility(View.GONE);
+            mRenzheng.setVisibility(View.GONE);
+            mShop.setVisibility(View.GONE);
+
+            mName.setVisibility(View.GONE);
+            mDizhi.setVisibility(View.GONE);
+            mKaopu.setVisibility(View.GONE);
+            mLlmaikaopu.setVisibility(View.GONE);
+            mLlzukaopu.setVisibility(View.GONE);
+            mCollect.setVisibility(View.GONE);
+            mShopcar.setVisibility(View.GONE);
+            mUserlv.setVisibility(View.GONE);
+            llpinfen.setVisibility(View.GONE);
+            llinfo.setVisibility(View.GONE);
+
+
+            mBussnessphoto.setVisibility(View.VISIBLE);
+            mBussnesstag.setVisibility(View.VISIBLE);
+
+            mTitle.setVisibility(View.VISIBLE);
+            mFanmai.setVisibility(View.VISIBLE);
+            mZu.setVisibility(View.VISIBLE);
+            mHuan.setVisibility(View.VISIBLE);
+            mMore.setImageResource(R.mipmap.com_icon_pro_list_corn);
+        }
+
 
 
         mMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //点击了以后隐藏信息 或者  展示信息
-                if (isshowgood) {
+                if (showuser) {
                    // showBussnessinfo();
                     mAvator.setVisibility(View.VISIBLE);
                     mRenzheng.setVisibility(View.VISIBLE);
                     mShop.setVisibility(View.VISIBLE);
-                    mManor.setVisibility(View.VISIBLE);
+
                     mName.setVisibility(View.VISIBLE);
                     mDizhi.setVisibility(View.VISIBLE);
                     mKaopu.setVisibility(View.VISIBLE);
@@ -389,12 +489,12 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
                     mCollect.setVisibility(View.VISIBLE);
                     mShopcar.setVisibility(View.VISIBLE);
                     mUserlv.setVisibility(View.VISIBLE);
-
-
+                    llpinfen.setVisibility(View.VISIBLE);
+                    llinfo.setVisibility(View.VISIBLE);
 
                     mBussnessphoto.setVisibility(View.GONE);
                     mBussnesstag.setVisibility(View.GONE);
-                    mBaoyou.setVisibility(View.GONE);
+
                     mTitle.setVisibility(View.GONE);
                     mFanmai.setVisibility(View.GONE);
                     mZu.setVisibility(View.GONE);
@@ -405,7 +505,7 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
                     mAvator.setVisibility(View.GONE);
                     mRenzheng.setVisibility(View.GONE);
                     mShop.setVisibility(View.GONE);
-                    mManor.setVisibility(View.GONE);
+
                     mName.setVisibility(View.GONE);
                     mDizhi.setVisibility(View.GONE);
                     mKaopu.setVisibility(View.GONE);
@@ -414,11 +514,13 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
                     mCollect.setVisibility(View.GONE);
                     mShopcar.setVisibility(View.GONE);
                     mUserlv.setVisibility(View.GONE);
+                    llpinfen.setVisibility(View.GONE);
+                    llinfo.setVisibility(View.GONE);
 
 
                     mBussnessphoto.setVisibility(View.VISIBLE);
                     mBussnesstag.setVisibility(View.VISIBLE);
-                    mBaoyou.setVisibility(View.VISIBLE);
+
                     mTitle.setVisibility(View.VISIBLE);
                     mFanmai.setVisibility(View.VISIBLE);
                     mZu.setVisibility(View.VISIBLE);
@@ -426,7 +528,9 @@ public class IdelAdapter extends BaseQuickAdapter<BussnessBean,BaseViewHolder> {
                     mMore.setImageResource(R.mipmap.com_icon_pro_list_corn);
                 }
 
-                isshowgood = !isshowgood;
+                item.setShowuser(!showuser);
+              notifyDataSetChanged();
+
 
             }
         });

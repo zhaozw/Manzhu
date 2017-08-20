@@ -11,9 +11,6 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -31,7 +28,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.hyphenate.chat.EMMessage;
 import com.zhy.view.flowlayout.FlowLayout;
@@ -48,22 +44,21 @@ import com.zpfan.manzhu.bean.ShareBean;
 import com.zpfan.manzhu.bean.ShopBean;
 import com.zpfan.manzhu.myui.EaseActivity;
 import com.zpfan.manzhu.myui.MyToast;
+import com.zpfan.manzhu.myui.ShareActivity;
 import com.zpfan.manzhu.utils.MyScrollView;
+import com.zpfan.manzhu.utils.SPUtils;
 import com.zpfan.manzhu.utils.ScrollViewListener;
 import com.zpfan.manzhu.utils.Utils;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
-import cn.sharesdk.framework.ShareSDK;
+import cn.bingoogolapple.bgabanner.BGABanner;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
 import cn.sharesdk.tencent.qzone.QZone;
@@ -77,8 +72,7 @@ import static com.zpfan.manzhu.Aplication.mContext;
 
 public class IdleDetailActivity extends AppCompatActivity {
 
-    @BindView(R.id.iv_detail)
-    ImageView mIvDetail;
+
     @BindView(R.id.iv_top_back)
     ImageView mIvTopBack;
     @BindView(R.id.iv_topmenu)
@@ -319,6 +313,8 @@ public class IdleDetailActivity extends AppCompatActivity {
     TextView mTvIdle;
     @BindView(R.id.line5)
     View mLine5;
+    @BindView(R.id.iv_detail)
+    BGABanner mIvDetail;
 
 
     private boolean isshowbabyparame = false;
@@ -350,6 +346,7 @@ public class IdleDetailActivity extends AppCompatActivity {
     private RecyclerView mRvpopshare;
     private ShareAdapter mpopAdapter;
     private List<ShareBean> mShare;
+    private ArrayList<CosBean> mCosBeen;
 
 
     @Override
@@ -388,8 +385,22 @@ public class IdleDetailActivity extends AppCompatActivity {
         mRvCos.setLayoutManager(new LinearLayoutManager(IdleDetailActivity.this));
 
         if (mbussness != null) {
-            //设置封面
-            Glide.with(this).load(mbussness.getG_Cover()).into(mIvDetail);
+            //设置封面的轮播图
+
+            ArrayList<String> imgs = new ArrayList<>();
+            String images = mbussness.getG_Images();
+            String[] split1 = images.split(",");
+            for (String s : split1) {
+                imgs.add(s);
+            }
+
+            mIvDetail.setAdapter(new BGABanner.Adapter<ImageView, String>() {
+                @Override
+                public void fillBannerItem(BGABanner banner, ImageView itemView, String model, int position) {
+                    Glide.with(IdleDetailActivity.this).load(model).into(itemView);
+                }
+            });
+            mIvDetail.setData(imgs,null);
 
 
             if (mbussness.isG_IsFreeShip()) {
@@ -575,6 +586,14 @@ public class IdleDetailActivity extends AppCompatActivity {
                     }
                 }
 
+                String fixedPrice1 = mbussness.getG_FixedPrice();
+
+                if (fixedPrice1.equals("0.00")) {
+                    mTvPrice.setText("无偿");
+                    mTvDecimal.setText("");
+                    mTvServerunit.setVisibility(View.GONE);
+                    mTvQian.setVisibility(View.GONE);
+                }
 
 
                 mTvKuaidi.setText(mbussness.getG_Province() + "-" + mbussness.getG_City());
@@ -670,15 +689,17 @@ public class IdleDetailActivity extends AppCompatActivity {
 
             }
 
+
             //设置快递的价格
-            mTvExpress.setText(mbussness.getG_CourierMoney() + "（成都 到 北京）");
+            String usercity = SPUtils.getInstance().getString("Usercity", "");
+            mTvExpress.setText(mbussness.getG_CourierMoney() + "（"+ mbussness.getG_City() +" 到 "+usercity+"）");
 
             //设置发布时间
-            String substring = mbussness.getG_UpTime().substring(0, 11);
+            String substring = Utils.timeChange(mbussness.getG_UpTime());
             mTvUptime.setText(substring);
 
             //设置看过的人数
-            mTvViewnumber.setText(mbussness.getG_Hits() + "");
+            mTvViewnumber.setText(  Utils.numberChange(mbussness.getG_Hits() + "")  );
 
             //设置宝贝参数
             String parameter = mbussness.getGoods_parameter();
@@ -728,8 +749,6 @@ public class IdleDetailActivity extends AppCompatActivity {
             isCollection();
 
 
-            // mTvCoupon.setText(" " + mbussness.getShop_coupon_count() + " ");
-
             //查看是否有规格
             List<BussnessBean.GoodsSpecificationsBean> specifications = mbussness.getGoods_specifications();
             if (specifications == null || specifications.size() == 0) {
@@ -751,59 +770,6 @@ public class IdleDetailActivity extends AppCompatActivity {
 
             mObj = mbussness.getG_Member_OBJ();
 
-            boolean business = mObj.isM_IsBusiness();
-
-            if (business) {
-                //发送网络请求 去请求到商家的信息
-                Call<String> getshopdetail = Aplication.mIinterface.getshopdetail(mObj.getM_UID());
-                getshopdetail.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        String body = response.body();
-
-                        if (body != null) {
-                            Type type = new TypeToken<ArrayList<AvatorBean>>() {
-                            }.getType();
-
-                            ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
-                            AvatorBean bean = avatorBeen.get(0);
-                            if (bean != null) {
-                                String retmsg = bean.getRetmsg();
-                                if (retmsg.contains("[") && retmsg != null) {
-
-                                    Type type1 = new TypeToken<ArrayList<ShopBean>>() {
-                                    }.getType();
-
-                                    mShopBeen = Utils.gson.fromJson(retmsg, type1);
-                                    if (mShopBeen != null && mShopBeen.size() > 0) {
-                                        mShopBean = mShopBeen.get(0);
-                                    }
-
-                                }
-
-
-                            }
-
-
-                        }
-
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-
-                    }
-                });
-
-
-                isbussness = true;
-            } else {
-
-
-                isbussness = false;
-            }
-
 
         }
 
@@ -823,10 +789,10 @@ public class IdleDetailActivity extends AppCompatActivity {
             if (split.length > 0) {
                 for (String s : split) {
                     ImageView img = new ImageView(IdleDetailActivity.this);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                     params.setMargins(0, 0, 0, 20);
                     img.setLayoutParams(params);
-                    img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    img.setScaleType(ImageView.ScaleType.FIT_CENTER);
                     Glide.with(IdleDetailActivity.this).load(s).into(img);
                     mLlDetail.addView(img);
 
@@ -876,6 +842,13 @@ public class IdleDetailActivity extends AppCompatActivity {
         }
         //展示相关cos作品  要发送网络请求 需要字段
         String cosworks = mbussness.getGoods_cosworks();
+        String[] split = cosworks.split(",");
+        if (split.length > 1) {
+            mBtMorecos.setVisibility(View.VISIBLE);
+        } else {
+            mBtMorecos.setVisibility(View.GONE);
+        }
+
         setCosWork(cosworks);
 
         mShare = new ArrayList<>();
@@ -887,57 +860,12 @@ public class IdleDetailActivity extends AppCompatActivity {
         mShare.add(new ShareBean(R.mipmap.share_icon_haoyou, "发给好友"));
         mShare.add(new ShareBean(R.mipmap.share_icon_lianjie, "复制链接"));
 
-        //初始化分享的pop
-        initSharePop();
 
-
-    }
-
-    private void initSharePop() {
-        mPaywindow = new PopupWindow(IdleDetailActivity.this);
-        View inflate = View.inflate(IdleDetailActivity.this, R.layout.share_pop, null);
-        mTvcancle = (TextView) inflate.findViewById(R.id.tv_cancle);
-        mTvshare = (TextView) inflate.findViewById(R.id.tv_share);
-        mRvpopshare = (RecyclerView) inflate.findViewById(R.id.rv_popshare);
-
-        LinearLayoutManager layout = new LinearLayoutManager(IdleDetailActivity.this);
-        layout.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mRvpopshare.setLayoutManager(layout);
-        mpopAdapter = new ShareAdapter(R.layout.item_share, mShare);
-
-        mRvpopshare.setAdapter(mpopAdapter);
-
-
-        mPaywindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.detail_toppop_bg));
-        mPaywindow.setTouchable(true);
-        mPaywindow.setContentView(inflate);
-        mPaywindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        mPaywindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        mPaywindow.setOutsideTouchable(true);
-        mPaywindow.setFocusable(true);
-        mPaywindow.update();
-
-        mPaywindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                WindowManager.LayoutParams lp = IdleDetailActivity.this.getWindow()
-                        .getAttributes();
-                lp.alpha = 1f;
-                IdleDetailActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                IdleDetailActivity.this.getWindow().setAttributes(lp);
-
-            }
-        });
-
-        mTvcancle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPaywindow.dismiss();
-            }
-        });
-
+        initPopData(mWindow);
 
     }
+
+
 
     private void isCollection() {
         Call<String> isCollection = Aplication.mIinterface.operaisCollection("商品", mbussness.getId() + "", Utils.getloginuid());
@@ -1065,12 +993,13 @@ public class IdleDetailActivity extends AppCompatActivity {
                             Type type1 = new TypeToken<ArrayList<CosBean>>() {
                             }.getType();
 
-                            ArrayList<CosBean> cosBeen = Utils.gson.fromJson(substring, type1);
-                            if (cosBeen.size() > 0) {
+                            mCosBeen = Utils.gson.fromJson(substring, type1);
+                            ArrayList<CosBean> cosBeen = new ArrayList<>();
+                            cosBeen.add(mCosBeen.get(0));
+                            if (mCosBeen.size() > 0) {
+
                                 CosAdapter adapter = new CosAdapter(R.layout.item_cosshow, cosBeen);
                                 mRvCos.setAdapter(adapter);
-
-
                             }
 
 
@@ -1098,6 +1027,11 @@ public class IdleDetailActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getCanUseCouponNumber();
+        WindowManager.LayoutParams lp = IdleDetailActivity.this.getWindow()
+                .getAttributes();
+        lp.alpha = 1f;
+        IdleDetailActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        IdleDetailActivity.this.getWindow().setAttributes(lp);
     }
 
     @Override
@@ -1117,7 +1051,7 @@ public class IdleDetailActivity extends AppCompatActivity {
     @OnClick({R.id.iv_top_back, R.id.ll_share, R.id.ll_babayparame, R.id.ll_coupon, R.id.iv_topmenu, R.id.bt_morecomment
             , R.id.ll_impression, R.id.ll_babaycomment, R.id.ll_callbussness, R.id.ll_shop, R.id.ll_collect, R.id.ll_shopcart
             , R.id.tv_makeorder, R.id.ll_format, R.id.iv_icontop_back, R.id.iv_menu, R.id.ll_top2, R.id.ll_top1
-            , R.id.ll_top3, R.id.ll_top4
+            , R.id.ll_top3, R.id.ll_top4,R.id.bt_morecos
 
     })
     public void onViewClicked(View view) {
@@ -1156,8 +1090,9 @@ public class IdleDetailActivity extends AppCompatActivity {
 
             case R.id.ll_share:
                 //分享按钮
-                showShare(mbussness);
-
+                Intent shareIntent = new Intent(IdleDetailActivity.this, ShareActivity.class);
+                shareIntent.putExtra("bussnessbean", mbussness);
+                startActivity(shareIntent);
 
                 break;
             case R.id.ll_babayparame:
@@ -1212,8 +1147,8 @@ public class IdleDetailActivity extends AppCompatActivity {
                         mAdapter = new DetailCommentAdapter(R.layout.review_item, list1, mbussness, 0);
                         mRvComment.setVisibility(View.VISIBLE);
                         mTvNocomment.setVisibility(View.GONE);
-                        mBtMorecomment.setVisibility(View.VISIBLE);
                         mRvComment.setAdapter(mAdapter);
+                        mBtMorecomment.setVisibility(View.GONE);
                     } else {
                         mRvComment.setVisibility(View.GONE);
                         mTvNocomment.setVisibility(View.VISIBLE);
@@ -1226,7 +1161,7 @@ public class IdleDetailActivity extends AppCompatActivity {
                         mAdapter = new DetailCommentAdapter(R.layout.review_item, list, mbussness, 1);
                         mRvComment.setVisibility(View.VISIBLE);
                         mTvNocomment.setVisibility(View.GONE);
-                        mBtMorecomment.setVisibility(View.VISIBLE);
+                        mBtMorecomment.setVisibility(View.GONE);
                         mRvComment.setAdapter(mAdapter);
                     } else {
                         mRvComment.setVisibility(View.GONE);
@@ -1588,122 +1523,40 @@ public class IdleDetailActivity extends AppCompatActivity {
 
 
                 break;
+            case R.id.bt_morecos:
+                //点击更多cos的操作
 
+                CosAdapter adapter = new CosAdapter(R.layout.item_cosshow, mCosBeen);
+                mRvCos.setAdapter(adapter);
+                mBtMorecos.setVisibility(View.GONE);
+
+                break;
 
         }
     }
 
-    private void showShare(final BussnessBean mbussness) {
 
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
         WindowManager.LayoutParams lp = IdleDetailActivity.this.getWindow()
                 .getAttributes();
         lp.alpha = 0.4f;
         IdleDetailActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         IdleDetailActivity.this.getWindow().setAttributes(lp);
-
-        mPaywindow.showAtLocation(mLlBottommenu, Gravity.BOTTOM, 0, 0);
-
-        String text = null;
-        if (mbussness.getG_CommissionMoney().equals("0.00")) {
-            text = "求分享，求扩散~~~";
-            mTvshare.setText(text);
-        } else {
-            text = "分享本宝贝可得 " + mbussness.getG_CommissionMoney() + " 元 佣金哦~";
-            SpannableString string = new SpannableString(text);
-            string.setSpan(new ForegroundColorSpan(this.getResources().getColor(R.color.pricetextcolor)), 7, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            mTvshare.setText(string);
-        }
-
-
-        mpopAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ShareBean bean = mShare.get(position);
-                if (bean.getParpamName() != null) {
-
-
-                    Platform.ShareParams sp = new Platform.ShareParams();
-
-
-                    String type = mbussness.getG_Type();
-                    if (type.equals("二手商品")) {
-                        sp.setTitle("【猪排贩】COS闲置贩售");
-                    } else if (type.equals("新商品")) {
-                        sp.setTitle("【猪排贩】COS新品定做");
-                    } else if (type.equals("服务")) {
-                        sp.setTitle("【猪排贩】COS服务接单");
-                    }
-
-                    String url = "http://www.anipiggy.com/Home/productdetail.htm?" + "id=" + mbussness.getId() + "&share_member=" + Utils.getloginid();
-                    sp.setTitleUrl(url); // 标题的超链接
-                    sp.setText(mbussness.getG_Title());
-                    sp.setImageUrl(mbussness.getG_Cover());
-                    sp.setSite("猪排贩");
-                    sp.setSiteUrl("www.zpfan.com");
-
-                    if (bean.getParpamName().equals(Wechat.NAME)) {
-                        if (type.equals("二手商品")) {
-                            sp.setTitle("【猪排贩】COS闲置贩售");
-                        } else if (type.equals("新商品")) {
-                            sp.setTitle("【猪排贩】COS新品定做");
-                        } else if (type.equals("服务")) {
-                            sp.setTitle("【猪排贩】COS服务接单");
-                        }
-                        sp.setImageUrl(mbussness.getG_Cover());
-                        sp.setText(mbussness.getG_Title());
-                        sp.setShareType(Platform.SHARE_WEBPAGE);
-                    }
-                    if (bean.getParpamName().equals(SinaWeibo.NAME)) {
-                        sp.setText(mbussness.getG_Title() + url);
-                    }
-
-
-                    Platform platform = ShareSDK.getPlatform(bean.getParpamName());
-
-                    platform.setPlatformActionListener(new PlatformActionListener() {
-                        public void onError(Platform arg0, int arg1, Throwable arg2) {
-                            //失败的回调，arg:平台对象，arg1:表示当前的动作，arg2:异常信息
-                            Log.i("zc", "onError:  分享失败");
-                        }
-
-                        public void onComplete(Platform arg0, int arg1, HashMap<String, Object> arg2) {
-                            //分享成功的回调
-                            Log.i("zc", "onError:  分享成功");
-                        }
-
-                        public void onCancel(Platform arg0, int arg1) {
-                            //取消分享的回调
-                            Log.i("zc", "onError:  分享取消" + arg0 + "----" + arg1);
-                        }
-                    });
-                    platform.share(sp);
-                    mPaywindow.dismiss();
-
-                }
-            }
-        });
-
     }
 
     private void showTopWindow() {
 
-        mWindow = new PopupWindow(IdleDetailActivity.this);
-        View inflate = View.inflate(IdleDetailActivity.this, R.layout.detail_popwindow, null);
-        initPopData(inflate, mWindow);
-
         WindowManager.LayoutParams lp = IdleDetailActivity.this.getWindow()
                 .getAttributes();
         lp.alpha = 0.4f;
         IdleDetailActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         IdleDetailActivity.this.getWindow().setAttributes(lp);
 
-        mWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.detail_toppop_bg));
-        mWindow.setTouchable(true);
-        mWindow.setContentView(inflate);
-        mWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        mWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        mWindow.setOutsideTouchable(true);
-        mWindow.update();
+
         mWindow.showAtLocation(mRvTopline, Gravity.TOP, 0, 0);
 
         mWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -1721,7 +1574,11 @@ public class IdleDetailActivity extends AppCompatActivity {
 
     }
 
-    private void initPopData(View inflate, final PopupWindow window) {
+    private void initPopData(final PopupWindow window) {
+
+        mWindow = new PopupWindow(IdleDetailActivity.this);
+        View inflate = View.inflate(IdleDetailActivity.this, R.layout.detail_popwindow, null);
+
         ImageView ivbotoom = (ImageView) inflate.findViewById(R.id.iv_botoom);
         ImageView ivhome = (ImageView) inflate.findViewById(R.id.iv_home);
         ImageView ivshopcart = (ImageView) inflate.findViewById(R.id.iv_shopcart);
@@ -1729,10 +1586,19 @@ public class IdleDetailActivity extends AppCompatActivity {
         ImageView ivusercenter = (ImageView) inflate.findViewById(R.id.iv_usercenter);
         final ImageView ivavator = (ImageView) inflate.findViewById(R.id.iv_avator);
         ImageView ivshop = (ImageView) inflate.findViewById(R.id.iv_shop);
-        ImageView ivmanor = (ImageView) inflate.findViewById(R.id.iv_manor);
+        final ImageView ivmanor = (ImageView) inflate.findViewById(R.id.iv_manor);
         View line = inflate.findViewById(R.id.dashline);
         line.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         View close = inflate.findViewById(R.id.close);
+        mWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.detail_toppop_bg));
+        mWindow.setTouchable(true);
+        mWindow.setContentView(inflate);
+        mWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        mWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        mWindow.setOutsideTouchable(true);
+        mWindow.update();
+
+
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1805,16 +1671,16 @@ public class IdleDetailActivity extends AppCompatActivity {
         });
 
 
-        TextView tvname = (TextView) inflate.findViewById(R.id.tv_name);
-        TextView tvdizhi = (TextView) inflate.findViewById(R.id.tv_dizhi);
+        final TextView tvname = (TextView) inflate.findViewById(R.id.tv_name);
+        final TextView tvdizhi = (TextView) inflate.findViewById(R.id.tv_dizhi);
         TextView tvnumber = (TextView) inflate.findViewById(R.id.tv_number);
         TextView tvjiufen = (TextView) inflate.findViewById(R.id.tv_jiufen);
-        TextView tvfirstscore = (TextView) inflate.findViewById(R.id.tv_firstscore);
-        TextView tvpro = (TextView) inflate.findViewById(R.id.tv_pro);
-        TextView tvsecandscore = (TextView) inflate.findViewById(R.id.tv_secandscore);
-        TextView tvserver = (TextView) inflate.findViewById(R.id.tv_server);
-        TextView tvthreescore = (TextView) inflate.findViewById(R.id.tv_threescore);
-        TextView tvfinishspeed = (TextView) inflate.findViewById(R.id.tv_finishspeed);
+        final TextView tvfirstscore = (TextView) inflate.findViewById(R.id.tv_firstscore);
+        final TextView tvpro = (TextView) inflate.findViewById(R.id.tv_pro);
+        final TextView tvsecandscore = (TextView) inflate.findViewById(R.id.tv_secandscore);
+        final TextView tvserver = (TextView) inflate.findViewById(R.id.tv_server);
+        final TextView tvthreescore = (TextView) inflate.findViewById(R.id.tv_threescore);
+        final TextView tvfinishspeed = (TextView) inflate.findViewById(R.id.tv_finishspeed);
         TextView tvformat1 = (TextView) inflate.findViewById(R.id.tv_format1);
         TextView tvformat2 = (TextView) inflate.findViewById(R.id.tv_format2);
         final TextView tvprice = (TextView) inflate.findViewById(R.id.tv_price);
@@ -1826,7 +1692,7 @@ public class IdleDetailActivity extends AppCompatActivity {
         final TextView tvzudayxiaoshu = (TextView) inflate.findViewById(R.id.tv_zudayxiaoshu);
         final TextView tvzuday = (TextView) inflate.findViewById(R.id.tv_zuday);
         final TextView tvprdnumber = (TextView) inflate.findViewById(R.id.tv_prdnumber);
-        TextView tvleav = (TextView) inflate.findViewById(R.id.tv_leav);
+        final TextView tvleav = (TextView) inflate.findViewById(R.id.tv_leav);
 
 
         final RelativeLayout btup = (RelativeLayout) inflate.findViewById(R.id.bt_up);
@@ -1873,36 +1739,75 @@ public class IdleDetailActivity extends AppCompatActivity {
 
 
         //设置参数进去
-        if (mObj.isM_IsBusiness()) {
+        if (mbussness.getShowtype() == 2) {
             //是商家 设置商家的参数
-            ViewGroup.LayoutParams params = ivavator.getLayoutParams();
-            params.width = Utils.dp2px(104);
-            params.height = Utils.dp2px(50);
-            ShopBean bean = mShopBeen.get(0);
-            Glide.with(this).load(bean.getS_Logo()).into(ivavator);
-            tvname.setText(bean.getS_Name());
-            ivmanor.setVisibility(View.GONE);
-            String province = bean.getS_Com_Province();
-            String city = bean.getS_Com_City();
-            String sheng = province.substring(0, province.lastIndexOf("省"));
-            String shi = city.substring(0, city.lastIndexOf("市"));
-            String text = sheng + "-" + shi;
-            tvdizhi.setText(text);
-            tvleav.setText("Lv." + mbussness.getG_Member_OBJ().getN_AllLevel());
+            //发送网络请求 去请求到商家的信息
+            Call<String> getshopdetail = Aplication.mIinterface.getshopdetail(mObj.getM_UID());
+            getshopdetail.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    String body = response.body();
 
-            tvfirstscore.setText("宝贝描述相符度  ");
-            tvpro.setText(mbussness.getBbmsxfd_member_value() + "  ");
+                    if (body != null) {
+                        Type type = new TypeToken<ArrayList<AvatorBean>>() {
+                        }.getType();
 
-            tvsecandscore.setText("  卖家服务态度  ");
-            tvserver.setText(mbussness.getMjfutd_member_value() + "  ");
+                        ArrayList<AvatorBean> avatorBeen = Utils.gson.fromJson(body, type);
+                        AvatorBean bean = avatorBeen.get(0);
+                        if (bean != null) {
+                            String retmsg = bean.getRetmsg();
+                            if (retmsg.contains("[") && retmsg != null) {
 
-            tvthreescore.setText("  卖家发货速度  ");
-            tvfinishspeed.setText(mbussness.getMjfhsd_member_value() + "  ");
+                                Type type1 = new TypeToken<ArrayList<ShopBean>>() {
+                                }.getType();
+
+                                mShopBeen = Utils.gson.fromJson(retmsg, type1);
+                                if (mShopBeen != null && mShopBeen.size() > 0) {
+                                    mShopBean = mShopBeen.get(0);
+                                    if (mShopBean != null) {
+                                        ViewGroup.LayoutParams params = ivavator.getLayoutParams();
+                                        params.width = Utils.dp2px(104);
+                                        params.height = Utils.dp2px(50);
+
+                                        Glide.with(IdleDetailActivity.this).load(mShopBean.getS_Logo()).into(ivavator);
+                                        tvname.setText(mShopBean.getS_Name());
+                                        ivmanor.setVisibility(View.GONE);
+                                        String province = mShopBean.getS_Com_Province();
+                                        String city = mShopBean.getS_Com_City();
+                                        String sheng = province.substring(0, province.lastIndexOf("省"));
+                                        String shi = city.substring(0, city.lastIndexOf("市"));
+                                        String text = sheng + "-" + shi;
+                                        tvdizhi.setText(text);
+                                        tvleav.setText("Lv." + mbussness.getG_Member_OBJ().getN_AllLevel());
+
+
+
+
+
+
+                                    }
+                                }
+
+                            }
+
+
+                        }
+
+
+                    }
+
+
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+
+                }
+            });
 
 
         } else {
             //不是商家  设置个人的参数
-
             RequestOptions options = new RequestOptions().centerCrop();
 
             Glide.with(mContext).asBitmap().load(Utils.imgUrl + mObj.getM_Avatar()).apply(options).into(new BitmapImageViewTarget(ivavator) {
@@ -1918,7 +1823,18 @@ public class IdleDetailActivity extends AppCompatActivity {
             tvleav.setText("Lv." + mObj.getN_AllLevel());
             ivshop.setImageResource(R.mipmap.type_icon_user);
             tvname.setText(mObj.getM_UserName());
-            tvdizhi.setText(mObj.getM_Province() + "-" + mObj.getM_City());
+            String province = mObj.getM_Province();
+            String city = mObj.getM_City();
+            String sheng = null;
+            if (province.contains("省")) {
+                sheng = province.substring(0, province.lastIndexOf("省"));
+            }
+            String shi = null;
+            if (city.contains("市")) {
+                shi = city.substring(0, city.lastIndexOf("市"));
+            }
+            String text = "（" + sheng + "-" + shi + "）";
+            tvdizhi.setText(text);
 
             if (mObj.getM_Sex().equals("男")) {
                 ivmanor.setImageResource(R.mipmap.com_icon_male);
@@ -1926,21 +1842,100 @@ public class IdleDetailActivity extends AppCompatActivity {
                 ivmanor.setImageResource(R.mipmap.com_icon_female);
             }
 
-            tvfirstscore.setText("宝贝靠谱度");
-            tvpro.setText(mbussness.getBbkpd_member_value());
+           /* tvfirstscore.setText("  宝贝靠谱度  ");
+            tvpro.setText(mbussness.getBbkpd_member_value() + "  ");
 
-            tvsecandscore.setText("卖家靠谱度");
-            tvserver.setText(mbussness.getMjkpd_member_value());
+            tvsecandscore.setText("  卖家靠谱度  ");
+            tvserver.setText(mbussness.getMjkpd_member_value() + "  ");
 
-            tvthreescore.setText("出租人靠谱度");
-            tvfinishspeed.setText(mbussness.getCzrkpd_member_value());
+            tvthreescore.setText("  出租人靠谱度  ");
+            tvfinishspeed.setText(mbussness.getCzrkpd_member_value() + "  ");*/
 
         }
 
         //设置共通的参数
 
-        //设置分数mObj.getOrder_deal_count()
 
+        if (mbussness.getG_Type().equals("新商品")) {
+            tvfirstscore.setText("宝贝描述相符度  ");
+            String value = mbussness.getBbmsxfd_member_value();
+            if (value.equals("0")) {
+                value = "0.0";
+            }
+            tvpro.setText(value + "  ");
+
+            tvsecandscore.setText("  卖家服务态度  ");
+            String value1 = mbussness.getMjfutd_member_value();
+            if (value1.equals("0")) {
+                value1 = "0.0";
+            }
+            tvserver.setText(value1 + "  ");
+
+            tvthreescore.setText("  卖家发货速度  ");
+            String value2 = mbussness.getMjfhsd_member_value();
+
+            if (value2.equals("0")) {
+                value2 = "0.0";
+            }
+
+            tvfinishspeed.setText(value2 + "  ");
+        } else if (mbussness.getG_Type().equals("二手商品")) {
+            tvfirstscore.setText("宝贝靠谱度  ");
+            String value = mbussness.getBbkpd_member_value();
+            if (value.equals("0")) {
+                value = "0.0";
+            }
+            tvpro.setText(value + "  ");
+
+            tvsecandscore.setText("  卖家靠谱度  ");
+            String value1 = mbussness.getMjkpd_member_value();
+            if (value1.equals("0")) {
+                value1 = "0.0";
+            }
+            tvserver.setText(value1 + "  ");
+
+            tvthreescore.setText("  出租人靠谱度  ");
+            String value2 = mbussness.getCzrkpd_member_value();
+
+            if (value2.equals("0")) {
+                value2 = "0.0";
+            }
+
+            tvfinishspeed.setText(value2 + "  ");
+
+
+        } else if (mbussness.getG_Type().equals("服务")) {
+            tvfirstscore.setText("专业程度  ");
+            String value = mbussness.getProfessionaldegree_value();
+            if (value.equals("0")) {
+                value = "0.0";
+            }
+            tvpro.setText(value + "  ");
+
+            tvsecandscore.setText("  服务态度  ");
+            String value1 = mbussness.getAttitude_number_value();
+            if (value1.equals("0")) {
+                value1 = "0.0";
+            }
+            tvserver.setText(value1 + "  ");
+
+            tvthreescore.setText("  完成速度  ");
+            String value2 = mbussness.getComplatespeed_value();
+
+            if (value2.equals("0")) {
+                value2 = "0.0";
+            }
+
+            tvfinishspeed.setText(value2 + "  ");
+
+
+
+
+        }
+
+
+
+        //设置分数mObj.getOrder_deal_count()
         tvnumber.setText(mObj.getOrder_deal_count() + "");
         tvjiufen.setText("（纠纷比例：" + mObj.getS_DisputeProportion() + "%）");
 

@@ -105,32 +105,32 @@
             android:layout_height="match_parent"/>
 
         <LinearLayout
-            android:gravity="center_vertical"
             android:orientation="vertical"
             android:layout_marginRight="@dimen/itemiconmarl"
+            android:gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/tv_lasttime"
-                android:layout_gravity="center"
+                android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:singleLine="true"
                 android:text="11：05"
                 android:textSize="10sp"
                 android:layout_width="wrap_content"
-                android:maxWidth="60dp"
                 android:layout_height="wrap_content"/>
 
             <TextView
                 android:id="@+id/tv_unred"
                 android:gravity="center"
                 android:text="99"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="7dp"
                 android:textSize="10sp"
                 android:textColor="@color/buttontext"
                 android:background="@drawable/unredmessag_bg"
-                android:layout_gravity="center"
+                android:layout_gravity="bottom|right"
                 android:layout_width="17dp"
                 android:layout_height="17dp"/>
 
@@ -141,7 +141,7 @@
     </LinearLayout>
 
     <View
-        android:layout_marginLeft="80dp"
+        android:layout_marginLeft="70dp"
         android:background="@color/secondbuttonbc"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>

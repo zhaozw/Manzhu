@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,6 +8,12 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context="com.zpfan.manzhu.IdleActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="45dp"
+        android:id="@+id/rv_idel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <com.zpfan.manzhu.myui.IconTopLin
         android:visibility="gone"
@@ -22,27 +28,17 @@
         app:topicon = "@mipmap/menu_icon_03"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
     <com.zpfan.manzhu.myui.SearchTopLin
         android:id="@+id/searchtoplin"
         app:searchtop1iv="@mipmap/com_icon_serv"
         app:searchtop1tv="全部服务"
         app:searchtop2iv="@mipmap/com_icon_loca_gra"
         app:searchtop2tv="本地服务"
+        app:isshowmore="true"
         app:searchcontext =" |"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_idel"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
-
-
-
-
-</LinearLayout>
+</RelativeLayout>

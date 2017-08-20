@@ -48,6 +48,7 @@ dependencies {
     compile project(':easeui')
     compile files('libs/BaiduLBS_Android1.jar')
     compile files('libs/alipaySdk-20170725.jar')
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
@@ -66,8 +67,8 @@ dependencies {
     compile 'com.makeramen:roundedimageview:2.3.0'
     compile 'com.zhy:flowlayout-lib:1.0.3'
     compile 'cn.bingoogolapple:bga-banner:2.1.7@aar'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     compile 'de.hdodenhof:circleimageview:2.1.0'
-
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'

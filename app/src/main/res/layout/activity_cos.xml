@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.zpfan.manzhu.CosActivity">
+
+    <!-- 顶部的导航栏-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="45dp">
+
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/iv_icontop_back"
+                android:layout_marginLeft="@dimen/toastmarglr"
+                android:src="@mipmap/com_icon_back"
+                android:layout_width="@dimen/topmenuwh"
+                android:layout_height="@dimen/topmenuwh"/>
+
+
+            <LinearLayout
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_menu"
+                    android:src="@mipmap/menu_icon_06"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"/>
+
+                <TextView
+                    android:id="@+id/tv_icontop_text"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/maintextcolor"
+                    android:text="漫猪COS秀"
+                    android:layout_marginRight="@dimen/toastmarglr"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+
+
+            </LinearLayout>
+
+
+
+
+        </RelativeLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:paddingTop="10dp"
+            android:background="@color/bootmbc"
+            android:paddingBottom="10dp"
+            android:id="@+id/ll_topmenu"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <LinearLayout
+                android:gravity="center"
+                android:background="@color/bootmbc"
+                android:orientation="horizontal"
+                android:id="@+id/ll_top1"
+                android:layout_width="0dp"
+                android:layout_weight="0.27"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_top1"
+                    android:src="@mipmap/com_icon_all"
+                    android:layout_width="@dimen/idle_topiconwh"
+                    android:layout_height="@dimen/idle_topiconwh"/>
+
+                <TextView
+                    android:id="@+id/tv_top1"
+                    android:text="全部作品"
+                    android:layout_marginLeft="7.5dp"
+                    android:textColor="@color/maintextcolor"
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+
+            </LinearLayout>
+
+            <View
+                android:background="@color/stronglin"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+
+            <LinearLayout
+                android:gravity="center"
+                android:background="@color/bootmbc"
+                android:orientation="horizontal"
+                android:id="@+id/ll_top3"
+                android:layout_width="0dp"
+                android:layout_weight="0.27"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_top3"
+                    android:src="@mipmap/com_icon_cos_elt_ept"
+                    android:layout_width="@dimen/idle_topiconwh"
+                    android:layout_height="@dimen/idle_topiconwh"/>
+
+                <TextView
+                    android:id="@+id/tv_top3"
+                    android:text="COS精品"
+                    android:layout_marginLeft="7.5dp"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+
+            </LinearLayout>
+
+            <View
+                android:background="@color/stronglin"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="@color/bootmbc"
+                android:id="@+id/ll_top4"
+                android:layout_weight="0.19"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_shaixuan"
+                    android:src="@mipmap/com_icon_order_ept"
+                    android:layout_width="@dimen/idle_topiconwh"
+                    android:layout_height="@dimen/idle_topiconwh"/>
+
+                <TextView
+                    android:id="@+id/tv_shaixuan"
+                    android:text="筛选排序"
+                    android:layout_marginLeft="7.5dp"
+                    android:textColor="@color/secondtextcolor"
+                    android:textSize="8sp"
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--  列表-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_coslist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+
+
+</LinearLayout>

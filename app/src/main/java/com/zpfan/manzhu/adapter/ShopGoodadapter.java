@@ -155,6 +155,9 @@ public class ShopGoodadapter extends BaseQuickAdapter<ShopCartbean.CarshoplistBe
 
                 String s = tvcount.getText().toString();
                 Integer integer = Integer.valueOf(s);
+                if (item.getGoods_model().getG_Type().equals("服务")) {
+                    max = 100000;
+                }
                 int i = integer + 1;
                 if (i > max) {
                     i = max;

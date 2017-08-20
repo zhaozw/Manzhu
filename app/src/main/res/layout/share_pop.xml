@@ -6,10 +6,6 @@
               android:layout_height="wrap_content">
 
 
-    
-
-
-
     <ImageView
         android:layout_marginRight="22.5dp"
         android:layout_alignParentRight="true"
@@ -71,8 +67,5 @@
         android:layout_below="@+id/tv_cancle"
         android:layout_width="match_parent"
         android:layout_height="2.5dp"/>
-
-
-    
 
 </RelativeLayout>

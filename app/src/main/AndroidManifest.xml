@@ -260,6 +260,14 @@
         </activity>
         <activity android:name=".WelcomActivity">
         </activity>
+        <activity
+            android:name=".myui.ShareActivity"
+            android:theme="@style/NoTitleTranslucentTheme">
+        </activity>
+        <activity android:name=".CosActivity">
+        </activity>
+        <activity android:name=".CosLocationActivity">
+        </activity>
     </application>
 
 </manifest>

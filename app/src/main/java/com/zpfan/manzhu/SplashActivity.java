@@ -10,6 +10,7 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -183,14 +184,13 @@ public class SplashActivity extends AppCompatActivity implements BDLocationListe
     @Override
     public void onReceiveLocation(final BDLocation location) {
 
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
-
-
+        if (location.getCity() != null) {
+           SPUtils.getInstance().put("Usercity",location.getCity());
+            Log.i("zc", "onReceiveLocation:  进来保存数据了吗" + location.getCity());
+        }
+        if (mLocationClient.isStarted()) {
+            mLocationClient.stop();
+        }
     }
 
     @Override
@@ -203,5 +203,11 @@ public class SplashActivity extends AppCompatActivity implements BDLocationListe
         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 }

@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
+        android:layout_above="@+id/ll_bottommenu"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -30,54 +31,21 @@
 
 
             <!--  顶部的图片-->
-        <ImageView
+        <cn.bingoogolapple.bgabanner.BGABanner
             android:scaleType="centerCrop"
             android:id="@+id/iv_detail"
             android:src="@mipmap/u5027"
+            app:banner_pointDrawable="@drawable/banner_selector"
+            app:banner_pointLeftRightMargin="3.75dp"
+            app:banner_pointAutoPlayAble="true"
+            app:banner_pointContainerBackground="@android:color/transparent"
             android:layout_width="match_parent"
             android:layout_height="@dimen/detail_top_imgh"/>
-            <!--  顶部一栏-->
-            <RelativeLayout
-                android:id="@+id/rv_topline"
-                android:layout_alignParentTop="true"
-                android:background="#30000000"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/detail_topline_h">
 
-                <ImageView
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:id="@+id/iv_top_back"
-                    android:layout_marginLeft="@dimen/toastmarglr"
-                    android:src="@mipmap/com_icon_back_w"
-                    android:scaleType="centerInside"
-                    android:layout_width="@dimen/topmenuwh"
-                    android:layout_height="@dimen/topmenuwh"/>
-
-                <TextView
-                    android:id="@+id/tv_pagetitle"
-                    android:textStyle="bold"
-                    android:layout_centerInParent="true"
-                    android:textSize="15sp"
-                    android:textColor="@color/buttontext"
-                    android:text="闲置/二手"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <ImageView
-                    android:id="@+id/iv_topmenu"
-                    android:src="@mipmap/com_icon_bmenu_w"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="@dimen/detail_top_iconrwh"
-                    android:layout_height="@dimen/detail_top_iconrwh"/>
-
-            </RelativeLayout>
 
         <!-- 包邮的一栏  和分享按钮-->
         <LinearLayout
-            android:gravity="center"
+
             android:layout_below="@+id/iv_detail"
             android:id="@+id/ll_freepostage"
             android:layout_marginLeft="@dimen/idle_itemtxtml"
@@ -93,6 +61,7 @@
                 android:layout_alignTop="@+id/ll_freepostage"
                 android:background="@drawable/baoyou_shape"
                 android:gravity="center"
+                android:layout_marginTop="2dp"
                 android:textSize="10sp"
                 android:textColor="@color/buttontext"
                 android:text="包邮"
@@ -103,6 +72,7 @@
             <TextView
                 android:visibility="gone"
                 android:id="@+id/tv_idle"
+                android:layout_marginTop="2dp"
                 android:gravity="center"
                 android:layout_marginRight="3dp"
                 android:text="闲"
@@ -121,13 +91,13 @@
                 android:textColor="@color/maintextcolor"
                 android:text="商品的标题啊啊啊啊啊aaaaaaaaaaaaaaaaaaaaaa"
                 android:textSize="14sp"
+                android:layout_gravity="center_vertical"
+                app:align="left"
                 android:maxLines="2"
-                android:gravity="left"
-                android:layout_alignTop="@+id/tv_baoyou"
-                android:layout_toRightOf="@+id/iv_bussness_photo"
+                android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
             
             <LinearLayout
                 android:id="@+id/ll_share"
@@ -604,6 +574,7 @@
             android:orientation="horizontal"
             android:layout_below="@+id/ll_serverstart"
             android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -664,7 +635,7 @@
         <View
             android:id="@+id/line5"
             android:background="@color/weaklin"
-            android:layout_marginTop="10dp"
+
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_below="@+id/ll_express"
@@ -1041,19 +1012,10 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:gravity="center"
-            android:id="@+id/ll_detail"
-            android:layout_below="@+id/line_detail"
-            android:layout_marginTop="12.5dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-        </LinearLayout>
         <TextView
             android:lineSpacingMultiplier = "1.2"
-            android:layout_below="@+id/ll_detail"
+            android:layout_below="@+id/line_detail"
             android:id="@+id/tv_prddetail"
             android:textColor="@color/maintextcolor"
             android:textSize="14sp"
@@ -1064,13 +1026,22 @@
             android:layout_marginRight="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:gravity="center"
+            android:id="@+id/ll_detail"
+            android:layout_below="@+id/tv_prddetail"
+            android:layout_marginTop="12.5dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+        </LinearLayout>
 
         <!-- 买家评论的分隔栏 和 买家评论的内容-->
         <LinearLayout
             android:id="@+id/line_comment"
             android:background="@color/threebackground"
-            android:layout_below="@+id/tv_prddetail"
+            android:layout_below="@+id/ll_detail"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="@dimen/detail_detailh">
@@ -1310,6 +1281,44 @@
 
 
     </com.zpfan.manzhu.utils.MyScrollView>
+    <!--  顶部一栏-->
+    <RelativeLayout
+        android:id="@+id/rv_topline"
+        android:layout_alignParentTop="true"
+        android:background="#30000000"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_topline_h">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/iv_top_back"
+            android:layout_marginLeft="@dimen/toastmarglr"
+            android:src="@mipmap/com_icon_back_w"
+            android:scaleType="centerInside"
+            android:layout_width="@dimen/topmenuwh"
+            android:layout_height="@dimen/topmenuwh"/>
+
+        <TextView
+            android:id="@+id/tv_pagetitle"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:textSize="15sp"
+            android:textColor="@color/buttontext"
+            android:text="闲置/二手"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/iv_topmenu"
+            android:src="@mipmap/com_icon_bmenu_w"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="@dimen/detail_top_iconrwh"
+            android:layout_height="@dimen/detail_top_iconrwh"/>
+
+    </RelativeLayout>
     <LinearLayout
         android:visibility="gone"
         android:id="@+id/ll_topmen"
@@ -1513,7 +1522,7 @@
             android:background="@color/bootmbc"
             android:id="@+id/ll_callbussness"
             android:gravity="center"
-            android:layout_weight="0.14"
+            android:layout_weight="1"
             android:layout_width="0dp"
             android:orientation="vertical"
             android:layout_height="match_parent">
@@ -1547,7 +1556,7 @@
             android:background="@color/bootmbc"
             android:id="@+id/ll_shop"
             android:gravity="center"
-            android:layout_weight="0.14"
+            android:layout_weight="1"
             android:layout_width="0dp"
             android:orientation="vertical"
             android:layout_height="match_parent">
@@ -1582,7 +1591,7 @@
             android:background="@color/bootmbc"
             android:id="@+id/ll_collect"
             android:gravity="center"
-            android:layout_weight="0.14"
+            android:layout_weight="1"
             android:layout_width="0dp"
             android:orientation="vertical"
             android:layout_height="match_parent">
@@ -1608,7 +1617,7 @@
 
         <LinearLayout
             android:id="@+id/ll_shopcart"
-            android:layout_weight="0.29"
+            android:layout_weight="2"
             android:layout_width="0dp"
             android:gravity="center"
             android:orientation="horizontal"
@@ -1631,13 +1640,12 @@
         <LinearLayout
             android:background="@color/maintextcolor"
             android:layout_width="0dp"
-            android:layout_weight="0.29"
+            android:layout_weight="2"
             android:layout_height="match_parent">
         <TextView
             android:id="@+id/tv_makeorder"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:background="@color/maintextcolor"
             android:gravity="center"
             android:text="立即下单"

@@ -84,9 +84,18 @@ public class ShopCartbean implements Parcelable {
         private String huoqujiaoyi = "";
         private boolean ischeckallgood = false;
         private boolean iscleancheck = false;
+        private int showtype = 1;
 
 
 
+
+        public int getShowtype() {
+            return showtype;
+        }
+
+        public void setShowtype(int showtype) {
+            this.showtype = showtype;
+        }
 
         public boolean iscleancheck() {
             return iscleancheck;
@@ -2432,6 +2441,7 @@ public class ShopCartbean implements Parcelable {
             dest.writeString(this.huoqujiaoyi);
             dest.writeByte(this.ischeckallgood ? (byte) 1 : (byte) 0);
             dest.writeByte(this.iscleancheck ? (byte) 1 : (byte) 0);
+            dest.writeInt(this.showtype);
         }
 
         protected CarshoplistBean(Parcel in) {
@@ -2449,6 +2459,7 @@ public class ShopCartbean implements Parcelable {
             this.huoqujiaoyi = in.readString();
             this.ischeckallgood = in.readByte() != 0;
             this.iscleancheck = in.readByte() != 0;
+            this.showtype = in.readInt();
         }
 
         public static final Creator<CarshoplistBean> CREATOR = new Creator<CarshoplistBean>() {

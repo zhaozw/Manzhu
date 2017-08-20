@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
@@ -25,8 +24,6 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.google.gson.reflect.TypeToken;
@@ -37,6 +34,8 @@ import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 import com.zpfan.manzhu.Aplication;
+import com.zpfan.manzhu.CosActivity;
+import com.zpfan.manzhu.CosLocationActivity;
 import com.zpfan.manzhu.IdleActivity;
 import com.zpfan.manzhu.LocationActivity;
 import com.zpfan.manzhu.LoginActivity;
@@ -54,12 +53,9 @@ import com.zpfan.manzhu.bean.ShopCartbean;
 import com.zpfan.manzhu.bean.TypeBean;
 import com.zpfan.manzhu.myui.GlideImageLoader;
 import com.zpfan.manzhu.utils.MyScrollView;
+import com.zpfan.manzhu.utils.SPUtils;
 import com.zpfan.manzhu.utils.ScrollViewListener;
 import com.zpfan.manzhu.utils.Utils;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -79,7 +75,7 @@ import static com.zpfan.manzhu.utils.Utils.dp2px;
  * Created by Administrator on 2017/6/14 0014.
  */
 
-public class HomeFragment extends Fragment implements BDLocationListener {
+public class HomeFragment extends Fragment  {
     private static final int REQUSET_LOCATION = 1;
     private static final int REQUEST_PRODUCT = 0;
     private static final int REQUEST_CN = 1;
@@ -194,14 +190,13 @@ public class HomeFragment extends Fragment implements BDLocationListener {
         typelist = new ArrayList<>();
         unbinder = ButterKnife.bind(this, mView);
         initView();
-        initLBS();
-        EventBus.getDefault().register(this);
+
+
         return mView;
     }
 
     @Override
     public void onDestroy() {
-        EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 
@@ -272,6 +267,8 @@ public class HomeFragment extends Fragment implements BDLocationListener {
 
 
         showShopCartNumber();
+        String usercity = SPUtils.getInstance().getString("Usercity", "");
+        mTvLocation.setText(usercity);
 
         super.onResume();
     }
@@ -281,7 +278,8 @@ public class HomeFragment extends Fragment implements BDLocationListener {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         showShopCartNumber();
-
+        String usercity = SPUtils.getInstance().getString("Usercity", "");
+        mTvLocation.setText(usercity);
     }
 
     private void showShopCartNumber() {
@@ -325,8 +323,10 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                                     mTvBtshopcart.setVisibility(View.GONE);
                                 }
 
-                                mTvShopcart.setText(count + "");
-                                mTvBtshopcart.setText(count + "");
+                                if (mTvShopcart != null && mTvBtshopcart != null) {
+                                    mTvShopcart.setText(count + "");
+                                    mTvBtshopcart.setText(count + "");
+                                }
 
                                 // }
 
@@ -564,21 +564,7 @@ public class HomeFragment extends Fragment implements BDLocationListener {
 
     }
 
-    private void initLBS() {
-        //初始化定位的方法
 
-        mLocationClient = new LocationClient(Aplication.mContext);
-        //声明LocationClient类
-
-        mLocationClient.setLocOption(getDefaultLocationClientOption());
-        mLocationClient.registerLocationListener(this);
-        //注册监听函数
-        mLocationClient.requestLocation();
-        initper();
-        String version = mLocationClient.getVersion();
-
-
-    }
 
     private void initView() {
         ScrollViewListener listener = new ScrollViewListener() {
@@ -599,6 +585,9 @@ public class HomeFragment extends Fragment implements BDLocationListener {
         ArrayList<Integer> images = new ArrayList<>();
         images.add(R.mipmap.share_bg);
         images.add(R.mipmap.share_icon_pyq);
+
+        String usercity = SPUtils.getInstance().getString("Usercity", "");
+        mTvLocation.setText(usercity);
 
 
         //设置图片加载器
@@ -789,12 +778,12 @@ public class HomeFragment extends Fragment implements BDLocationListener {
                 break;
             case R.id.ll_cos:
                 //cos秀的按钮
-
+                startActivity(new Intent(getContext(), CosActivity.class));
 
                 break;
             case R.id.ll_toshoot:
                 //  cos拍摄地的按钮
-
+                startActivity(new Intent(getContext(), CosLocationActivity.class));
 
                 break;
             case R.id.ll_fans:
@@ -921,74 +910,15 @@ public class HomeFragment extends Fragment implements BDLocationListener {
     }
 
 
-    /***
-     * 配置参数
-     *
-     * @return DefaultLocationClientOption
-     */
-    public LocationClientOption getDefaultLocationClientOption() {
-        if (locationClientOption == null) {
-            locationClientOption = new LocationClientOption();
-            locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
-            locationClientOption.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系，如果配合百度地图使用，建议设置为bd09ll;
-            locationClientOption.setScanSpan(3000);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
-            locationClientOption.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
-            locationClientOption.setIsNeedLocationDescribe(true);//可选，设置是否需要地址描述
-            locationClientOption.setNeedDeviceDirect(true);//可选，设置是否需要设备方向结果
-            locationClientOption.setLocationNotify(true);//可选，默认false，设置是否当gps有效时按照1S1次频率输出GPS结果
-            locationClientOption.setIgnoreKillProcess(true);//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
-            locationClientOption.setIsNeedLocationDescribe(true);//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
-            locationClientOption.setIsNeedLocationPoiList(true);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
-            locationClientOption.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
-
-            locationClientOption.setIsNeedAltitude(false);//可选，默认false，设置定位时是否需要海拔信息，默认不需要，除基础定位版本都可用
-        }
-        return locationClientOption;
-    }
 
 
-    @Override
-    public void onReceiveLocation(final BDLocation location) {
-        //  Log.i("location", "onReceiveLocation:     看看回调的地址" + location.getCity());
 
 
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mProvince = location.getProvince();
-
-                mTvLocation.setText(location.getCity());
-            }
-        });
-
-    }
-
-    @Override
-    public void onConnectHotSpotMessage(String s, int i) {
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUSET_LOCATION) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                mLocationClient.start();
-            }
-
-        }
 
 
-    }
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getLocation(String city) {
 
-
-        mTvLocation.setText(city);
-
-    }
 
 
 }

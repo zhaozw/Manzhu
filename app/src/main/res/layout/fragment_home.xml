@@ -8,7 +8,7 @@
               android:layout_height="match_parent">
 
 
-    <!--  顶部的搜索栏-->
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -16,80 +16,13 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
-    <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/ll_topsearch"
-        android:layout_width="match_parent"
-        android:background="@color/maintextcolor"
-        android:layout_height="@dimen/home_topseachh">
+            <!--  顶部的搜索栏-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-           android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/home_topseachmarlr"
-            android:layout_marginRight="@dimen/home_topseachmarlr"
-            android:background="@drawable/search_bg"
-            android:layout_height="@dimen/home_topseachpadh">
-
-            <TextView
-                android:id="@+id/tv_keyword"
-                android:textColor="@color/secondtextcolor"
-                android:layout_marginLeft="@dimen/home_topseachtxtml"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:text="宝贝"
-                />
-            
-            <ImageView
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_vertical"
-                android:src="@mipmap/com_icon_arr_down_gra"
-                android:layout_width="@dimen/home_toparrwh"
-                android:layout_height="@dimen/home_toparrwh"/>
-
-            <View
-                android:layout_marginLeft="5dp"
-                android:background="@color/secondtextcolor"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"/>
-            
-            <EditText
-                android:id="@+id/ed_topsearch"
-                android:layout_marginLeft="6dp"
-                android:textColor="@color/maintextcolor"
-                android:layout_weight="1"
-                android:hint="输入您想查找的角色名、商品名"
-                android:textColorHint="@color/secondtextcolor"
-                android:textSize="12sp"
-                android:layout_width="0dp"
-                android:background="@null"
-                android:textCursorDrawable="@null"
-                android:layout_height="match_parent"/>
-
-            <ImageView
-                android:id="@+id/iv_topsearch"
-                android:src="@mipmap/com_icon_sch_gra"
-                android:layout_marginRight="@dimen/home_topseachtxtml"
-                android:layout_gravity="center_vertical"
-                android:layout_width="@dimen/home_topseachiconwh"
-                android:layout_height="@dimen/home_topseachiconwh"/>
-            
-
-
-        </LinearLayout>
-
-    </LinearLayout>
 
     <com.zpfan.manzhu.utils.MyScrollView
         android:id="@+id/myscroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -161,9 +94,7 @@
                     android:textColor="@color/buttontext"
                     android:textSize="7sp"/>
 
-
                 <LinearLayout
-
                     android:id="@+id/ll_hometag"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/home_seachTagh"
@@ -461,25 +392,19 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/home_binnermt"
                 android:background="@color/threebackground"/>
-
             <!--   轮播图-->
             <com.youth.banner.Banner
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/home_binnerh"/>
-
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/home_binnermt"
                 android:background="@color/threebackground"/>
-
             <!--  优选商家模块-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -803,17 +728,11 @@
 
 
             </LinearLayout>
-
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/home_binnermt"
                 android:background="@color/threebackground"/>
-
-
             <!--   漫猪推荐模块 -->
-
-
             <LinearLayout
                 android:gravity="center|left"
                 android:orientation="horizontal"
@@ -834,26 +753,86 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:background="@color/threebackground"/>
-
-
             <TextView
                 android:text="为了能看全布局，后期会换成列表"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"/>
-
-
-
         </LinearLayout>
     </com.zpfan.manzhu.utils.MyScrollView>
-    
+        </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_topsearch"
+        android:layout_width="match_parent"
+        android:background="@color/maintextcolor"
+        android:layout_height="@dimen/home_topseachh">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/home_topseachmarlr"
+            android:layout_marginRight="@dimen/home_topseachmarlr"
+            android:background="@drawable/search_bg"
+            android:layout_height="@dimen/home_topseachpadh">
+
+            <TextView
+                android:id="@+id/tv_keyword"
+                android:textColor="@color/secondtextcolor"
+                android:layout_marginLeft="@dimen/home_topseachtxtml"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="宝贝"
+                />
+
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/com_icon_arr_down_gra"
+                android:layout_width="@dimen/home_toparrwh"
+                android:layout_height="@dimen/home_toparrwh"/>
+
+            <View
+                android:layout_marginLeft="5dp"
+                android:background="@color/secondtextcolor"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+
+            <EditText
+                android:id="@+id/ed_topsearch"
+                android:layout_marginLeft="6dp"
+                android:textColor="@color/maintextcolor"
+                android:layout_weight="1"
+                android:hint="输入您想查找的角色名、商品名"
+                android:textColorHint="@color/secondtextcolor"
+                android:textSize="12sp"
+                android:layout_width="0dp"
+                android:background="@null"
+                android:textCursorDrawable="@null"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:id="@+id/iv_topsearch"
+                android:src="@mipmap/com_icon_sch_gra"
+                android:layout_marginRight="@dimen/home_topseachtxtml"
+                android:layout_gravity="center_vertical"
+                android:layout_width="@dimen/home_topseachiconwh"
+                android:layout_height="@dimen/home_topseachiconwh"/>
+
+
 
         </LinearLayout>
 
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/rl_shopcart"

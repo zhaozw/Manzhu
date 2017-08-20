@@ -162,7 +162,7 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:visibility="gone"
+        android:visibility="visible"
         android:background="@color/bootmbc"
         android:id="@+id/rv_shopcart"
         android:layout_width="match_parent"
@@ -170,6 +170,7 @@
         android:layout_height="0dp"/>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tv_empty"
         android:gravity="center"
         android:text="您还没有选购任何宝贝哦~~ 再去逛逛吧~~"
